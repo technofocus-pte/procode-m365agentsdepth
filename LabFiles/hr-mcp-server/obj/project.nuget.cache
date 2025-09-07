@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "4tppUY+FOIQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ShanthiVijayaragavan\\OneDrive - TECHNOFOCUS\\Desktop\\Courses\\FY 26\\pro-code\\Labs\\hr-mcp-server\\hr-mcp-server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ShanthiVijayaragavan\\.nuget\\packages\\microsoft.extensions.ai.abstractions\\9.7.1\\microsoft.extensions.ai.abstractions.9.7.1.nupkg.sha512",
+    "C:\\Users\\ShanthiVijayaragavan\\.nuget\\packages\\modelcontextprotocol\\0.3.0-preview.3\\modelcontextprotocol.0.3.0-preview.3.nupkg.sha512",
+    "C:\\Users\\ShanthiVijayaragavan\\.nuget\\packages\\modelcontextprotocol.aspnetcore\\0.3.0-preview.3\\modelcontextprotocol.aspnetcore.0.3.0-preview.3.nupkg.sha512",
+    "C:\\Users\\ShanthiVijayaragavan\\.nuget\\packages\\modelcontextprotocol.core\\0.3.0-preview.3\\modelcontextprotocol.core.0.3.0-preview.3.nupkg.sha512"
+  ],
+  "logs": []
+}
