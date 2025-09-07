@@ -1,4 +1,3 @@
-
 # Lab - Create a Retail agent in Copilot Studio that leverages Azure AI Search and Bring your own model for your prompts
 
 Lab duration – 60 minutes
