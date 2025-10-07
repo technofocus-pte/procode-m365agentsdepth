@@ -1,4 +1,4 @@
-# Lab - Build your own agent with the M365 Agents SDK and Semantic Kernel
+# Lab 3 - Build your own agent with the M365 Agents SDK and Semantic Kernel
 
 Lab duration – 80 minutes
 
