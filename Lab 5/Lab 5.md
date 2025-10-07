@@ -1,4 +1,4 @@
-# Build an instructions-based Geo locator game agent using Microsoft 365 Agents Toolkit
+# Lab 2 - Build an instructions-based Geo locator game agent using Microsoft 365 Agents Toolkit
 
 **Estimated Time: 30 mins**
 
@@ -586,3 +586,4 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
