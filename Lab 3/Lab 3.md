@@ -1,4 +1,4 @@
-# Deploy a MCP Server and use it in the Copilot Studio 
+# Lab 4 - Deploy a MCP Server and use it in the Copilot Studio 
 
 ## Introduction
 
