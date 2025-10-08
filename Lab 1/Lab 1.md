@@ -214,23 +214,18 @@ define starter prompts and actions.](./media/image17.png)
 2.  Begin by defining your agent for the repair scenario. Replace the
     **@agent** and **@instruction** definitions with below code snippet.
 
-> @agent(
->
-> "RepairServiceAgent",
->
-> "An agent for managing repair information"
->
-> )
->
-> @instructions("""
->
-> \## Purpose
->
-> You will assist the user in finding car repair records based on the
-> information provided by the user.
->
-> """)
->
+    ```
+    @agent(
+      "RepairServiceAgent",
+       "An agent for managing repair information"
+    )
+    
+    @instructions("""
+      ## Purpose
+    You will assist the user in finding car repair records based on the information provided by the user.
+    """)
+    ```
+
 > ![A screenshot of a computer program AI-generated content may be
 > incorrect.](./media/image19.png)
 
@@ -239,13 +234,12 @@ define starter prompts and actions.](./media/image17.png)
     starter. Replace the @conversationStarter block (Should be the lines
     from 22 to 25) with the below code.
 
-> @conversationStarter(#{
->
-> title: "List repairs",
->
-> text: "List all repairs"
->
-> })
+    ```
+    @conversationStarter(#{
+      title: "List repairs",
+      text: "List all repairs"
+    })
+    ```
 
 ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image20.png)
