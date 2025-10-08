@@ -1,6 +1,6 @@
 # Lab 1 - Build a RepairService declarative agent with TypeSpec definition using Microsoft 365 Agents Toolkit
 
-## Objective
+## Objectivetest
 
 Test
 In this lab your will build a Declarative Agent with TypeSpec definition
