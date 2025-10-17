@@ -97,7 +97,7 @@ clues for you to identify a city. The more clues you need, the fewer
 points you earn. At the end of the game, it will reveal your final
 score.
 
-    ![A screenshot of a chat AI-generated content may be
+![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image5.png)
 
 You will also give your agent some files to refer to a secret diary 🕵🏽
@@ -592,3 +592,4 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
