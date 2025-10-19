@@ -104,8 +104,7 @@ The server manages candidates information including:
 The MCP inspector is a developer tool for testing and debugging MCP
 servers.
 
-1.  From the terminal, run the command +++npm install -g
-    @modelcontextprotocol/inspector+++ to get the **MCP Inspector**
+1.  From the terminal, run the command +++npm install -g @modelcontextprotocol/inspector+++ to get the **MCP Inspector**
     running.
 
 	![A screenshot of a computer AI-generated content may be
