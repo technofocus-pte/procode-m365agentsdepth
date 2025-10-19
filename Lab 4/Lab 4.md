@@ -57,6 +57,28 @@ tools to manage a hypothetical list of job candidates. In this exercise
 you are going to download and configure the server, so that you can run
 it locally.
 
+1.  Open the **Edit the environment variables** from the Windows menu.
+
+	![](./media/image62.png)
+
+2.	Select **Environment variables** -> click on the **Path** variable under **System variables** and select **Edit**. Select **New** -> Enter +++**C:\LabFiles**+++ as a new variable and select **OK**.
+
+	![](./media/image65.png)
+
+	![](./media/image66.png)
+
+	![](./media/image67.png)
+
+3.  Open **Windows PowerShell** in the **Administrator mode**.
+
+	![](./media/image68.png)
+
+4.  Execute +++winget install Microsoft.devtunnel --source winget+++.
+
+	![](./media/image69.png)
+
+	![](./media/image70.png)
+
 ### Task 1: Understanding the MCP Server and prerequisites
 
 The HR MCP server that you will be consuming in this lab provides the
@@ -191,23 +213,7 @@ on a reverse proxy tool to expose your localhost via a public URL. For
 the sake of simplicity, you can use the dev tunnel tool provided by
 Microsoft, following these steps:
 
-1.  Open the **Edit the environment variables** from the Windows menu.
-
-	![](./media/image62.png)
-
-2.	Select **Environment variables** -> click on the **Path** variable under **System variables** and select **Edit**. Select **New** -> Enter +++**C:\LabFiles**+++ as a new variable and select **OK**.
-
-	![](./media/image65.png)
-
-	![](./media/image66.png)
-
-	![](./media/image67.png)
-
-4.  From the terminal, execute +++winget install Microsoft.devtunnel --source winget+++.
-
-	![](./media/image64.png)
-
-2.  Next, execute the command +++devtunnel user login+++ to login to the
+1.  Open a new terminal in the VSCode and execute the command +++devtunnel user login+++ to login to the
     devtunnel.
 
 	![A screenshot of a computer program AI-generated content may be
@@ -226,9 +232,9 @@ Microsoft, following these steps:
 	![A screenshot of a computer program AI-generated content may be
 	incorrect.](./media/image19.png)
 
-5.  Host your dev tunnel, executing the following commands.
+5.  Host your dev tunnel, executing the following commands. Replacce **XX** in the commands with a random number to ensure uniqueness. Make sure to use the same number in all the three commands
 
-	- +++devtunnel create hr-mcp -a --host-header unchanged+++
+	- +++devtunnel create hr-mcpXX -a --host-header unchanged+++
 
 	![A screenshot of a computer program AI-generated content may be
 	incorrect.](./media/image20.png)
@@ -236,7 +242,7 @@ Microsoft, following these steps:
 	![A screen shot of a computer AI-generated content may be
 	incorrect.](./media/image21.png)
 
-	- +++devtunnel port create hr-mcp -p 47002+++
+	- +++devtunnel port create hr-mcpXX -p 47002+++
 
 	![A screenshot of a computer program AI-generated content may be
 	incorrect.](./media/image22.png)
@@ -244,7 +250,7 @@ Microsoft, following these steps:
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image23.png)
 
-	- +++devtunnel host hr-mcp+++
+	- +++devtunnel host hr-mcpXX+++
 
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image24.png)
