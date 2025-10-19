@@ -159,6 +159,11 @@ The main elements of the project outline are:
 
 	![](./media/image11.png)
 
+2.	Execute the below command
++++dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org+++
+  	
+	<img width="940" height="172" alt="image" src="https://github.com/user-attachments/assets/71b833f1-bcb2-4f20-a8b2-b2227281f7b0" />
+
 2.  Install dependencies, build, and start the .NET project by invoking
     the following command +++dotnet run+++
 
@@ -186,15 +191,17 @@ on a reverse proxy tool to expose your localhost via a public URL. For
 the sake of simplicity, you can use the dev tunnel tool provided by
 Microsoft, following these steps:
 
-- Install dev tunnel on your environment following [these
-  instructions](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/get-started)
+1.  Open the **Edit the environment variables**.
 
-- Login with dev tunnel, executing the following command:
+	<img width="940" height="708" alt="image" src="https://github.com/user-attachments/assets/6a4a0ea7-d968-461b-80c4-2822cc487088" />
 
-1.  From the terminal, execute +++winget install Microsoft.devtunnel+++.
+2.	Add C:\LabFiles to the System path.
 
-	![A computer screen shot of a program AI-generated content may be
-	incorrect.](./media/image15.png)
+	<img width="440" height="362" alt="image" src="https://github.com/user-attachments/assets/6e29b054-2fcc-44eb-9164-d1912d37f71c" />
+
+3.  From the terminal, execute +++winget install Microsoft.devtunnel --source winget+++.
+
+	<img width="940" height="366" alt="image" src="https://github.com/user-attachments/assets/26da533e-ca10-4530-a9f5-068000c51394" />
 
 2.  Next, execute the command +++devtunnel user login+++ to login to the
     devtunnel.
