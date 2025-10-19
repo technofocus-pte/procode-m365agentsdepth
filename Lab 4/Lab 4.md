@@ -191,17 +191,21 @@ on a reverse proxy tool to expose your localhost via a public URL. For
 the sake of simplicity, you can use the dev tunnel tool provided by
 Microsoft, following these steps:
 
-1.  Open the **Edit the environment variables**.
-
-	![](./media/image64.png)
-
-2.	Add C:\LabFiles to the System path.
-
-	![](./media/image63.png)
-
-3.  From the terminal, execute +++winget install Microsoft.devtunnel --source winget+++.
+1.  Open the **Edit the environment variables** from the Windows menu.
 
 	![](./media/image62.png)
+
+2.	Select **Environment variables** -> click on the **Path** variable under **System variables** and select **Edit**. Select **New** -> Enter +++**C:\LabFiles**+++ as a new variable and select **OK**.
+
+	![](./media/image65.png)
+
+	![](./media/image66.png)
+
+	![](./media/image67.png)
+
+4.  From the terminal, execute +++winget install Microsoft.devtunnel --source winget+++.
+
+	![](./media/image64.png)
 
 2.  Next, execute the command +++devtunnel user login+++ to login to the
     devtunnel.
