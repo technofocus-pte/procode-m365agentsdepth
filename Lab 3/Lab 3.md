@@ -723,14 +723,11 @@ incorrect.](./media/image68.png)
 16. You can ask one of the following questions to interact with the
     agent.
 
-    - +++What’s the difference between Northwind Standard and Health Plus
-      when it comes to emergency and mental health coverage?+++
+    - +++What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?+++
     
-    - +++Can I use PerksPlus to pay for both a rock climbing class and a
-      virtual fitness program?+++
+    - +++Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?+++
     
-    - +++What values guide behavior and decision-making at Contoso
-      Electronics?+++
+    - +++What values guide behavior and decision-making at Contoso Electronics?+++
 
     You should observe that you are getting similar responses with the agent you've created on Azure AI Foundry.
 
