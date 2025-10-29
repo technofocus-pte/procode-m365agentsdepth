@@ -25,7 +25,7 @@ var tags = {
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: 'rg-${environmentName}'
+  name: 'ResourceGroup1lod@lab.LabInstance.Id'
   location: location
   tags: tags
 }
@@ -42,3 +42,4 @@ module resources 'resources.bicep' = {
 }
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = resources.outputs.AZURE_CONTAINER_REGISTRY_ENDPOINT
 output AZURE_RESOURCE_JOKESMCP_HTTP_TYPESCRIPT_ID string = resources.outputs.AZURE_RESOURCE_JOKESMCP_HTTP_TYPESCRIPT_ID
+
