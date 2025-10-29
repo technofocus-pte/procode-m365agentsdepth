@@ -118,25 +118,25 @@ incorrect.](./media/image10.png)
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Use the arrow marks to scroll up and down the list of regions and
-    select one by clicking **Enter**. **southcentralus** is selected
-    here.
+11. Print this to a notepad to see which location you have ResourceGroup in -  @lab.CloudResourceGroup(ResourceGroup1).Location
+    
+13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
 
 	![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image12.png)
 
-12. This deploys the necessary resources in the Azure portal and outputs
+14. This deploys the necessary resources in the Azure portal and outputs
     a success message.
 
 	![](./media/image13.png)
 
-13. The output also provides an **Endpoint url**. **Save** it to a
+15. The output also provides an **Endpoint url**. **Save** it to a
     **notepad** to be used in the upcoming exercises.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-14. Add **/mcp** to the end of that URL and open it in a browser. You
+16. Add **/mcp** to the end of that URL and open it in a browser. You
     will see an error inside a JSON message, which is ok. It means that
     you are reaching the MCP server.
 
