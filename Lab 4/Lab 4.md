@@ -108,7 +108,7 @@ incorrect.](./media/image8.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Enter the name as +++mcsmcp@labinstaceid+++
+9.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
@@ -160,7 +160,7 @@ with downstream components in the upcoming exercises.
 To import and configure a **custom MCP connector** in **Power Apps** for
 integration with the deployed MCP Server.
 
-1.  Go to +++<https://make.preview.powerapps.com/customconnectors>+++
+1.  Go to +++https://make.preview.powerapps.com/customconnectors+++
 
 2.  Select **+ New custom connector** -\> **Import from GitHub**.
 
