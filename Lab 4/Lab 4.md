@@ -118,7 +118,7 @@ incorrect.](./media/image10.png)
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Print this to a notepad to see which location you have ResourceGroup in -  @lab.CloudResourceGroup(ResourceGroup1).Location
+11. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
     
 13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
 
