@@ -1,95 +1,86 @@
-# Lab 3 - Build your own agent with the M365 Agents SDK and Semantic Kernel
+# 实验室 3 - 使用 M365 代理 SDK 和 Semantic kernel构建自己的代理
 
-Lab duration – 80 minutes
+实验室时间 – 80 分钟
 
-## Objective
+## 目标
 
-In this lab, you will develop a custom engine agent that runs across
-Microsoft Teams, Microsoft 365 Copilot Chat, and even external channels
-using the Microsoft 365 Agents SDK and Semantic Kernel.
+在本实验室中，你将开发一个自定义引擎代理，该代理使用 Microsoft 365 代理
+SDK 和语义内核跨 Microsoft Teams、Microsoft 365 Copilot Chat
+甚至外部渠道运行。
 
-In Azure AI Foundry, you’ll define your agent’s core instructions,
-tools, and personality. From there, you’ll use the Microsoft 365 Agents
-SDK and Visual Studio to bring your agent to life, customizing its
-behaviors and integrating it with Semantic Kernel for orchestration.
-You’ll then test your agent in Microsoft Teams, bring it into Copilot
-Chat, and see it come to life across Microsoft 365 applications.
+在 Azure AI Foundry
+中，你将定义代理的核心指令、工具和个性。从那里，你将使用 Microsoft 365
+代理 SDK 和 Visual Studio
+使代理栩栩如生，自定义其行为并将其与语义内核集成以进行业务流程。然后，您将在
+Microsoft Teams 中测试您的代理，将其引入 Copilot Chat，并看到它在
+Microsoft 365 应用程序中变为现实。
 
-In this lab, you will learn to
+在本实验中，您将学习
 
-- Prepare your agent in Azure AI Foundry
+- 在 Azure AI Foundry 中准备代理
 
-- Build your first agent using the M365 Agents SDK
+- 使用 M365 代理 SDK 构建您的第一个代理
 
-- Configure your agent’s properties using the SDK
+- 使用 SDK 配置代理的属性
 
-- Integrate your agent with Teams using Azure AI Foundry
+- 使用 Azure AI Foundry 将代理与 Teams 集成
 
-- Bring your agent into Microsoft 365 Copilot Chat
+- 将您的代理引入 Microsoft 365 Copilot 聊天
 
-## Exercise 1: Prepare your agent in Azure AI Foundry
+## 练习 1: 在 Azure AI Foundry 中准备代理
 
-In this exercise, you’ll begin your journey by preparing a custom engine
-agent using Azure AI Foundry, Microsoft’s platform for creating,
-configuring, and scaling AI agents. You'll explore the **Agents
-Playground**, define your agent's role, personalize its instructions,
-and connect it to relevant internal documents to support
-Retrieval-Augmented Generation (RAG).
+在本练习中，你将使用 Azure AI Foundry（Microsoft 用于创建、配置和缩放 AI
+代理的平台）准备自定义引擎代理，开始您的旅程。您将探索**Agents
+Playground,**，定义代理的角色，个性化其说明，并将其连接到相关的内部文档以支持Retrieval-Augmented
+Generation (RAG)。
 
-This exercise sets the foundation for the rest of the Build Path using
-the **Microsoft 365 Agents SDK** and **Semantic Kernel**. You’ll
-simulate a real-world Human Resources agent for Contoso Electronics that
-can answer questions based on uploaded documents like the Employee
-Handbook, Role Library, and Benefit Plans.
+本练习使用 Microsoft 365 代理 SDK
+**和语**义内核**为生成路径的其余部分奠定基础**。你将模拟 Contoso
+Electronics
+的真实人力资源代理，该代理可以根据上传的文档（如员工手册、角色库和福利计划）回答问题。
 
-Azure AI Foundry is a platform that enables developers to build, deploy,
-and scale AI agents with ease. You'll learn how to configure an agent,
-and test its functionality using the Agents Playground. This hands-on
-experience will provide insight into the capabilities of Azure AI Agent
-Service and how it integrates with various AI models and tools.
+Azure AI Foundry 是一个平台，使开发人员能够轻松生成、部署和缩放 AI
+代理。您将学习如何配置代理，并使用 Agents Playground
+测试其功能。这种实践经验将深入了解 Azure AI
+代理服务的功能以及它如何与各种 AI 模型和工具集成。
 
-Azure AI Foundry is your launchpad for building AI agents. In this task,
-you’ll log in to Azure AI Foundry with your login credentials.
+Azure AI Foundry 是构建 AI
+代理的启动板。在此任务中，你将使用登录凭据登录 Azure AI Foundry。
 
-1.  Open the browser and navigate to +++<https://ai.azure.com>+++ and
-    sign to your Azure account.
+1.  打开浏览器并导航到+++<https://ai.azure.com>+++ 并登录到你的 Azure
+    帐户。
 
     ![](./media/image1.png)
 
-2.  From the Azure AI Foundry homepage, select **Create an agent**.
+2.  在 Azure AI Foundry 主页中，选择**Create an agent**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image2.png)
 
-3.  Leave the project name as recommended and select **Create**.
+3.  将项目名称保留为建议，然后选择 **Create**.
 
     ![A screenshot of a project AI-generated content may be incorrect.](./media/image3.png)
 
-4.  This will scaffold a new project for you in Azure AI Foundry, it
-    usually takes 3-5 minutes.
+4.  这将在 Azure AI Foundry 中为你搭建一个新项目，通常需要 3-5 分钟。
 
-5.  When your project is created, you'll be redirected to your project,
-    extend the left side bar and select **Agents**. This will open the
-    Agents Playground.
+5.  创建项目后，您将被重定向到您的项目，展开左侧栏并选择**代理。**这将打开
+    Agents Playground。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image4.png)
 
-6.  Select **Agents** from the left pane. You will see that a new Agent
-    is created for you.
+6.  从 左窗格中选择**代理**。您将看到为您创建了一个新的代理。
 
     ![](./media/image5.png)
 
-7.  **Select** the **Agent**, scroll down and select **Try in
-    playground**.
+7.  **选择代理**，向下滚动并选择**在 Playground 中尝试**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-Now that you're inside the Agents Playground, you'll customize your
-agent's identity and behavior to match a real-world scenario: an
-internal HR Agent at Contoso.
+现在，你已进入代理游乐场，你将自定义代理的标识和行为，以匹配真实场景：Contoso
+的内部 HR 代理。
 
-8.  In your agent's Setup panel, Name your agent as +++Contoso HR
-    Agent+++ and update the Instructions as the following:
+8.  在代理的“设置”面板中，将代理命名为 +++Contoso HR
+    Agent+++，并按如下方式更新说明：
 
     ```
     You are Contoso HR Agent, an internal assistant for Contoso Electronics. Your role is to help employees find accurate, policy-aligned answers to questions related to:
@@ -108,246 +99,226 @@ internal HR Agent at Contoso.
 
     ```
 
-9.  In the Knowledge section, select **+ Add** and select **Files**,
-    then Select **local files**.
+9.  在“知识”部分中，选择“**+
+    Add**”，然后选择“**文件”**，然后选择“**选择本地文件**”。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image7.png)
+    incorrect.](./media/image7.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+    incorrect.](./media/image8.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+    incorrect.](./media/image9.png)
 
-10. Navigate to **C:\Labfiles\M365 Agents SDK** and select all the files
-    inside that and click **Open**.
+10. 导航到 **C:\Labfiles\M365 Agents SDK**
+    然后选择其中的所有文件，然后单击 **打开**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-11. Select **Upload and save** to upload them. This will create a vector
-    store for our agent.
+11. 选择 **Upload and save**
+    上传它们。这将为我们的代理创建一个向量存储。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-12. When you upload documents, Foundry automatically converts them into
-    vectors, a format that allows the agent to search and retrieve
-    relevant information efficiently.
+12. 当您上传文档时，Foundry
+    会自动将它们转换为向量，这种格式允许代理有效地搜索和检索相关信息。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-13. Save the **Agent id** to a notepad, that'll be required in the next
-    exercises. You can find your Agent id in the agent’s details.
+13. 将 **Agent ID**
+    保存到记事本，这将在接下来的练习中进行。您可以在代理的详细信息中找到您的代理
+    ID。
 
     ![A screenshot of a computer screen AI-generated content may be
 incorrect.](./media/image13.png)
 
-14. Also, go to the **Overview** page and save the value of **Azure AI
-    Foundry project endpoint** to the notepad.
+14. 此外，转到“**概述**”页，并将 **Azure AI Foundry project
+    endpoint**的值保存到记事本。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-By customizing the instructions and uploading relevant documents, you're
-teaching the agent how to behave and what knowledge to rely on. This is
-a simplified form of Retrieval-Augmented Generation (RAG).
+通过自定义说明和上传相关文档，您可以教代理如何行为以及依赖哪些知识。这是Retrieval-Augmented
+Generation (RAG) 的简化形式。
 
-## Exercise 2 : Build your first agent using M365 Agents SDK
+## 练习 2 : 使用 M365 Agents SDK 构建您的第一个代理
 
-Now that you’ve seen how to build an agent using Azure AI Foundry, let’s
-switch gears and explore how to build your own agent locally using the
-Microsoft 365 Agents SDK. This SDK lets you build multi-channel,
-production-ready agents that can run in Microsoft Teams, Microsoft 365
-Copilot, and other preferred channels.
+现在，你已经了解了如何使用 Azure AI Foundry
+生成代理，让我们换个角度，探索如何使用 Microsoft 365 代理 SDK
+在本地生成自己的代理。此 SDK 允许你生成可在 Microsoft Teams、Microsoft
+365 Copilot 和其他首选渠道中运行的多渠道生产就绪代理。
 
-1.  From Windows Start, search for Visual and open **Visual Studio
-    2022**. Select **Skip and add accounts later**.
+1.  在 Windows 开始模式下，搜索“Visual”并打开 **Visual Studio
+    2022**。选择 **Skip and add accounts later**。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image15.png)
 
-2.  Select **Start Visual Studio**.
+2.  选择 **Start Visual Studio**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image16.png)
 
-3.  Select **Create a new project**.
+3.  选择 **Create a new project**.
 
     ![](./media/image17.png)
 
-4.  Search for +++**Microsoft**+++and select **Microsoft 365
-    Agents** template. Click on **Next**.
+4.  寻找 +++**Microsoft**+++，然后选择**Microsoft 365
+    Agents** 模板。点击 **Next**.
 
     ![A screenshot of a computer project AI-generated content may be incorrect.](./media/image18.png)
 
-5.  Provide a name for your agent as +++**ContosoHRAgent**+++ and
-    select **Create**.
+5.  为您的代理提供名称+++**ContosoHRAgent**+++ ，然后选择**Create**.
 
     ![](./media/image19.png)
 
-6.  From the list of templates, select **Echo Bot** and
-    select **Create**.
+6.  从模板列表中, 选择 **Echo Bot** ，然后选择**Create**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
 
-7.  Select **Allow access** in the pop up.
+7.  在弹出窗口中选择 **Allow access**。
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image21.png)
 
-9.  When the project template is scaffolded, go to Solution Explorer on
-    the right-side panel and explore the agent template. Expand
-    the **ContosoHRAgent** project.
+8.  搭建项目模板后，转到右侧面板上的“解决方案资源管理器”并浏览代理模板。展开
+    **ContosoHRAgent** 项目。
 
-    - Open **Program.cs**, this code configures and runs the web server
-      that hosts your agent. It sets up required services like
-      authentication, routing, storage and registers the **EchoBot** and
-      injects memory-based state handling.
-    
+    - 打开**Program.cs**，此代码配置并运行托管代理的 Web
+      服务器。它设置所需的服务，如身份验证、路由、存储并注册 **EchoBot**
+      并注入基于内存的状态处理。
+
       ![A screenshot of a computer AI-generated content may be incorrect.](./media/image22.png)
 
-    - Open **Bot \> EchoBot.cs** and observe that this sample sets up a
-  basic AI agent using the **Microsoft.Agents.Builder**. It sends a
-  welcome message when a user joins the chat and listens for any message
-  and echoes it back with a running message count.
+    -  打开 **Bot > EchoBot.cs**，并观察此示例使用
+    **Microsoft.Agents.Builder** 设置基本 AI
+    代理。当用户加入聊天并侦听任何消息并回显正在运行的消息计数时，它会发送欢迎消息。
 
       ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
 
-    You've started with an **Echo Bot**, a simple bot that repeats back any message a user sends. It’s a useful way to verify your setup and understand how conversations are handled behind the scenes.
+    您已经从 **Echo Bot** 开始，这是一个简单的机器人，可以重复用户发送的任何消息。这是验证您的设置并了解如何在幕后处理对话的有用方法。
 
-9.  From Visual Studio, select **Tools -\> NuGet Package Manager -\>
-    Package Manager Settings**, to add the NuGet.org to the package
-    sources.
+9.  在 Visual Studio 中，选择 **Tools -\> NuGet Package Manager -\>
+    Package Manager Settings**, 将 NuGet.org 添加到包源。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
 
-10. Select **Package Sources** and click on the **+** symbol to add a
-    new Package source.
+10. 选择 **Package Sources** ，然后单击 **+** 符号以添加新的包源。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image25.png)
 
-11. Enter the below details and then select **Ok**.
+11. 输入以下详细信息，然后选择 **Ok**.
 
-    - Name - +++nuget.org+++
+    -  名称 - +++nuget.org+++
 
-    - Source - +++https://api.nuget.org/v3/index.json+++
+    -  来源 - +++https://api.nuget.org/v3/index.json+++
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image26.png)
 
-12. To test your echo agent, hit **Start** or **F5**. This will launch
-    Test Tool automatically in localhost where you can interact with
-    your agent. In case Visual Studio will ask you to confirm the
-    creation of a self-issued SSL certificate to test the application
-    locally, **confirm** and **proceed**.
+12. 测试回声代理, 点击 **Start** 或者 **F5**.
+    这将在本地主机中自动启动测试工具，您可以在其中与代理交互。如果
+    Visual Studio 要求你确认创建自颁发的 SSL
+    证书以在本地测试应用程序，请 **确认** 并 **继续**。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image27.png)
 
     ![A screenshot of a computer security warning AI-generated content may be incorrect.](./media/image28.png)
 
-13. Select **Allow access** in the security alert.
+13. 在安全警报中选择 **Allow access。**
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image29.png)
 
-14. The application now starts.
+14. 应用程序现在启动。
 
     ![](./media/image30.png)
 
-15. Wait until the agent's message "Hello and Welcome!", then type
-    anything such as “Hi”, “Hello”. Observe that the agent echoes
-    everything back.
+15. 等到座席消息“您好，欢迎光临！”，然后键入任何内容，例如 “Hi”,
+    “Hello”. 观察代理回应所有内容。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image31.png)
 
     ![A screenshot of a chat AI-generated content may be incorrect.](./media/image32.png)
 
-16. Stop debugging by selecting **Debug** -\> **Stop Debugging** from
-    Visual Studio.
+16. 从 Visual Studio通过选择停止调试 **Debug** -\> **Stop Debugging**.
 
     ![](./media/image33.png)
 
-    You have completed Build your first agent using M365 Agents SDK
-exercise. This simple agent forms the base for more powerful
-experiences. In the next step, you'll combine this with your Azure AI
-Foundry agent to enable richer, context-aware answers.
+你已完成使用 M365 代理 SDK
+构建第一个代理练习。这个简单的代理构成了更强大体验的基础。在下一步中，你将把它与
+Azure AI Foundry 代理相结合，以启用更丰富的上下文感知答案。
 
-## Exercise 3: Configure agent properties and test on Teams
+## 练习 3: 在 Teams 上配置代理属性和测试
 
-Now that you’ve created a basic bot, it’s time to enhance it with
-generative AI capabilities and upgrade it to an AI agent. In this
-exercise, you’ll install key libraries such as Semantic Kernel and
-prepare your agent to reason and respond more intelligently, ready for
-Teams or Copilot Chat.
+现在您已经创建了一个基本机器人，是时候使用 Generative AI
+功能对其进行增强并将其升级为 AI
+代理了。在本练习中，你将安装语义内核等关键库，并准备代理更智能地推理和响应，为
+Teams 或 Copilot 聊天做好准备。
 
-1.  Add **Semantic Kernel Nuget** Package. This package will provide
-    support for Azure AI integration.
+1.  添加 **Semantic Kernel Nuget**包。此包将支持 Azure AI 集成。
 
-2.  Right-click to **ContosoHRAgent** project and select **Manage Nuget
-    Packages for Solution**.
+2.  右键单击 **ContosoHRAgent** 项目，然后选择**“Manage Nuget Packages
+    for Solution**.
 
     ![](./media/image34.png)
 
-3.  Select **Browse** tab and search
-    for +++Microsoft.SemanticKernel.Agents.AzureAI+++. Check the
-    **Include prerelease** checkbox.
+3.  选择**“Browse”**选项卡并搜索
+    +++Microsoft.SemanticKernel.Agents.AzureAI+++. 选中“ **Include
+    prerelease** **”**复选框。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-4.  Select the **package**, select **Contoso** under Project and
-    select **Install**.
+4.  选择 **package**,在项目下，选择**Contoso**然后选择**Install**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image36.png)
+    incorrect.](./media/image36.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image37.png)
+    incorrect.](./media/image37.png)
 
-5.  Select **Apply** in the Preview Changes dialog.
+5.  在“预览更改”对话框中选择 **Apply**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-6.  Select **I Accept** in the License Acceptance dialog.
+6.  在许可证接受对话框中选择 **I Accept**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-7.  The package is now installed.
+7.  软件包现已安装。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-8.  Select **Program.cs** and enter +++builder.Services.AddKernel();+++
-    above the line, **var app = builder.Build()** (Line 31).
+8.  选择 **Program.cs** 并输入+++builder.Services.AddKernel();+++
+    线以上, **var app = builder.Build()** (Line 31).
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-    This registers the Semantic Kernel, a core component that allows your
-agent to interact with generative AI models.
+    这会注册语义内核，这是一个核心组件，允许您的代理与生成式 AI
+模型进行交互。
 
-9.  Right-click to **ContosoHRAgent** project and select **Add \>
-    Class**.
+9.  右键单击 **ContosoHRAgent** 项目，然后选择**“Add \> Class. **”。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image42.png)
 
-10. Enter the class name as +++**FileReference.cs**+++ and select
-    **Create**.
+10. 将类名称输入为 +++**FileReference.cs**+++ ，然后选择“ **Create”**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image43.png)
 
-11. This class defines the structure used when referencing specific
-    documents in responses—useful when your agent cites content from
-    uploaded files.
+11. 此类定义在响应中引用特定文档时使用的结构，当您的代理引用上传文件中的内容时非常有用。
 
-    Replace the existing code with the following.
+    将现有代码替换为以下内容。
 
     ```
     using Microsoft.Agents.Core.Models;
-    
+
     namespace ContosoHRAgent
     {
         public class FileReference(string fileId, string fileName, string quote, Citation citation)
@@ -358,84 +329,79 @@ incorrect.](./media/image43.png)
             public Citation Citation { get; set; } = citation;
         }
     }
-        
     ```
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image44.png)
 
-12. Right-click to **ContosoHRAgent** project and select **Add \>
-    Class** and define your class name
-    as +++ConversationStateExtensions.cs+++. Replace existing the code
-    with following
+12. 右键单击 **ContosoHRAgent**
+    项目，然后选择“**添加\>类**”，并将类名称定义为
+    +++ConversationStateExtensions.cs+++。将现有代码替换为以下内容
 
     ```
     using Microsoft.Agents.Builder.State;
-    
+
     namespace ContosoHRAgent
     {
-     public static class ConversationStateExtensions
-     {
-         public static int MessageCount(this ConversationState state) => state.GetValue<int>("countKey");
-    
-         public static void MessageCount(this ConversationState state, int value) => state.SetValue("countKey", value);
-    
-         public static int IncrementMessageCount(this ConversationState state)
-         {
-             int count = state.GetValue<int>("countKey");
-             state.SetValue("countKey", ++count);
-             return count;
-         }
-    
-         public static string ThreadId(this ConversationState state) => state.GetValue<string>("threadId");
-    
-         public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
-     }
+    public static class ConversationStateExtensions
+    {
+        public static int MessageCount(this ConversationState state) => state.GetValue<int>("countKey");
+
+        public static void MessageCount(this ConversationState state, int value) => state.SetValue("countKey", value);
+
+        public static int IncrementMessageCount(this ConversationState state)
+        {
+            int count = state.GetValue<int>("countKey");
+            state.SetValue("countKey", ++count);
+            return count;
+        }
+
+        public static string ThreadId(this ConversationState state) => state.GetValue<string>("threadId");
+
+        public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
     }
+    }
+
     ```
 
     ![](./media/image45.png)
 
-    This class adds helper methods to manage and track the number of user
-messages—demonstrating how state is stored and modified during an
-ongoing conversation.
+    此类添加了帮助程序方法来管理和跟踪用户消息数，演示在正在进行的对话期间如何存储和修改状态。
 
-## Exercise 4: Integrate Azure AI Foundry Agent with M365 Agents SDK
+## 练习 4: 将 Azure AI Foundry 代理与 M365 代理 SDK 集成
 
-You’ve built an agent using the M365 Agents SDK and configured it with
-generative AI capabilities. Now, you’ll connect this local agent to the
-Azure AI Foundry agent you created earlier. This enables your agent to
-respond using enterprise data and instructions stored in the Foundry
-project, bringing everything full circle.
+您已使用 M365 Agents SDK 构建了代理，并为其配置了生成式 AI
+功能。现在，你将此本地代理连接到之前创建的 Azure AI Foundry
+代理。这使您的代理能够使用存储在 Foundry
+项目中的企业数据和指令进行响应，从而使一切顺利进行。
 
-### Task 1: Configure EchoBot.cs to Connect with Azure AI Foundry Agent
+### 任务 1: 配置EchoBot.cs以与 Azure AI Foundry 代理连接
 
-In this task, you’ll connect to the Azure AI Foundry agent by adding a
-client to fetch and invoke your Foundry-hosted model inside the
-EchoBot.cs.
+在此任务中，你将通过添加客户端来在EchoBot.cs中提取和调用 Foundry
+托管的模型，从而连接到 Azure AI Foundry 代理。
 
-1.  In **ContosoHRAgent** project, open **Bot/EchoBot.cs** and add the
-    following lines inside the EchoBot public class.
+1.  在 **ContosoHRAgent** 项目, 打开 **Bot/EchoBot.cs** 并在 EchoBot
+    公共类中添加以下行。
 
     ```
     private readonly PersistentAgentsClient _projectClient;
     private readonly string _agentId;
     ```
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image46.png)
 
-2.  Replace the existing **EchoBot constructor** with the following.
+2.  将现有**的 EchoBot constructor** 替换为以下内容。
 
     ```
     public EchoBot(AgentApplicationOptions options, IConfiguration configuration) : base(options)
     {
-    
+
         OnConversationUpdate(ConversationUpdateEvents.MembersAdded, WelcomeMessageAsync);
-    
+
         // Listen for ANY message to be received. MUST BE AFTER ANY OTHER MESSAGE HANDLERS 
         OnActivity(ActivityTypes.Message, OnMessageAsync);
-    
+
         // Azure AI Foundry Project ConnectionString
         string projectEndpoint = configuration["AIServices:ProjectEndpoint"];
         if (string.IsNullOrEmpty(projectEndpoint))
@@ -443,52 +409,52 @@ incorrect.](./media/image46.png)
             throw new InvalidOperationException("ProjectEndpoint is not configured.");
         }
         _projectClient = new PersistentAgentsClient(projectEndpoint, new AzureCliCredential());
-    
+
         // Azure AI Foundry Agent Id
         _agentId = configuration["AIServices:AgentID"];
         if (string.IsNullOrEmpty(_agentId))
         {
             throw new InvalidOperationException("AgentID is not configured.");
         }
-    
+
     }
     ```
-    
+
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
 
-3.  Replace **OnMessageAsync** method with the following.
+3.  将 **OnMessageAsync** 方法替换为以下内容。
 
     ```
     protected async Task OnMessageAsync(ITurnContext turnContext, ITurnState turnState, CancellationToken cancellationToken)
     {
         // send the initial message to the user
         await turnContext.StreamingResponse.QueueInformativeUpdateAsync("Working on it...", cancellationToken);
-    
+
         // get the agent definition from the project
         var agentDefinition = await _projectClient.Administration.GetAgentAsync(_agentId, cancellationToken);
-    
+
         // initialize a new agent instance from the agent definition
         var agent = new AzureAIAgent(agentDefinition, _projectClient);
-    
+
         // retrieve the threadId from the conversation state
         // this is set if the agent has been invoked before in the same conversation
         var threadId = turnState.Conversation.ThreadId();
-    
+
         // if the threadId is not set, we create a new thread
         // otherwise, we use the existing thread
         var thread = string.IsNullOrEmpty(threadId)
             ? new AzureAIAgentThread(_projectClient)
             : new AzureAIAgentThread(_projectClient, threadId);
-    
+
         try
         {
             // increment the message count in state and queue the count to the user
             int count = turnState.Conversation.IncrementMessageCount();
             turnContext.StreamingResponse.QueueTextChunk($"({count}) ");
-    
+
             // create the user message to send to the agent
             var message = new ChatMessageContent(AuthorRole.User, turnContext.Activity.Text);
-    
+
             // invoke the agent and stream the responses to the user
             await foreach (AgentResponseItem<StreamingChatMessageContent> agentResponse in agent.InvokeStreamingAsync(message, thread, cancellationToken: cancellationToken))
             {
@@ -499,7 +465,7 @@ incorrect.](./media/image46.png)
                     threadId = agentResponse.Thread.Id;
                     turnState.Conversation.ThreadId(threadId);
                 }
-    
+
                 turnContext.StreamingResponse.QueueTextChunk(agentResponse.Message.Content);
             }
         }
@@ -511,241 +477,233 @@ incorrect.](./media/image46.png)
     }
     ```
 
-4.  When pasting the above code excerpt, you might see a
-    warning (SKEXP0110) because this feature is still in preview. You
-    can safely suppress this warning for now by right-clicking on
-    AzureAIAgent, selecting **Quick Actions and Refactorings \> Suppress
-    or configure issues \> Configure SKEXP0110 Severity \> Silent**.
+4.  粘贴上述代码摘录时，可能会看到警告
+    （SKEXP0110），因为此功能仍处于预览状态。目前可以通过右键单击
+    AzureAIAgent，选择“**Quick Actions and Refactorings \> Suppress or
+    configure issues \> Configure SKEXP0110 Severity \> Silent**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image48.png)
 
-5.  The code will now look like this.
+5.  代码现在将如下所示。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-6.  The ***OnMessageAsync*** method is the heart of your agent’s
-    response logic. By replacing the default echo behavior, you’ve
-    enabled your agent to send the user’s message to your Azure AI
-    Foundry agent, stream the response back to the user in real time,
-    track and attach citations and file references for transparency and
-    add sensitivity and AI-generated labels for security and
-    traceability.
+6.  ***OnMessageAsync***
+    方法是代理响应逻辑的核心。通过替换默认回显行为，你已使代理能够将用户的消息发送到
+    Azure AI Foundry
+    代理，将响应实时流式传输回用户，跟踪和附加引文和文件引用以提高透明度，并添加敏感度和
+    AI 生成的标签以实现安全性和可跟踪性。
 
-### Task 2: Configure Azure AI Agent Service Keys
+### 任务 2: 配置 Azure AI 代理服务密钥
 
-In this task, you will add your Foundry connection details to
-appsettings.json, these values connect your M365 agent to the correct
-Foundry project and agent.
+在此任务中，您将把 Foundry 连接详细信息添加到appsettings.json，这些值将
+M365 代理连接到正确的 Foundry 项目和代理。
 
-1.  In **ContosoHRAgent** project, open **appsettings.json** and add the
-    following lines at the bottom of the appsettings list (At line 40).
+1.  在 **ContosoHRAgent** 项目中，打开**appsettings.json**并在
+    appsettings 列表的底部添加以下行（在第 40 行）。
 
     ```
     ,
-      "AIServices": {
-       "AgentID": "<AzureAIFoundryAgentId>",
-       "ProjectEndpoint": "<ProjectEndpoint>"
-      }
+    "AIServices": {
+    "AgentID": "<AzureAIFoundryAgentId>",
+    "ProjectEndpoint": "<ProjectEndpoint>"
+    }
     ```
 
-    Replace the place holders for **AzureAIFoundryAgentId** and **ProjectEndpoint** with the values you saved to the notepad at the end of Exercise 1.
+    将 **AzureAIFoundryAgentId**   和 **ProjectEndpoint**  的占位符替换 为在练习 1 结束时保存到记事本的值。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
 
-2.  Final version of the **appsettings.json** will look like below.
+2.  **appsettings.json**的最终版本 如下所示：
 
-    ```no-copy
+    ```
     {
-      "AgentApplicationOptions": {
+    "AgentApplicationOptions": {
         "StartTypingTimer": false,
         "RemoveRecipientMention": false,
         "NormalizeMentions": false
-      },
-    
-      "TokenValidation": {
+    },
+
+    "TokenValidation": {
         "Audiences": [
-          "{{ClientId}}" // this is the Client ID used for the Azure Bot
+        "{{ClientId}}" // this is the Client ID used for the Azure Bot
         ]
-      },
-    
-      "Logging": {
+    },
+
+    "Logging": {
         "LogLevel": {
-          "Default": "Information",
-          "Microsoft.AspNetCore": "Warning",
-          "Microsoft.Agents": "Warning",
-          "Microsoft.Hosting.Lifetime": "Information"
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning",
+        "Microsoft.Agents": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information"
         }
-      },
-      "AllowedHosts": "*",
-      "Connections": {
+    },
+    "AllowedHosts": "*",
+    "Connections": {
         "BotServiceConnection": {
-          "Settings": {
+        "Settings": {
             "AuthType": "UserManagedIdentity", // this is the AuthType for the connection, valid values can be found in Microsoft.Agents.Authentication.Msal.Model.AuthTypes.
             "ClientId": "{{BOT_ID}}", // this is the Client ID used for the connection.
             "TenantId": "{{BOT_TENANT_ID}}",
             "Scopes": [
-              "https://api.botframework.com/.default"
+            "https://api.botframework.com/.default"
             ]
-          }
         }
-      },
-      "ConnectionsMap": [
+        }
+    },
+    "ConnectionsMap": [
         {
-          "ServiceUrl": "*",
-          "Connection": "BotServiceConnection"
+        "ServiceUrl": "*",
+        "Connection": "BotServiceConnection"
         }
-      ],
-      "AIServices": {
-       "AgentID": "<AzureAIFoundryAgentId>",
-       "ProjectEndpoint": "<ProjectEndpoint>"
-      }
+    ],
+    "AIServices": {
+    "AgentID": "<AzureAIFoundryAgentId>",
+    "ProjectEndpoint": "<ProjectEndpoint>"
+    }
     }
     ```
 
-### Task 3: Test your agent on Teams
+### 任务 3: 在 Teams 上测试代理
 
-In this task, you will test the created agent in Teams.
+在此任务中，你将在 Teams 中测试创建的代理。
 
-1.  Open the **Windows command prompt** and enter +++where az+++. This
-    is to get the path where the Azure CLI is installed and update the
-    Path Environment variable.
+1.  打开 **Windows command prompt**并输入 +++where
+    az+++。这是为了获取安装 Azure CLI 的路径并更新路径环境变量。
 
-    Copy and paste the paths that are listed as the output.
+    复制并粘贴列为输出的路径。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  From the **Start** window, search for +++Environment+++ and select
-    **Edit the system environment variables**.
+2.  在“ **开始”** 窗口中，搜索 +++Environment+++ 并选择
+    **“编辑系统环境变量”**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image52.png)
 
-3.  Select **Environment variables**.
+3.  选择**Environment variables**.
 
     ![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image53.png)
 
-4.  Under **System variables**, select **Path** and then select
-    **Edit**.
+4.  在 **System variables**, 选择 **Path** ，然后选择 **Edit**.
 
     ![](./media/image54.png)
 
-5.  Add the path obtained as the output for the command **where az**
-    (the first step of this Task) and click on **Ok**.
+5.  将获取的路径添加为命令的输出， **其中 az**
+    （此任务的第一步），然后单击 **“确定**”。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image55.png)
 
-6.  Select **Ok** in the other Open windows of the **Environment
-    Settings**.
+6.  在**Environment Settings**. 的其他打开窗口中选择。
 
-7.  From the Visual Studio, open **Tools \> Command Line \> Developer
+7.  在 Visual Studio 中，打开 **Tools \> Command Line \> Developer
     Command Prompt**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image56.png)
 
-8.  Execute the below command.
+8.  执行以下命令。
 
     +++az login+++
 
-    A window will pop up on your browser. Select **Work or school account** and login with your login credentials.
+    浏览器上将弹出一个窗口。选择 **“Work or school account**”，然后使用登录凭据登录。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image57.png)
+    incorrect.](./media/image57.png)
 
     ![A computer screen with a white box and blue text AI-generated content
-may be incorrect.](./media/image58.png)
+    may be incorrect.](./media/image58.png)
 
-9.  Once logged in, enter **1** to select the subscription.
+9.  登录后，输入 **1** 选择订阅。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image59.png)
 
-10. Expand **Start** and select **Dev Tunnels \> Create a Tunnel**:
+10. 展开“**开始”**，然后选择 **Dev Tunnels \> Create a Tunnel**:
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image60.png)
 
-11. Provide the below details and select **Ok**.
+11. 提供以下详细信息，然后选择 **Ok**.
 
-    - The account that will create the tunnel - Select **Sign in** -\>
-      **Work or school account** and login with your login credentials.
-    
-    - Name - +++DevTunnel+++.
-    
-    - Tunnel Type - **Temporary**
-    
-    - Access - **Public**
+    - 将创建隧道的帐户 - 选择**“Sign in** -\> **Work or school
+    account**”，然后使用登录凭据登录。
+
+    - 名称 - +++DevTunnel+++.
+
+    - 隧道类型 - **Temporary**
+
+    - 访问 - **Public**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image61.png)
+    incorrect.](./media/image61.png)
 
     ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image62.png)
+    incorrect.](./media/image62.png)
 
-12. Right click to **M365Agent** project, select **Microsoft 365 Agents
-    Toolkit > Select Microsoft 365 Account**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image63.png)
+12. 右键点击 **M365Agent** 项目，选择 **Microsoft 365 Agents Toolkit \>
+    Select Microsoft 365 Account**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image64.png)
+    incorrect.](./media/image63.png)
 
-13. Select your account and click on **Continue**.
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image64.png)
+
+13. 选择您的帐户并单击 **Continue**.
 
     ![A screenshot of a computer error AI-generated content may be
 incorrect.](./media/image65.png)
 
-14. Expand the **drop down** next to **Multiple startup projects** and
-    select **Microsoft Teams (browser)**.
+14. 展开“**Multiple startup projects**”
+    **旁边**的**下拉列表**，然后选择“**Microsoft Teams（浏览器）**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image66.png)
 
-You're now ready to run your integrated agent and test it live in
-Microsoft Teams.
+    现在，你已准备好运行集成代理并在 Microsoft Teams 中实时测试它。
 
-15. Hit **Start** or **F5** to start debugging. Microsoft Teams will
-    launch automatically, and your agent app will pop up on the window.
-    Select **Add** and **Open** to start chatting with your agent.
+15. 点击**“开始”**或 **F5** 开始调试。Microsoft Teams
+    将自动启动，您的代理应用程序将在窗口中弹出。选择**添加**并**打开**以开始与您的代理聊天。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image67.png)
+    incorrect.](./media/image67.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image68.png)
+    incorrect.](./media/image68.png)
 
-16. You can ask one of the following questions to interact with the
-    agent.
+16. 您可以提出以下问题之一来与代理交互。
 
-    - +++What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?+++
-    
-    - +++Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?+++
-    
-    - +++What values guide behavior and decision-making at Contoso Electronics?+++
+    - +++What’s the difference between Northwind Standard and Health Plus
+    when it comes to emergency and mental health coverage?+++
 
-    You should observe that you are getting similar responses with the agent you've created on Azure AI Foundry.
+    - +++Can I use PerksPlus to pay for both a rock climbing class and a
+    virtual fitness program?+++
+
+    - +++What values guide behavior and decision-making at Contoso
+    Electronics?+++
+
+    > 应注意，在 Azure AI Foundry 上创建的代理会收到类似的响应。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image69.png)
+    incorrect.](./media/image69.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image70.png)
+    incorrect.](./media/image70.png)
 
-## Exercise 5:  Bring your agent to Copilot Chat
+## 练习 5:  将您的代理带到 Copilot Chat
 
-In this exercise, you’ll bring your custom engine agent into Copilot
-Chat by updating the agent's manifest. By enabling copilotAgents in the
-app manifest, you’ll make your AI-powered assistant available directly
-inside the Copilot experience.
+在本练习中，您将通过更新代理的清单将自定义引擎代理引入 Copilot
+Chat。通过在应用清单中启用 copilotAgents，你将直接在 Copilot 体验中提供
+AI 支持的助手。
 
-1.  Open **M365Agent/AppPackage/manifest.json**, update the manifest
-    schema and version as following.
+1.  打开 **M365Agent/AppPackage/manifest.json**,
+    更新清单架构和版本，如下所示。
 
     ```
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
@@ -755,119 +713,113 @@ inside the Copilot experience.
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image71.png)
 
-2.  Replace **bots** section with the following that will also add
-    copilotAgents in the manifest.
+2.  将**机器人**部分替换 为以下内容，这也将在清单中添加 copilotAgents。
 
-    This block declares your agent as a custom engine agent for M365
-Copilot. It tells Microsoft 365 to expose this agent in Copilot Chat and
-surface its command list in the conversation UI along with the
-conversation starters to help users get started quickly.
+    此块将代理声明为 M365 Copilot 的自定义引擎代理。它告诉 Microsoft 365 在
+Copilot Chat 中公开此代理，并在对话 UI
+中显示其命令列表以及对话启动器，以帮助用户快速入门。
 
     ```
     "bots": [ 
-      { 
+    { 
         "botId": "${{BOT_ID}}", 
         "scopes": [ 
-          "personal", 
-          "team", 
-          "groupChat" 
+        "personal", 
+        "team", 
+        "groupChat" 
         ], 
         "supportsFiles": false, 
         "isNotificationOnly": false, 
         "commandLists": [ 
-          { 
+        { 
             "scopes": [ "personal", "team", "groupChat" ], 
             "commands": [ 
-              { 
+            { 
                 "title": "Emergency and Mental Health",
                 "description": "What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?" 
-              }, 
-              { 
+            }, 
+            { 
                 "title": "PerksPlus Details", 
                 "description": "Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?" 
-              }, 
-              { 
+            }, 
+            { 
                 "title": "Contoso Electronics Values", 
                 "description": "What values guide behavior and decision making at Contoso Electronics?" 
-              } 
+            } 
             ] 
-          } 
+        } 
         ] 
-      } 
+    } 
     ], 
     "copilotAgents": { 
-      "customEngineAgents": [ 
+    "customEngineAgents": [ 
         { 
-          "id": "${{BOT_ID}}", 
-          "type": "bot" 
+        "id": "${{BOT_ID}}", 
+        "type": "bot" 
         } 
-      ] 
+    ] 
     },
     ```
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image72.png)
 
-3.  Hit **Start** or **F5** to start debugging. Microsoft Teams will
-    launch automatically.
+3.  点击 **“开始”** 或 **F5** 开始调试。Microsoft Teams 将自动启动。
 
-4.  When Microsoft Teams open in your browser, ignore the app pop-up and
-    select **Apps \> Manage your apps \> Upload an app** and then select
-    **Upload a custom app**.
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image73.png)
+4.  在浏览器中打开Microsoft Teams
+    时，请忽略应用弹出窗口，然后选择“**Apps \> Manage your apps \>
+    Upload an app”**，然后选择“**Upload a custom app.**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image19.png)
+    incorrect.](./media/image73.png)
 
-5.  In the File Explorer go to your project folder. The path will be
-    **C:\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent** if you
-    have not changed the path during the project setup. Navigate to
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image19.png)
+
+5.  在文件资源管理器中，转到项目文件夹。如果在项目设置期间未更改路径，则路径将为
+    **C：\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent**。导航到
     **\ContosoHRAgent\M365Agent\appPackage\build select
-    appPackage.local.zip** and click **Open**.
+    appPackage.local.zip** 并点击 **Open**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image74.png)
 
-6.  Your app will pop-up on Teams again, select **Add**
+6.  应用将再次在 Teams 上弹出，选择 **Add**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image75.png)
 
-7.  Select **Open with Copilot** to test your agent on Copilot.
+7.  选择 **Open with Copilot**  以在 Copilot 上测试您的代理。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image76.png)
 
-8.  Select the conversation starter, **PerksPlus Details** and hit
-    **Send**.
+8.  选择对话启动器 **PerksPlus 详细信息并** 点击 **发送**。
 
     ![](./media/image77.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image78.png)
+    incorrect.](./media/image78.png)
 
-9.  Observe that you are getting the response from the AI Foundry agent,
-    now on Copilot Chat.
+9.  请注意，您现在正在 Copilot Chat 上收到来自 AI Foundry 代理的响应。
 
     ![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image79.png)
 
-## Summary
+## 总结
 
-In this lab, you've just built your Custom Engine Agent using the
-Microsoft 365 Agents SDK and Azure AI Foundry.
+在本实验室中，你刚刚使用 Microsoft 365 代理 SDK 和 Azure AI Foundry
+生成了自定义引擎代理。
 
-You learned how to
+您学会了如何
 
-  - Configure an AI agent in Azure AI Foundry using the Agent Playground
-  
-  - Upload enterprise documents to ground your agent’s responses
-  
-  - Scaffold a bot using the M365 Agents SDK in Visual Studio
-  
-  - Add Semantic Kernel and connect to Azure AI Agent Service
-  
-  - Integrate your bot with the Azure AI Foundry agent for real-time,
-    grounded reasoning
-  
-  - Deploy and test your agent in **Microsoft Teams** and **Copilot Chat**
+1.  使用代理场在 Azure AI Foundry 中配置 AI 代理
+
+2.  上传企业文档以支持代理的回复
+
+3.  在 Visual Studio 中使用 M365 代理 SDK 搭建机器人
+
+4.  添加语义内核并连接到 Azure AI 代理服务
+
+5.  将机器人与 Azure AI Foundry 代理集成，以实现实时、扎根的推理
+
+6.  在 **Microsoft Teams 和 Copilot Chat** 中部署和测试代理
