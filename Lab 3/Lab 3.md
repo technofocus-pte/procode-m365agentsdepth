@@ -358,7 +358,6 @@ incorrect.](./media/image43.png)
             public Citation Citation { get; set; } = citation;
         }
     }
-        
     ```
 
     ![A screenshot of a computer AI-generated content may be
@@ -392,6 +391,7 @@ incorrect.](./media/image44.png)
          public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
      }
     }
+    
     ```
 
     ![](./media/image45.png)
