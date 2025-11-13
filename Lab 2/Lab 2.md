@@ -1,388 +1,329 @@
-# Lab 2 - Build an instructions-based Geo locator game agent using Microsoft 365 Agents Toolkit
+# 使用 Microsoft 365 代理工具包生成基於指令的地理定位器遊戲代理
 
-**Estimated Time: 30 mins**
+**預計時間: 30 分鐘**
 
-## Objective
+## 目標
 
-The objective of this lab is to empower participants to build a
-declarative agent for Microsoft 365 Copilot using Microsoft 365 Agents
-Toolkit. By completing the lab, participants will create a geo-location
-game that provides a fun and educational break from work. The lab
-focuses on understanding the structure of declarative agents,
-configuring them with instructions, and integrating them into the
-Microsoft 365 ecosystem for customized Copilot interactions.
+本實驗室的目標是使參與者能夠使用 Microsoft 365 代理工具包為 Microsoft
+365 Copilot
+生成聲明性代理。通過完成實驗室，參與者將創建一個地理定位遊戲，在工作之餘提供有趣且具有教育意義的休息時間。該實驗室專注於瞭解聲明式代理的結構，使用指令配置它們，並將它們集成到
+Microsoft 365 生態系統中以實現自定義的 Copilot 交互。
 
-## Solution
+## 解決方案
 
-Participants will install Microsoft 365 Agents Toolkit in Visual Studio
-Code and set up their development environment. Using a template, they
-will scaffold a declarative agent named Geo Locator Game. They will
-customize the agent's instructions and update its configuration files,
-such as instruction.txt and manifest.json. The lab also guides
-participants in enhancing the agent with unique identifiers, custom
-icons, and testing functionality. The result is a fully functional,
-engaging Copilot application tailored to deliver clues about cities
-while integrating seamlessly with Microsoft 365.
+參與者將在 Visual Studio Code 中安裝 Microsoft 365 Agents Toolkit
+並設置他們的開發環境。使用模板，他們將搭建一個名為 Geo Locator Game
+的聲明性代理。他們將自定義代理的指令並更新其配置文件，例如
+instruction.txt 和
+manifest.json。該實驗室還指導參與者使用唯一標識符、自定義圖標和測試功能來增強代理。其結果是一個功能齊全、引人入勝的
+Copilot 應用程序，專為提供有關城市的線索而定制，同時與 Microsoft 365
+無縫集成。
 
-## Exercise 1: Set up your development environment for Microsoft 365 Copilot
+## 練習 1: 為 Microsoft 365 Copilot 設置開發環境
 
-### Task 1: Install Microsoft 365 Agents Toolkit
+### 任務 1: 安裝 Microsoft 365 代理工具包
 
-1.  Open Visual Studio Code and click on the **Extensions** toolbar
-    button.
+1.  打開 Visual Studio Code 並單擊“**擴展”**工具欄按鈕。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image1.png)
 
-2.  Search for +++Microsoft 365 agents+++ and locate **Microsoft 365
-    Agents Toolkit**.
+2.  搜索 +++**Microsoft 365 agents**+++ 並定位**Microsoft 365 Agents
+    Toolkit**.
 
-    ![image](./media/image2.png)
+	![image](./media/image2.png)
 
-3.  Select **Install**.
+3.  選擇 **Install**.
 
-    ![image](./media/image3.png)
+	![image](./media/image3.png)
 
-4.  Once the installation is complete, the **Microsoft 365 Agents
-    Toolkit** icon will appear on the left navigation bar.
+4.  安裝完成後, 將 **Microsoft 365 Agents
+    Toolkit** 圖標將出現在左側導航欄上。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-	>[!note] Microsoft 365 Agents Toolkit is an evolution of
-	Teams Toolkit. It is in a transition phase and at places it shows up as
-	Teams toolkit and at places it shows up as Microsoft 365 Agents Toolkit.
+[！注意] **注意：** Microsoft 365 代理工具包是 Teams
+工具包的演變。它處於過渡階段，在某些地方顯示為 Teams
+工具包，在某些地方顯示為 Microsoft 365 代理工具包。
 
-## Exercise 2: First declarative agent
+## 練習 2: 第一個聲明性代理
 
-In this lab, you'll build a simple declarative agent using Microsoft 365
-Agents Toolkit for Visual Studio Code. Your agent is designed to give
-you a fun and educational break from work by helping you explore cities
-across the globe. It presents abstract clues for you to guess a city,
-with fewer points awarded the more clues you use. At the end, your final
-score will be revealed.
+在本實驗室中，你將使用 Microsoft 365 Agents Toolkit for Visual Studio
+Code
+生成一個簡單的聲明性代理。您的代理旨在幫助您探索全球城市，讓您在工作之餘獲得有趣且具有教育意義的休息時間。它為您提供猜測城市的抽象線索，您使用的線索越多，獲得的分數就越少。最後，您的最終分數將揭曉。
 
-In this exercise you will learn:
+在本練習中，您將瞭解到：
 
-- What is a declarative agent for Microsoft 365 Copilot
+- 什麼是 Microsoft 365 Copilot 的聲明性代理
 
-- Create a declarative agent using Microsoft 365 Agents Toolkit template
+- 使用 Microsoft 365 代理工具包模板創建聲明性代理
 
-- Customize the agent to create the geo locator game using instructions
+- 自定義代理以使用說明創建地理定位器遊戲
 
-- Learn how to run and test your app
+- 瞭解如何運行和測試您的應用
 
-- For bonus exercise, you will need a SharePoint teams site
+- 對於獎勵練習，您將需要一個 SharePoint 團隊網站
 
-**Introduction**
+**介紹**
 
-Declarative agents leverage the same scalable infrastructure and
-platform of Microsoft 365 Copilot, tailored specifically to meet focus
-on a special area of your needs. They function as subject matter experts
-in a specific area or business need, allowing you to use the same
-interface as a standard Microsoft 365 Copilot chat while ensuring they
-focus exclusively on the specific task at hand.
+聲明式代理利用與 Microsoft 365 Copilot
+相同的可縮放基礎結構和平臺，專為滿足對特定需求的關注而定制。他們充當特定領域或業務需求的主題專家，允許您使用與標準
+Microsoft 365 Copilot 聊天相同的界面，同時確保他們專注於手頭的特定任務。
 
-Welcome on board to building your own declarative agent ! Let's dive in
-and make your Copilot work magic!
+歡迎加入構建您自己的聲明式代理！讓我們深入瞭解一下，讓您的 Copilot
+發揮魔力！
 
-In this lab you will start out building a declarative agent using
-Microsoft 365 Agents Toolkit with a default template used in the tool.
-This is to help you get started with something. Next, you will modify
-your agent to be focused on a geo location game.
+在本實驗室中，你將開始使用 Microsoft 365
+代理工具包生成聲明性代理，並在該工具中使用默認模板。這是為了幫助您開始某事。接下來，您將修改您的代理以專注於地理位置遊戲。
 
-The goal of your AI is to provide a fun break from work while helping
-you learn about different cities around the world. It offers abstract
-clues for you to identify a city. The more clues you need, the fewer
-points you earn. At the end of the game, it will reveal your final
-score.
+人工智能的目標是提供一個有趣的工作休息時間，同時幫助您瞭解世界各地的不同城市。它為您提供識別城市的抽象線索。您需要的線索越多，您獲得的積分就越少。遊戲結束時，它將顯示您的最終分數。
 
 ![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image5.png)
 
-You will also give your agent some files to refer to a secret diary 🕵🏽
-and a map 🗺️ to give more challenges to the player.
+您還將向您的代理提供一些文件以參考秘密日記 🕵🏽 和一張地圖 🗺️
+給玩家更多的挑戰。
 
-So, let's begin
+那麼，讓我們開始吧
 
-**Anatomy of a Declarative agent**
+**聲明性代理的剖析**
 
-You will see as we develop more and more extensions to Copilot, that in
-the end what you will build is collection of few files in a zip file
-which we will refer to as an app package that you will then install and
-use. So, it's important you have a basic understanding of what the app
-package consists of. The app package of a declarative agent is like a
-Teams app if you have built one before with additional elements. See the
-table to see all the core elements. You will also see that the app
-deployment process is very similar to deploying a Teams app.
+隨著我們開發越來越多的 Copilot 擴展，您會看到，最終您將構建的是 zip
+文件中的幾個文件的集合，我們將將其稱為應用程序包，然後您將安裝和使用該文件。因此，對應用程序包的組成有一個基本的瞭解非常重要。聲明性代理的應用包類似於
+Teams
+應用（如果之前已使用其他元素構建過一個應用）。請參閱表格以查看所有核心要素。你還將看到應用部署過程與部署
+Teams 應用非常相似。
 
+|元素	|	描述|文件名稱	|
+|:-----|:-------|:------|
+|App manifest	|	描述應用配置、功能、所需資源和重要屬性。|manifest.json	|
+|	應用圖標|	聲明性代理需要顏色 （192x192） 和輪廓 （32x32） 圖標。|icon.png, color.png	|
+|聲明性代理清單	|描述代理配置、說明、必填字段、功能、對話啟動器和作。	|	declarativeAgent.json|
 
+**注意:** 可以從 SharePoint、OneDrive、Web
+搜索等添加引用數據，並將擴展功能添加到聲明性代理，如插件和連接器。您將在此路徑中即將舉行的實驗室中學習如何添加插件。
 
-**Note:** You can add reference data from SharePoint, OneDrive, Web
-search etc. and add extension capabilities to a declarative agent like
-plugins and connectors. You will learn how to add a plugin in the
-upcoming labs in this path.
+**聲明式代理的功能**
 
-**Capabilities of a Declarative agent**
+您不僅可以通過添加指令還指定它應該訪問的知識庫來增強代理對上下文和數據的關注。它們稱為功能，支持三種類型的功能。
 
-You can enhance the agent's focus on context and data by not only adding
-instructions but also specifying the knowledge base it should access.
-They are called capabilities and there are three types of capabilities
-supported.
+- **Microsoft Graph 連接器**- 將 Graph
+  連接器的連接傳遞給代理，允許代理訪問和利用連接器的知識。
 
-- **Microsoft Graph Connectors** - Pass connections of Graph connectors
-  to the agent, allowing the agent to access and utilize the connector's
-  knowledge.
+- **OneDrive 和 SharePoint** - 向代理提供文件和站點的
+  URL，以便代理訪問這些內容。
 
-- **OneDrive and SharePoint** - Provides URLs of files and sites to
-  agent, for it to gain access to those contents.
+- **Web search** - 啟用或禁用 Web 內容作為代理知識庫的一部分。
 
-- **Web search** - Enables or disables web content as part of the
-  agent's knowledge base.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-**One Drive and SharePoint**
+**One Drive 和 SharePoint**
 
-URLs should be full path to SharePoint items (site, document library,
-folder, or file). You can use the "Copy direct link" option in
-SharePoint to get the full path or files and folders. To achieve this,
-right-click on the file or folder and select Details. Navigate to Path
-and click on the copy icon. Not specifying the URLs, the entire corpus
-of OneDrive and SharePoint content available to the logged in user will
-be used by the agent.
+URL 應是 SharePoint
+項目（網站、文檔庫、文件夾或文件）的完整路徑。可以使用 SharePoint
+中的“複製直接鏈接”選項來獲取完整路徑或文件和文件夾。為此，請右鍵單擊文件或文件夾並選擇詳細信息。導航到路徑並單擊複製圖標。如果不指定
+URL，代理將使用登錄用戶可用的整個 OneDrive 和 SharePoint 內容語料庫。
 
-**Microsoft Graph Connector**
+**Microsoft Graph 連接器**
 
-Not specifying the connections, the entire corpus of Graph Connectors
-content available to the logged in user will be used by the agent.
+如果不指定連接，則代理將使用登錄用戶可用的整個 Graph Connectors
+內容語料庫。
 
-**Web search**
+**網絡搜索**
 
-At the moment you cannot pass specific websites or domains, and this
-acts only as a toggle on and off to use web.
+目前，您無法傳遞特定的網站或域，這僅用作打開和關閉以使用 Web 的開關。
 
-## Exercise 3: Scaffold a declarative agent from template**
+## 練習 3: 從模板搭建聲明性代理
 
-You can use just any editor to create a declarative agent if you know
-the structure of the files in the app package mentioned above. But
-things are easier if you use a tool like Microsoft 365 Agents Toolkit to
-not only create these files for you but also help you deploy and publish
-your app. So, to keep things as simple as possible you will use
-Microsoft 365 Agents Toolkit.
+如果您知道上述應用包中文件的結構，則可以使用任何編輯器來創建聲明性代理。但是，如果您使用
+Microsoft 365
+代理工具包等工具不僅可以為您創建這些文件，還可以幫助您部署和發佈應用，那麼事情會更容易。因此，為了使事情盡可能簡單，您將使用
+Microsoft 365 代理工具包。
 
-### Task 1: Use Microsoft 365 Agents Toolkit to create a declarative agent app
+### 任務 1: 使用 Microsoft 365 代理工具包創建聲明性代理應用
 
-1.  Go to the Microsoft 365 Agents Toolkit extension in your Visual
-    Studio Code editor and select **Create a New App.**
+1.  轉到 Visual Studio Code 編輯器中的 Microsoft 365
+    代理工具包擴展，然後選擇“**Create a New App.”。**
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-2.  A panel opens up where you need to select **Agent** from the list of
-    project types.
+2.  將打開一個面板，您需要 從項目類型列表中選擇**代理**。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-3.  Next, you will be asked to choose the app feature of Copilot Agent.
-    Choose **declarative agent**.
+3.  接下來，系統將要求您選擇 Copilot Agent
+    的應用程序功能。選擇**聲明性代理**。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-4.  Next, you will be asked to choose want to create a basic declarative
-    agent or one with an API plugin. Choose the **No Plugin** option.
+4.  接下來，系統將要求您選擇要創建一個基本的聲明性代理或帶有 API
+    插件的代理。選擇“ **No Plugin”**選項。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-5.  Next, select the **Default folder** option for specifying where the
-    project folder has to be created.
+5.  接下來，選擇“**默認文件夾”**選項，以指定必須創建項目文件夾的位置。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-6.  Next, give it an application name +++**Geo Locator Game**+++ and
-    select Enter.
+6.  接下來，為其指定應用程序名稱 **+++Geo Locator Game+++**，然後選擇
+    Enter。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-	The project will be created in a few seconds in the folder you mentioned
-	and will open in a new project window of Visual Studio Code. This is
-	your working folder.
+該項目將在幾秒鐘內在你提到的文件夾中創建，並將在 Visual Studio Code
+的新項目窗口中打開。這是您的工作文件夾。
 
-7.  If a prompt appears regarding the trustworthiness of the source,
-    click on **Yes, I trust the authors.**
+7.  如果出現有關來源可信度的提示，請單擊**“Yes, I trust the authors".**
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
 
-	![](./media/image14.png)
+	![A screenshot of a computer AI-generated content may be incorrect.](./media/image14.png)
 
-Well done! You have successfully set up the base declarative agent! Now,
-proceed to examine the files contained within to be able to customize it
-to make the geo locator game app.
+幹的好！您已成功設置基本聲明性代理！現在，繼續檢查其中包含的文件，以便能夠對其進行自定義以製作地理定位器遊戲應用程序。
 
-### Task 2: Set up accounts in Microsoft 365 Agents Toolkit
+### 任務 2: 在 Microsoft 365 代理工具包中設置帳戶
 
-1.  Now select the Microsoft 365 Agents Toolkit icon in the left
-    Under **Accounts** click **Sign in to Microsoft 365** and log in
-    with your **User1 credentials** under the **Azure Portal** section
-    in the **Resources** tab.
+1.  現在，選擇左側的 Microsoft 365
+    代理工具包圖標，在**“ Accounts ”下**，單擊**“Sign in to Microsoft
+    365 **”，然後在**“資源”**選項卡的“**Azure 門戶**”部分 **下User1
+    credentials ** 憑據登錄。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image15.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image15.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image16.png)
 
-2.  A browser window will pop up and offer to log into Microsoft 365.
+2.  將彈出一個瀏覽器窗口並提供登錄 Microsoft 365。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image17.png)
 
-3.  Select **Allow access** in the Security Alert dialog.
+3.  在“安全警報”對話框中選擇“**Allow access**”。
 
-    ![A screenshot of a computer security alert AI-generated content may be
+	![A screenshot of a computer security alert AI-generated content may be
 incorrect.](./media/image18.png)
 
-4.  When the browser window says "You are signed in now and close this
-    page", please do so.
+4.  當瀏覽器窗口顯示“您現在已登錄並關閉此頁面”時，請這樣做。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image19.png)
 
-5.  Verify that the **Custom App Upload Enabled** checker has a green
-    checkmark.
+5.  驗證**“Custom App Upload Enabled** ”檢查器是否具有綠色複選標記。
 
-    ![image](./media/image20.png)
+	![image](./media/image20.png)
 
-### Task 3: Understanding the files in the app
+### 任務 3: 瞭解應用程序中的文件
 
+基本項目的外觀如下：
 
-1.  The file of interest for our lab is primarily
-    the **appPackage/instruction.txt** file which is the core directives
-    needed for your agent. It's a plain text file and you can write
-    natural language instructions in it.
+|文件夾/文件	|內容	|
+|:------|:-------|
+|.vscode	|用於調試的 VSCode 文件	|
+|appPackage	|Teams 應用程序清單、GPT 清單和 API 規範的模板	|
+|env	|具有默認 .env.dev 文件的環境文件	|
+|appPackage/color.png	|應用程序徽標圖像	|
+|appPackage/outline.png	|應用程序徽標輪廓圖像	|
+|appPackage/declarativeAgent.json	|	定義聲明性代理的設置和配置。|
+|appPackage/instruction.txt	|定義聲明性代理的行為。	|
+|appPackage/manifest.json	|Teams 應用程序清單，用於定義聲明性代理的元數據。	|
+|teamsapp.yml	|主 Microsoft 365 代理工具包項目文件。項目文件定義了兩個主要內容：屬性和配置階段定義。	|
 
-    ![A screenshot of a computer AI-generated content may be
+1.  我們實驗室感興趣的文件主要是 **appPackage/instruction.txt**
+    文件，它是代理所需的核心指令。它是一個純文本文件，您可以在其中編寫自然語言指令。
+
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image21.png)
 
-2.  Another important file is **appPackage/declarativeAgent.json** where
-    there is a schema to be followed to extend Microsoft 365 Copilot
-    with the new declarative agent. Let's look at what properties the
-    schema of this file has.
+2.  另一個重要文件是
+    **appPackage/declarativeAgent.json**其中有一個架構，可以使用新的聲明式代理擴展
+    Microsoft 365 Copilot。讓我們看看這個文件的模式有什麼屬性。
 
-    - The $schema is the schema reference
+    - $schema是架構引用
 
-    - The version is the schema version
+    - 版本是架構版本
 
-    - The name key represents the name of the declarative agent.
+    - name 鍵表示聲明性代理的名稱。
 
-    - The description provides a description.
+    - 描述提供了描述。
 
-    - The instructions the path to the **instructions.txt** file which
-      holds directives which will determine the operational behavior.
-      You can also put your instructions as plain text as a value here.
-      But for this lab we will use the **instructions.txt** file.
+    - 指令是**instructions.txt**文件的路徑，該文件包含將確定作行為的指令。您還可以將說明作為純文本作為值放在此處。但對於本練習，我們將使用**instructions.txt**文件。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-3.  Another important file is the **appPackage/manifest.json** file,
-    which contains crucial metadata, including the package name, the
-    developer’s name, and references to the copilot agents utilized by
-    the application. The following section from the manifest.json file
-    illustrates these details:
+3． 另一個重要文件是 **appPackage/manifest.json**
+文件，其中包含重要的元數據，包括包名稱、開發人員名稱以及對應用程序使用的助手代理的引用。manifest.json文件中的以下部分說明瞭這些詳細信息：
+
+```
+"copilotAgents": {
+        "declarativeAgents": [            
+            {
+                "id": "declarativeAgent",
+                "file": "declarativeAgent.json"
+            }
+        ]
+    },
+
+```
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image23.png)4.
+您還可以更新徽標文件color.png和outline.png，使其與應用程序的品牌相匹配。在今天的實驗室中，您將更改**color.png**圖標，使代理脫穎而出。
+
+## 練習 4: 更新說明和圖標
+
+### 任務 1: 更新圖標和清單
+
+1.  首先，我們將更換徽標。我們將用新圖像替換項目中color.png的圖像。複製
+    **位於** C：\LabFiles 中的映像**color.png，並替換根項目中文件夾**
+    appPackage **中的同名映像** （路徑應為
+    **C：\Users\Student\TeamsApps\Geo Locator Game\appPackage**） 。
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image24.png)
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image25.png)
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image26.png)
+
+1.  接下來，轉到根項目中的文件 **appPackage/manifest.json** 並找到節點
+    **copilotAgents**。將 declarativeAgents 數組的第一個條目的 id 值從
+    declarativeAgent 更新為 +++dcGeolocator+++，以使此 ID 唯一。
 
 	```
 	"copilotAgents": {
-
-	"declarativeAgents": \[
-
-	{
-
-	"id": "declarativeAgent",
-
-	"file": "declarativeAgent.json"
-
-	}
-
-	\]
-
-	},
+			"declarativeAgents": [            
+				{
+					"id": "dcGeolocator",
+					"file": "declarativeAgent.json"
+				}
+			]
+		},
 	```
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image23.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image27.png)
 
-4.  You could also update the logo files color.png and outline.png to
-    make it match your application's brand. In today's lab you will
-    change **color.png** icon for the agent to stand out.
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image28.png)
 
-## Exercise 4: Update instructions and icons
-
-### Task 1: Update icons and manifests
-
-1.  First, we will replace the logo. We will replace the
-    image **color.png** in the project with a new one. Copy the
-    image **color.png** located in **C:\LabFiles** and replace the image
-    of same name in the folder **appPackage** in your root project(The
-    path should be **C:\Users\Student\TeamsApps\Geo Locator
-    Game\appPackage**).
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image24.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image25.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image26.png)
-
-2.  Next, go to the file **appPackage/manifest.json** in your root
-    project and find the node **copilotAgents**. Update the id value of
-    the declarativeAgents array's first entry
-    from declarativeAgent to +++dcGeolocator+++ to make this ID unique.
+2.  接下來，轉到文件 **appPackage/instruction txt**
+    並複製粘貼以下指令以覆蓋文件的現有內容。
 
 	```
-	"copilotAgents": {
-
-	"declarativeAgents": \[
-
-	{
-
-	"id": "dcGeolocator",
-
-	"file": "declarativeAgent.json"
-
-	}
-
-	\]
-
-	},
-	```
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image27.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image28.png)
-
-3.  Next, go to the file **appPackage/instruction txt** and copy paste
-    the below instruction to overwrite the existing contents of the
-    file.
-
-	```
-	System Role: You are the game host for a geo-location guessing game.
-	Your goal is to provide the player with clues about a specific city
-	and guide them through the game until they guess the correct answer.
-	You will progressively offer more detailed clues if the player guesses
-	incorrectly. You will also reference PDF files in special rounds to
-	create a clever and immersive game experience.
+	System Role: You are the game host for a geo-location guessing game. Your goal is to provide the player with clues about a specific city and guide them through the game until they guess the correct answer. You will progressively offer more detailed clues if the player guesses incorrectly. You will also reference PDF files in special rounds to create a clever and immersive game experience.
 
 	Game play Instructions:
 
@@ -390,56 +331,40 @@ incorrect.](./media/image28.png)
 
 	Use the following prompt to welcome the player and explain the rules:
 
-	Welcome to the Geo Location Game! I’ll give you clues about a city,
-	and your task is to guess the name of the city. After each wrong
-	guess, I’ll give you a more detailed clue. The fewer clues you use,
-	the more points you score! Let’s get started. Here’s your first clue:
+	Welcome to the Geo Location Game! I’ll give you clues about a city, and your task is to guess the name of the city. After each wrong guess, I’ll give you a more detailed clue. The fewer clues you use, the more points you score! Let’s get started. Here’s your first clue:
 
 	Clue Progression Prompts
 
-	Start with vague clues and become progressively specific if the player
-	guesses incorrectly. Use the following structure:
+	Start with vague clues and become progressively specific if the player guesses incorrectly. Use the following structure:
 
-	Clue 1: Provide a general geographical clue about the city (e.g.,
-	continent, climate, latitude/longitude).
+	Clue 1: Provide a general geographical clue about the city (e.g., continent, climate, latitude/longitude).
 
-	Clue 2: Offer a hint about the city’s landmarks or natural features
-	(e.g., a famous monument, a river).
+	Clue 2: Offer a hint about the city’s landmarks or natural features (e.g., a famous monument, a river).
 
-	Clue 3: Give a historical or cultural clue about the city (e.g.,
-	famous events, cultural significance).
+	Clue 3: Give a historical or cultural clue about the city (e.g., famous events, cultural significance).
 
-	Clue 4: Offer a specific clue related to the city’s cuisine, local
-	people, or industry.
+	Clue 4: Offer a specific clue related to the city’s cuisine, local people, or industry.
 
 	Response Handling
 
 	After the player’s guess, respond accordingly:
-
 	If the player guesses correctly, say:
 
-	That’s correct! You’ve guessed the city in \[number of clues\] clues
-	and earned \[score\] points. Would you like to play another round?
+	That’s correct! You’ve guessed the city in [number of clues] clues and earned [score] points. Would you like to play another round?
 
 	If the guess is wrong, say:
 
-	Nice try! \[followed by more clues\]
+	Nice try! [followed by more clues]
 
 	PDF-Based Scenario
 
-	For special rounds, use a PDF file to provide clues from a historical
-	document, traveler's diary, or ancient map:
+	For special rounds, use a PDF file to provide clues from a historical document, traveler's diary, or ancient map:
 
-	This round is different! I’ve got a secret document to help us. I’ll
-	read clues from this \[historical map/traveler’s diary\] and guide you
-	to guess the city. Here’s the first clue:
+	This round is different! I’ve got a secret document to help us. I’ll read clues from this [historical map/traveler’s diary] and guide you to guess the city. Here’s the first clue:
 
 	Reference the specific PDF to extract details:
-
 	Traveler's Diary PDF,Historical Map PDF.
-
-	Use emojis where necessary to have friendly tone.
-
+	Use emojis where necessary to have friendly tone. 
 	Scorekeeping System
 
 	Track how many clues the player uses and calculate points:
@@ -457,139 +382,111 @@ incorrect.](./media/image28.png)
 	After the player guesses the city or exhausts all clues, prompt:
 
 	Would you like to play another round, try a special challenge?
+
 	```
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-4.  Notice this line in **appPackage/declarativeAgent.json**:
+3.  在 **appPackage/declarativeAgent.json**: 注意這行
 
-	```
-	"instructions": "$\[file('instruction.txt')\]",
-	```
+"instructions": "$\[file('instruction.txt')\]",
 
-	This brings in your instructions from the **instruction.txt** file. If
-	you want to modularize your packaging files, you can use this technique
-	in any of the JSON files in the **appPackage** folder.
+這會從 instruction.txt 文件中引入您的說明 。如果要模塊化打包文件，可以在
+appPackage 文件夾中的任何 JSON 文件中使用此技術 。
 
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-### Task 2 : Add conversation starters
+### 任務 2 : 添加對話啟動器
 
-You can enhance user engagement with the declarative agent by adding
-conversation starters to it.
+您可以通過向聲明式代理添加對話啟動器來增強用戶與聲明式代理的互動。
 
-Some of the benefits of having conversation starters are:
+擁有對話開場白的一些好處是：
 
-- **Engagement**: They help initiate interaction, making users feel more
-  comfortable and encouraging participation.
+- **婚約**: 它們有助於啟動交互，讓用戶感覺更舒適並鼓勵參與。
 
-- **Context Setting**: Starters set the tone and topic of the
-  conversation, guiding users on how to proceed.
+- **上下文設置**: 啟動器設定對話的基調和主題，指導用戶如何繼續。
 
-- **Efficiency**: By leading with a clear focus, starters reduce
-  ambiguity, allowing the conversation to progress smoothly.
+- **效率**:
+  通過以明確的重點進行領導，開場白可以減少歧義，使對話順利進行。
 
-- **User Retention**: Well-designed starters keep users interested,
+- **用戶保留率**: Well-designed starters keep users interested,
   encouraging repeat interactions with the AI.
 
-1.  Open file **declarativeAgent.json** and right after
-    the instructions node add a comma press enter, and paste below code.
+1.	打開  **declarativeAgent.json** 在指令節點後面添加一個逗號，按 Enter
+  鍵，然後粘貼到代碼下方。
 
 	```
-	"conversation_starters": \[
+	"conversation_starters": [
+		{ 
+				"title": "Getting Started",
+				"text":"I am ready to play the Geo Location Game! Give me a city to guess, and start with the first clue." 
+			},
+			{
+				"title": "Ready for a Challenge",
+				"text": "Let us try something different. Can we play a round using the travelers diary?"
+			},
+			{ 
+				"title": "Feeling More Adventurous",
+				"text": "I am in the mood for a challenge! Can we play the game using the historical map? I want to see if I can figure out the city from those ancient clues."
+			}
+		]
 
-	{
-
-	"title": "Getting Started",
-
-	"text":"I am ready to play the Geo Location Game! Give me a city to
-	guess, and start with the first clue."
-
-	},
-
-	{
-
-	"title": "Ready for a Challenge",
-
-	"text": "Let us try something different. Can we play a round using the
-	travelers diary?"
-
-	},
-
-	{
-
-	"title": "Feeling More Adventurous",
-
-	"text": "I am in the mood for a challenge! Can we play the game using
-	the historical map? I want to see if I can figure out the city from
-	those ancient clues."
-
-	}
-
-	\]
 	```
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-	Now all the changes are done to the agent, it's time to test it.
+	現在對代理的所有更改都已完成，是時候對其進行測試了。
 
-2.  Go to **Files** from the top bar and click on the **Save All.**
+1.  從 頂部欄轉到 **Files**，然後單擊**Save All。**
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-### Task 3: Test the app
+### 任務 3: 測試應用
 
-1.  To test the app, go to the Microsoft 365 Agents Toolkit extension
-    in Visual Studio Code. This will open up the left pane.
-    Under **LIFECYCLE** select **Provision**. You can see the value of
-    Microsoft 365 Agents Toolkit here, as it makes publishing so simple.
+1.  若要測試應用，請轉到 Visual Studio Code 中的 Microsoft 365
+    代理工具包擴展。這將打開左窗格。在**“LIFECYCLE”**下，選擇**“Provision”**。可以在此處查看
+    Microsoft 365 代理工具包的價值，因為它使發佈變得如此簡單。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image33.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image34.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image34.png)
 
-2.  If prompted, sign in with your credentials.
+2.  如果出現提示，請使用您的憑據登錄。
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-3.  In this step Microsoft 365 Agents Toolkit will package up all the
-    files inside the appPackage folder as a zip file and install the
-    declarative agent to your own app catalog.
+3.  在此步驟中，Microsoft 365 代理工具包會將 appPackage
+    文件夾中的所有文件打包為 zip
+    文件，並將聲明性代理安裝到自己的應用目錄。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image36.png)
 
-4.  Open a browser and navigate to
-    +++https://m365.cloud.microsoft/chat/+++ into your
-    developer tenant. Open the Geo Locator Game from the left pane.
+4.  打開瀏覽器並導航到
+    +++<https://m365.cloud.microsoft/chat/+++%C2%A0logged> 到開發人員租戶中。
+    從左側窗格打開地理定位器遊戲。
 
-    ![image](./media/image37.png)
+	![image](./media/image37.png)
 
-5.  Once launched, you will be in this focused chat window with the
-    agent. And you will see the conversation starters as marked below:
+5.  啟動後，您將與代理進入這個集中聊天窗口。您將看到對話啟動器，如下所示：
 
-    ![image](./media/image38.png)
+	![image](./media/image38.png)
 
-6.  Select one of the conversation starters and it will fill your
-    compose message box with the starter prompt, just waiting for you to
-    hit "Enter". It is still only your assistant and will wait for you
-    to take action.
+6.  選擇其中一個對話啟動器，它會用啟動提示填充您的撰寫消息框，等待您按“Enter”。它仍然只是您的助手，會等待您採取行動。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-7.  Try answering the question and exploring the game that you
-    developed.
+7.  嘗試回答問題並探索您開發的遊戲。
 
-## Summary:
+## 總結:
 
-In this lab, we have learnt to build a declarative agent using the
-Microsoft 365 Agents Toolkit and test the agent’s functionality.
-
+在本實驗室中，我們學習了如何使用 Microsoft 365
+代理工具包生成聲明性代理並測試代理的功能。
