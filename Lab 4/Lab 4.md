@@ -1,244 +1,222 @@
-# Lab 4- Zava’s Journey to AI Integration – Building MCP-Powered Agents in Microsoft Copilot Studio
+# Lab 4- Zava 的人工智能集成之旅 – 在 Microsoft Copilot Studio 中構建 MCP 支持的代理
 
-**Scenario:**
+## 場景:
 
-Zava, a fast-growing digital health organization, has recently formed an
-**Internal Innovation Hub** to experiment with new AI capabilities that
-could later be adapted into regulated healthcare solutions. Before
-connecting sensitive medical systems, the innovation team needs a
-**safe, low-risk sandbox** to learn how to integrate external APIs and
-data sources with **Microsoft Copilot Studio** using the **Model Context
-Protocol (MCP)**.
+Zava
+是一家快速發展的數字健康組織，最近成立了一個**內部創新中心**，以試驗新的人工智能功能，這些功能稍後可以應用於受監管的醫療保健解決方案。在連接敏感醫療系統之前，創新團隊需要一個**安全、低風險的沙盒，以瞭解如何**使用**模型上下文協議
+（MCP）** 將外部 API 和數據源與 **Microsoft Copilot Studio 集成**。
 
-To do this, the team starts with a **simple, harmless example** — a
-*Jokes MCP Server* — that demonstrates how Copilot Studio can call
-real-time APIs through MCP. This lightweight prototype helps engineers,
-data scientists, and AI solution architects understand:
+為此，該團隊從一個**簡單、無害的示例（**Jokes MCP
+服務器*）*開始，該示例演示了 Copilot Studio 如何通過 MCP 調用實時
+API。這個輕量級原型可幫助工程師、數據科學家和 AI 解決方案架構師瞭解：
 
-- how MCP servers are deployed to Azure,
+- 如何將 MCP 服務器部署到 Azure，
 
-- how Copilot Studio can discover and consume MCP tools, and
+- Copilot Studio 如何發現和使用 MCP 工具，以及
 
-- how real-time external data can be securely integrated into agents.
+- 如何將實時外部數據安全地集成到代理中.
 
-By completing this lab, the Zava Innovation team establishes the
-foundation for connecting future MCP servers to real business systems —
-once governance and compliance measures are applied.
+通過完成此實驗，Zava 創新團隊為將未來的 MCP
+服務器連接到實際業務系統奠定了基礎——一旦應用了治理和合規措施。
 
-**Business Value:**
+## 商業價值:
 
-- Encourages hands-on learning with MCP integration before applying it
-  to sensitive domains.
+- 鼓勵在將 MCP 集成應用於敏感領域之前進行實踐學習。
 
-- Demonstrates end-to-end deployment and tool consumption in a secure,
-  Azure-ready setup.
+- 演示安全、Azure 就緒設置中的端到端部署和工具使用。
 
-- Builds organizational readiness for next-generation, AI-driven
-  workflows.
+- 為下一代 AI 驅動的工作流程做好組織準備。
 
-## Objective:
+## 目標:
 
-In this lab, you will simulate how Zava’s Innovation Hub experiments
-with the Model Context Protocol (MCP) to connect external APIs and
-knowledge sources with Microsoft Copilot Studio. You’ll learn how to
-deploy an MCP Server to Azure, register it as a tool in Copilot Studio,
-and integrate it into a conversational agent.
+在本實驗室中，你將模擬 Zava 的創新中心如何使用模型上下文協議 （MCP）
+進行試驗，以將外部 API 和知識源與 Microsoft Copilot Studio
+連接起來。您將學習如何將 MCP 服務器部署到 Azure，將其註冊為 Copilot
+Studio 中的工具，並將其集成到對話代理中。
 
-By completing this lab, you will:
+完成本實驗後，您將：
 
-- Understand how MCP enables secure, real-time data integration for
-  Copilot Studio agents.
+- 瞭解 MCP 如何為 Copilot Studio 代理實現安全、實時的數據集成。
 
-- Learn to deploy, configure, and connect an MCP Server using Azure
-  Developer CLI.
+- 瞭解如何使用 Azure 開發人員 CLI 部署、配置和連接 MCP 服務器。
 
-- Explore the end-to-end workflow of adding an MCP-powered tool to a
-  Copilot Studio agent.
+- 探索將 MCP 支持的工具添加到 Copilot Studio 代理的端到端工作流。
 
-## Exercise 1: Deploy the MCP Server to Azure
+## 練習 1: 將 MCP 服務器部署到 Azure
 
-In this exercise, you will **deploy** the **Microsoft MCP** (Model
-Context Protocol) Server from a local development environment to
-**Azure** using the Azure Developer CLI (azd). This establishes a
-**cloud-hosted endpoint** that can be **consumed** by **Copilot Studio**
-or other applications in later exercises.
+在本練習中，你將 使用 Azure 開發人員 CLI （azd） 將 **Microsoft
+MCP**（模型上下文協議）服務器從本地開發環境部署到
+**Azure**。這將建立一個**雲託管終結點**， **Copilot Studio**
+或其他應用程序可以在以後的練習中使用該終結點。
 
-1.  Open **Docker Desktop** from the lab VM.
+1.  從實驗室 VM 打開 **Docker Desktop**。
 
-	![](./media/image1.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-2.  Open the **Visual Studio Code** and select **OpenFolder**.
+2.  打開 **Visual Studio Code** 並選擇 **OpenFolder**。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image2.png)
 
-3.  Select the **mcsmcp** folder from **C:\LabFiles** and click on
-    **Select Folder**.
+3.  從 **C：\LabFiles** 中選擇 **mcsmcp**
+    文件夾，然後單擊**“選擇文件夾**”。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image3.png)
 
-4.  Select **Yes, I trust the authors** to continue.
+4.  **選擇Yes, I trust the authors** 繼續。
 
 	![A screenshot of a computer AI-generated content may be
-	incorrect.](./media/image4.png)
+incorrect.](./media/image4.png)
 
-5.  From the **VS Code**, select **View** -\> **Terminal** to open the
-    terminal.
-
-	![A screenshot of a computer AI-generated content may be
-	incorrect.](./media/image5.png)
+5.  從 **VS Code** 中，選擇**“View** -\> **Terminal**  “以打開終端。
 
 	![A screenshot of a computer AI-generated content may be
-	incorrect.](./media/image6.png)
+incorrect.](./media/image5.png)
 
-6.  Enter +++azd auth login+++ to login to **Azure**.
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image6.png)
+
+6.  輸入 +++azd auth login+++ 以登錄到**Azure**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-7.  **Login** using the credentials from the **Resources** tab.
+7.  **使用**“資源”**選項卡**中的憑據登錄。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-8.  Enter +++azd up+++ and click Enter to scaffold the project into
-    Azure.
+8.  輸入 +++azd up+++ ，然後單擊 Enter 將項目基架到 Azure 中。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
+9.  將名稱輸入為<+++mcsmcp@lab.LabInstance.Id>+++
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-10. Select **Enter** to accept the listed subscription.
+10. 選擇 **Enter** 以接受列出的訂閱。
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
-    
-13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
+11. 選擇 **@lab.CloudResourceGroup(ResourceGroup1).Location** 作為您的位置
+
+12. 使用箭頭標記上下滾動區域列表，然後選擇 上述步驟中標識的區域，然後按
+    **Enter**。屏幕截圖中的區域與實驗室 VM
+    中分配給你的區域可能會有所不同。
 
 	![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image12.png)
 
-14. This deploys the necessary resources in the Azure portal and outputs
-    a success message.
+13. 這會在 Azure 門戶中部署必要的資源並輸出成功消息。
 
-	![](./media/image13.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image13.png)
 
-15. The output also provides an **Endpoint url**. **Save** it to a
-    **notepad** to be used in the upcoming exercises.
+14. 輸出還提供**Endpoint url**.  
+    **將其保存**到**記事本**中，以便在接下來的練習中使用。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-16. Add **/mcp** to the end of that URL and open it in a browser. You
-    will see an error inside a JSON message, which is ok. It means that
-    you are reaching the MCP server.
+15. 將 **/mcp** 添加到該 URL 的末尾，然後在瀏覽器中打開它。您將在 JSON
+    消息中看到錯誤，這沒關係。這意味著您正在訪問 MCP 服務器。
 
 	![](./media/image15.png)
 
-In this exercise, you opened the MCP Server project in Visual Studio
-Code, authenticated to Azure using the Azure Developer CLI, and deployed
-the solution to Azure using the azd up command. The deployment created
-the necessary Azure resources (such as a Container App and supporting
-infrastructure) and provided a public endpoint URL for the MCP Server.
-Verifying the endpoint in a browser confirmed successful deployment and
-connectivity, setting up the foundation for integrating the MCP Server
-with downstream components in the upcoming exercises.
+在本練習中，你在 Visual Studio Code 中打開了 MCP 服務器項目，使用 Azure 開發人員 CLI 向 Azure 進行身份驗證，並使用 azd up 命令將解決方案部署到 Azure。部署創建了必要的 Azure 資源（例如容器應用和支持基礎結構），並為 MCP 服務器提供了公共終結點 URL。在瀏覽器中驗證端點確認部署和連接成功，為在即將進行的練習中將 MCP 服務器與下游組件集成奠定了基礎。
 
-## Exercise 2: Use the Jokes MCP Server in Microsoft Copilot Studio
+## 練習 2: 在 Microsoft Copilot Studio 中使用 Jokes MCP 服務器
 
-### Task 1: Import the Connector
+### 任務 1: 導入連接器
 
-**Objective**
+**目標**
 
-To import and configure a **custom MCP connector** in **Power Apps** for
-integration with the deployed MCP Server.
+**在 Power Apps** 中導入和配置**自定義 MCP 連接器**，以便與已部署的 MCP
+服務器集成。
 
-1.  Go to +++https://make.preview.powerapps.com/customconnectors+++
+1.  轉到 +++<https://make.preview.powerapps.com/customconnectors+++>
 
-2.  Select **+ New custom connector** -\> **Import from GitHub**.
+2.  選擇 **+ New custom connector** -\> **Import from GitHub**.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-3.  Select the below details.
+3.  選擇以下詳細信息。
 
-	- **Connector Type – Custom**
+    - **Connector Type – Custom**
 
-	- **Branch – dev**
+    - **Branch – dev**
 
-	- **Connector - MCP-Streamable-HTTP **
+    - **Connector - MCP-Streamable-HTTP**
 
-	Select **Continue**.
+	選擇 **Continue**.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-4.  Change the **Connector Name** to +++**Jokes MCP**+++.
+4.  將 **Connector Name更改** 為 +++**Jokes MCP**+++.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-5.  Paste your root URL (the part after https://) from the url that you
-    saved earlier, in the **Host** field select **Create connector**.
+5.  粘貼之前保存的 URL 中的根 URL（https:// 之後的部分），在主機字段中
+    選擇** Create connector。**
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image19.png) 
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
 
-	>[!Alert] **Warning**
-	>
-	>You may see a warning and an error upon creation – it should be resolved soon - but you can ignore it for now.
+	[!Alert] **警告**
 
-6.  **Close** the connector.
+您可能會在創建時看到警告和錯誤 - 它應該很快就會解決 -
+但您現在可以忽略它。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
+6.  **關閉**連接器。
+
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image21.png)
 
-In this task, you imported the **MCP-Streamable-HTTP** connector from
-GitHub into Power Apps, renamed it to **Jokes MCP**, and configured it
-with the Azure-hosted MCP Server URL. This establishes a connection
-between Power Platform and the MCP Server, enabling future interactions
-in subsequent tasks.
+在此任務中，您將 **MCP-Streamable-HTTP** 連接器從 GitHub 導入 Power
+Apps，將其重命名為 **Jokes MCP**，並使用 Azure 託管的 MCP 服務器 URL
+對其進行配置。這在 Power Platform 和 MCP
+服務器之間建立了連接，從而支持將來在後續任務中的交互。
 
-### Task 2: Create an agent and add the MCP server as a tool
+### 任務 2: 創建代理並將 MCP 服務器添加為工具
 
-In this task, you will build a custom **Jokester** agent in Microsoft
-Copilot Studio and integrate it with the **Jokes MCP Server** using the
-Model Context Protocol (MCP) framework, enabling the agent to fetch and
-deliver dynamic jokes from the connected MCP endpoint.
+在此任務中，您將 **在 Microsoft Copilot Studio 中**生成自定義 Jokester
+**代理，並使用模型上下文協議 （MCP） 框架將其與 Jokes MCP
+服務器集成，使代理能夠從連接的 MCP 終結點獲取和傳遞動態笑話。**
 
-1.  Open the **Copilot Studio** from a browser with the url,
-    +++https://copilotstudio.microsoft.com+++ and login with the
-    credentials from the **Resources** tab. Select **Get Started** to
-    enable the **trial** license.
+1.  從瀏覽器打開 **Copilot Studio**，其中 url 為
+
+	+++https://copilotstudio.microsoft.com+++/ ，然後使用“資源”**選項卡中的憑據登錄** 。選擇**“開始”**以啟用**試用**許可證。
 
 	![A screenshot of a web page AI-generated content may be
 incorrect.](./media/image22.png)
 
-2.  Select **Create** -\> **+ New agent**.
+2.  選擇 **Create** -> **+ New agent**.
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image23.png)
 
-3.  Select the **Configure** tab to configure your agent.
+3.  選擇**配置**選項卡以配置代理。
 
 	![A screenshot of a login page AI-generated content may be
 incorrect.](./media/image24.png)
 
-4.  Enter the below details and select **Create**.
+4.  輸入以下詳細信息，然後選擇 **Create**.
 
-	- **Name** – +++Jokester+++
-	
-	- **Description** –
+	- **名字** – +++Jokester+++
 
-	```
-	A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.
-	```
+	- **描述** – A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.+++
 
-	- **Instructions** –
+- **指示** –
 
 	```
 	You are a joke-telling assistant. Your sole purpose is to deliver appropriate, clever, and engaging jokes upon request. Follow these rules:
@@ -252,12 +230,13 @@ incorrect.](./media/image24.png)
 	* Do not repeat jokes within the same session.
 	* Avoid explaining the joke unless explicitly asked.
 	* Be responsive, witty, and quick.
+
 	```
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-5.  The **agent** gets **created** as per the instructions provided.
+5.  根據提供的說明**創建代理**。
 
 	![A logo of a company AI-generated content may be
 incorrect.](./media/image26.png)
@@ -265,153 +244,144 @@ incorrect.](./media/image26.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-6.  Select **Settings** from the top right corner of the agent page.
+6.  從代理頁面的右上角選擇**設置**。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-7.  In the **Settings** pane, select **No** under **Use generative AI
-    orchestration for your agent responses**.
+7.  在“**設置**”窗格中，在**“Use generative AI orchestration for your
+    agent responses**.”下選擇**“否**”。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-8.  Scroll down and disable **Use general knowledge** and **Use
-    information from the Web** under the Knowledge section.
+8.  向下滾動並禁用**Use general knowledge and Use information from the
+    Web**。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-9.  Scroll up and select **Yes** under **Use generative AI orchestration
-    for your agent responses**.
+9． **Use generative AI orchestration for your agent responses** 下 向上滾動並選擇**是**
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-10. Select **Save** and then **close** the Settings window.
+10. 選擇**保存，**然後**關閉**設置窗口。
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image32.png)
+	incorrect.](./media/image32.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+	incorrect.](./media/image33.png)
 
-11. From the agent’s **Overview** page, select **Tools**.
+11. 從代理的概述頁面中 ，選擇**工具。**
 
-	![A screenshot of a computer AI-generated content may be
+	[A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-12. Select **+ Add a tool** to add a new tool to the agent.
+12. 選擇 **+ Add a tool** 以將新工具添加到代理。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-13. In the Add a tool window, select the **Model Context Protocol** tab.
+13. 在“添加工具”窗口中，選擇“**Model Context Protocol** **”**選項卡。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image36.png)
 
-14. Select the **Jokes MCP** Server you created earlier.
+14. 選擇您之前創建**的 Jokes MCP** 服務器。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-15. Select the **drop down** next to **Not connected** and then select
-    **Create new connection**.
+15. 選擇“**Not connected** **”旁邊**的**下拉列表**，然後選擇“**reate new
+    connection**”。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-16. Select **Create** in the next screen.
+16. 在下一個屏幕中選擇**Create**。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-17. Once the connection is established, select the **Add to agent**
-    button to add the MCP Server to the Jokester agent.
+17. 建立連接後，選擇“**Add to agent** ”按鈕將 MCP 服務器添加到 Jokester
+    代理。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-18. Now the **MCP Server** has been added as a **tool** to the agent.
+18. 現在，**MCP Server** 已作為**工具**添加到代理中。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-19. Select **Refresh** in the Test pane before starting to test the
-    agent behaviour.
+19. 在開始測試代理行為之前，在測試窗格中選擇**Refresh**。
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image42.png)
 
-20. Enter +++Can I get a Chuck Norris joke?+++ and select **Send**.
+20. 輸入 +++Can I get a Chuck Norris joke?+++ ，然後選擇**發送**。
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image43.png)
 
-21. Select **Open connection manager**.
+21. 選擇 **Open connection manager**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image44.png)
 
-22. Select **Connect** to establish the connection.
+22. 選擇“**連接”**以建立連接。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-23. Once the Jokes MCP connection is selected, select **Submit**.
+23. 選擇 Jokes MCP 連接後，選擇**Submit**.**。**
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-24. You can now see that in the **Manage your connections** page, the
-    Jokes MCP Server is in **connected** state.
+24. 現在，您可以看到在**“Manage your connections** **”**頁面中，Jokes
+    MCP 服務器處於**connected **狀態。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-25. Now that it is connected, navigate back to the Test pane and select
-    **Retry**.
+25. 連接後，導航回“測試”窗格並選擇“ **Retry**”。
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image48.png)
 
-26. You can now see that the MCP Server is being invoked and the agent
-    tries to generate a response from the Jokes MCP Server.
+26． 現在，您可以看到正在調用 MCP 服務器，並且代理嘗試從 Jokes MCP 服務器生成響應。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-27. The agent uses the **MCP Server**, generates a response and
-    **populates** it in the **Test pane**.
+27. 代理使用 **MCP 服務器**，生成響應並將其**填充到**“**Test
+    pane**”窗格**中**。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
 
-And this is the **Jokes MCP Server** working in **Microsoft Copilot
-Studio**.
+這是在 **Microsoft Copilot Studio** 中工作的 **Jokes MCP 服務器**。
 
-In this task, you created a new agent named **Jokester** in Copilot
-Studio, configured its purpose and behavioral instructions for humor
-generation, and enabled **Generative AI Orchestration** for intelligent
-responses. You then connected the **Jokes MCP Server** as a tool via the
-Model Context Protocol, authenticated the connection, and successfully
-tested the integration by retrieving jokes through the agent’s test
-panel. This confirmed that the MCP server was properly connected and
-functioning within the Copilot Studio environment.
+在此任務中，您在 Copilot Studio 中創建了一個名為 **Jokester**
+的新代理，配置了其用於幽默生成的用途和行為指令，並啟用**了Generative AI
+業務流程**以實現智能響應。然後，您通過模型上下文協議將 **Jokes MCP
+服務器**作為工具連接，對連接進行身份驗證，並通過代理的測試面板檢索笑話成功測試了集成。這確認
+MCP 服務器已正確連接並在 Copilot Studio 環境中運行。
 
-## Summary
+## 總結
 
-In this lab, Zava’s Innovation Hub successfully explored how the **Model
-Context Protocol (MCP)** can extend Microsoft Copilot Studio with
-real-time, external data integration. Beginning with a safe and low-risk
-example — the **Jokes MCP Server** — participants learned how to deploy
-an MCP Server to **Azure** using the **Azure Developer CLI**, configure
-it as a **custom connector**, and consume it within a **Copilot Studio
-agent**.
+在此實驗室中，Zava 的創新中心成功探索了 **Model Context Protocol
+(MCP)（MCP）** 如何通過實時外部數據集成擴展 Microsoft Copilot
+Studio。從安全且低風險的示例（**Jokes MCP
+Server**）開始，參與者學習了如何使用 Azure 開發人員 CLI **將** MCP
+服務器部署到 **Azure**，將其配置為**Custom connector**，並在 **Copilot
+Studio 代理中使用它**。
 
-Through the exercises, you created a custom **Jokester** agent that
-connected securely to the Jokes MCP Server, demonstrating how Copilot
-Studio can invoke live API calls through MCP. The lab provided practical
-experience in setting up, authenticating, and testing MCP-based tools —
-establishing the foundation for integrating future, business-critical
-MCP servers with enterprise data systems.
+通過這些練習，您創建了一個安全連接到 Jokes MCP 服務器的自定義
+**Jokester** 代理，演示了 Copilot Studio 如何通過 MCP 調用實時 API
+調用。該實驗室提供了設置、驗證和測試基於 MCP
+的工具的實踐經驗，為未來的關鍵業務 MCP
+服務器與企業數據系統集成奠定了基礎。
