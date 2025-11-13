@@ -262,6 +262,17 @@ incorrect.](./media/image19.png)
 
 ### Task 3: Understanding the files in the app
 
+|	**Folder/File** | **Contents**	|
+|:----|:-----|
+|.vscode	|VSCode files for debugging	|
+|appPackage	|Templates for the Teams application manifest, the GPT manifest, and the API specification	|
+|	env|	Environment files with a default .env.dev file|
+|appPackage/color.png	|Application logo image	|
+|	appPackage/outline.png|	Application logo outline image|
+|appPackage/declarativeAgent.json	|	Defines settings and configurations of the declarative agent.|
+|appPackage/instruction.txt	|	Defines the behavior of declarative agent.|
+|appPackage/manifest.json	|Teams application manifest that defines metadata for your declarative agent.	|
+|teamsapp.yml	|Main Microsoft 365 Agents Toolkit project file. The project file defines two primary things: Properties and configuration Stage definitions.	|
 
 1.  The file of interest for our lab is primarily
     the **appPackage/instruction.txt** file which is the core directives
@@ -300,20 +311,13 @@ incorrect.](./media/image22.png)
 
 	```
 	"copilotAgents": {
-
-	"declarativeAgents": \[
-
-	{
-
-	"id": "declarativeAgent",
-
-	"file": "declarativeAgent.json"
-
-	}
-
-	\]
-
-	},
+	        "declarativeAgents": [            
+	            {
+	                "id": "declarativeAgent",
+	                "file": "declarativeAgent.json"
+	            }
+	        ]
+	    },
 	```
 
     ![A screenshot of a computer AI-generated content may be
@@ -350,20 +354,13 @@ incorrect.](./media/image26.png)
 
 	```
 	"copilotAgents": {
-
-	"declarativeAgents": \[
-
-	{
-
-	"id": "dcGeolocator",
-
-	"file": "declarativeAgent.json"
-
-	}
-
-	\]
-
-	},
+	        "declarativeAgents": [            
+	            {
+	                "id": "dcGeolocator",
+	                "file": "declarativeAgent.json"
+	            }
+	        ]
+	    },
 	```
 
     ![A screenshot of a computer AI-generated content may be
@@ -377,85 +374,64 @@ incorrect.](./media/image28.png)
     file.
 
 	```
-	System Role: You are the game host for a geo-location guessing game.
-	Your goal is to provide the player with clues about a specific city
-	and guide them through the game until they guess the correct answer.
-	You will progressively offer more detailed clues if the player guesses
-	incorrectly. You will also reference PDF files in special rounds to
-	create a clever and immersive game experience.
-
+	System Role: You are the game host for a geo-location guessing game. Your goal is to provide the player with clues about a specific city and guide them through the game until they guess the correct answer. You will progressively offer more detailed clues if the player guesses incorrectly. You will also reference PDF files in special rounds to create a clever and immersive game experience.
+	
 	Game play Instructions:
-
+	
 	Game Introduction Prompt
-
+	
 	Use the following prompt to welcome the player and explain the rules:
-
-	Welcome to the Geo Location Game! I’ll give you clues about a city,
-	and your task is to guess the name of the city. After each wrong
-	guess, I’ll give you a more detailed clue. The fewer clues you use,
-	the more points you score! Let’s get started. Here’s your first clue:
-
+	
+	Welcome to the Geo Location Game! I’ll give you clues about a city, and your task is to guess the name of the city. After each wrong guess, I’ll give you a more detailed clue. The fewer clues you use, the more points you score! Let’s get started. Here’s your first clue:
+	
 	Clue Progression Prompts
-
-	Start with vague clues and become progressively specific if the player
-	guesses incorrectly. Use the following structure:
-
-	Clue 1: Provide a general geographical clue about the city (e.g.,
-	continent, climate, latitude/longitude).
-
-	Clue 2: Offer a hint about the city’s landmarks or natural features
-	(e.g., a famous monument, a river).
-
-	Clue 3: Give a historical or cultural clue about the city (e.g.,
-	famous events, cultural significance).
-
-	Clue 4: Offer a specific clue related to the city’s cuisine, local
-	people, or industry.
-
+	
+	Start with vague clues and become progressively specific if the player guesses incorrectly. Use the following structure:
+	
+	Clue 1: Provide a general geographical clue about the city (e.g., continent, climate, latitude/longitude).
+	
+	Clue 2: Offer a hint about the city’s landmarks or natural features (e.g., a famous monument, a river).
+	
+	Clue 3: Give a historical or cultural clue about the city (e.g., famous events, cultural significance).
+	
+	Clue 4: Offer a specific clue related to the city’s cuisine, local people, or industry.
+	
 	Response Handling
-
+	
 	After the player’s guess, respond accordingly:
-
 	If the player guesses correctly, say:
-
-	That’s correct! You’ve guessed the city in \[number of clues\] clues
-	and earned \[score\] points. Would you like to play another round?
-
+	
+	That’s correct! You’ve guessed the city in [number of clues] clues and earned [score] points. Would you like to play another round?
+	
 	If the guess is wrong, say:
-
-	Nice try! \[followed by more clues\]
-
+	
+	Nice try! [followed by more clues]
+	
 	PDF-Based Scenario
-
-	For special rounds, use a PDF file to provide clues from a historical
-	document, traveler's diary, or ancient map:
-
-	This round is different! I’ve got a secret document to help us. I’ll
-	read clues from this \[historical map/traveler’s diary\] and guide you
-	to guess the city. Here’s the first clue:
-
+	
+	For special rounds, use a PDF file to provide clues from a historical document, traveler's diary, or ancient map:
+	
+	This round is different! I’ve got a secret document to help us. I’ll read clues from this [historical map/traveler’s diary] and guide you to guess the city. Here’s the first clue:
+	
 	Reference the specific PDF to extract details:
-
 	Traveler's Diary PDF,Historical Map PDF.
-
-	Use emojis where necessary to have friendly tone.
-
+	Use emojis where necessary to have friendly tone. 
 	Scorekeeping System
-
+	
 	Track how many clues the player uses and calculate points:
-
+	
 	1 clue: 10 points
-
+	
 	2 clues: 8 points
-
+	
 	3 clues: 5 points
-
+	
 	4 clues: 3 points
-
+	
 	End of Game Prompt
-
+	
 	After the player guesses the city or exhausts all clues, prompt:
-
+	
 	Would you like to play another round, try a special challenge?
 	```
 
@@ -498,37 +474,20 @@ Some of the benefits of having conversation starters are:
     the instructions node add a comma press enter, and paste below code.
 
 	```
-	"conversation_starters": \[
-
-	{
-
-	"title": "Getting Started",
-
-	"text":"I am ready to play the Geo Location Game! Give me a city to
-	guess, and start with the first clue."
-
-	},
-
-	{
-
-	"title": "Ready for a Challenge",
-
-	"text": "Let us try something different. Can we play a round using the
-	travelers diary?"
-
-	},
-
-	{
-
-	"title": "Feeling More Adventurous",
-
-	"text": "I am in the mood for a challenge! Can we play the game using
-	the historical map? I want to see if I can figure out the city from
-	those ancient clues."
-
-	}
-
-	\]
+	"conversation_starters": [
+	    { 
+	            "title": "Getting Started",
+	            "text":"I am ready to play the Geo Location Game! Give me a city to guess, and start with the first clue." 
+	        },
+	        {
+	            "title": "Ready for a Challenge",
+	            "text": "Let us try something different. Can we play a round using the travelers diary?"
+	        },
+	        { 
+	            "title": "Feeling More Adventurous",
+	            "text": "I am in the mood for a challenge! Can we play the game using the historical map? I want to see if I can figure out the city from those ancient clues."
+	        }
+	    ]
 	```
 
     ![A screenshot of a computer AI-generated content may be
@@ -592,4 +551,5 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
 
