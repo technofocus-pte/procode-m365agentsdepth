@@ -1,18 +1,19 @@
-# Lab 1 - Build a RepairService declarative agent with TypeSpec definition using Microsoft 365 Agents Toolkit
+# Lab 1 - Crie um agente declarativo RepairService com definição de TypeSpec usando o Microsoft 365 Agents Toolkit
 
-## Objective
+**Objetivo**
 
-In this lab your will build a Declarative Agent with TypeSpec definition
-using Microsoft 365 Agents Toolkit. You will create an agent
-called RepairServiceAgent, which interacts with repairs data via an
-existing API service to help users manage car repair records.
+Neste laboratório, você criará um Agente Declarativo com definição de
+TypeSpec usando o Microsoft 365 Agents Toolkit. Você criará um agente
+chamado RepairServiceAgent, que interage com os dados de reparos por
+meio de um serviço de API existente para ajudar os usuários a gerenciar
+registros de reparos de automóveis.
 
-## Declarative agents 
+**Agentes declarativos**
 
-**Declarative agents** are a type of agents for Microsoft 365. You can
-build one by extending Microsoft 365 Copilot. You define custom
-knowledge and custom actions to create agents tailored to a specific
-scenario.
+**Agentes declarativos** são um tipo de agentes para o Microsoft 365.
+Você pode criar um estendendo o Microsoft 365 Copilot. Você define
+conhecimento personalizado e ações personalizadas para criar agentes
+personalizados para um cenário específico.
 
 Declarative agents use the same infrastructure, orchestrator, foundation
 model, and security controls as Microsoft 365 Copilot, which ensures a
@@ -24,214 +25,242 @@ orchestrator. The agent provides also custom knowledge and grounding
 data, and custom skills as actions, triggers, and workflows.. The user
 experience is available in Microsoft 365 Copilot.](./media/image1.png)
 
-**Significance of TypeSpec for Declarative Agents**
+**Importância do TypeSpec para agentes declarativos**
 
-**What is TypeSpec**
+**O que é TypeSpec**
 
-TypeSpec is a language developed by Microsoft for designing and
-describing API contracts in a structured and type-safe way. Think of it
-like a blueprint for how an API should look and behave including what
-data it accepts, returns, and how different parts of the API and its
-actions are connected.
+TypeSpec é uma linguagem desenvolvida pela Microsoft para projetar e
+descrever contratos de API de maneira estruturada e com segurança de
+tipo. Pense nisso como um plano de como uma API deve parecer e se
+comportar, incluindo quais dados ela aceita, retorna e como diferentes
+partes da API e suas ações estão conectadas.
 
-**Why TypeSpec for Agents?**
+**Por que TypeSpec para agentes?**
 
-If you like how TypeScript enforces structure in your frontend/backend
-code, you'll love how TypeSpec enforces structure in your agent and its
-API services like actions. It fits perfectly in design-first development
-workflows that align with tools like Visual Studio Code.
+Se você gosta de como o TypeScript impõe estrutura em seu código de
+front-end/back-end, vai adorar como o TypeSpec impõe a estrutura no seu
+agente e nos seus serviços de API, como ações. Ele se encaixa
+perfeitamente em fluxos de trabalho de desenvolvimento que priorizam o
+design e se alinham com ferramentas como o Visual Studio Code.
 
-Clear Communication - provides a single source of truth that defines how
-your agent should behave, avoiding confusion when dealing with multiple
-manifest files like in the case of Declarative Agents.
+Comunicação clara - fornece uma única fonte de verdade que define como
+seu agente deve se comportar, evitando confusão ao lidar com vários
+arquivos de manifesto, como no caso de Agentes Declarativos.
 
-Consistency - ensures all parts of your agent and its actions,
-capabilities, etc. are designed consistently following the same pattern.
+Consistência - garante que todas as partes do seu agente e suas ações,
+recursos, etc. sejam projetados consistentemente seguindo o mesmo
+padrão.
 
-Automation Friendly - automatically generates OpenAPI specs and other
-manifests saving time and reducing human errors.
+Automação amigável - gera automaticamente especificações OpenAPI e
+outros manifestos, economizando tempo e reduzindo erros humanos.
 
-Early Validation - catches design issues early before writing actual
-code for example, mismatched data types or unclear definintions.
+Validação antecipada - detecta problemas de design antes de escrever o
+código real, por exemplo, tipos de dados incompatíveis ou definições
+pouco claras.
 
-Design-First Approach - encourages thinking about agent and API
-structure and contracts before jumping into implementation, leading to
-better long-term maintainability.
+Abordagem de design em primeiro lugar - incentiva a pensar sobre a
+estrutura e os contratos do agente e da API antes de entrar na
+implementação, levando a uma melhor manutenção a longo prazo.
 
-## Exercise 1: Set up the lab environment
+## Exercício 1: Configurar o ambiente de laboratório
 
-In this exercise, you will set up the development environment to build,
-test, and deploy the Copilot agents, that will help you achieve tailor
-made AI assitance using Microsoft 365 Copilot.
+Neste exercício, você configurará o ambiente de desenvolvimento para
+criar, testar e implementar os agentes do Copilot, que o ajudarão a
+obter assistência de AI personalizada usando o Microsoft 365 Copilot.
 
-### Task 1: Install Agents Toolkit 
+### Tarefa 1: Instalar o Agents Toolkit
 
-The **Agents Toolkit for Visual Studio Code** requires Visual Studio
-Code. In this exercise, you will install the toolkit in Visual Studio
-Code.
+O **Agents Toolkit for Visual Studio Code** requer o Visual Studio Code.
+Neste exercício, você instalará o tolkit no Visual Studio Code.
 
-1.  Open **Visual Studio Code** from the VM. Select **Extensions** from
-    the left menu.
+1.  Abra o **Visual Studio Code** da VM. Selecione **Extensions** no
+    menu à esquerda.
 
-    ![](./media/image2.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image2.png)
 
-2.  Search and select +++Microsoft 365 Agents Toolkit+++ and click
-    on **Install**.
+2.  Search and select +++Microsoft 365 Agents Toolkit+++ e clique
+    em **Install**.
 
-    ![](./media/image3.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image3.png)
 
-3.  Ensure that the toolkit is installed.
+3.  Certifique-se de que o toolkit esteja instalado.
 
-    ![](./media/image4.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image4.png)
 
-4.  Create a new folder named +++ServiceAgent+++ in your Desktop.
+4.  Crie uma nova pasta chamada +++ServiceAgent+++ na sua área de
+    trabalho.
 
-    ![](./media/image5.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image5.png)
 
-    ![](./media/image6.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image6.png)
 
-## Exercise 2: Build the base agent with TypeSpec using Microsoft 365 Agents Toolkit
+## Exercício 2: Criar o agente base com TypeSpec usando o Microsoft 365 Agents Toolkit
 
-In this exercise, you will build a **Declarative Agent**, define it,
-update the actions and test the agent.
+Neste exercício, você criará um **Agente Declarativo**, o definirá,
+atualizará as ações e testará o agente.
 
-### Task 1: Scaffold your base agent project using Microsoft 365 Agents Toolkit
+### Tarefa 1: Estruturar seu projeto de agente base usando o Microsoft 365 Agents Toolkit
 
-In this task, you will build the **Declarative Agent** with **TypeSpec**
-definition using **Microsoft 365 Agents Toolkit**. You will create an
-agent called **RepairServiceAgent**, which interacts with repairs data
-via an existing API service to help users manage car repair records.
+Nesta tarefa, você criará o **Agente Declarativo** com **a definição**
+de TypeSpec usando o **Microsoft 365 Agents Toolkit**. Você criará um
+agente chamado **RepairServiceAgent**, que interage com os dados de
+reparos por meio de um serviço de API existente para ajudar os usuários
+a gerenciar registros de reparos de automóveis.
 
-1.  Locate the **Microsoft 365 Agents Toolkit
-    icon** ![m365atk-icon](./media/image7.png) from the VS Code menu on
-    the left and select it. An activity bar will be open. Select the
-    **Create a New Agent/App** button in the activity bar which will
-    open the palette with a list of app templates available on Microsoft
-    365 Agents Toolkit.
+1.  Localize o **ícone do Microsoft 365 Agents Toolkit**
+    ![m365atk-icon](./media/image7.png) no menu VS Code à esquerda e
+    selecione-o. Uma barra de atividades será aberta. Selecione o botão
+    **Create a New Agent/App** na barra de atividades que abrirá a
+    paleta com uma lista de modelos de aplicativos disponíveis no
+    Microsoft 365 Agents Toolkit.
 
-    ![](./media/image8.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image8.png)
 
-2.  Choose **Declarative Agent** from the list of templates.
+2.  Escolha **Declarative Agent** na lista de modelos.
 
-    ![](./media/image9.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image9.png)
 
-3.  Next, select **Start with TypeSpec for Microsoft 365 Copilot** to
-    define your agent using TypeSpec.
+3.  Em seguida, selecione **Start with TypeSpec for Microsoft 365
+    Copilot** para definir seu agente usando TypeSpec.
 
-    ![](./media/image10.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image10.png)
 
-4.  Next, select the folder **ServiceAgent** from the Desktop. This is
-    the location, where you want the agents toolkit will scaffold the
-    agent project.
+4.  Em seguida, selecione a pasta **ServiceAgent** na área de trabalho.
+    Este é o local onde você deseja que o toolkit dos agentes crie a
+    estrutura do projeto do agente.
 
-    ![](./media/image11.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image11.png)
 
-    ![](./media/image12.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image12.png)
 
-5.  Next, enter the application name as +++RepairServiceAgent+++ and
-    select **Enter** to complete the process. You will get a new VS Code
-    window with the agent project preloaded.
+5.  Em seguida, insira o nome do aplicativo como
+    +++RepairServiceAgent+++ e selecione **Enter** para concluir o
+    processo. Você verá uma nova janela do VS Code com o projeto do
+    agente pré-carregado.
 
-	![](./media/image13.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image13.png)
 
-6.  You'll need to sign into the **Microsoft 365 Agents Toolkit** in
-    order to upload and test your agent from within it.
+6.  Você precisará entrar no **Microsoft 365 Agents Toolkit** para
+    carregar e testar seu agente de dentro dele.
 
-7.  Within the project window, select the **Microsoft 365 Agents Toolkit
-    icon** ![m365atk-icon](./media/image7.png) again from the left side
-    menu. This will open the Agent Toolkit’s activity bar with sections
-    like Accounts, Environment, Development etc.
+7.  Na janela do projeto, selecione o **ícone do Microsoft 365 Agents
+    Toolkit** ![m365atk-icon](./media/image7.png) novamente no menu do
+    lado esquerdo. Isso abrirá a barra de atividades do Kit de
+    ferramentas do agente com seções como **Accounts**, **Environment**,
+    **Development** etc.
 
-8.  Under **Accounts** section select **Sign in to Microsoft 365**.
+8.  Na seção **Accounts** selecione **Sign in to Microsoft 365**.
 
-	![](./media/image14.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image14.png)
 
-9.  This will open a dialog from the editor to sign in or create a
-    Microsoft 365 developer sandbox or Cancel. Select **Sign in** and
-    login with your credentials.
+9.  Isso abrirá uma caixa de diálogo do editor para entrar ou criar uma
+    área restrita do desenvolvedor do Microsoft 365 ou Cancelar.
+    Selecione **Sign in** e faça login com suas credenciais.
 
-    ![](./media/image15.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image15.png)
 
-10. Once signed in, **close** the browser and go back to the project
-    window.
+10. Depois de fazer login, **feche** o navegador e volte para a janela
+    do projeto.
 
-	![](./media/image16.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-### Task 2: Define your agent
+### Tarefa 2: Definir seu agente
 
-The Declarative Agent project scaffolded by the Agents Toolkit provides
-a template that includes code for connecting an agent to the GitHub API
-to display repository issues. In this lab, you’ll build your own agent
-that integrates with a car repair service, supporting multiple
-operations to manage repair data.
+O projeto Declarative Agent, desenvolvido pelo Agents Toolkit, fornece
+um modelo que inclui código para conectar um agente à API do GitHub para
+exibir problemas do repositório. Neste laboratório, você criará seu
+próprio agente que se integra a um serviço de reparo de automóveis,
+oferecendo suporte a várias operações para gerenciar dados de reparo.
 
-In the project folder, you will find two **TypeSpec**
-files **main.tsp** and **actions.tsp**. The agent is defined with its
-**metadata**, **instructions** and **capabilities** in
-the **main.tsp** file. Use the **actions.tsp** file to define your
-**agent’s actions**. If your agent includes any actions like connecting
-to an API service, then this is the file where it should be defined.
+Na pasta do projeto, você encontrará dois **arquivos** TypeSpec
+**main.tsp** e **actions.tsp**. O agente é definido com seus
+**metadados**, **instruções** e **recursos** no arquivo **main.tsp**.
+Use o arquivo **actions.tsp** para definir **as ações do agente**. Se o
+seu agente incluir ações como conectar-se a um serviço de API, esse será
+o arquivo em que ele deverá ser definido.
 
-Open **main.tsp** and inspect what is there in the default template,
-which you will modify for our agent’s repair service scenario.
+Abra **main.tsp** e inspecione o que está lá no modelo padrão, que você
+modificará para o cenário de serviço de reparo do nosso agente.
 
-**Update the Agent Metadata and Instructions**
+**Atualizar os metadados e as instruções do agente**
 
-In the **main.tsp** file you will find the basic structure of the agent.
-Review the content provided by the agents toolkit template which
-includes: -
+No arquivo **main.tsp** você encontrará a estrutura básica do agente.
+Revise o conteúdo fornecido pelo modelo de kit de ferramentas de
+agentes, que inclui: -
 
-- **Agent name** and **description** 1️⃣
+- **Agent name** e **description** 1️⃣
 
-- Basic **instructions** 2️⃣
+- **Instructions** básicas 2️⃣
 
-- Placeholder code for **actions** and **capabilities** (commented out)
-  3️⃣
+- Código de espaço reservado para **actions **e** capabilities**
+  (comentado) 3️⃣
 
-![](./media/image17.png)
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-1.  Identify the **@agent** and **@instructions** blocks of code (From
-    line 10 to 17).
+1.  Identifique os blocos de código **@agent** e **@instructions** (da
+    linha 10 a 17).
 
-	![](./media/image18.png)
+![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image18.png)
 
-2.  Begin by defining your agent for the repair scenario. Replace the
-    **@agent** and **@instruction** definitions with below code snippet.
+2.  Comece definindo seu agente para o cenário de reparo. Substitua as
+    definições de **@agent** e **@instruction** pelo snippet de código
+    abaixo.
 
-    ```
-    @agent(
-      "RepairServiceAgent",
-       "An agent for managing repair information"
-    )
-    
-    @instructions("""
-      ## Purpose
-    You will assist the user in finding car repair records based on the information provided by the user.
-    """)
-    ```
+	```
+	@agent(
+	"RepairServiceAgent",
+	"An agent for managing repair information"
+	)
 
-    ![](./media/image19.png)
+	@instructions("""
+	## Purpose
+	You will assist the user in finding car repair records based on the information provided by the user. 
+	""")
 
-3.  Next, add a conversation starter for the agent. Just below the
-    instructions you will see a commented-out code for a conversation
-    starter. Replace the @conversationStarter block (Should be the lines
-    from 22 to 25) with the below code.
+	```
 
-    ```
-    @conversationStarter(#{
-      title: "List repairs",
-      text: "List all repairs"
-    })
-    ```
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image19.png)
 
-    ![](./media/image20.png)
+3.  Em seguida, adicione um iniciador de conversa para o agente. Logo
+    abaixo das instruções, você verá um código comentado para iniciar
+    uma conversa. Substitua o bloco @conversationStarter (devem ser as
+    linhas de 22 a 25) pelo código abaixo.
 
-    ![](./media/image21.png)
+	```
+	@conversationStarter(#{
+	title: "List repairs",
+	text: "List all repairs"
+	})	
 
-### Task 3: Update the action for the agent
+	```
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image20.png)
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image21.png)
+
+### Tarefa 3: Atualizar a ação do agente
 
 In this task, you will define the action for your agent by opening
-the **actions.tsp** file. You’ll return to the main.tsp file later to
+the **actions.tsp** file. You’ll return to the main.tsp file later to
 complete the agent metadata with the action reference, but first, the
 action itself must be defined.
 
@@ -241,590 +270,491 @@ newcomers understand how to define an action for their agent like
 action’s metadata, API host url and operations or functions and their
 definitions. You will replace all this with repair service.
 
-1.  Open the file **actions.tsp**. Replace the code starting with
-    **@service** till **const SERVER_URL** (line numbers should be 7
-    to 25) with the below code block.
+1.  Open the file **actions.tsp**. Replace the code starting
+    with **@service** till **const SERVER_URL** (line numbers should be
+    7 to 25) with the below code block.
 
-	This update introduces the action metadata and sets the server URL. Also, note that the namespace has been changed from GitHubAPI to RepairsAPI.
+	Esta atualização introduz os metadados da ação e define a URL do
+servidor. Além disso, observe que o namespace foi alterado de GitHubAPI
+para RepairsAPI.
 
 	```
 	@service
-
 	@server(RepairsAPI.SERVER_URL)
-
 	@actions(RepairsAPI.ACTIONS_METADATA)
-
 	namespace RepairsAPI{
-
-	/\*\*
-
-	\* Metadata for the API actions.
-
-	\*/
-
-	const ACTIONS_METADATA = \#{
-
-	nameForHuman: "Repair Service Agent",
-
-	descriptionForHuman: "Manage your repairs and maintenance tasks.",
-
-	descriptionForModel: "Plugin to add, update, remove, and view repair
-	objects.",
-
-	legalInfoUrl:
-	"https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
-
-	privacyPolicyUrl:
-	"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-
+	/**
+	* Metadata for the API actions.
+	*/
+	const ACTIONS_METADATA = #{
+		nameForHuman: "Repair Service Agent",
+		descriptionForHuman: "Manage your repairs and maintenance tasks.",
+		descriptionForModel: "Plugin to add, update, remove, and view repair objects.",
+		legalInfoUrl: "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+		privacyPolicyUrl: "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
 	};
 
-	/\*\*
-
-	\* The base URL for the API.
-
-	\*/
-
+	/**
+	* The base URL for the  API.
+	*/
 	const SERVER_URL = "https://repairshub.azurewebsites.net";
-	```
-
-2.  Next, replace the operation in the template code from searchIssues
-    to **listRepairs** which is a repair operation to get the list of
-    **repairs**. Replace the entire block of code starting just after
-    the SERVER_URL definition and ending *before* the final closing
-    braces with the snippet below. Be sure to leave the closing braces
-    intact. (Line numbers should be 27 to 37)
 
 	```
-	/\*\*
 
-	\* List repairs from the API
+2.  Em seguida, substitua a operação no código do modelo de searchIssues
+    para **listRepairs,** que é uma operação de reparo para obter a
+    lista de **repairs**. Substitua todo o bloco de código começando
+    logo após a definição SERVER_URL e terminando *antes* das chaves de
+    fechamento finais pelo snippet abaixo. Certifique-se de deixar os
+    suportes de fechamento intactos. (Os números das linhas devem ser de
+    27 a 37)
 
-	\* @param assignedTo The user assigned to a repair item.
-
-	\*/
+	```
+	/**
+	* List repairs from the API 
+	* @param assignedTo The user assigned to a repair item.
+	*/
 
 	@route("/repairs")
-
-	@get op listRepairs(@query assignedTo?: string): string;
-	```
-
-
-	![](./media/image22.png)
-
-3.  Now go back to **main.tsp** file and add the action you just defined
-    into the agent. After the conversation starters replace the entire
-    block of code with below snippet.
+	@get  op listRepairs(@query assignedTo?: string): string;
 
 	```
-	namespace RepairServiceAgent{
 
+	![A screenshot of a computer program AI-generated content may be incorrect.](./media/image22.png)
+
+3.  Agora volte para o arquivo **main.tsp** e adicione a ação que você
+    acabou de definir no agente. Após os iniciadores da conversa,
+    substitua todo o bloco de código pelo trecho abaixo.
+
+	```
+	namespace RepairServiceAgent{  
 	// Uncomment this part to add actions to the agent.
-
 	@service
-
 	@server(global.RepairsAPI.SERVER_URL)
-
 	@actions(global.RepairsAPI.ACTIONS_METADATA)
-
 	namespace RepairServiceActions {
-
-	op listRepairs is global.RepairsAPI.listRepairs;
-
+		op listRepairs is global.RepairsAPI.listRepairs;   
+	}
 	}
 
-	}
 	```
 
-    ![](./media/image23.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image23.png)
 
-### Task 4: (Read only) Understand the decorators
+### Tarefa 4: (Somente leitura) Entenda os elementos
 
-This is a task to understand what we have defined in the TypeSpec file.
-Just read through this task. In the TypeSpec
-files main.tsp and actions.tsp, you'll find decorators (starting with
-@), namespaces, models, and other definitions for your agent.
+Esta é uma tarefa para entender o que definimos no arquivo TypeSpec.
+Basta ler esta tarefa. Nos arquivos TypeSpec main.tsp e actions.tsp,
+você encontrará elementos (começando com @), namespaces, models e outras
+definições para seu agente.
 
-Check the below details to understand some of the decorators used in these
-files
--	**@agent** - Defines the namespace (name) and description of the agent
--	**@instructions** -	Defines the instructions that prescribe the behaviour of the agent. 8000 characters or less
--	**@conversationStarter** -	Defines conversation starters for the agent
--	**op**	-	Defines any operation. Either it can be an operation to define agent’s capabilities like op GraphicArt, op CodeInterpreter etc., or define API operations like op listRepairs.
--	**@server**	-	Defines the server endpoint of the API and its name
--	**@capabilities**	-	When used inside a function, it defines simple adaptive cards with small definitions like a confirmation card for the operation
+Confira os detalhes abaixo para entender alguns dos elementos usados
+nesses arquivos
 
+- **@agent** - Define o namespace (nome) e a descrição do agente
 
-### Task 5: Test your agent
+- **@instructions** - Define as instruções que prescrevem o
+  comportamento do agente. 8000 caracteres ou menos
 
-In this task, you will test the Repair Service Agent that you just
-created.
+- **@conversationStarter** - Define iniciadores de conversa para o
+  agente
 
-1.  Select the **Agents Toolkit extension's** icon, to open the activity
-    bar from within your project.
+- op - Define qualquer operação. Pode ser uma operação para definir os
+  recursos do agente, como op GraphicArt, op CodeInterpreter etc., ou
+  definir operações de API, como op listRepairs
 
-	![](./media/image24.png)
+- **@server** - Define o ponto de extremidade do servidor da API e seu
+  nome
 
-2.  In the activity bar of the Agents Toolkit under **LifeCycle** select
-    **Provision**. This will build the app package consisting of the
-    generated manifest files and icons and side load the app into the
-    catalog only for you to test.
+- **@capabilities** - Quando usado dentro de uma função, ele define
+  cartões adaptáveis simples com pequenas definições, como um cartão de
+  confirmação para a operação
 
-    ![](./media/image25.png)
+### Tarefa 5: Testar seu agente
 
-3.  Open your web browser and navigate to
-    +++https://m365.cloud.microsoft/chat+++ to open Copilot app.
+Nesta tarefa, você testará o Agente do Serviço de Reparo que acabou de
+criar.
 
-4.  Select the **RepairServiceAgent** from the list of **Agents**
-    available in the Microsoft 365 Copilot interface. This will take a
-    while, and you will be able to see a toaster message showing the
-    progress of the task to provision.
+1.  Selecione o ícone de **extensão Agents Toolkit**, para abrir a barra
+    de atividades de dentro do seu projeto.
 
-    ![](./media/image26.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image24.png)
 
-5.  Select the conversation starter **List repairs** and send the
-    prompt.
+2.  Na barra de atividades do Agents Toolkit,
+    em **LifeCycle** selecione **Provision**. Isso criará o pacote do
+    aplicativo que consiste nos arquivos e ícones de manifesto gerados e
+    carregará o aplicativo no catálogo apenas para você testar.
 
-    ![](./media/image27.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image25.png)
 
-6.  This initiates the conversation with your agent and you can see the
-    response from the agent with the list of repairs.
+3.  Abra seu navegador e vá até
+    +++https://m365.cloud.microsoft/chat+++ para abrir o aplicativo
+    Copilot.
 
-    ![](./media/image28.png)
+4.  Selecione o **RepairServiceAgent** na lista de **Agentes**
+    disponíveis na interface do Microsoft 365 Copilot. Isso levará um
+    tempo e você poderá ver uma mensagem de torradeira mostrando o
+    progresso da tarefa a ser provisionada.
 
-## Exercise 3: Enhance Agent capabilities
+	![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image26.png)
 
-In this exercise, you will enhance the agent by adding more operations,
-enabling responses with Adaptive Cards, and incorporating code
-interpreter capabilities. Let’s explore each of these enhancements step
-by step. Go back to the project in VS Code.
+5.  Selecione o início da conversa **List repairs** e envie o prompt.
 
-### Task 1: Modify agent to add more operations
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image27.png)
 
-In this task, you will modify the agent and add operations like
-**createRepair**, **updateRepair** and **deleteRepair.**
+6.  Isso inicia a conversa com seu agente e você pode ver a resposta do
+    agente com a lista de reparos.
 
-1.  Go to file **actions.tsp** and copy paste below snippet just
-    after **listRepairs** operation to add these new
-    operations **createRepair**, **updateRepair** and **deleteRepair**.
-    Here you are also defining the Repair item data model.
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image28.png)
+
+## Exercício 3: Aprimorar os recursos do agente
+
+Neste exercício, você aprimorará o agente adicionando mais operações,
+habilitando respostas com Cartões Adaptáveis e incorporando recursos de
+interpretador de código. Vamos explorar cada um desses aprimoramentos
+passo a passo. Voltar para o projeto no VS Code.
+
+### Tarefa 1: Modificar o agente para adicionar mais operações
+
+Nesta tarefa, você modificará o agente e adicionará operações
+como **createRepair**, **updateRepair** e **deleteRepair.**
+
+1.  Vá para o arquivo **actions.tsp** e copie e cole o trecho abaixo
+    logo após a operação **listRepairs** para adicionar essas novas
+    operações **createRepair**, **updateRepair** e **deleteRepair**.
+    Aqui você também está definindo o modelo de dados Item de reparo.
 
 	```
-	/\*\*
+	/**
+	* Create a new repair. 
+	* When creating a repair, the `id` field is optional and will be generated by the server.
+	* The `date` field should be in ISO 8601 format (e.g., "2023-10-01T12:00:00Z").
+	* The `image` field should be a valid URL pointing to the image associated with the repair.
+	* @param repair The repair to create.
+	*/
+	@route("/repairs")  
+	@post  op createRepair(@body repair: Repair): Repair;
 
-	\* Create a new repair.
+	/**
+	* Update an existing repair.
+	* The `id` field is required to identify the repair to update.
+	* The `date` field should be in ISO 8601 format (e.g., "2023-10-01T12:00:00Z").
+	* The `image` field should be a valid URL pointing to the image associated with the repair.
+	* @param repair The repair to update.
+	*/
+	@route("/repairs")  
+	@patch  op updateRepair(@body repair: Repair): Repair;
 
-	\* When creating a repair, the \`id\` field is optional and will be
-	generated by the server.
+	/**
+	* Delete a repair.
+	* The `id` field is required to identify the repair to delete.
+	* @param repair The repair to delete.
+	*/
+	@route("/repairs") 
+	@delete  op deleteRepair(@body repair: Repair): Repair;
 
-	\* The \`date\` field should be in ISO 8601 format (e.g.,
-	"2023-10-01T12:00:00Z").
-
-	\* The \`image\` field should be a valid URL pointing to the image
-	associated with the repair.
-
-	\* @param repair The repair to create.
-
-	\*/
-
-	@route("/repairs")
-
-	@post op createRepair(@body repair: Repair): Repair;
-
-	/\*\*
-
-	\* Update an existing repair.
-
-	\* The \`id\` field is required to identify the repair to update.
-
-	\* The \`date\` field should be in ISO 8601 format (e.g.,
-	"2023-10-01T12:00:00Z").
-
-	\* The \`image\` field should be a valid URL pointing to the image
-	associated with the repair.
-
-	\* @param repair The repair to update.
-
-	\*/
-
-	@route("/repairs")
-
-	@patch op updateRepair(@body repair: Repair): Repair;
-
-	/\*\*
-
-	\* Delete a repair.
-
-	\* The \`id\` field is required to identify the repair to delete.
-
-	\* @param repair The repair to delete.
-
-	\*/
-
-	@route("/repairs")
-
-	@delete op deleteRepair(@body repair: Repair): Repair;
-
-	/\*\*
-
-	\* A model representing a repair.
-
-	\*/
-
+	/**
+	* A model representing a repair.
+	*/
 	model Repair {
+		/**
+		* The unique identifier for the repair.
+		*/
+		id?: string;
 
-	/\*\*
+		/**
+		* The short summary or title of the repair.
+		*/
+		title: string;
 
-	\* The unique identifier for the repair.
+		/**
+		* The detailed description of the repair.
+		*/
+		description?: string;
 
-	\*/
+		/**
+		* The user who is assigned to the repair.
+		*/
+		assignedTo?: string;
 
-	id?: string;
+		/**
+		* The optional date and time when the repair is scheduled or completed.
+		*/
+		@format("date-time")
+		date?: string;
 
-	/\*\*
-
-	\* The short summary or title of the repair.
-
-	\*/
-
-	title: string;
-
-	/\*\*
-
-	\* The detailed description of the repair.
-
-	\*/
-
-	description?: string;
-
-	/\*\*
-
-	\* The user who is assigned to the repair.
-
-	\*/
-
-	assignedTo?: string;
-
-	/\*\*
-
-	\* The optional date and time when the repair is scheduled or completed.
-
-	\*/
-
-	@format("date-time")
-
-	date?: string;
-
-	/\*\*
-
-	\* The URL of the image associated with the repair.
-
-	\*/
-
-	@format("uri")
-
-	image?: string;
-
+		/**
+		* The URL of the image associated with the repair.
+		*/
+		@format("uri")
+		image?: string;
 	}
+
 	```
 
-    ![](./media/image29.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image29.png)
 
-2.  Now, open **main.tsp** file and add these new operations into the
-    agent's action. **Paste** the below snippet after the line **op
-    listRepairs is global.RepairsAPI.listRepairs;** inside the
-    **RepairServiceActions** namespace.
+2.  Agora, abra o arquivo **main.tsp** e adicione essas novas operações
+    à ação do agente. **Cole** o snippet abaixo depois que a linha **op
+    listRepairs for global. ReparosAPI.listRepairs;** dentro do
+    namespace **RepairServiceActions**.
 
 	```
 	op createRepair is global.RepairsAPI.createRepair;
-
 	op updateRepair is global.RepairsAPI.updateRepair;
-
 	op deleteRepair is global.RepairsAPI.deleteRepair;
+
 	```
 
-    ![](./media/image30.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image30.png)
 
-3.  Also add a new conversation starter for creating a new repair item
-    just after the first conversation start definition.
+3.  Adicione também um novo iniciador de conversa para criar um novo
+    item de reparo logo após a definição de início da primeira conversa.
 
 	```
 	@conversationStarter(#{
-
 	title: "Create repair",
-
-	text: "Create a new repair titled \\\[TO_REPLACE\]\\ and assign it to
-	me"
-
+	text: "Create a new repair titled \"[TO_REPLACE]\" and assign it to me"
 	})
-	```
-
-    ![](./media/image31.png)
-
-### Task 2: Add adaptive card to function reference
-
-In this task, you will enhance the reference cards or response cards
-using adaptive cards. Let’s take the **listRepairs** operation and add
-an adaptive card for the repair item.
-
-1.  In the project folder, create a new folder
-    called +++cards+++ under the **appPackage** folder.
-
-    ![](./media/image32.png)
-
-2.  Create a file +++repair.json+++ in the **cards** folder and
-    paste the code snippet as is from below to the file.
 
 	```
+
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image31.png)
+
+### Tarefa 2: Adicionar cartão adaptável à referência de função
+
+Nesta tarefa, você aprimorará os cartões de referência ou cartões de
+resposta usando cartões adaptáveis. Vamos pegar a operação
+**listRepairs** e adicionar um cartão adaptável para o item de reparo.
+
+1.  Na pasta do projeto, crie uma nova pasta chamada +++cards+++ na
+    pasta **appPackage**.
+
+![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image32.png)
+
+2.  Crie um arquivo +++repair.json+++ na pasta **cards** e cole o trecho
+    de código como está abaixo no arquivo.
+
+	```
 	{
-
-	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-
-	"type": "AdaptiveCard",
-
-	"version": "1.5",
-
-	"body": \[
-
+		"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+		"type": "AdaptiveCard",
+		"version": "1.5",
+		"body": [
 	{
-
-	"type": "Container",
-
-	"$data": "${$root}",
-
-	"items": \[
-
-	{
-
-	"type": "TextBlock",
-
-	"text": "Title: ${if(title, title, 'N/A')}",
-
-	"weight": "Bolder",
-
-	"wrap": true
-
-	},
-
-	{
-
-	"type": "TextBlock",
-
-	"text": "Description: ${if(description, description, 'N/A')}",
-
-	"wrap": true
-
-	},
-
-	{
-
-	"type": "TextBlock",
-
-	"text": "Assigned To: ${if(assignedTo, assignedTo, 'N/A')}",
-
-	"wrap": true
-
-	},
-
-	{
-
-	"type": "TextBlock",
-
-	"text": "Date: ${if(date, date, 'N/A')}",
-
-	"wrap": true
-
-	},
-
-	{
-
-	"type": "Image",
-
-	"url": "${image}",
-
-	"$when": "${image != null}"
-
+		"type": "Container",
+		"$data": "${$root}",
+		"items": [
+		{
+			"type": "TextBlock",
+			"text": "Title: ${if(title, title, 'N/A')}",
+			"weight": "Bolder",
+			"wrap": true
+		},
+		{
+			"type": "TextBlock",
+			"text": "Description: ${if(description, description, 'N/A')}",
+			"wrap": true
+		},
+		{
+			"type": "TextBlock",
+			"text": "Assigned To: ${if(assignedTo, assignedTo, 'N/A')}",
+			"wrap": true
+		},
+		{
+			"type": "TextBlock",
+			"text": "Date: ${if(date, date, 'N/A')}",
+			"wrap": true
+		},
+		{
+			"type": "Image",
+			"url": "${image}",
+			"$when": "${image != null}"
+		}
+		]
+	}
+	],  
+		"actions": [
+		{
+			"type": "Action.OpenUrl",
+			"title": "View Image",
+			"url": "https://www.howmuchisit.org/wp-content/uploads/2011/01/oil-change.jpg"
+		}
+		]
 	}
 
-	\]
-
-	}
-
-	\],
-
-	"actions": \[
-
-	{
-
-	"type": "Action.OpenUrl",
-
-	"title": "View Image",
-
-	"url":
-	"https://www.howmuchisit.org/wp-content/uploads/2011/01/oil-change.jpg"
-
-	}
-
-	\]
-
-	}
 	```
 
-    ![](./media/image33.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image33.png)
 
-3.  Next, go back to **actions.tsp** file and locate
-    the **listRepairs** operation. Replace the operation
-    definition **@get op listRepairs(@query assignedTo?: string):
-    string;,** line with the below 2 lines of code.
+3.  Em seguida, volte para o arquivo **actions.tsp** e localize a
+    operação **listRepairs**. Substitua a definição de operação **@get
+    op listRepairs(@query assignedTo?: string): string;** linha com as 2
+    linhas de código abaixo.
 
 	```
-	@card(#{ dataPath: "$", title: "$.title", url: "$.image", file:
-	"cards/repair.json"})
+	@card(#{ dataPath: "$", title: "$.title",   url: "$.image", file: "cards/repair.json"})
+	@get op listRepairs(@query assignedTo?: string): Repair[];
 
-	@get op listRepairs(@query assignedTo?: string): Repair\[\];
 	```
 
-	![](./media/image34.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image34.png)
 
-4.  The above card response will be sent by the agent when you ask about
-    a repair item or when agent brings a list of items as its reference.
+4.  A resposta do cartão acima será enviada pelo agente quando você
+    perguntar sobre um item de reparo ou quando o agente trouxer uma
+    lista de itens como referência.
 
-5.  Since the agent now supports additional functionality, update the
-    instructions accordingly to reflect this enhancement.
+5.  Como o agente agora oferece suporte a funcionalidades adicionais,
+    atualize as instruções de acordo para refletir esse aprimoramento.
 
-6.  In the same **main.tsp** file, update instructions definition to
-    have additional directives for the agent. Replace the existing
-    **@instructions** code block with the below code block.
+6.  No mesmo arquivo **main.tsp**, atualize a definição de instruções
+    para ter diretivas adicionais para o agente. Substitua o bloco **de
+    código @instructions** existente pelo bloco de código abaixo.
 
 	```
 	@instructions("""
+	## Purpose
+	You will assist the user in finding car repair records based on the information provided by the user. When asked to display a report, you will use the code interpreter to generate a report based on the data you have.
 
-	\## Purpose
-	```
-
-	You will assist the user in finding car repair records based on the
-	information provided by the user. When asked to display a report, you
-	will use the code interpreter to generate a report based on the data
-	you have.
-
-	```
-	\## Guidelines
-
+	## Guidelines
 	- You are a repair service agent.
-
 	- You can use the actions to create, update, and delete repairs.
-
-	- When creating a repair item, if the user did not provide a
-	description or date , use title as description and put todays date in
-	format YYYY-MM-DD
-
-	- Do not show any code or technical details to the user.
-
+	- When creating a repair item, if the user did not provide a description or date , use title as description and put todays date in format YYYY-MM-DD
+	- Do not show any code or technical details to the user. 
 	- Do not use any technical jargon or complex terms.
 
 	""")
+
 	```
 
-    ![](./media/image35.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image35.png)
 
-### Task 3: Provision and Test the Agent
+### Tarefa 3: Provisionar e testar o agente
 
-In this task, you will take the updated agent who is also now a repairs
-analyst to test.
+Nesta tarefa, você levará o agente atualizado que agora também é um
+analista de reparos para testar.
 
-1.  Select the Agents Toolkit's extension icon to open its activity bar
-    from within your project.
+1.  Selecione o ícone de extensão do Agents Toolkit para abrir sua barra
+    de atividades no seu projeto.
 
-2.  In the activity bar of the toolkit under **LifeCycle** select
-    **Provision** to package and upload the newly updated agent for
-    testing.
+2.  Na barra de atividades do kit de ferramentas, em
+    **LifeCycle** selecione **Provision** para empacotar e carregar o
+    agente recém-atualizado para teste.
 
-	![](./media/image36.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image36.png)
 
-3.  Ensure that the provisioning gets succeeded.
+3.  Certifique-se que o provisionamento seja bem-sucedido.
 
-    ![](./media/image37.png)
+	![A screenshot of a computer program AI-generated content may be
+incorrect.](./media/image37.png)
 
-4.  Go back to the open **browser** session and do a **refresh**.
+4.  Volte para a sessão aberta do **navegador** e faça uma
+    **atualização**.
 
-5.  In the **RepairServiceAgent**, start by using the conversation
-    starter **Create repair**. Replace parts of the prompt to add a
-    title, then send it to the chat to initiate the interaction. For
-    example:
+5.  No **RepairServiceAgent**, comece usando o iniciador de conversa
+    **Create repair**. Substitua partes do prompt para adicionar um
+    título e envie-o para o chat para iniciar a interação. Por exemplo:
 
-    ![](./media/image38.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image38.png)
 
-6.  Replace the **“\[TO REPLACE\]”** with
-    +++rear camera issue+++ and assign it to me.
+6.  Substitua o **“\[TO REPLACE\]”** por +++rear camera issue+++ e
+    **assign it to me**.
 
-    ![](./media/image39.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image39.png)
 
-7.  The confirmation dialog if you notice has more metadata that what
-    you sent, thanks to the new instructions.
+7.  A caixa de diálogo de confirmação, se você notar, tem mais metadados
+    do que o que você enviou, graças às novas instruções.
 
-    ![](./media/image40.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image40.png)
 
-8.  Proceed to add the item by **confirming** the dialog.
+8.  Prossiga para adicionar o item clicando em **Confirm** na caixa de
+    diálogo.
 
-	![](./media/image41.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image41.png)
 
-9.  The agent responds with the **created item** shown in a rich
-    **adaptive card**.
+9.  O agente responde com o **item criado** mostrado em um **cartão
+    adaptável avançado**.
 
-    ![](./media/image42.png)
+	![A screenshot of a chat AI-generated content may be
+incorrect.](./media/image42.png)
 
-10. Next, re-check reference cards work. Send below prompt in the
-    conversation.
+10. Em seguida, verifique novamente se os cartões de referência
+    funcionam. Envie o prompt abaixo na conversa.
 
 	+++List all my repairs+++.
 
-	Select **Always allow** in the confirmation dialog.
+	Selecione **Always allow **na caixa de diálogo de confirmação.
 
-	![](./media/image43.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image43.png)
 
-	![](./media/image44.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image44.png)
 
-11. The agent will respond with the list of repairs assigned to you.
-    with each item referenced with an adaptive card. In this case, it
-    should only be the rear camera issue that you just added.
+11. O agente responderá com a lista de reparos atribuídos a você. com
+    cada item referenciado com um cartão adaptável. Nesse caso, deve ser
+    apenas o problema da câmera traseira que você acabou de adicionar.
 
-	![](./media/image45.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image45.png)
 
-12. Next, you will test the new analytical capability of your agent.
-    Open a new chat by selecting the **New chat** button on the top
-    right corner of your agent.
+12. Em seguida, você testará a nova capacidade analítica do seu agente.
+    Abra um novo chat selecionando o botão **New chat** no canto
+    superior direito do seu agente.
 
-    ![](./media/image46.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image46.png)
 
-13. Next, copy the prompt below and paste it to the message box and hit
-    enter to send it.
+13. Em seguida, copie o prompt abaixo e cole-o na caixa de mensagem e
+    pressione Enter para enviá-lo.
 
-	```
-	Classify repair items based on title into three distinct categories:
-	Routine Maintenance, Critical, and Low Priority. Then, generate a chart
-	displaying the percentage representation of each category.
-	```
+14. Classifique os itens de reparo com base no título em três categorias
+    distintas: **Routine Maintenance, Critical** e **Low Priority**. Em
+    seguida, gere um gráfico exibindo a representação percentual de cada
+    categoria.
 
-	![](./media/image47.png)
+	![A screenshot of a phone AI-generated content may be
+incorrect.](./media/image47.png)
 
-14. You should get some response similar to below screen. It may vary
-    sometimes.
+15. Você deve obter alguma resposta semelhante à tela abaixo. Pode
+    variar às vezes.
 
-    ![](./media/image48.png)
+	![A screenshot of a data box AI-generated content may be
+incorrect.](./media/image48.png)
 
-## Summary:
+**Resumo:**
 
-In this lab, you have:
+Neste laboratório, você:
 
-- Used **TypeSpec** to describe APIs and bind them to Copilot actions.
+- Usou **TypeSpec** para descrever APIs e vinculá-las às ações do
+  Copilot.
 
-- Configure **Adaptive Cards** to display repair records in a rich
-  visual layout.
+- Configurou **Cartões Adaptáveis** para exibir registros de reparo em
+  um layout visual avançado.
 
-- Build a complete scenario where users can interact naturally with
-  Copilot to manage repair data.
+- Criou um cenário completo em que os usuários possam interagir
+  naturalmente com o Copilot para gerenciar dados de reparo.
 
-This lab demonstrated how Declarative Agents leverage the **Copilot
-platform’s orchestration, foundation models, and security controls** to
-deliver a familiar and consistent user experience while integrating with
-custom business data and workflows.
+Este laboratório demonstrou como os Agentes Declarativos aproveitam a
+**orquestração, os modelos de base e os controles de segurança da
+plataforma Copilot** para oferecer uma experiência de usuário familiar e
+consistente, integrando-se a dados e fluxos de trabalho de negócios
+personalizados. 
