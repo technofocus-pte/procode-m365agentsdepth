@@ -1,95 +1,100 @@
-# Lab 3 - Build your own agent with the M365 Agents SDK and Semantic Kernel
+# Laboratório 3 - Crie seu próprio agente com o M365 Agents SDK e o Semantic Kernel
 
-Lab duration – 80 minutes
+Duração do laboratório – 80 minutos
 
-## Objective
+## Objetivo
 
-In this lab, you will develop a custom engine agent that runs across
-Microsoft Teams, Microsoft 365 Copilot Chat, and even external channels
-using the Microsoft 365 Agents SDK and Semantic Kernel.
+Neste laboratório, você desenvolverá um agente de mecanismo
+personalizado que é executado no Microsoft Teams, no Microsoft 365
+Copilot Chat e até mesmo em canais externos usando o Microsoft 365
+Agents SDK e o Semantic Kernel.
 
-In Azure AI Foundry, you’ll define your agent’s core instructions,
-tools, and personality. From there, you’ll use the Microsoft 365 Agents
-SDK and Visual Studio to bring your agent to life, customizing its
-behaviors and integrating it with Semantic Kernel for orchestration.
-You’ll then test your agent in Microsoft Teams, bring it into Copilot
-Chat, and see it come to life across Microsoft 365 applications.
+No Azure AI Foundry, você definirá as principais instruções, ferramentas
+e personalidade do seu agente. A partir daí, você usará o Microsoft 365
+Agents SDK e o Visual Studio para dar vida ao seu agente, personalizando
+seus comportamentos e integrando-o ao Semantic Kernel para orquestração.
+Em seguida, você testará seu agente no Microsoft Teams, o trará para o
+Copilot Chat e o verá ganhar vida nos aplicativos do Microsoft 365.
 
-In this lab, you will learn to
+Neste laboratório, você aprenderá a:
 
-- Prepare your agent in Azure AI Foundry
+- Preparar seu agente no Azure AI Foundry
 
-- Build your first agent using the M365 Agents SDK
+- Criar seu primeiro agente usando o M365 Agents SDK
 
-- Configure your agent’s properties using the SDK
+- Configurar as propriedades do seu agente usando o SDK
 
-- Integrate your agent with Teams using Azure AI Foundry
+- Integrar seu agente ao Teams usando o Azure AI Foundry
 
-- Bring your agent into Microsoft 365 Copilot Chat
+- Trazer seu agente para o Microsoft 365 Copilot Chat
 
-## Exercise 1: Prepare your agent in Azure AI Foundry
+## Exercício 1: Preparar seu agente no Azure AI Foundry
 
-In this exercise, you’ll begin your journey by preparing a custom engine
-agent using Azure AI Foundry, Microsoft’s platform for creating,
-configuring, and scaling AI agents. You'll explore the **Agents
-Playground**, define your agent's role, personalize its instructions,
-and connect it to relevant internal documents to support
-Retrieval-Augmented Generation (RAG).
+Neste exercício, você começará sua jornada preparando um agente de
+mecanismo personalizado usando o Azure AI Foundry, a plataforma da
+Microsoft para criar, configurar e dimensionar agentes de AI. Você
+explorará o **Agents Playground**, definirá a função do seu agente,
+personalizará suas instruções e o conectará a documentos internos
+relevantes para suporte de Retrieval-Augmented Generation (RAG).
 
-This exercise sets the foundation for the rest of the Build Path using
-the **Microsoft 365 Agents SDK** and **Semantic Kernel**. You’ll
-simulate a real-world Human Resources agent for Contoso Electronics that
-can answer questions based on uploaded documents like the Employee
-Handbook, Role Library, and Benefit Plans.
+Este exercício define a base para o restante do Caminho de Construção
+usando o **Microsoft 365 Agents SDK** e o **Semantic Kernel**. Você
+simulará um agente de Recursos Humanos do mundo real para a Contoso
+Electronics que pode responder a perguntas com base em documentos
+carregados, como o Manual do Funcionário, a Biblioteca de Funções e os
+Planos de Benefícios.
 
-Azure AI Foundry is a platform that enables developers to build, deploy,
-and scale AI agents with ease. You'll learn how to configure an agent,
-and test its functionality using the Agents Playground. This hands-on
-experience will provide insight into the capabilities of Azure AI Agent
-Service and how it integrates with various AI models and tools.
+O Azure AI Foundry é uma plataforma que permite que os desenvolvedores
+criem, implantem e dimensionem agentes de IA com facilidade. Você
+aprenderá a configurar um agente e testar sua funcionalidade usando o
+Agents Playground. Essa experiência prática fornecerá informações sobre
+os recursos do Azure AI Agent Service e como ele se integra a vários
+modelos e ferramentas de AI.
 
-Azure AI Foundry is your launchpad for building AI agents. In this task,
-you’ll log in to Azure AI Foundry with your login credentials.
+O Azure AI Foundry é sua plataforma de lançamento para a criação de
+agentes de AI. Nesta tarefa, você fará logon no Azure AI Foundry com
+suas credenciais de loin.
 
-1.  Open the browser and navigate to +++<https://ai.azure.com>+++ and
-    sign to your Azure account.
+1.  Abra o navegador, vá até +++<https://ai.azure.com>+++ e entre em sua
+    conta do Azure.
 
     ![](./media/image1.png)
 
-2.  From the Azure AI Foundry homepage, select **Create an agent**.
+2.  Na página inicial do Azure AI Foundry, selecione **Create an
+    agent**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image2.png)
 
-3.  Leave the project name as recommended and select **Create**.
+3.  Deixe o nome do projeto como recomendado e selecione **Create**.
 
     ![A screenshot of a project AI-generated content may be incorrect.](./media/image3.png)
 
-4.  This will scaffold a new project for you in Azure AI Foundry, it
-    usually takes 3-5 minutes.
+4.  Isso criará um novo projeto para você no Azure AI Foundry,
+    geralmente leva de 3 a 5 minutos.
 
-5.  When your project is created, you'll be redirected to your project,
-    extend the left side bar and select **Agents**. This will open the
-    Agents Playground.
+5.  Quando seu projeto for criado, você será redirecionado para ele,
+    estenda a barra lateral esquerda e selecione **Agents**. Isso abrirá
+    o **Agents Playground**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image4.png)
 
-6.  Select **Agents** from the left pane. You will see that a new Agent
-    is created for you.
+6.  Selecione **Agents** no painel esquerdo. Você verá que um novo
+    agente foi criado para você.
 
     ![](./media/image5.png)
 
-7.  **Select** the **Agent**, scroll down and select **Try in
+7.  **Selecione** o agente, role para baixo e selecione **Try in
     playground**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-Now that you're inside the Agents Playground, you'll customize your
-agent's identity and behavior to match a real-world scenario: an
-internal HR Agent at Contoso.
+    Agora que você está dentro do Agents Playground, você personalizará a
+identidade e o comportamento do seu agente para corresponder a um
+cenário do mundo real: um Agente de RH interno na Contoso.
 
-8.  In your agent's Setup panel, Name your agent as +++Contoso HR
-    Agent+++ and update the Instructions as the following:
+8.  No painel de Configuração do agente, nomeie-o como +++Contoso HR
+    Agent+++ e atualize as **Instructions** da seguinte forma:
 
     ```
     You are Contoso HR Agent, an internal assistant for Contoso Electronics. Your role is to help employees find accurate, policy-aligned answers to questions related to:
@@ -108,246 +113,248 @@ internal HR Agent at Contoso.
 
     ```
 
-9.  In the Knowledge section, select **+ Add** and select **Files**,
-    then Select **local files**.
+9.  Na seção **Knowledge**, selecione **+ Add** e selecione **Files**,
+    em seguida, selecione **local files**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image7.png)
+    incorrect.](./media/image7.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+    incorrect.](./media/image8.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+    incorrect.](./media/image9.png)
 
-10. Navigate to **C:\Labfiles\M365 Agents SDK** and select all the files
-    inside that and click **Open**.
+10. Navegue até **C:\Labfiles\M365 Agents SDK** , selecione todos os
+    arquivos dentro da pasta e clique em **Open**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-11. Select **Upload and save** to upload them. This will create a vector
-    store for our agent.
+11. Selecione **Upload and save** para carregá-los. Isso criará um
+    armazenamento de vetores para o nosso agente.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-12. When you upload documents, Foundry automatically converts them into
-    vectors, a format that allows the agent to search and retrieve
-    relevant information efficiently.
+12. Quando você carrega documentos, o Foundry os converte
+    automaticamente em vetores, um formato que permite ao agente
+    pesquisar e recuperar informações relevantes de forma eficiente.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-13. Save the **Agent id** to a notepad, that'll be required in the next
-    exercises. You can find your Agent id in the agent’s details.
+13. Salve o **Agent id** em um bloco de notas, isso será necessário nos
+    próximos exercícios. Você pode encontrar seu ID de agente nos
+    detalhes do agente.
 
     ![A screenshot of a computer screen AI-generated content may be
 incorrect.](./media/image13.png)
 
-14. Also, go to the **Overview** page and save the value of **Azure AI
-    Foundry project endpoint** to the notepad.
+14. Além disso, vá para a página **Overview** e salvar o valor de
+    **Azure AI Foundry project endpoint** no bloco de notas.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-By customizing the instructions and uploading relevant documents, you're
-teaching the agent how to behave and what knowledge to rely on. This is
-a simplified form of Retrieval-Augmented Generation (RAG).
+    Ao personalizar as instruções e fazer upload de documentos relevantes,
+você está ensinando ao agente como se comportar e em qual conhecimento
+confiar. Esta é uma forma simplificada de Retrieval-Augmented Generation
+(RAG).
 
-## Exercise 2 : Build your first agent using M365 Agents SDK
+## Exercício 2: Criar seu primeiro agente usando o SDK de agentes do M365
 
-Now that you’ve seen how to build an agent using Azure AI Foundry, let’s
-switch gears and explore how to build your own agent locally using the
-Microsoft 365 Agents SDK. This SDK lets you build multi-channel,
-production-ready agents that can run in Microsoft Teams, Microsoft 365
-Copilot, and other preferred channels.
+Agora que você viu como criar um agente usando o Azure AI Foundry, vamos
+mudar de assunto e explorar como criar seu próprio agente localmente
+usando o Microsoft 365 Agents SDK. Esse SDK permite que você crie
+agentes multicanais prontos para produção que podem ser executados no
+Microsoft Teams, no Microsoft 365 Copilot e em outros canais
+preferenciais.
 
-1.  From Windows Start, search for Visual and open **Visual Studio
-    2022**. Select **Skip and add accounts later**.
+1.  Em Iniciar do Windows, procure Visual e abra **Visual Studio 2022**.
+    Selecione **Skip and add accounts later**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image15.png)
 
-2.  Select **Start Visual Studio**.
+2.  Selecione **Start Visual Studio**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image16.png)
 
-3.  Select **Create a new project**.
+3.  Selecione **Create a new project**.
 
     ![](./media/image17.png)
 
-4.  Search for +++**Microsoft**+++and select **Microsoft 365
-    Agents** template. Click on **Next**.
+4.  Busque por +++**Microsoft**+++ e selecione o modelo **Microsoft 365
+    Agents**. Clique em **Next**.
 
     ![A screenshot of a computer project AI-generated content may be incorrect.](./media/image18.png)
 
-5.  Provide a name for your agent as +++**ContosoHRAgent**+++ and
-    select **Create**.
+5.  Forneça um nome para o seu agente como +++**ContosoHRAgent**+++ e
+    selecione **Create**.
 
     ![](./media/image19.png)
 
-6.  From the list of templates, select **Echo Bot** and
-    select **Create**.
+6.  Na lista de modelos, selecione **Echo Bot** e selecione **Create**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
 
-7.  Select **Allow access** in the pop up.
+7.  Selecione **Allow access** no pop-up.
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image21.png)
 
-9.  When the project template is scaffolded, go to Solution Explorer on
-    the right-side panel and explore the agent template. Expand
-    the **ContosoHRAgent** project.
+8.  Quando o modelo de projeto for estruturado, acesse o Solution
+    Explorer no painel do lado direito e explore o modelo de agente.
+    Expanda o projeto **ContosoHRAgent**.
 
-    - Open **Program.cs**, this code configures and runs the web server
-      that hosts your agent. It sets up required services like
-      authentication, routing, storage and registers the **EchoBot** and
-      injects memory-based state handling.
-    
-      ![A screenshot of a computer AI-generated content may be incorrect.](./media/image22.png)
+    - Abra **Program.cs**, esse código configura e executa o servidor
+      web que hospeda seu agente. Ele configura os serviços necessários,
+      como autenticação, roteamento, armazenamento e registra o
+      **EchoBot** e injeta manipulação de estado baseada em memória.
 
-    - Open **Bot \> EchoBot.cs** and observe that this sample sets up a
-  basic AI agent using the **Microsoft.Agents.Builder**. It sends a
-  welcome message when a user joins the chat and listens for any message
-  and echoes it back with a running message count.
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image22.png)
 
-      ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+    - Abra **Bot \> EchoBot.cs** e observe que este exemplo configura um agente de IA básico usando o **Microsoft.Agents.Builder**. Ele envia uma mensagem de boas-vindas quando um usuário entra no chat e escuta qualquer mensagem e a ecoa de volta com uma contagem de mensagens em execução.
 
-    You've started with an **Echo Bot**, a simple bot that repeats back any message a user sends. It’s a useful way to verify your setup and understand how conversations are handled behind the scenes.
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
 
-9.  From Visual Studio, select **Tools -\> NuGet Package Manager -\>
-    Package Manager Settings**, to add the NuGet.org to the package
-    sources.
+    Você começou com um **Echo Bot**, um bot simples que repete qualquer mensagem que um usuário envie. É uma maneira útil de verificar sua configuração e entender como as conversas são tratadas nos bastidores.
+
+9.  No Visual Studio, selecione **Tools -\> NuGet Package Manager -\>
+    Package Manager Settings**, para adicionar o NuGet.org às fontes do
+    pacote.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
 
-10. Select **Package Sources** and click on the **+** symbol to add a
-    new Package source.
+10. Selecione **Package Sources** e clique no símbolo **+** para
+    adicionar uma nova fonte de pacote.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image25.png)
 
-11. Enter the below details and then select **Ok**.
+11. Insira os detalhes abaixo e selecione **Ok**.
 
-    - Name - +++nuget.org+++
+    - Name: +++nuget.org+++
 
-    - Source - +++https://api.nuget.org/v3/index.json+++
+    - Source: +++https://api.nuget.org/v3/index.json+++
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image26.png)
 
-12. To test your echo agent, hit **Start** or **F5**. This will launch
-    Test Tool automatically in localhost where you can interact with
-    your agent. In case Visual Studio will ask you to confirm the
-    creation of a self-issued SSL certificate to test the application
-    locally, **confirm** and **proceed**.
+12. Para testar seu agente de eco, pressione **Iniciar** ou **F5**. Isso
+    iniciará a Ferramenta de Teste automaticamente no host local, onde
+    você pode interagir com seu agente. Caso o Visual Studio solicite
+    que você confirme a criação de um certificado SSL autoemitido para
+    testar o aplicativo localmente, **confirme** e **prossiga**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image27.png)
 
     ![A screenshot of a computer security warning AI-generated content may be incorrect.](./media/image28.png)
 
-13. Select **Allow access** in the security alert.
+13. Selecione **Allow access** em Security Alert.
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image29.png)
 
-14. The application now starts.
+14. O aplicativo agora começa.
 
     ![](./media/image30.png)
 
-15. Wait until the agent's message "Hello and Welcome!", then type
-    anything such as “Hi”, “Hello”. Observe that the agent echoes
-    everything back.
+15. Aguarde até a mensagem do agente " Hello and Welcome!" e digite
+    qualquer coisa como "Hi", "Hello". Observe que o agente ecoa tudo de
+    volta.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image31.png)
 
     ![A screenshot of a chat AI-generated content may be incorrect.](./media/image32.png)
 
-16. Stop debugging by selecting **Debug** -\> **Stop Debugging** from
+16. Pare a depuração selecionando **Debug** -\> **Stop Debugging** no
     Visual Studio.
 
     ![](./media/image33.png)
 
-    You have completed Build your first agent using M365 Agents SDK
-exercise. This simple agent forms the base for more powerful
-experiences. In the next step, you'll combine this with your Azure AI
-Foundry agent to enable richer, context-aware answers.
+    Você concluiu a construção do seu primeiro agente usando o exercício
+M365 Agents SDK. Esse agente simples forma a base para experiências mais
+poderosas. Na próxima etapa, você combinará isso com seu agente do Azure
+AI Foundry para habilitar respostas mais avançadas e com reconhecimento
+de contexto.
 
-## Exercise 3: Configure agent properties and test on Teams
+## Exercício 3: Configurar propriedades do agente e testar no Teams
 
-Now that you’ve created a basic bot, it’s time to enhance it with
-generative AI capabilities and upgrade it to an AI agent. In this
-exercise, you’ll install key libraries such as Semantic Kernel and
-prepare your agent to reason and respond more intelligently, ready for
-Teams or Copilot Chat.
+Agora que você criou um bot básico, é hora de aprimorá-lo com recursos
+de AI generativa e atualizá-lo para um agente de AI. Neste exercício,
+você instalará bibliotecas importantes, como o Kernel Semântico, e
+preparará seu agente para raciocinar e responder de forma mais
+inteligente, pronto para o Teams ou o Copilot Chat.
 
-1.  Add **Semantic Kernel Nuget** Package. This package will provide
-    support for Azure AI integration.
+1.  Adicione o pacote **Semantic Kernel Nuget**. Este pacote fornecerá
+    suporte para integração do Azure AI.
 
-2.  Right-click to **ContosoHRAgent** project and select **Manage Nuget
-    Packages for Solution**.
+2.  Clique com o botão direito do mouse para projetar
+    **ContosoHRAgent** e selecione **Manage Nuget Packages for
+    Solution**.
 
     ![](./media/image34.png)
 
-3.  Select **Browse** tab and search
-    for +++Microsoft.SemanticKernel.Agents.AzureAI+++. Check the
-    **Include prerelease** checkbox.
+3.  Selecione a guia **Browse**  e busque por
+     +++Microsoft.SemanticKernel.Agents.AzureAI+++. Marque a caixa de
+    seleção **Include prerelease**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-4.  Select the **package**, select **Contoso** under Project and
-    select **Install**.
+4.  Selecione o **pacote**, selecione **Contoso** em **Project** e
+    selecione **Install**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image36.png)
+    incorrect.](./media/image36.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image37.png)
+    incorrect.](./media/image37.png)
 
-5.  Select **Apply** in the Preview Changes dialog.
+5.  Selecione **Apply** na caixa de diálogo Preview Changes.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-6.  Select **I Accept** in the License Acceptance dialog.
+6.  Selecione **I Accept** na caixa de diálogo License Acceptance.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-7.  The package is now installed.
+7.  O pacote agora está instalado.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-8.  Select **Program.cs** and enter +++builder.Services.AddKernel();+++
-    above the line, **var app = builder.Build()** (Line 31).
+8.  Selecionw **Program.cs** e digite
+    +++builder.Services.AddKernel();+++ acima da linha **var app =
+    builder.Build()** (linha 31).
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-    This registers the Semantic Kernel, a core component that allows your
-agent to interact with generative AI models.
+    Isso registra o Semantic Kernel, um componente principal que permite que
+seu agente interaja com modelos de AI generativa.
 
-9.  Right-click to **ContosoHRAgent** project and select **Add \>
-    Class**.
+9.  Clique com o botão direito do mouse para projetar **ContosoHRAgent**
+    e selecione **Add \> Class**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image42.png)
 
-10. Enter the class name as +++**FileReference.cs**+++ and select
+10. Insira o nome da classe como +++FileReference.cs+++ e selecione
     **Create**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image43.png)
 
-11. This class defines the structure used when referencing specific
-    documents in responses—useful when your agent cites content from
-    uploaded files.
+11. Essa classe define a estrutura usada ao fazer referência a
+    documentos específicos em respostas, útil quando o agente cita
+    conteúdo de arquivos carregados.
 
-    Replace the existing code with the following.
+    Substitua o código existente pelo seguinte:
 
     ```
     using Microsoft.Agents.Core.Models;
-    
+
     namespace ContosoHRAgent
     {
         public class FileReference(string fileId, string fileName, string quote, Citation citation)
@@ -358,64 +365,65 @@ incorrect.](./media/image43.png)
             public Citation Citation { get; set; } = citation;
         }
     }
-        
+
     ```
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image44.png)
 
-12. Right-click to **ContosoHRAgent** project and select **Add \>
-    Class** and define your class name
-    as +++ConversationStateExtensions.cs+++. Replace existing the code
-    with following
+12. Clique com o botão direito do mouse para projetar
+    **ContosoHRAgent** e selecione **Add \> Class** and defina o class
+    name como +++ConversationStateExtensions.cs+++. Substitua o código
+    existente pelo seguinte:
 
     ```
     using Microsoft.Agents.Builder.State;
-    
+
     namespace ContosoHRAgent
     {
-     public static class ConversationStateExtensions
-     {
-         public static int MessageCount(this ConversationState state) => state.GetValue<int>("countKey");
-    
-         public static void MessageCount(this ConversationState state, int value) => state.SetValue("countKey", value);
-    
-         public static int IncrementMessageCount(this ConversationState state)
-         {
-             int count = state.GetValue<int>("countKey");
-             state.SetValue("countKey", ++count);
-             return count;
-         }
-    
-         public static string ThreadId(this ConversationState state) => state.GetValue<string>("threadId");
-    
-         public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
-     }
+    public static class ConversationStateExtensions
+    {
+        public static int MessageCount(this ConversationState state) => state.GetValue<int>("countKey");
+
+        public static void MessageCount(this ConversationState state, int value) => state.SetValue("countKey", value);
+
+        public static int IncrementMessageCount(this ConversationState state)
+        {
+            int count = state.GetValue<int>("countKey");
+            state.SetValue("countKey", ++count);
+            return count;
+        }
+
+        public static string ThreadId(this ConversationState state) => state.GetValue<string>("threadId");
+
+        public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
     }
+    }
+
     ```
 
     ![](./media/image45.png)
 
-    This class adds helper methods to manage and track the number of user
-messages—demonstrating how state is stored and modified during an
-ongoing conversation.
+    Essa classe adiciona métodos auxiliares para gerenciar e rastrear o
+número de mensagens do usuário, demonstrando como o estado é armazenado
+e modificado durante uma conversa em andamento.
 
-## Exercise 4: Integrate Azure AI Foundry Agent with M365 Agents SDK
+## Exercício 4: Integrar o Azure AI Foundry Agent ao M365 Agents SDK
 
-You’ve built an agent using the M365 Agents SDK and configured it with
-generative AI capabilities. Now, you’ll connect this local agent to the
-Azure AI Foundry agent you created earlier. This enables your agent to
-respond using enterprise data and instructions stored in the Foundry
-project, bringing everything full circle.
+Você criou um agente usando o M365 Agents SDK e configurou-o com
+recursos de IA generativa. Agora, você conectará esse agente local ao
+agente do Azure AI Foundry criado anteriormente. Isso permite que seu
+agente responda usando dados corporativos e instruções armazenadas no
+projeto Foundry, fechando o círculo.
 
-### Task 1: Configure EchoBot.cs to Connect with Azure AI Foundry Agent
+### Tarefa 1: Configurar o EchoBot.cs para se conectar com o Azure AI Foundry Agent
 
-In this task, you’ll connect to the Azure AI Foundry agent by adding a
-client to fetch and invoke your Foundry-hosted model inside the
-EchoBot.cs.
+Nesta tarefa, você se conectará ao agente do Azure AI Foundry
+adicionando um cliente para buscar e invocar seu modelo hospedado no
+Foundry dentro do EchoBot.cs.
 
-1.  In **ContosoHRAgent** project, open **Bot/EchoBot.cs** and add the
-    following lines inside the EchoBot public class.
+1.  No projeto **ContosoHRAgent**, abra **Bot/EchoBot.cs** e adicione as
+    seguintes linhas dentro de public class no EchoBot.
 
     ```
     private readonly PersistentAgentsClient _projectClient;
@@ -425,17 +433,17 @@ EchoBot.cs.
     ![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image46.png)
 
-2.  Replace the existing **EchoBot constructor** with the following.
+2.  Substitua o **construtor EchoBot** existente pelo seguinte:
 
     ```
     public EchoBot(AgentApplicationOptions options, IConfiguration configuration) : base(options)
     {
-    
+
         OnConversationUpdate(ConversationUpdateEvents.MembersAdded, WelcomeMessageAsync);
-    
+
         // Listen for ANY message to be received. MUST BE AFTER ANY OTHER MESSAGE HANDLERS 
         OnActivity(ActivityTypes.Message, OnMessageAsync);
-    
+
         // Azure AI Foundry Project ConnectionString
         string projectEndpoint = configuration["AIServices:ProjectEndpoint"];
         if (string.IsNullOrEmpty(projectEndpoint))
@@ -443,52 +451,53 @@ incorrect.](./media/image46.png)
             throw new InvalidOperationException("ProjectEndpoint is not configured.");
         }
         _projectClient = new PersistentAgentsClient(projectEndpoint, new AzureCliCredential());
-    
+
         // Azure AI Foundry Agent Id
         _agentId = configuration["AIServices:AgentID"];
         if (string.IsNullOrEmpty(_agentId))
         {
             throw new InvalidOperationException("AgentID is not configured.");
         }
-    
+
     }
+
     ```
-    
+
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
 
-3.  Replace **OnMessageAsync** method with the following.
+3.  Substitua **o método OnMessageAsync** pelo seguinte:
 
     ```
     protected async Task OnMessageAsync(ITurnContext turnContext, ITurnState turnState, CancellationToken cancellationToken)
     {
         // send the initial message to the user
         await turnContext.StreamingResponse.QueueInformativeUpdateAsync("Working on it...", cancellationToken);
-    
+
         // get the agent definition from the project
         var agentDefinition = await _projectClient.Administration.GetAgentAsync(_agentId, cancellationToken);
-    
+
         // initialize a new agent instance from the agent definition
         var agent = new AzureAIAgent(agentDefinition, _projectClient);
-    
+
         // retrieve the threadId from the conversation state
         // this is set if the agent has been invoked before in the same conversation
         var threadId = turnState.Conversation.ThreadId();
-    
+
         // if the threadId is not set, we create a new thread
         // otherwise, we use the existing thread
         var thread = string.IsNullOrEmpty(threadId)
             ? new AzureAIAgentThread(_projectClient)
             : new AzureAIAgentThread(_projectClient, threadId);
-    
+
         try
         {
             // increment the message count in state and queue the count to the user
             int count = turnState.Conversation.IncrementMessageCount();
             turnContext.StreamingResponse.QueueTextChunk($"({count}) ");
-    
+
             // create the user message to send to the agent
             var message = new ChatMessageContent(AuthorRole.User, turnContext.Activity.Text);
-    
+
             // invoke the agent and stream the responses to the user
             await foreach (AgentResponseItem<StreamingChatMessageContent> agentResponse in agent.InvokeStreamingAsync(message, thread, cancellationToken: cancellationToken))
             {
@@ -499,7 +508,7 @@ incorrect.](./media/image46.png)
                     threadId = agentResponse.Thread.Id;
                     turnState.Conversation.ThreadId(threadId);
                 }
-    
+
                 turnContext.StreamingResponse.QueueTextChunk(agentResponse.Message.Content);
             }
         }
@@ -509,336 +518,349 @@ incorrect.](./media/image46.png)
             await turnContext.StreamingResponse.EndStreamAsync(cancellationToken);
         }
     }
+
     ```
 
-4.  When pasting the above code excerpt, you might see a
-    warning (SKEXP0110) because this feature is still in preview. You
-    can safely suppress this warning for now by right-clicking on
-    AzureAIAgent, selecting **Quick Actions and Refactorings \> Suppress
-    or configure issues \> Configure SKEXP0110 Severity \> Silent**.
+4.  Ao colar o trecho de código acima, você pode ver um aviso
+    (SKEXP0110) porque esse recurso ainda está em versão prévia. Você
+    pode suprimir esse aviso com segurança por enquanto clicando com o
+    botão direito do mouse em AzureAIAgent, selecionando **Quick Actions
+    and Refactorings \> Suppress or configure issues \> Configure
+    SKEXP0110 Severity \> Silent**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image48.png)
 
-5.  The code will now look like this.
+5.  O código agora ficará assim:
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-6.  The ***OnMessageAsync*** method is the heart of your agent’s
-    response logic. By replacing the default echo behavior, you’ve
-    enabled your agent to send the user’s message to your Azure AI
-    Foundry agent, stream the response back to the user in real time,
-    track and attach citations and file references for transparency and
-    add sensitivity and AI-generated labels for security and
-    traceability.
+6.  O método ***OnMessageAsync*** é o coração da lógica de resposta do
+    agente. Ao substituir o comportamento de eco padrão, você permitiu
+    que seu agente enviasse a mensagem do usuário para o agente do Azure
+    AI Foundry, transmitisse a resposta de volta ao usuário em tempo
+    real, rastreasse e anexasse citações e referências de arquivo para
+    transparência e adicionasse confidencialidade e rótulos gerados por
+    AI para segurança e rastreabilidade.
 
-### Task 2: Configure Azure AI Agent Service Keys
+### Tarefa 2: Configurar o Azure AI Agent Service Keys
 
-In this task, you will add your Foundry connection details to
-appsettings.json, these values connect your M365 agent to the correct
-Foundry project and agent.
+Nesta tarefa, você adicionará os detalhes da conexão do Foundry a
+appsettings.json, esses valores conectam o agente M365 ao projeto e ao
+agente corretos do Foundry.
 
-1.  In **ContosoHRAgent** project, open **appsettings.json** and add the
-    following lines at the bottom of the appsettings list (At line 40).
+1.  No projeto **ContosoHRAgent**, abra **appsettings.json** e adicione
+    as seguintes linhas na parte inferior da lista appsettings (linha
+    40).
 
     ```
     ,
-      "AIServices": {
-       "AgentID": "<AzureAIFoundryAgentId>",
-       "ProjectEndpoint": "<ProjectEndpoint>"
-      }
+    "AIServices": {
+    "AgentID": "<AzureAIFoundryAgentId>",
+    "ProjectEndpoint": "<ProjectEndpoint>"
+    }
+
     ```
 
-    Replace the place holders for **AzureAIFoundryAgentId** and **ProjectEndpoint** with the values you saved to the notepad at the end of Exercise 1.
+    Substitua os espaços reservados para **AzureAIFoundryAgentId** e **ProjectEndpoint** pelos valores salvos no bloco de notas no final do Exercício 1.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
 
-2.  Final version of the **appsettings.json** will look like below.
+2.  A versão final do **appsettings.json** será semelhante a seguir:
 
-    ```no-copy
+    ```
     {
-      "AgentApplicationOptions": {
+    "AgentApplicationOptions": {
         "StartTypingTimer": false,
         "RemoveRecipientMention": false,
         "NormalizeMentions": false
-      },
-    
-      "TokenValidation": {
+    },
+
+    "TokenValidation": {
         "Audiences": [
-          "{{ClientId}}" // this is the Client ID used for the Azure Bot
+        "{{ClientId}}" // this is the Client ID used for the Azure Bot
         ]
-      },
-    
-      "Logging": {
+    },
+
+    "Logging": {
         "LogLevel": {
-          "Default": "Information",
-          "Microsoft.AspNetCore": "Warning",
-          "Microsoft.Agents": "Warning",
-          "Microsoft.Hosting.Lifetime": "Information"
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning",
+        "Microsoft.Agents": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information"
         }
-      },
-      "AllowedHosts": "*",
-      "Connections": {
+    },
+    "AllowedHosts": "*",
+    "Connections": {
         "BotServiceConnection": {
-          "Settings": {
+        "Settings": {
             "AuthType": "UserManagedIdentity", // this is the AuthType for the connection, valid values can be found in Microsoft.Agents.Authentication.Msal.Model.AuthTypes.
             "ClientId": "{{BOT_ID}}", // this is the Client ID used for the connection.
             "TenantId": "{{BOT_TENANT_ID}}",
             "Scopes": [
-              "https://api.botframework.com/.default"
+            "https://api.botframework.com/.default"
             ]
-          }
         }
-      },
-      "ConnectionsMap": [
+        }
+    },
+    "ConnectionsMap": [
         {
-          "ServiceUrl": "*",
-          "Connection": "BotServiceConnection"
+        "ServiceUrl": "*",
+        "Connection": "BotServiceConnection"
         }
-      ],
-      "AIServices": {
-       "AgentID": "<AzureAIFoundryAgentId>",
-       "ProjectEndpoint": "<ProjectEndpoint>"
-      }
+    ],
+    "AIServices": {
+    "AgentID": "<AzureAIFoundryAgentId>",
+    "ProjectEndpoint": "<ProjectEndpoint>"
     }
+    }
+
     ```
 
-### Task 3: Test your agent on Teams
+### Tarefa 3: Teste seu agente no Teams
 
-In this task, you will test the created agent in Teams.
+Nesta tarefa, você testará o agente criado no Teams.
 
-1.  Open the **Windows command prompt** and enter +++where az+++. This
-    is to get the path where the Azure CLI is installed and update the
-    Path Environment variable.
+1.  Abra o **prompt de comando do Windows** e digite +++onde az+++. Isso
+    é para obter o caminho em que a CLI do Azure está instalada e
+    atualizar a variável de ambiente de caminho.
 
-    Copy and paste the paths that are listed as the output.
+    Copie e cole os caminhos listados como saída.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  From the **Start** window, search for +++Environment+++ and select
-    **Edit the system environment variables**.
+2.  Na janela **Iniciar**, procure por +++Ambiente+++ e selecione **Edit
+    the system environment variables**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image52.png)
 
-3.  Select **Environment variables**.
+3.  Selecione **Environment Variables**.
 
     ![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image53.png)
 
-4.  Under **System variables**, select **Path** and then select
+4.  Em **System variables**, selecione **Path** e, em seguida, selecione
     **Edit**.
 
     ![](./media/image54.png)
 
-5.  Add the path obtained as the output for the command **where az**
-    (the first step of this Task) and click on **Ok**.
+5.  Add the path obtained as the output for the command **where az** (a
+    primeira etapa desta tarefa) e clique em **Ok**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image55.png)
 
-6.  Select **Ok** in the other Open windows of the **Environment
+6.  Selecione **Ok** nas outras janelas abertas do **Environment
     Settings**.
 
-7.  From the Visual Studio, open **Tools \> Command Line \> Developer
-    Command Prompt**.
+7.  No Visual Studio, abra **Tools \> Command Line \> Developer Command
+    Prompt**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image56.png)
 
-8.  Execute the below command.
+8.  Execute o comando abaixo:
 
     +++az login+++
 
-    A window will pop up on your browser. Select **Work or school account** and login with your login credentials.
+    Uma janela aparecerá no seu navegador. Selecione **Work or school account** e faça login com suas credenciais.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image57.png)
+    incorrect.](./media/image57.png)
 
     ![A computer screen with a white box and blue text AI-generated content
-may be incorrect.](./media/image58.png)
+    may be incorrect.](./media/image58.png)
 
-9.  Once logged in, enter **1** to select the subscription.
+9.  Uma vez logado, digite **1** para selecionar a assinatura.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image59.png)
 
-10. Expand **Start** and select **Dev Tunnels \> Create a Tunnel**:
+10. Expanda **Start** e selecione **Dev Tunnels \> Create a Tunnel**:
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image60.png)
 
-11. Provide the below details and select **Ok**.
+11. Forneça os detalhes abaixo e selecione **Ok**.
 
-    - The account that will create the tunnel - Select **Sign in** -\>
-      **Work or school account** and login with your login credentials.
-    
+    - A conta que criará o túnel - Selecione **Sign in** -\> **Work or
+    school account** e faça login com suas credenciais.
+
     - Name - +++DevTunnel+++.
-    
+
     - Tunnel Type - **Temporary**
-    
+
     - Access - **Public**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image61.png)
+    incorrect.](./media/image61.png)
 
     ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image62.png)
+    incorrect.](./media/image62.png)
 
-12. Right click to **M365Agent** project, select **Microsoft 365 Agents
-    Toolkit > Select Microsoft 365 Account**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image63.png)
+12. Clique com o botão direito do mouse no projeto **M365Agent**,
+    selecione **Microsoft 365 Agents Toolkit \> Select Microsoft 365
+    Account**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image64.png)
+    incorrect.](./media/image63.png)
 
-13. Select your account and click on **Continue**.
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image64.png)
+
+13. Selecione sua conta e clique em **Continue**.
 
     ![A screenshot of a computer error AI-generated content may be
 incorrect.](./media/image65.png)
 
-14. Expand the **drop down** next to **Multiple startup projects** and
-    select **Microsoft Teams (browser)**.
+14. Expanda o **menu suspenso** ao lado de **Multiple startup projects**
+    e selecione **Microsoft Teams (browser)**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image66.png)
 
-You're now ready to run your integrated agent and test it live in
-Microsoft Teams.
+    Agora você está pronto para executar seu agente integrado e testá-lo ao
+vivo no Microsoft Teams.
 
-15. Hit **Start** or **F5** to start debugging. Microsoft Teams will
-    launch automatically, and your agent app will pop up on the window.
-    Select **Add** and **Open** to start chatting with your agent.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image67.png)
+15. Pressione **Iniciar** ou **F5** para iniciar a depuração. O
+    Microsoft Teams será iniciado automaticamente e seu aplicativo de
+    agente aparecerá na janela. Selecione **Add** e **Open** para
+    começar a conversar com seu agente.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image68.png)
-
-16. You can ask one of the following questions to interact with the
-    agent.
-
-    - +++What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?+++
-    
-    - +++Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?+++
-    
-    - +++What values guide behavior and decision-making at Contoso Electronics?+++
-
-    You should observe that you are getting similar responses with the agent you've created on Azure AI Foundry.
+    incorrect.](./media/image67.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image69.png)
+    incorrect.](./media/image68.png)
+
+16. Você pode fazer uma das seguintes perguntas para interagir com o
+    agente.
+
+    - +++What’s the difference between Northwind Standard and Health Plus
+    when it comes to emergency and mental health coverage?+++
+
+    - +++Can I use PerksPlus to pay for both a rock climbing class and a
+    virtual fitness program?+++
+
+    - +++What values guide behavior and decision-making at Contoso
+    Electronics?+++
+
+    Você deve observar que está obtendo respostas semelhantes com o agente criado no Azure AI Foundry.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image70.png)
+    incorrect.](./media/image69.png)
 
-## Exercise 5:  Bring your agent to Copilot Chat
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image70.png)
 
-In this exercise, you’ll bring your custom engine agent into Copilot
-Chat by updating the agent's manifest. By enabling copilotAgents in the
-app manifest, you’ll make your AI-powered assistant available directly
-inside the Copilot experience.
+## Exercício 5: Traga seu agente para o Copilot Chat
 
-1.  Open **M365Agent/AppPackage/manifest.json**, update the manifest
-    schema and version as following.
+Neste exercício, você trará seu agente de mecanismo personalizado para o
+Copilot Chat atualizando o manifesto do agente. Ao habilitar
+copilotAgents no manifesto do aplicativo, você disponibilizará seu
+assistente com tecnologia de IA diretamente na experiência do Copilot.
+
+1.  Abra **M365Agent/AppPackage/manifest.json**, atualize o esquema e a
+    versão do manifesto da seguinte maneira:
 
     ```
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
     "manifestVersion": "1.22",
+
     ```
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image71.png)
 
-2.  Replace **bots** section with the following that will also add
-    copilotAgents in the manifest.
+2.  Substitua a seção **bots** pela seguinte, que também adicionará
+    copilotAgents no manifesto.
 
-    This block declares your agent as a custom engine agent for M365
-Copilot. It tells Microsoft 365 to expose this agent in Copilot Chat and
-surface its command list in the conversation UI along with the
-conversation starters to help users get started quickly.
+    Este bloco declara seu agente como um agente de mecanismo personalizado
+para o M365 Copilot. Ele informa ao Microsoft 365 para expor esse agente
+no Copilot Chat e exibir sua lista de comandos na interface do usuário
+da conversa, juntamente com os iniciadores de conversa, para ajudar os
+usuários a começar rapidamente.
 
     ```
     "bots": [ 
-      { 
+    { 
         "botId": "${{BOT_ID}}", 
         "scopes": [ 
-          "personal", 
-          "team", 
-          "groupChat" 
+        "personal", 
+        "team", 
+        "groupChat" 
         ], 
         "supportsFiles": false, 
         "isNotificationOnly": false, 
         "commandLists": [ 
-          { 
+        { 
             "scopes": [ "personal", "team", "groupChat" ], 
             "commands": [ 
-              { 
+            { 
                 "title": "Emergency and Mental Health",
                 "description": "What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?" 
-              }, 
-              { 
+            }, 
+            { 
                 "title": "PerksPlus Details", 
                 "description": "Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?" 
-              }, 
-              { 
+            }, 
+            { 
                 "title": "Contoso Electronics Values", 
                 "description": "What values guide behavior and decision making at Contoso Electronics?" 
-              } 
+            } 
             ] 
-          } 
+        } 
         ] 
-      } 
+    } 
     ], 
     "copilotAgents": { 
-      "customEngineAgents": [ 
+    "customEngineAgents": [ 
         { 
-          "id": "${{BOT_ID}}", 
-          "type": "bot" 
+        "id": "${{BOT_ID}}", 
+        "type": "bot" 
         } 
-      ] 
+    ] 
     },
+
     ```
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image72.png)
 
-3.  Hit **Start** or **F5** to start debugging. Microsoft Teams will
-    launch automatically.
+3.  Pressione **Iniciar** ou **F5** para iniciar a depuração. O
+    Microsoft Teams será iniciado automaticamente.
 
-4.  When Microsoft Teams open in your browser, ignore the app pop-up and
-    select **Apps \> Manage your apps \> Upload an app** and then select
-    **Upload a custom app**.
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image73.png)
+4.  Quando o Microsoft Teams abrir em seu navegador, ignore o pop-up do
+    aplicativo, selecione **Apps \> Manage your apps \> Upload an app**
+    e, em seguida, selecione **Upload a custom app**. ![A screenshot of
+    a computer AI-generated content may be
+    incorrect.](./media/image73.png)
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image19.png)
 
-5.  In the File Explorer go to your project folder. The path will be
-    **C:\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent** if you
-    have not changed the path during the project setup. Navigate to
-    **\ContosoHRAgent\M365Agent\appPackage\build select
-    appPackage.local.zip** and click **Open**.
+5.  No Explorador de Arquivos, vá para a pasta do seu projeto. O caminho
+    será **C:\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent**
+    se você não alterou o caminho durante a configuração do projeto.
+    Navegue até **\ContosoHRAgent\M365Agent\appPackage\build select
+    appPackage.local.zip** e clique em **Open**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image74.png)
 
-6.  Your app will pop-up on Teams again, select **Add**
+6.  Seu aplicativo aparecerá no Teams novamente, selecione **Add**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image75.png)
 
-7.  Select **Open with Copilot** to test your agent on Copilot.
+7.  Selecione **Open with Copilot** para testar seu agente no Copilot.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image76.png)
 
-8.  Select the conversation starter, **PerksPlus Details** and hit
+8.  Selecione o iniciador da conversa, **PerksPlus Details** e pressione
     **Send**.
 
     ![](./media/image77.png)
@@ -846,28 +868,31 @@ incorrect.](./media/image76.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image78.png)
 
-9.  Observe that you are getting the response from the AI Foundry agent,
-    now on Copilot Chat.
+9.  Observe que você está recebendo a resposta do agente do AI Foundry,
+    agora no Copilot Chat.
 
     ![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image79.png)
 
-## Summary
+## Resumo
 
-In this lab, you've just built your Custom Engine Agent using the
-Microsoft 365 Agents SDK and Azure AI Foundry.
+Neste laboratório, você acabou de criar seu agente de mecanismo
+personalizado usando o Microsoft 365 Agents SDK e o Azure AI Foundry.
 
-You learned how to
+Você aprendeu a:
 
-  - Configure an AI agent in Azure AI Foundry using the Agent Playground
-  
-  - Upload enterprise documents to ground your agent’s responses
-  
-  - Scaffold a bot using the M365 Agents SDK in Visual Studio
-  
-  - Add Semantic Kernel and connect to Azure AI Agent Service
-  
-  - Integrate your bot with the Azure AI Foundry agent for real-time,
-    grounded reasoning
-  
-  - Deploy and test your agent in **Microsoft Teams** and **Copilot Chat**
+- Configurar um agente de AI no Azure AI Foundry usando o Agent
+  Playground
+
+- Carregar documentos corporativos para fundamentar as respostas do seu
+  agente
+
+- Estruturar um bot usando o SDK do M365 Agents no Visual Studio
+
+- Adicionar Semantic Kernel e conectar-se a Azure AI Agent Service
+
+- Integrar seu bot ao agente do Azure AI Foundry para raciocínio
+  fundamentado em tempo real
+
+- Implementar e teste seu agente no **Microsoft Teams** e no **Copilot
+  Chat**
