@@ -1,95 +1,94 @@
-# Lab 3 - Build your own agent with the M365 Agents SDK and Semantic Kernel
+# ラボ 3 - M365 Agents SDK とセマンティック カーネルを使用して独自のエージェントを構築する
 
-Lab duration – 80 minutes
+ラボの所要時間 – 80分
 
-## Objective
+## 客観的
 
-In this lab, you will develop a custom engine agent that runs across
-Microsoft Teams, Microsoft 365 Copilot Chat, and even external channels
-using the Microsoft 365 Agents SDK and Semantic Kernel.
+このラボでは、Microsoft 365 Agents SDK と Semantic Kernel
+を使用して、Microsoft Teams、Microsoft 365 Copilot
+Chat、さらには外部チャネルで実行されるカスタム エンジン
+エージェントを開発します。
 
-In Azure AI Foundry, you’ll define your agent’s core instructions,
-tools, and personality. From there, you’ll use the Microsoft 365 Agents
-SDK and Visual Studio to bring your agent to life, customizing its
-behaviors and integrating it with Semantic Kernel for orchestration.
-You’ll then test your agent in Microsoft Teams, bring it into Copilot
-Chat, and see it come to life across Microsoft 365 applications.
+Azure AI
+Foundryでは、エージェントのコアとなる指示、ツール、そしてパーソナリティを定義します。そこから、Microsoft
+365 Agents SDKとVisual
+Studioを使用してエージェントを実装し、動作をカスタマイズし、オーケストレーションのためにSemantic
+Kernelと統合します。その後、Microsoft
+Teamsでエージェントをテストし、Copilot Chatにインポートして、Microsoft
+365アプリケーション全体でエージェントが動作する様子を確認します。
 
-In this lab, you will learn to
+このラボでは、次のことを学びます。
 
-- Prepare your agent in Azure AI Foundry
+- Azure AI Foundry でエージェントを準備する
 
-- Build your first agent using the M365 Agents SDK
+- M365 Agents SDK を使用して最初のエージェントを構築する
 
-- Configure your agent’s properties using the SDK
+- SDKを使用してエージェントのプロパティを構成する
 
-- Integrate your agent with Teams using Azure AI Foundry
+- Azure AI Foundry を使用してエージェントを Teams と統合する
 
-- Bring your agent into Microsoft 365 Copilot Chat
+- エージェントを Microsoft 365 Copilot Chat に招待する
 
-## Exercise 1: Prepare your agent in Azure AI Foundry
+## 演習 1: Azure AI Foundry でエージェントを準備する
 
-In this exercise, you’ll begin your journey by preparing a custom engine
-agent using Azure AI Foundry, Microsoft’s platform for creating,
-configuring, and scaling AI agents. You'll explore the **Agents
-Playground**, define your agent's role, personalize its instructions,
-and connect it to relevant internal documents to support
-Retrieval-Augmented Generation (RAG).
+この演習では、AIエージェントの作成、構成、スケーリングのためのMicrosoftプラットフォームであるAzure
+AI
+Foundryを使用して、カスタムエンジンエージェントを準備することから始めます。**Agents**
+**Playground**を探索し、エージェントの役割を定義し、指示をカスタマイズし、関連する社内ドキュメントに接続して、検索拡張生成（RAG）をサポートします。
 
-This exercise sets the foundation for the rest of the Build Path using
-the **Microsoft 365 Agents SDK** and **Semantic Kernel**. You’ll
-simulate a real-world Human Resources agent for Contoso Electronics that
-can answer questions based on uploaded documents like the Employee
-Handbook, Role Library, and Benefit Plans.
+**Microsoft 365 Agents SDK**と**Semantic Kernel
+を**使用して、残りのビルドパスの基礎を構築します。従業員ハンドブック、ロールライブラリ、福利厚生プランなどのアップロードされたドキュメントに基づいて質問に答えることができる、Contoso
+Electronics の実際の人事エージェントをシミュレートします。
 
-Azure AI Foundry is a platform that enables developers to build, deploy,
-and scale AI agents with ease. You'll learn how to configure an agent,
-and test its functionality using the Agents Playground. This hands-on
-experience will provide insight into the capabilities of Azure AI Agent
-Service and how it integrates with various AI models and tools.
+Azure AI
+Foundryは、開発者がAIエージェントを容易に構築、デプロイ、スケールできるプラットフォームです。エージェントの設定方法と、
+Agents
+Playgroundを使用した機能テストについて学習します。このハンズオン体験を通して、Azure
+AI Agent
+Serviceの機能と、様々なAIモデルやツールとの統合方法について理解を深めることができます。
 
-Azure AI Foundry is your launchpad for building AI agents. In this task,
-you’ll log in to Azure AI Foundry with your login credentials.
+Azure AI Foundry は、AI
+エージェントを構築するための出発点です。このタスクでは、ログイン資格情報を使用して
+Azure AI Foundry にログインします。
 
-1.  Open the browser and navigate to +++<https://ai.azure.com>+++ and
-    sign to your Azure account.
+1.  ブラウザを開き、 +++ <https://ai.azure.com> +++ に移動して、Azure
+    アカウントにサインインします。
 
     ![](./media/image1.png)
 
-2.  From the Azure AI Foundry homepage, select **Create an agent**.
+2.  Azure AI Foundry ホームページから、**Create an agent**を選択します。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image2.png)
 
-3.  Leave the project name as recommended and select **Create**.
+3.  プロジェクト名は推奨どおりのままにして、
+    **\[Create\]を選択します**。
 
     ![A screenshot of a project AI-generated content may be incorrect.](./media/image3.png)
 
-4.  This will scaffold a new project for you in Azure AI Foundry, it
-    usually takes 3-5 minutes.
+4.  これにより、Azure AI Foundry
+    で新しいプロジェクトがスキャフォールディングされます。これには通常 3
+    ～ 5 分かかります。
 
-5.  When your project is created, you'll be redirected to your project,
-    extend the left side bar and select **Agents**. This will open the
-    Agents Playground.
+5.  プロジェクトが作成されると、プロジェクトにリダイレクトされます。左側のサイドバーを展開し、
+    **「Agents」**を選択します。これで Agents Playground が開きます。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image4.png)
 
-6.  Select **Agents** from the left pane. You will see that a new Agent
-    is created for you.
+6.  **「Agents」**を選択します。新しいエージェントが作成されていることがわかります。
 
     ![](./media/image5.png)
 
-7.  **Select** the **Agent**, scroll down and select **Try in
-    playground**.
+7.  エージェント**を選択し**、下にスクロールして「**Try in
+    playground」を選択します**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-Now that you're inside the Agents Playground, you'll customize your
-agent's identity and behavior to match a real-world scenario: an
-internal HR Agent at Contoso.
+Agents Playground に移動したら、実際のシナリオ (Contoso 社内の HR
+エージェント) に合わせてエージェントの ID と動作をカスタマイズします。
 
-8.  In your agent's Setup panel, Name your agent as +++Contoso HR
-    Agent+++ and update the Instructions as the following:
+8.  エージェントのセットアップ パネルで、エージェントの名前を +++Contoso
+    HR Agent+++ に設定し、手順を次のように更新します。
 
     ```
     You are Contoso HR Agent, an internal assistant for Contoso Electronics. Your role is to help employees find accurate, policy-aligned answers to questions related to:
@@ -108,246 +107,230 @@ internal HR Agent at Contoso.
 
     ```
 
-9.  In the Knowledge section, select **+ Add** and select **Files**,
-    then Select **local files**.
+9.  Knowledgeセクションで、 **+ Add を選択し**、**Files
+    を選択して**、**local filesを選択します**。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image7.png)
+    incorrect.](./media/image7.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
+    incorrect.](./media/image8.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+    incorrect.](./media/image9.png)
 
-10. Navigate to **C:\Labfiles\M365 Agents SDK** and select all the files
-    inside that and click **Open**.
+10. **C:\Labfiles\M365 Agents
+    SDK**に移動し、その中のすべてのファイルを選択して、
+    **「Open」をクリックします**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-11. Select **Upload and save** to upload them. This will create a vector
-    store for our agent.
+11. **「Upload and
+    save」を**選択して、アップロードします。これにより、エージェント用のベクターストアが作成されます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-12. When you upload documents, Foundry automatically converts them into
-    vectors, a format that allows the agent to search and retrieve
-    relevant information efficiently.
+12. ドキュメントをアップロードすると、Foundry
+    はそれをベクター形式に自動的に変換します。ベクター形式により、エージェントは関連情報を効率的に検索して取得できるようになります。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-13. Save the **Agent id** to a notepad, that'll be required in the next
-    exercises. You can find your Agent id in the agent’s details.
+13. **Agent
+    ID**をメモ帳に保存してください。次の演習で必要になります。エージェントIDはエージェントの詳細ページで確認できます。
 
     ![A screenshot of a computer screen AI-generated content may be
 incorrect.](./media/image13.png)
 
-14. Also, go to the **Overview** page and save the value of **Azure AI
-    Foundry project endpoint** to the notepad.
+14. また、 **\[Overview\]**ページに移動し、 **Azure AI Foundry project
+    endpoint**の値をメモ帳に保存します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-By customizing the instructions and uploading relevant documents, you're
-teaching the agent how to behave and what knowledge to rely on. This is
-a simplified form of Retrieval-Augmented Generation (RAG).
+指示をカスタマイズし、関連文書をアップロードすることで、エージェントに動作方法と依存する知識を教えることになります。これは、検索拡張生成（RAG）の簡略化された形式です。
 
-## Exercise 2 : Build your first agent using M365 Agents SDK
+## 練習問題2： M365 Agents SDK を使用して最初のエージェントを構築する
 
-Now that you’ve seen how to build an agent using Azure AI Foundry, let’s
-switch gears and explore how to build your own agent locally using the
-Microsoft 365 Agents SDK. This SDK lets you build multi-channel,
-production-ready agents that can run in Microsoft Teams, Microsoft 365
-Copilot, and other preferred channels.
+Azure AI Foundry を使ったエージェントの構築方法を解説しましたので、次は
+Microsoft 365 Agents SDK
+を使ってローカルで独自のエージェントを構築する方法を見ていきましょう。この
+SDK を使えば、Microsoft Teams、Microsoft 365
+Copilot、その他の推奨チャネルで実行できる、マルチチャネル対応で本番環境対応可能なエージェントを構築できます。
 
-1.  From Windows Start, search for Visual and open **Visual Studio
-    2022**. Select **Skip and add accounts later**.
+1.  Windowsのスタートから「Visual」を検索し、 **Visual Studio
+    2022を開きます**。 **「Skip and add accounts later」を選択します**。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image15.png)
 
-2.  Select **Start Visual Studio**.
+2.  **Start Visual Studioを**選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image16.png)
 
-3.  Select **Create a new project**.
+3.  **Create a new projectを**選択します。
 
     ![](./media/image17.png)
 
-4.  Search for +++**Microsoft**+++and select **Microsoft 365
-    Agents** template. Click on **Next**.
+4.  +++ **Microsoft** +++を検索し、 **Microsoft 365
+    Agents**テンプレートを選択します。 **「Next」をクリックします**。
 
     ![A screenshot of a computer project AI-generated content may be incorrect.](./media/image18.png)
 
-5.  Provide a name for your agent as +++**ContosoHRAgent**+++ and
-    select **Create**.
+5.  エージェントの名前を +++ **ContosoHRAgent** +++ として入力し、
+    **\[Create\]を選択します**。
 
     ![](./media/image19.png)
 
-6.  From the list of templates, select **Echo Bot** and
-    select **Create**.
+6.  テンプレートのリストから**Echo
+    Botを選択し**、**Createを選択します**。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
 
-7.  Select **Allow access** in the pop up.
+7.  ポップアップで**「Allow access」**を選択します。
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image21.png)
 
-9.  When the project template is scaffolded, go to Solution Explorer on
-    the right-side panel and explore the agent template. Expand
-    the **ContosoHRAgent** project.
+8.  プロジェクトテンプレートがスキャフォールディングされたら、右側のパネルのソリューションエクスプローラーに移動し、エージェントテンプレートを確認します。ContosoHRAgentプロジェクトを展開します。
 
-    - Open **Program.cs**, this code configures and runs the web server
-      that hosts your agent. It sets up required services like
-      authentication, routing, storage and registers the **EchoBot** and
-      injects memory-based state handling.
-    
-      ![A screenshot of a computer AI-generated content may be incorrect.](./media/image22.png)
+    - **Program.cs**を開いてください。このコードは、エージェントをホストするWebサーバーの設定と実行を行います。認証、ルーティング、ストレージなどの必要なサービスをセットアップし、
+      **EchoBot**を登録して、メモリベースの状態処理を挿入します。
 
-    - Open **Bot \> EchoBot.cs** and observe that this sample sets up a
-  basic AI agent using the **Microsoft.Agents.Builder**. It sends a
-  welcome message when a user joins the chat and listens for any message
-  and echoes it back with a running message count.
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image22.png)
 
-      ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
+    - **Bot > EchoBot.cs**を開き、このサンプルが**Microsoft.Agents.Builder**を使用して基本的な AI エージェントをセットアップしていることを確認します。ユーザーがチャットに参加するとウェルカムメッセージを送信し、メッセージをリッスンして、実行中のメッセージ数とともにエコーバックします。
 
-    You've started with an **Echo Bot**, a simple bot that repeats back any message a user sends. It’s a useful way to verify your setup and understand how conversations are handled behind the scenes.
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image23.png)
 
-9.  From Visual Studio, select **Tools -\> NuGet Package Manager -\>
-    Package Manager Settings**, to add the NuGet.org to the package
-    sources.
+    **Echo Bot**は、ユーザーが送信したメッセージを繰り返し返信するシンプルなボットです。これは、設定を確認し、会話がバックグラウンドでどのように処理されるかを理解するのに役立ちます。
+
+9.  Visual Studio から、 **\[Tool\] -\> \[NuGet Packet Manager\] -\>
+    \[Package Manager Settings\]を選択して**、NuGet.org をパッケージ
+    ソースに追加します。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image24.png)
 
-10. Select **Package Sources** and click on the **+** symbol to add a
-    new Package source.
+10. **「Package Sources」**を選択し、
+    **+**記号をクリックして新しいパッケージ ソースを追加します。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image25.png)
 
-11. Enter the below details and then select **Ok**.
+11. 以下の詳細を入力し、 **「OK」を選択します**。
 
     - Name - +++nuget.org+++
 
-    - Source - +++https://api.nuget.org/v3/index.json+++
+    - Source - +++https://api.nuget.org/v3/index.json
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image26.png)
 
-12. To test your echo agent, hit **Start** or **F5**. This will launch
-    Test Tool automatically in localhost where you can interact with
-    your agent. In case Visual Studio will ask you to confirm the
-    creation of a self-issued SSL certificate to test the application
-    locally, **confirm** and **proceed**.
+12. Echoエージェントをテストするには、
+    **「Stsrt」**または**F5**キーを押してください。これにより、ローカルホストでテストツールが自動的に起動し、エージェントと対話できるようになります。Visual
+    Studioから、アプリケーションをローカルでテストするために自己発行のSSL証明書を作成するように求められた場合は、**確認し**て**続行してください**。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image27.png)
 
     ![A screenshot of a computer security warning AI-generated content may be incorrect.](./media/image28.png)
 
-13. Select **Allow access** in the security alert.
+13. セキュリティ警告で**「Allow access」**を選択します。
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image29.png)
 
-14. The application now starts.
+14. アプリケーションが起動します。
 
     ![](./media/image30.png)
 
-15. Wait until the agent's message "Hello and Welcome!", then type
-    anything such as “Hi”, “Hello”. Observe that the agent echoes
-    everything back.
+15. エージェントからの「Hello and
+    Welcome!」というメッセージが流れるまで待ち、「Hi」「Hello」など何か入力してください。エージェントが全てエコーバックすることを確認してください。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image31.png)
 
     ![A screenshot of a chat AI-generated content may be incorrect.](./media/image32.png)
 
-16. Stop debugging by selecting **Debug** -\> **Stop Debugging** from
-    Visual Studio.
+16. Visual Studio から**\[Debug\]** -\> **\[Stop
+    Debugging\]**を選択してデバッグを停止します。
 
     ![](./media/image33.png)
 
-    You have completed Build your first agent using M365 Agents SDK
-exercise. This simple agent forms the base for more powerful
-experiences. In the next step, you'll combine this with your Azure AI
-Foundry agent to enable richer, context-aware answers.
+    M365 Agents SDKを使用した最初のエージェントの構築演習を完了しました。このシンプルなエージェントは、より強力なエクスペリエンスの基盤となります。次のステップでは、これをAzure
+AI
+Foundryエージェントと組み合わせて、よりリッチでコンテキストに応じた回答を実現します。
 
-## Exercise 3: Configure agent properties and test on Teams
+## 演習3: エージェントのプロパティを構成してTeamsでテストする
 
-Now that you’ve created a basic bot, it’s time to enhance it with
-generative AI capabilities and upgrade it to an AI agent. In this
-exercise, you’ll install key libraries such as Semantic Kernel and
-prepare your agent to reason and respond more intelligently, ready for
-Teams or Copilot Chat.
+基本的なボットを作成したら、次は生成AI機能を追加してAIエージェントにアップグレードしましょう。この演習では、Semantic
+Kernelなどの主要ライブラリをインストールし、エージェントがよりインテリジェントに推論・応答できるように準備し、TeamsやCopilot
+Chatで利用できるようにします。
 
-1.  Add **Semantic Kernel Nuget** Package. This package will provide
-    support for Azure AI integration.
+1.  **Semantic Kernel
+    NuGet**パッケージを追加します。このパッケージは、Azure AI
+    統合のサポートを提供します。
 
-2.  Right-click to **ContosoHRAgent** project and select **Manage Nuget
-    Packages for Solution**.
+2.  **ContosoHRAgentプロジェクト**を右クリックし、**Manage Nuget
+    Packages for Solution**を選択します。
 
     ![](./media/image34.png)
 
-3.  Select **Browse** tab and search
-    for +++Microsoft.SemanticKernel.Agents.AzureAI+++. Check the
-    **Include prerelease** checkbox.
+3.  **「Browse」**タブを選択し、「+++
+    Microsoft.SemanticKernel.Agents.AzureAI +++」を検索します。
+    **「Include prerelease」**チェックボックスをオンにします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-4.  Select the **package**, select **Contoso** under Project and
-    select **Install**.
+4.  **パッケージ**を選択し、プロジェクトの下の**Contoso
+    を選択して**、**Install**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image36.png)
+    incorrect.](./media/image36.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image37.png)
+    incorrect.](./media/image37.png)
 
-5.  Select **Apply** in the Preview Changes dialog.
+5.  \[Preview Changes\] ダイアログで**\[Apply\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-6.  Select **I Accept** in the License Acceptance dialog.
+6.  \[License Acceptance\] ダイアログで**\[I Accept\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-7.  The package is now installed.
+7.  パッケージがインストールされました。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-8.  Select **Program.cs** and enter +++builder.Services.AddKernel();+++
-    above the line, **var app = builder.Build()** (Line 31).
+8.  **Program.cs**を選択し、 +++ builder.Services.AddKernel ();+++
+    の行の上に**var app = builder.Build ()** (行 31) を入力します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-    This registers the Semantic Kernel, a core component that allows your
-agent to interact with generative AI models.
+    これにより、エージェントが生成 AI モデルと対話できるようにするコア
+コンポーネントであるセマンティック カーネルが登録されます。
 
-9.  Right-click to **ContosoHRAgent** project and select **Add \>
-    Class**.
+9.  **ContosoHRAgentプロジェクト**を右クリックし、 **\[Add\] \>
+    \[Class\]を選択します**。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image42.png)
 
-10. Enter the class name as +++**FileReference.cs**+++ and select
-    **Create**.
+10. クラス名を +++ **FileReference.cs** +++ と入力し、
+    **\[Create\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image43.png)
 
-11. This class defines the structure used when referencing specific
-    documents in responses—useful when your agent cites content from
-    uploaded files.
+11. このクラスは、応答内の特定のドキュメントを参照するときに使用する構造を定義します。これは、エージェントがアップロードされたファイルのコンテンツを引用する場合に便利です。
 
-    Replace the existing code with the following.
+    既存のコードを次のコードに置き換えます。
 
     ```
     using Microsoft.Agents.Core.Models;
-    
+
     namespace ContosoHRAgent
     {
         public class FileReference(string fileId, string fileName, string quote, Citation citation)
@@ -358,84 +341,81 @@ incorrect.](./media/image43.png)
             public Citation Citation { get; set; } = citation;
         }
     }
-        
+
     ```
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image44.png)
 
-12. Right-click to **ContosoHRAgent** project and select **Add \>
-    Class** and define your class name
-    as +++ConversationStateExtensions.cs+++. Replace existing the code
-    with following
+12. **ContosoHRAgent**プロジェクトを右クリックし、
+    **「Add」\>「Class」を選択し**、クラス名を「+++
+    ConversationStateExtensions.cs
+    +++」と定義します。既存のコードを以下のコードに置き換えます。
 
     ```
     using Microsoft.Agents.Builder.State;
-    
+
     namespace ContosoHRAgent
     {
-     public static class ConversationStateExtensions
-     {
-         public static int MessageCount(this ConversationState state) => state.GetValue<int>("countKey");
-    
-         public static void MessageCount(this ConversationState state, int value) => state.SetValue("countKey", value);
-    
-         public static int IncrementMessageCount(this ConversationState state)
-         {
-             int count = state.GetValue<int>("countKey");
-             state.SetValue("countKey", ++count);
-             return count;
-         }
-    
-         public static string ThreadId(this ConversationState state) => state.GetValue<string>("threadId");
-    
-         public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
-     }
+    public static class ConversationStateExtensions
+    {
+        public static int MessageCount(this ConversationState state) => state.GetValue<int>("countKey");
+
+        public static void MessageCount(this ConversationState state, int value) => state.SetValue("countKey", value);
+
+        public static int IncrementMessageCount(this ConversationState state)
+        {
+            int count = state.GetValue<int>("countKey");
+            state.SetValue("countKey", ++count);
+            return count;
+        }
+
+        public static string ThreadId(this ConversationState state) => state.GetValue<string>("threadId");
+
+        public static void ThreadId(this ConversationState state, string value) => state.SetValue("threadId", value);
     }
+    }
+
     ```
 
     ![](./media/image45.png)
 
-    This class adds helper methods to manage and track the number of user
-messages—demonstrating how state is stored and modified during an
-ongoing conversation.
+    このクラスは、ユーザー メッセージの数を管理および追跡するためのヘルパー
+メソッドを追加し、進行中の会話中に状態がどのように保存および変更されるかを示します。
 
-## Exercise 4: Integrate Azure AI Foundry Agent with M365 Agents SDK
+## 演習 4: Azure AI Foundry エージェントと M365 エージェント SDK を統合する
 
-You’ve built an agent using the M365 Agents SDK and configured it with
-generative AI capabilities. Now, you’ll connect this local agent to the
-Azure AI Foundry agent you created earlier. This enables your agent to
-respond using enterprise data and instructions stored in the Foundry
-project, bringing everything full circle.
+    M365 Agents SDKを使用してエージェントを構築し、生成AI機能を設定しました。次に、このローカルエージェントを、先ほど作成したAzure AI Foundryエージェントに接続します。これにより、エージェントはFoundryプロジェクトに保存されているエンタープライズデータと指示を使用して応答できるようになり、すべてが完了します。
 
-### Task 1: Configure EchoBot.cs to Connect with Azure AI Foundry Agent
+### タスク 1: EchoBot.cs を Azure AI Foundry エージェントに接続できるように構成する
 
-In this task, you’ll connect to the Azure AI Foundry agent by adding a
-client to fetch and invoke your Foundry-hosted model inside the
-EchoBot.cs.
+このタスクでは、EchoBot.cs 内で Foundry
+でホストされているモデルを取得して呼び出すクライアントを追加して、Azure
+AI Foundry エージェントに接続します。
 
-1.  In **ContosoHRAgent** project, open **Bot/EchoBot.cs** and add the
-    following lines inside the EchoBot public class.
+1.  **ContosoHRAgent**プロジェクトで、 **Bot/EchoBot.**csを開き、EchoBot
+    パブリック クラス内に次の行を追加します。
 
     ```
     private readonly PersistentAgentsClient _projectClient;
     private readonly string _agentId;
+
     ```
 
-    ![A screenshot of a computer program AI-generated content may be
+![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image46.png)
 
-2.  Replace the existing **EchoBot constructor** with the following.
+2.  既存の**EchoBot コンストラクターを**次のものに置き換えます。
 
     ```
     public EchoBot(AgentApplicationOptions options, IConfiguration configuration) : base(options)
     {
-    
+
         OnConversationUpdate(ConversationUpdateEvents.MembersAdded, WelcomeMessageAsync);
-    
+
         // Listen for ANY message to be received. MUST BE AFTER ANY OTHER MESSAGE HANDLERS 
         OnActivity(ActivityTypes.Message, OnMessageAsync);
-    
+
         // Azure AI Foundry Project ConnectionString
         string projectEndpoint = configuration["AIServices:ProjectEndpoint"];
         if (string.IsNullOrEmpty(projectEndpoint))
@@ -443,52 +423,53 @@ incorrect.](./media/image46.png)
             throw new InvalidOperationException("ProjectEndpoint is not configured.");
         }
         _projectClient = new PersistentAgentsClient(projectEndpoint, new AzureCliCredential());
-    
+
         // Azure AI Foundry Agent Id
         _agentId = configuration["AIServices:AgentID"];
         if (string.IsNullOrEmpty(_agentId))
         {
             throw new InvalidOperationException("AgentID is not configured.");
         }
-    
+
     }
+
     ```
-    
+
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image47.png)
 
-3.  Replace **OnMessageAsync** method with the following.
+3.  **OnMessageAsync**メソッドを次のものに置き換えます。
 
     ```
     protected async Task OnMessageAsync(ITurnContext turnContext, ITurnState turnState, CancellationToken cancellationToken)
     {
         // send the initial message to the user
         await turnContext.StreamingResponse.QueueInformativeUpdateAsync("Working on it...", cancellationToken);
-    
+
         // get the agent definition from the project
         var agentDefinition = await _projectClient.Administration.GetAgentAsync(_agentId, cancellationToken);
-    
+
         // initialize a new agent instance from the agent definition
         var agent = new AzureAIAgent(agentDefinition, _projectClient);
-    
+
         // retrieve the threadId from the conversation state
         // this is set if the agent has been invoked before in the same conversation
         var threadId = turnState.Conversation.ThreadId();
-    
+
         // if the threadId is not set, we create a new thread
         // otherwise, we use the existing thread
         var thread = string.IsNullOrEmpty(threadId)
             ? new AzureAIAgentThread(_projectClient)
             : new AzureAIAgentThread(_projectClient, threadId);
-    
+
         try
         {
             // increment the message count in state and queue the count to the user
             int count = turnState.Conversation.IncrementMessageCount();
             turnContext.StreamingResponse.QueueTextChunk($"({count}) ");
-    
+
             // create the user message to send to the agent
             var message = new ChatMessageContent(AuthorRole.User, turnContext.Activity.Text);
-    
+
             // invoke the agent and stream the responses to the user
             await foreach (AgentResponseItem<StreamingChatMessageContent> agentResponse in agent.InvokeStreamingAsync(message, thread, cancellationToken: cancellationToken))
             {
@@ -499,7 +480,7 @@ incorrect.](./media/image46.png)
                     threadId = agentResponse.Thread.Id;
                     turnState.Conversation.ThreadId(threadId);
                 }
-    
+
                 turnContext.StreamingResponse.QueueTextChunk(agentResponse.Message.Content);
             }
         }
@@ -509,365 +490,375 @@ incorrect.](./media/image46.png)
             await turnContext.StreamingResponse.EndStreamAsync(cancellationToken);
         }
     }
+
     ```
 
-4.  When pasting the above code excerpt, you might see a
-    warning (SKEXP0110) because this feature is still in preview. You
-    can safely suppress this warning for now by right-clicking on
-    AzureAIAgent, selecting **Quick Actions and Refactorings \> Suppress
-    or configure issues \> Configure SKEXP0110 Severity \> Silent**.
+4.  上記のコード抜粋を貼り付けると、この機能はまだプレビュー段階であるため、警告（SKEXP0110）が表示される場合があります。AzureAIAgent
+    を右クリックし、 **「Quick Actions and Refactorings \> Suppress or
+    configure issues \> Configure SKEXP0110 Severity \>
+    Silent**」を選択することで、現時点ではこの警告を安全に抑制できます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image48.png)
 
-5.  The code will now look like this.
+5.  コードは次のようになります。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-6.  The ***OnMessageAsync*** method is the heart of your agent’s
-    response logic. By replacing the default echo behavior, you’ve
-    enabled your agent to send the user’s message to your Azure AI
-    Foundry agent, stream the response back to the user in real time,
-    track and attach citations and file references for transparency and
-    add sensitivity and AI-generated labels for security and
-    traceability.
+6.  ***OnMessageAsync***メソッドは***、***エージェントの応答ロジックの中核です。デフォルトのエコー動作を置き換えることで、エージェントはユーザーのメッセージを
+    Azure AI Foundry
+    エージェントに送信し、応答をリアルタイムでユーザーにストリーミング返信し、透明性を確保するために引用とファイル参照を追跡・添付し、セキュリティとトレーサビリティを確保するために機密性と
+    AI 生成ラベルを追加できるようになります。
 
-### Task 2: Configure Azure AI Agent Service Keys
+### タスク 2: Azure AI エージェント サービス キーを構成する
 
-In this task, you will add your Foundry connection details to
-appsettings.json, these values connect your M365 agent to the correct
-Foundry project and agent.
+このタスクでは、Foundry
+接続の詳細をappsettings.jsonに追加します。これらの値により、M365
+エージェントが正しい Foundry プロジェクトとエージェントに接続されます。
 
-1.  In **ContosoHRAgent** project, open **appsettings.json** and add the
-    following lines at the bottom of the appsettings list (At line 40).
+1.  **ContosoHRAgent**プロジェクトで、
+    **appsettings.json**を開き、appsettings リストの下部 (行 40)
+    に次の行を追加します。
 
     ```
     ,
-      "AIServices": {
-       "AgentID": "<AzureAIFoundryAgentId>",
-       "ProjectEndpoint": "<ProjectEndpoint>"
-      }
+    "AIServices": {
+    "AgentID": "<AzureAIFoundryAgentId>",
+    "ProjectEndpoint": "<ProjectEndpoint>"
+    }
+
     ```
 
-    Replace the place holders for **AzureAIFoundryAgentId** and **ProjectEndpoint** with the values you saved to the notepad at the end of Exercise 1.
+    **AzureAIFoundryAgentId**のプレースホルダーを置き換え、 演習 1 の最後にメモ帳に保存した値を使用して、 **ProjectEndpoint** を変更します。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
 
-2.  Final version of the **appsettings.json** will look like below.
+2.  **appsettings.json**の最終バージョンは次のようになります。
 
-    ```no-copy
+    ```
     {
-      "AgentApplicationOptions": {
+    "AgentApplicationOptions": {
         "StartTypingTimer": false,
         "RemoveRecipientMention": false,
         "NormalizeMentions": false
-      },
-    
-      "TokenValidation": {
+    },
+
+    "TokenValidation": {
         "Audiences": [
-          "{{ClientId}}" // this is the Client ID used for the Azure Bot
+        "{{ClientId}}" // this is the Client ID used for the Azure Bot
         ]
-      },
-    
-      "Logging": {
+    },
+
+    "Logging": {
         "LogLevel": {
-          "Default": "Information",
-          "Microsoft.AspNetCore": "Warning",
-          "Microsoft.Agents": "Warning",
-          "Microsoft.Hosting.Lifetime": "Information"
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning",
+        "Microsoft.Agents": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information"
         }
-      },
-      "AllowedHosts": "*",
-      "Connections": {
+    },
+    "AllowedHosts": "*",
+    "Connections": {
         "BotServiceConnection": {
-          "Settings": {
+        "Settings": {
             "AuthType": "UserManagedIdentity", // this is the AuthType for the connection, valid values can be found in Microsoft.Agents.Authentication.Msal.Model.AuthTypes.
             "ClientId": "{{BOT_ID}}", // this is the Client ID used for the connection.
             "TenantId": "{{BOT_TENANT_ID}}",
             "Scopes": [
-              "https://api.botframework.com/.default"
+            "https://api.botframework.com/.default"
             ]
-          }
         }
-      },
-      "ConnectionsMap": [
+        }
+    },
+    "ConnectionsMap": [
         {
-          "ServiceUrl": "*",
-          "Connection": "BotServiceConnection"
+        "ServiceUrl": "*",
+        "Connection": "BotServiceConnection"
         }
-      ],
-      "AIServices": {
-       "AgentID": "<AzureAIFoundryAgentId>",
-       "ProjectEndpoint": "<ProjectEndpoint>"
-      }
+    ],
+    "AIServices": {
+    "AgentID": "<AzureAIFoundryAgentId>",
+    "ProjectEndpoint": "<ProjectEndpoint>"
     }
+    }
+
     ```
 
-### Task 3: Test your agent on Teams
+### タスク3: Teamsでエージェントをテストする
 
-In this task, you will test the created agent in Teams.
+このタスクでは、作成したエージェントを Teams でテストします。
 
-1.  Open the **Windows command prompt** and enter +++where az+++. This
-    is to get the path where the Azure CLI is installed and update the
-    Path Environment variable.
+1.  **Windowsコマンドプロンプト**を開き、「+++where
+    az+++」と入力します。これは、Azure
+    CLIがインストールされているパスを取得し、Path環境変数を更新するためです。
 
-    Copy and paste the paths that are listed as the output.
+    出力としてリストされているパスをコピーして貼り付けます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
 
-2.  From the **Start** window, search for +++Environment+++ and select
-    **Edit the system environment variables**.
+2.  **Start**ウィンドウで、 +++Environment+++ を検索し、**Edit the
+    system environment variables**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image52.png)
 
-3.  Select **Environment variables**.
+3.  **Environment variables**を選択します。
 
     ![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image53.png)
 
-4.  Under **System variables**, select **Path** and then select
-    **Edit**.
+4.  **System variables**の下で、**パス**を選択し、**Edit**を選択します。
 
     ![](./media/image54.png)
 
-5.  Add the path obtained as the output for the command **where az**
-    (the first step of this Task) and click on **Ok**.
+5.  コマンド**where az** (このタスクの最初のステップ)
+    の出力として取得したパスを追加し、 **\[OK\]**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image55.png)
 
-6.  Select **Ok** in the other Open windows of the **Environment
-    Settings**.
+6.  **Environment
+    Settings**の他の開いているウィンドウで**\[OK\]**を選択します。
 
-7.  From the Visual Studio, open **Tools \> Command Line \> Developer
-    Command Prompt**.
+7.  Visual Studio から、 **\[Tools \> Command Line \> Developer Command
+    Prompt\]**を開きます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image56.png)
 
-8.  Execute the below command.
+8.  以下のコマンドを実行します。
 
     +++az login+++
 
-    A window will pop up on your browser. Select **Work or school account** and login with your login credentials.
+    ブラウザにウィンドウがポップアップ表示されます。 **「Work or school account」**を選択し、ログイン資格情報でログインしてください。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image57.png)
+    incorrect.](./media/image57.png)
 
     ![A computer screen with a white box and blue text AI-generated content
-may be incorrect.](./media/image58.png)
+    may be incorrect.](./media/image58.png)
 
-9.  Once logged in, enter **1** to select the subscription.
+9.  ログインしたら、 **1 を入力して**サブスクリプションを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image59.png)
 
-10. Expand **Start** and select **Dev Tunnels \> Create a Tunnel**:
+10. **\[Start\]**を展開し、 **\[Dev Tunnels \> Create a
+    Tunnel\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image60.png)
 
-11. Provide the below details and select **Ok**.
+11. 以下の詳細を入力し、 **「OK」**を選択します。
 
-    - The account that will create the tunnel - Select **Sign in** -\>
-      **Work or school account** and login with your login credentials.
-    
-    - Name - +++DevTunnel+++.
-    
+    - トンネルを作成するアカウント - **\[Sign in** -\> **Work or school
+    account\]** を選択し、ログイン資格情報でログインします。
+
+    - Name - +++DevTunnel+++。
+
     - Tunnel Type - **Temporary**
-    
+
     - Access - **Public**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image61.png)
+    incorrect.](./media/image61.png)
 
     ![A screenshot of a computer program AI-generated content may be
-incorrect.](./media/image62.png)
+    incorrect.](./media/image62.png)
 
-12. Right click to **M365Agent** project, select **Microsoft 365 Agents
-    Toolkit > Select Microsoft 365 Account**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image63.png)
+12. **M365Agent**プロジェクトを右クリックし、 **Microsoft 365 Agents
+    Toolkit を選択し、Microsoft 365 Account**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image64.png)
+    incorrect.](./media/image63.png)
 
-13. Select your account and click on **Continue**.
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image64.png)
+
+13. アカウントを選択し、 **「Continue」**をクリックします。
 
     ![A screenshot of a computer error AI-generated content may be
 incorrect.](./media/image65.png)
 
-14. Expand the **drop down** next to **Multiple startup projects** and
-    select **Microsoft Teams (browser)**.
+14. **\[Multiple startup projects\]**の横にあるドロップダウンを展開し、
+    **\[Microsoft Teams (browser)\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image66.png)
 
-You're now ready to run your integrated agent and test it live in
-Microsoft Teams.
+    これで、統合エージェントを実行し、Microsoft Teams
+でライブテストする準備が整いました。
 
-15. Hit **Start** or **F5** to start debugging. Microsoft Teams will
-    launch automatically, and your agent app will pop up on the window.
-    Select **Add** and **Open** to start chatting with your agent.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image67.png)
+15. **「スタート」**または**F5キー**を押してください。Microsoft
+    Teamsが自動的に起動し、エージェントアプリがウィンドウにポップアップ表示されます。
+    **「Add」と「Open」**を選択して、エージェントとのチャットを開始してください。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image68.png)
-
-16. You can ask one of the following questions to interact with the
-    agent.
-
-    - +++What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?+++
-    
-    - +++Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?+++
-    
-    - +++What values guide behavior and decision-making at Contoso Electronics?+++
-
-    You should observe that you are getting similar responses with the agent you've created on Azure AI Foundry.
+    incorrect.](./media/image67.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image69.png)
+    incorrect.](./media/image68.png)
+
+16. エージェントと対話するには、次のいずれかの質問をすることができます。
+
+    - +++What’s the difference between Northwind Standard and Health Plus
+    when it comes to emergency and mental health coverage?+++
+
+    - +++Can I use PerksPlus to pay for both a rock climbing class and a
+    virtual fitness program?+++
+
+    - +++What values guide behavior and decision-making at Contoso
+    Electronics?+++
+
+    Azure AI Foundry で作成したエージェントでも同様の応答が得られることがわかります。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image70.png)
+    incorrect.](./media/image69.png)
 
-## Exercise 5:  Bring your agent to Copilot Chat
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image70.png)
 
-In this exercise, you’ll bring your custom engine agent into Copilot
-Chat by updating the agent's manifest. By enabling copilotAgents in the
-app manifest, you’ll make your AI-powered assistant available directly
-inside the Copilot experience.
+## 演習5: エージェントをCopilot Chatに招待する
 
-1.  Open **M365Agent/AppPackage/manifest.json**, update the manifest
-    schema and version as following.
+この演習では、カスタムエンジンエージェントのマニフェストを更新して、Copilot
+Chat にエージェントを導入します。アプリのマニフェストで copilotAgents
+を有効にすると、AI 搭載アシスタントを Copilot
+エクスペリエンス内で直接利用できるようになります。
+
+1.  **M365Agent/AppPackage/manifest.json**を開き、マニフェスト
+    スキーマとバージョンを次のように更新します。
 
     ```
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
     "manifestVersion": "1.22",
+
     ```
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image71.png)
 
-2.  Replace **bots** section with the following that will also add
-    copilotAgents in the manifest.
+2.  **bots**セクションを次のものに置き換えます。これにより、マニフェストに
+    copilotAgents も追加されます。
 
-    This block declares your agent as a custom engine agent for M365
-Copilot. It tells Microsoft 365 to expose this agent in Copilot Chat and
-surface its command list in the conversation UI along with the
-conversation starters to help users get started quickly.
+このブロックは、エージェントをM365
+Copilotのカスタムエンジンエージェントとして宣言します。Microsoft
+365にこのエージェントをCopilot
+Chatで公開し、会話UIにコマンドリストと会話スターターを表示して、ユーザーがすぐに使い始められるように指示します。
 
     ```
     "bots": [ 
-      { 
+    { 
         "botId": "${{BOT_ID}}", 
         "scopes": [ 
-          "personal", 
-          "team", 
-          "groupChat" 
+        "personal", 
+        "team", 
+        "groupChat" 
         ], 
         "supportsFiles": false, 
         "isNotificationOnly": false, 
         "commandLists": [ 
-          { 
+        { 
             "scopes": [ "personal", "team", "groupChat" ], 
             "commands": [ 
-              { 
+            { 
                 "title": "Emergency and Mental Health",
                 "description": "What’s the difference between Northwind Standard and Health Plus when it comes to emergency and mental health coverage?" 
-              }, 
-              { 
+            }, 
+            { 
                 "title": "PerksPlus Details", 
                 "description": "Can I use PerksPlus to pay for both a rock climbing class and a virtual fitness program?" 
-              }, 
-              { 
+            }, 
+            { 
                 "title": "Contoso Electronics Values", 
                 "description": "What values guide behavior and decision making at Contoso Electronics?" 
-              } 
+            } 
             ] 
-          } 
+        } 
         ] 
-      } 
+    } 
     ], 
     "copilotAgents": { 
-      "customEngineAgents": [ 
+    "customEngineAgents": [ 
         { 
-          "id": "${{BOT_ID}}", 
-          "type": "bot" 
+        "id": "${{BOT_ID}}", 
+        "type": "bot" 
         } 
-      ] 
+    ] 
     },
+
     ```
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image72.png)
 
-3.  Hit **Start** or **F5** to start debugging. Microsoft Teams will
-    launch automatically.
+3.  **「Start」**または**F5 キー**を押します。Microsoft Teams
+    が自動的に起動します。
 
-4.  When Microsoft Teams open in your browser, ignore the app pop-up and
-    select **Apps \> Manage your apps \> Upload an app** and then select
-    **Upload a custom app**.
-
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image73.png)
+4.  ブラウザーで Microsoft Teams
+    が開いたら、アプリのポップアップを無視し、 **\[Apps \> Manage your
+    apps \> Upload an app\] の**順に選択して、 **\[Upload a custom\]**
+    を選択します。![A screenshot of a computer AI-generated content may
+    be incorrect.](./media/image73.png)
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image19.png)
 
-5.  In the File Explorer go to your project folder. The path will be
-    **C:\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent** if you
-    have not changed the path during the project setup. Navigate to
-    **\ContosoHRAgent\M365Agent\appPackage\build select
-    appPackage.local.zip** and click **Open**.
+5.  プロジェクトのセットアップ時にパスを変更していない場合、パスは**C:\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent**になります。
+    **\ContosoHRAgent\M365Agent\appPackage\build**
+    に移動し、**appPackage.local.zip
+    を選択して「Open」**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image74.png)
 
-6.  Your app will pop-up on Teams again, select **Add**
+6.  アプリがTeamsに再度ポップアップ表示されるので、
+    **「Add」**を選択します
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image75.png)
 
-7.  Select **Open with Copilot** to test your agent on Copilot.
+7.  Copilot でエージェントをテストするには、 **「Open with
+    Copilot」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image76.png)
 
-8.  Select the conversation starter, **PerksPlus Details** and hit
-    **Send**.
-
-    ![](./media/image77.png)
+8.  会話のきっかけとなる**「PerksPlus Details」**を選択し、
+    **「Send」をクリックします**。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image78.png)
+    incorrect.](./media/image77.png)
 
-9.  Observe that you are getting the response from the AI Foundry agent,
-    now on Copilot Chat.
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image78.png)
+
+9.  Copilot Chat で AI Foundry
+    エージェントからの応答を受け取っていることを確認します。
 
     ![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image79.png)
 
-## Summary
+## まとめ
 
-In this lab, you've just built your Custom Engine Agent using the
-Microsoft 365 Agents SDK and Azure AI Foundry.
+このラボでは、Microsoft 365 エージェント SDK と Azure AI Foundry
+を使用してカスタム エンジン エージェントを構築しました。
 
-You learned how to
+あなたはどのように学びましたか
 
-  - Configure an AI agent in Azure AI Foundry using the Agent Playground
-  
-  - Upload enterprise documents to ground your agent’s responses
-  
-  - Scaffold a bot using the M365 Agents SDK in Visual Studio
-  
-  - Add Semantic Kernel and connect to Azure AI Agent Service
-  
-  - Integrate your bot with the Azure AI Foundry agent for real-time,
-    grounded reasoning
-  
-  - Deploy and test your agent in **Microsoft Teams** and **Copilot Chat**
+- エージェント プレイグラウンドを使用して Azure AI Foundry で AI
+  エージェントを構成する
+
+- エージェントの応答の根拠となる企業文書をアップロードします
+
+- Visual Studio で M365 Agents SDK
+  を使用してボットをスキャフォールディングする
+
+- セマンティック カーネルを追加し、Azure AI エージェント
+  サービスに接続する
+
+- ボットを Azure AI Foundry
+  エージェントと統合して、リアルタイムの根拠に基づいた推論を実現します。
+
+- **Microsoft Teams**と**Copilot
+  Chat**でエージェントを展開してテストする
