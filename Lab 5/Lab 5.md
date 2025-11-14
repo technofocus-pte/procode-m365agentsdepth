@@ -1,627 +1,645 @@
-# Lab 5 - Create a Retail agent in Copilot Studio that leverages Azure AI Search and Bring your own model for your prompts
+# Laboratório 5 – Crie um agente de varejo no Copilot Studio que aproveite o Azure AI Search e traga seu próprio modelo para seus prompts
 
-Lab duration – 60 minutes
+Duração do laboratório – 60 minutos
 
-## Objective
+## Objetivo
 
-In a retail store site, customers frequently ask about product
-specifications, warranty terms, or troubleshooting guides. Static FAQ
-chatbots can’t cover all variations.
+Em um site de loja de varejo, os clientes frequentemente perguntam sobre
+especificações do produto, termos de garantia ou guias de solução de
+problemas. Os chatbots estáticos de perguntas frequentes não podem
+cobrir todas as variações.
 
-To help this scenario, the following will be implemented in this lab
+Para ajudar nesse cenário, o seguinte será implementado neste
+laboratório:
 
-- Product manuals, warranty documents, and FAQ PDFs are indexed into
-  **Azure AI Search**.
+- Manuais de produtos, documentos de garantia e PDFs de perguntas
+  frequentes serão indexados no **Azure AI Search**.
 
-- A Copilot Studio agent retrieves the right snippet when a customer
-  asks a question regarding the products.
+- Um agente do Copilot Studio que recupera o snippet correto quando um
+  cliente faz uma pergunta sobre os produtos.
 
-- The agent gives a natural-language answer plus a link to the relevant
-  product manual.
+- O agente que fornece uma resposta em linguagem natural, além de um
+  link para o manual do produto relevante.
 
-This gives a reduced call-center load, 24/7 customer support and a
-higher customer satisfaction.
+Isso proporciona uma carga reduzida de central de atendimento, suporte
+ao cliente 24 horas por dia, 7 dias por semana e maior satisfação do
+cliente.
 
-We will also learn how to bring your own model from Azure AI Foundry
-into the Copilot Studio.
+Também aprenderemos como trazer seu próprio modelo do Azure AI Foundry
+para o Copilot Studio.
 
-## Exercise 1: Create an Azure AI Search resource
+## Exercício 1: Criar um recurso do Azure AI Search
 
-In this exercise, we will first create an Azure AI Search resource,
-which will be used to search through the documents.
+Neste exercício, primeiro criaremos um recurso do Azure AI Search, que
+será usado para pesquisar os documentos.
 
-1.  From the Home page of the Azure portal, select **Azure AI Foundry.**
+1.  Na página inicial do portal do Azure, selecione **Azure AI
+    Foundry.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image1.png)
 
-2.  In the **AI Foundry page**, select **AI Search** from the left pane
-    and then select **+ Create**.
+2.  Na página **AI Foundry**, selecione **AI Search** no painel esquerdo
+    e selecione **+ Create**.
 
     ![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image2.png)
 
-3.  Enter the below details and select **Review + create**.
+3.  Insira os detalhes abaixo e selecione **Review + create**.
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
-    
+    - Subscription – Selecione sua **assinatura atribuída**
+
+    - Resource group – Selecione seu **grupo de recursos atribuído**
+    (**ResourceGroup1**)
+
     - Service name – +++ **documentstore53853922@lab.labinstanceid()**+++
-    
-    - Location – Select your **assigned region**
-    
+
+    - Location – Selecione sua **região atribuída**
+
     ![](./media/image3.png)
 
-4.  Once the validation passes, select **Create**.
+4.  Depois que a validação for aprovada, selecione **Create**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-5.  The deployment takes a few minutes. Select **Go to resource** once
-    the search service is created.
+5.  A implementação leva alguns minutos. Selecione **Go to resource**
+    quando o serviço de pesquisa for criado.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image5.png)
 
-6.  From the **Overview** page, copy the Url value and save it in a
-    notepad to be used in a future exercise.
+6.  Na página **Overview**, copie o valor da URL e salve-o em um bloco
+    de notas para ser usado em um exercício futuro.
 
     ![](./media/image6.png)
 
-7.  Select **Keys** under **Settings** from the left pane. Copy the
-    **Primary admin key** and save it in a notepad for using it in the
-    upcoming exercises.
+7.  Selecione **Keys** em **Settings** no painel esquerdo. Copie a
+    **Primary admin key** e salve em um bloco de notas para usá-la nos
+    próximos exercícios.
 
     ![](./media/image7.png)
 
-8.  Select **Identity** under **Settings** from the left pane.
+8.  Selecione **Identity** em **Settings** no painel esquerdo.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-9.  Toggle the Status to **On** under **System assigned** and then click
-    on **Save**.
+9.  Alterne o Status para **On** em **System assigned** e clique em
+    **Save**.
 
     ![A screenshot of a computer screen AI-generated content may be
 incorrect.](./media/image9.png)
 
-10. Select **Yes** in the **Enable system assigned managed identity**
-    confirmation dialog. This setting will enable the search service to
-    be listed under the managed identity resources, which can then be
-    assigned roles as required.
+10. Selecione **Yes** na caixa de diálogo de confirmação **Enable system
+    assigned managed identity**. Essa configuração permitirá que o
+    serviço de pesquisa seja listado nos recursos de identidade
+    gerenciada, que podem receber funções conforme necessário.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-## Exercise 2: Create a Storage account
+## Exercício 2: Criar uma conta de armazenamento
 
-This exercise is to create a storage account with Blob storage and
-upload the documents required supporting the retail customers in it.
+Este exercício é para criar uma conta de armazenamento com o
+Armazenamento de Blobs e carregar os documentos necessários para dar
+suporte aos clientes de varejo nela.
 
-1.  From the Home page of the Azure portal,
-    (+++https://portal.azure.com/+++), select **Storage accounts**.
+1.  Na página inicial do portal do Azure,
+    (+++https://portal.azure.com/+++), selecione **Storage accounts**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-2.  Select **+ Create** to create a new Storage account.
+2.  Selecione **+ Create** para criar uma nova conta de armazenamento.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-3.  Enter the below details, accept the default values in the other
-    fields and click on **Review + create**.
+3.  Insira os detalhes abaixo, aceite os valores padrão nos outros
+    campos e clique em **Review + create**.
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
-    
-    - Region – Select your **assigned region**
-    
+    - Subscription – Selecione sua **assinatura atribuída**
+
+    - Resource group – Selecione seu **grupo de recursos atribuído**
+    (**ResourceGroup1**)
+
+    - Region – Selecione sua **região atribuída**
+
     - Storage account name – +++ **docstore@lab.LabInstanceId()**+++
-    
-    - Primary service – Select **Azure Blob Storage or Azure Data Lake
-      Storage Gen 2**
+
+    - Primary service – Selecione **Azure Blob Storage or Azure Data Lake
+    Storage Gen 2**
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image13.png)
 
-4.  Once the validation passes, click on **Create**.
+4.  Assim que a validação for aprovada, clique em **Create**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-5.  Once the resource creation succeeds, click on **Go to resource**.
+5.  Assim que a criação do recurso for bem-sucedida, clique em **Go to
+    resource**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image15.png)
+    incorrect.](./media/image15.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
+    incorrect.](./media/image16.png)
 
-6.  Select **Containers** under **Data storage**. Select **+
-    Container**, enter the name as +++**documents**+++ and click on
-    **Create** to create the container.
+6.  Selecione **Containers** em **Data storage**. Selecione **+ Add
+    container**, insira o nome como +++**documents**+++ e clique em
+    **Create** para criar o contêiner.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image17.png)
 
-7.  Select the created container **documents** to upload the leave
-    policy document into it.
+7.  Selecione **documents** para carregar o documento de política de
+    licença nele.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image18.png)
 
-8.  Click on **Upload** and then select **Browse for files**.
+8.  Clique em **Upload** e, em seguida, selecione **Browse for files**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image19.png)
 
-9.  Select the **documents** from **C:\LabFiles\AISearch** folder and
-    then click on **Upload**.
+9.  Selecione **documents** na pasta **C:\LabFiles\AISearch** e, em
+    seguida, clique em **Upload**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image20.png)
+    incorrect.](./media/image20.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image21.png)
+    incorrect.](./media/image21.png)
 
-10. Navigate to the **<docstore@lab.LabInstanceId()>** Storage account
-    (Select **Storageaccounts** from the **Home page** of the Azure
-    portal and select **docstore@lab.LabInstanceId()**) and select
-    **Access Control (IAM)** from the left pane. Select **Add -\> Add
-    role assignment**.
+10. Navegue até a conta de armazenamento
+    **<docstore@lab.LabInstanceId()>** (selecione **Storageaccounts** na
+    **página inicial** do portal do Azure e selecione
+    **docstore@lab.LabInstanceId()**) e selecione **Access Control
+    (IAM)** no painel esquerdo. Selecione **Add -\> Add role
+    assignment**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-11. Search for +++**Storage Blob Data Reader**+++, select it and click
-    on **Next**.
+11. Busque +++**Storage Blob Data Reader**+++, selecione-o e clique em
+    **Next**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image23.png)
 
-12. Click on **+Select members**, search for and select your **user
-    id**, select your **user id** that gets listed and then click on
-    **Select**. This adds the Storage Blob Data Reader role to your user
-    id.
+12. Clique em **+Select members**, pesquise e selecione seu **ID de
+    usuário**, selecione seu **ID de usuário** listado e clique em
+    **Select**. Isso adiciona a função Leitor de Dados do Blob de
+    Armazenamento ao seu ID de usuário.
 
     ![A screenshot of a group of people AI-generated content may be
 incorrect.](./media/image24.png)
 
-13. Select **Managed identity** and then select **+ Select members**.
-    Select **Search service** under **Managed identity** and select the
-    **searchleaves** search service that gets listed.
+13. Selecione **Managed identity** e, em seguida, selecione **+ Select
+    members**. Selecione **Search service** em **Managed identity** e
+    selecione o serviço de pesquisa **searchleaves** que é listado.
 
     ![](./media/image25.png)
 
-14. Click on **Select** to select the search service.
+14. Clique em **Select** para selecionar o serviço de pesquisa.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-15. Back in the Add role assignment screen, click on **Review +
-    assign**.
+15. De volta à tela **Add role assignment**, clique em **Review +
+    assign**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-16. Select **Review + assign** again in the next screen.
+16. Selecione **Review + assign** novamente na próxima tela.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-17. Proceed to the next step once the roles are added.
+17. Prossiga para a próxima etapa depois que as funções forem
+    adicionadas.
 
     ![](./media/image29.png)
 
-In this exercise, we have created a Storage account and added the
-documents and required Role permissions to it.
+    Neste exercício, criamos uma conta de armazenamento e adicionamos os
+documentos e as permissões de função necessárias a ela.
 
-## Exercise 3: Create an Azure OpenAI Service and deploy a model 
+## Exercício 3: Criar um serviço OpenAI do Azure e implementar um modelo 
 
-The AI Search service will have to vectorize the data uploaded, in order
-to perform the search over the documents. To vectorize the data, an
-embedding model needs to be deployed. In this exercise, you will create
-an Azure OpenAI Service and deploy the text-embedding model in it.
+O serviço AI Search terá que vetorizar os dados carregados, a fim de
+realizar a pesquisa sobre os documentos. Para vetorizar os dados, um
+modelo de incorporação precisa ser implantado. Neste exercício, você
+criará um Azure OpenAI Service e implementará o modelo de inserção de
+texto nele.
 
-1.  From the Azure portal Home page, search for select +++Azure
+1.  Na página inicial do portal do Azure, pesquise e selecione +++Azure
     OpenAI++.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-2.  Select **+ Create**.
+2.  Selecione **+ Create**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-3.  Enter the below details and select **Next**.
+3.  Insira os detalhes abaixo e selecione **Next**.
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
-    
-    - Region – Select your **assigned region**
-    
+    - Subscription – Selecione sua **assinatura atribuída**
+
+    - Resource group – Selecione seu **grupo de recursos atribuído**
+    (**ResourceGroup1**)
+
+    - Region – Selecione sua **região atribuída**
+
     - Name – +++**openaiservice52374668**+++
-    
-    - Pricing tier – Select **Standard**
-    
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image32.png)
-    
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image33.png)
 
-4.  Select **Next** in the next 2 screens select **Create** in the
-    **Review + submit** screen.
+    - Pricing tier – Selecione **Standard**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image34.png)
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image32.png)
 
-5.  Click on **Go to resource** once the service is created.
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image33.png)
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image35.png)
+4.  Selecionet **Next** nas próximas duas telas, selecione **Create** na
+    tela **Review + submit**
 
-6.  Select **Access control (IAM)** from the left pane, select **Add -\>
-    Add role assignment**.
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image34.png)
+
+5.  Clique em **Go to resource** depois que o serviço for criado.
+
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image35.png)
+
+6.  Selecione **Access control (IAM)** no painel esquerdo, selecione **+
+    Add -> Add role assignment**
 
     ![](./media/image36.png)
 
-7.  Search for +++**Cognitive Services OpenAI User**+++, select the role
-    and click on **Next**.
+7.  Busque por +++**Cognitive Services OpenAI User**+++, selecione a
+    função e clique em **Next**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image37.png)
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image37.png)
 
-8.  Select **+ Select members**, search for your **user id**, select it
-    and click on **Select**.
+8.  Selecione **+ Select members**, pesquise seu **ID de usuário**,
+    selecione-o e clique em **Select**
 
     ![](./media/image38.png)
 
-9.  Back in the **Add role assignment** screen, select **Managed
-    identity**. Then select **+ Select members**. In the **Select
-    managed identities** screen, select **Search service** under
-    **Managed identity** and select the
-    **documentstore@lab.LabInstanceId()** service.
+9.  De volta à tela **Add role assignment**, selecione **Managed
+    identity**. Em seguida, selecione **+ Select members**. Na tela
+    **Select managed identities**, selecione **Search service** em
+    **Managed identity** e selecione o serviço
+    **documentstore@lab.LabInstanceId()**
 
     ![](./media/image39.png)
 
-10. Once selected, click on **Select**.
+10. Uma vez selecionado, clique em **Select**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-11. Select Review + assign in the next 2 screens.
+11. Selecione **Review + assign** nas próximas duas telas.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-12. Wait for a **success** message on the role additions before
-    proceeding with the next tasks.
+12. Aguarde uma **mensagem** **de sucesso** nas adições de função antes
+    de prosseguir com as próximas tarefas.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image42.png)
 
-13. From the **Overview** page of the Azure OpenAI Service resource,
-    select **Go to Azure AI Foundry portal** to open the Azure OpenAI
-    Service there and deploy a model.
+13. Da página **Overview** do recurso Azure OpenAI Service, selecione
+    **Go to Azure AI Foundry portal** para abrir o Azure OpenAI Service
+    e implementar um modelo.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image43.png)
 
-14. Select **Deployments** from the left pane. Select **+ Deploy model**
-    -\> **From base models**.
+14. Selecione **Deployments** no painel esquerdo. Selecione **+ Deploy
+    model** -> **From base models**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image44.png)
 
-15. Search for +++**text-embedding**+++, select
-    **text-embedding-3-large** and then select **Confirm**.
+15. Procure por +++**text-embedding**+++, selecione
+    **text-embedding-3-large** e, em seguida, selecione **Confirm**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-16. Select **Deploy** in the Deploy text-embedding-3-large.
+16. Selecione **Deploy** em **Deploy text-embedding-3-large**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-17. The model gets deployed and the screen is loaded with the deployment
-    details.
+17. O modelo é implementado e a tela é carregada com os detalhes da
+    implementação.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-## Exercise 4: Create a vector index
+## Exercício 4: Criar um índice de vetor
 
-The AI Search resource needs a Vector index to perform the vector
-search. You will vectorize the uploaded data in this exercise.
+O recurso AI Search precisa de um índice vetor para realizar a pesquisa
+vetorial. Você vetorizará os dados carregados neste exercício.
 
-1.  From the Azure portal, go to the
-    **documentstore@lab.LabInstanceId()**, AI Search service resource.
-    Select **Import and vectorize data**.
+1.  No portal do Azure, vá ao **documentstore@lab.LabInstanceId()**, AI
+    Search service resource. Selecione **Import and vectorize data**
 
     ![](./media/image48.png)
 
-2.  Select the **Azure Blob Storage** option.
+2.  Selecione a opção **Azure Blob Storage**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-3.  Select the **RAG** option in the **What scenarios are you
-    targeting?** screen.
+3.  Selecione a opção **RAG** na tela **What scenarios are you
+    targeting?**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image50.png)
 
-4.  Enter the below details, accept the other values as default and
-    click **Next**.
+4.  Insira os detalhes abaixo, aceite os outros valores como padrão e
+    clique em **Next**.
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Storage account- Select the **docstore@lab@LabInstanceId()**
-    
-    - Blob-container – Select **documents**
-    
+    - Subscription – Selecione sua **assinatura atribuída**
+
+    - Storage account- Selecione **docstore@lab@LabInstanceId()**
+
+    - Blob-container – Selecione **documents**
+
     ![](./media/image51.png)
 
-5.  In the Vectorize your text screen, the subscription is
-    pre-populated. Enter the below details and click **Next**.
+5.  Na tela **Vectorize your text**, a assinatura é pré-preenchida.
+    Insira os detalhes abaixo e clique em **Next**.
 
-    - Azure OpenAI resource – Select **openaiservice@lab.LabInstanceId()**
-    
-    - Model deployment – Select **text-embedding-3-large**
-    
-    - Authentication type – Select **System assigned identity**
-    
-    - Select the checkbox to acknowledge the cost alert of Azure OpenAI.
-    
+    - Azure OpenAI resource – Selecione
+    **openaiservice@lab.LabInstanceId()**
+
+    - Model deployment – Selecione **text-embedding-3-large**
+
+    - Authentication type – Selecione **System assigned identity**
+
+    - Marque a caixa de seleção para confirmar o alerta de custo do Azure
+    OpenAI.
+
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image52.png)
 
-6.  Select Next in the **Vectorize and enrich your images** screen since
-    we are not dealing with images here and select **Next** in the
-    **Advanced settings** screen as well.
+6.  Selecione **Next** na tela **Vectorize and enrich your images** já
+    que não estamos lidando com imagens aqui e selecione **Next** na
+    tela **Advanced settings** também.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image53.png)
+    incorrect.](./media/image53.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image54.png)
+    incorrect.](./media/image54.png)
 
-7.  Select **Create** in the **Review + create** screen.
+7.  Selecione **Create** na tela **Review + create**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image55.png)
 
-8.  Click on **Close** in the success dialog box.
+8.  Clique em **Close** na caixa de diálogo de sucesso.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image56.png)
 
-## Exercise 5: Create a retail assistant agent
+## Exercício 5: Criar um agente assistente de varejo
 
-In this exercise, you will create a retail assistant agent in Copilot
+Neste exercício, você criará um agente assistente de varejo no Copilot
 Studio.
 
-1.  Login to +++https://copilotstudio.microsoft.com+++ using your login
-    credentials.
+1.  Faça login em +++https://copilotstudio.microsoft.com+++ usando suas
+    credenciais de login.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image57.png)
 
-2.  Select **Create** from the left pane.
+2.  Selecione **Create** no painel esquerdo.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image58.png)
 
-3.  Select **+ New agent** to create a new agent.
+3.  Selecione **+ New agent** para criar um novo agente.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image59.png)
 
-4.  Enter +++You are a Retail assistant agent for customers HR who will
-    answer questions related to the store products+++ and select
-    **Send**.
+4.  Insira +++You are a Retail assistant agent for customers HR who will
+    answer questions related to the store products+++ e selecione
+    **Send**
 
     ![](./media/image60.png)
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image61.png)
 
-5.  Once the agent is created, in the Test pane, enter +++What is the
-    warranty period for Washing machine?+++ and click **Send.**
+5.  Depois que o agente for criado, no painel **Test**, insira +++What
+    is the warranty period for Washing machine?+++ e clique em **Send.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image62.png)
 
-6.  It gives a generalized reply as in the screenshot below.
+6.  Ele dá uma resposta generalizada como na captura de tela abaixo.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image63.png)
 
-## Exercise 6: Add the Azure AI Search as a knowledge source
+## Exercício 6: Adicionar o Azure AI Search como uma fonte de conhecimento
 
-In this exercise, you will add the Azure AI Search that you created from
-the Azure portal, as a knowledge source to the Retail assistance agent
-in Copilot Studio.
+Neste exercício, você adicionará o Azure AI Search criado no portal do
+Azure, como uma fonte de conhecimento para o agente de assistência de
+varejo no Copilot Studio.
 
-1.  From the **Overview** page of the agent, select **+ Add knowledge**.
+1.  Da página **Overview** do agente, selecione **+ Add knowledge**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image64.png)
 
-2.  Select **Azure AI Search** from the list of knowledge sources
-    available.
+2.  Selecione **Azure AI Search** da lista de fontes de conhecimento
+    disponíveis.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image65.png)
 
-3.  Click on the **drop down** next to **Not connected** in the next
-    screen and select **Create new connection**.
+3.  Clique no **menu suspenso** ao lado de **Not connected** na próxima
+    tela e selecione **Create new connection**
 
     ![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image66.png)
 
-4.  Enter the **Endpoint url** and the **Admin key** values which we
-    saved to a notepad in a previous exercise and then click on
-    **Create** to create the connection.
+4.  Insira a URL do **endpoint** e os valores da **Admin key** que
+    salvamos em um bloco de notas em um exercício anterior e clique em
+    **Create** para criar a conexão.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image67.png)
 
-5.  Once the connection is established, the available index is listed
-    and already selected. Click on **Add to agent**.
+5.  Depois que a conexão for estabelecida, o índice disponível será
+    listado e já selecionado. Clique em **Add to agent**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image68.png)
 
-6.  The AI Search service is added as a knowledge source to the agent
-    and is in **Ready** state now.
+6.  O serviço AI Search é adicionado como uma fonte de conhecimento ao
+    agente e está no estado **Ready** agora.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image69.png)
 
-7.  Now, let us test the agent with the same question we have tried
-    before.
+7.  Agora, vamos testar o agente com a mesma pergunta que tentamos
+    antes.
 
-8.  In the Test pane, enter +++ What is the warranty period for Washing
-    machine?+++ and click **Send.**
+8.  No painel **Test**, insira +++ What is the warranty period for
+    Washing machine?+++ e clique em **Send.**
 
     ![](./media/image70.png)
 
-9.  You can see that the response from the agent now is from the
-    document uploaded in the AI Search service.
+9.  Você pode ver que a resposta do agente agora é do documento
+    carregado no serviço AI Search.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image71.png)
 
-## Exercise 7: Deploy a Model in Azure AI Foundry
+## Exercício 7: Implantar um modelo no Azure AI Foundry
 
-In this exercise, you will deploy a model in the Azure AI Foundry to use
-it in the Copilot Studio (in the next exercise).
+Neste exercício, você implantará um modelo no Azure AI Foundry para
+usá-lo no Copilot Studio (no próximo exercício).
 
-1.  Open the Azure AI Foundry Azure OpenAI resource created earlier.
+1.  Abrir o recurso Azure AI Foundry Azure OpenAI criado anteriormente.
 
-2.  From the left pane, select **Deployments**.
+2.  No painel esquerdo, selecione **Deployments**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image72.png)
 
-3.  Select the drop down next to the **+ Deploy model** and select
-    **Deploy base model**.
+3.  Selecione o menu suspenso ao lado de **+ Deploy model** e selecione
+    **Deploy base model**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image73.png)
 
-4.  Select **gpt-4o** and select **Confirm**.
+4.  Selecione **gpt-4o** e clique em **Confirm**
 
     ![](./media/image74.png)
 
-5.  In the Deploy gpt-4o dialog, enter the **Deployment name** as
-    +++**ModelforMCS**+++, accept the other defaults and select
-    **Deploy.**
+5.  Na caixa de diálogo **Deploy gpt-4o**, insira o **Deployment name**
+    como +++**ModelforMCS**+++, aceite os outros padrões e selecione
+    **Deploy**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image75.png)
 
-6.  Copy the Target URI and key values to a notepad to be used during
-    the connection creation from the Copilot Studio.
+6.  Copie o **Target URI** e os valores de **Key** para um bloco de
+    notas a ser usado durante a criação da conexão do Copilot Studio.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image76.png)
 
-Now that the model is deployed, you can use it in Copilot Studio’s agent
-prompt.
+Agora que o modelo está implantado, você pode usá-lo no prompt do agente
+do Copilot Studio.
 
-## Exercise 8: Create a prompt in the Copilot Studio and use the model created in Azure AI Foundry
+## Exercício 8: Criar um prompt no Copilot Studio e usar o modelo criado no Azure AI Foundry
 
-In this exercise, you will learn how to bring the deployed model from
-Azure AI Foundry in the Copilot Studio. Here, we are using a base model
-that is deployed. We can also create a fine tuned model as per the
-business requirements and then use it in Copilot Studio.
+Neste exercício, você aprenderá a trazer o modelo implantado do Azure AI
+Foundry no Copilot Studio. Aqui, estamos usando um modelo base que é
+implantado. Também podemos criar um modelo ajustado de acordo com os
+requisitos de negócios e usá-lo no Copilot Studio.
 
-1.  From the Copilot Studio agent, select **Tools** from the top menu
-    bar.
+1.  No agente do Copilot Studio, selecione **Tools** na barra de menus
+    superior.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image77.png)
 
-2.  Select **+ New tool** to add a new tool to the agent
+2.  Selecione **+ New tool** Para adicionar uma nova ferramenta ao
+    agente.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image78.png)
 
-3.  Select Prompt since we are going to add a new prompt.
+3.  Selecione **Prompt**, pois vamos adicionar um novo prompt.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image79.png)
 
-4.  In the Custom prompt screen, select the drop down next to the
-    **model** name.
+4.  Na tela **Custom prompt**, selecione o menu suspenso ao lado do
+    **nome** do modelo.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image80.png)
 
-5.  Select + against **Azure AI Foundry Models** to add the model
-    deployed in Azure AI Foundry and select **Connect a new model**.
+5.  Selecione **+** em **Azure AI Foundry Models** para adicionar o
+    modelo implementado no Azure AI Foundry e selecione **Connect a new
+    model**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image81.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image82.png)
 
-6.  Enter the below details and click on Connect.
+6.  Insira os detalhes abaixo e clique em **Connect**
 
     - Model deployment name - +++ModelforMCS+++
-    
+
     - Base model name - +++gpt-4o+++
-    
-    - Azure model endpoint URL – Enter the target url saved earlier
-    
-    - API Key – Enter the model API key saved earlier.
+
+    - Azure model endpoint URL – Insira o **Target url** salvo anteriormente
+
+    - API Key – Insira a **API key** do modelo salva anteriormente.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image83.png)
+    incorrect.](./media/image83.png)
 
     ![A screen shot of a computer AI-generated content may be
-incorrect.](./media/image84.png)
+    incorrect.](./media/image84.png)
 
-7.  Once connected, select **Close**.
+7.  Uma vez conectado, selecione **Close**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image85.png)
 
-8.  You can see that the model ModelforMCS is selected now
+8.  Você pode ver que o modelo ModelforMCS está selecionado agora.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image86.png)
 
-9.  Rename the prompt to +++WM Types+++. Enter +++What are the different
-    types of Washing Machines?+++ and select **Test**.
+9.  Renomeie o prompt para +++ +WM Types +++. Digite +++ What are the
+    different types of Washing Machines? +++ e selecione **Test**.
 
     ![](./media/image87.png)
 
-10. Select **Save** to save the prompt.
+10. Selecione **Save** para salvar o prompt.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image88.png)
 
-11. Select the **Add to agent** option to add the prompt to the agent.
+11. Selecione a opção **Add to agent** Para adicionar o prompt ao
+    agente.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image89.png)
+    incorrect.](./media/image89.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image90.png)
+    incorrect.](./media/image90.png)
 
-With this feature, we can fine-tune the model in Azure AI Foundry and
-use it in Copilot Studio with ease. We can bring in the vast ecosystem
-of the models in the Azure AI Foundry easily into the Copilot Studio.
+    Com esse recurso, podemos ajustar o modelo no Azure AI Foundry e usá-lo
+no Copilot Studio com facilidade. Podemos trazer o vasto ecossistema dos
+modelos no Azure AI Foundry facilmente para o Copilot Studio.
 
-## Summary
+## Resumo
 
-In this lab, we have learnt to connect the agent from the Copilot Studio
-to an Azure AI Search service as a knowledge source and test the agent
-based on the source. We have also learnt to bring the model deployed in
-Azure AI Foundry into the Copilot Studio.
+Neste laboratório, aprendemos a conectar o agente do Copilot Studio a um
+serviço do Azure AI Search como uma fonte de conhecimento e testar o
+agente com base na fonte. Também aprendemos a trazer o modelo implantado
+no Azure AI Foundry para o Copilot Studio.
