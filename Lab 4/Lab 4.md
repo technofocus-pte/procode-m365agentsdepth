@@ -1,89 +1,92 @@
-# Lab 4- Zava’s Journey to AI Integration – Building MCP-Powered Agents in Microsoft Copilot Studio
+# Laboratório 4 - A jornada da Zava para a integração da AI – Criando agentes com tecnologia MCP no Microsoft Copilot Studio
 
-**Scenario:**
+## Cenário:
 
-Zava, a fast-growing digital health organization, has recently formed an
-**Internal Innovation Hub** to experiment with new AI capabilities that
-could later be adapted into regulated healthcare solutions. Before
-connecting sensitive medical systems, the innovation team needs a
-**safe, low-risk sandbox** to learn how to integrate external APIs and
-data sources with **Microsoft Copilot Studio** using the **Model Context
-Protocol (MCP)**.
+A Zava, uma organização de saúde digital em rápido crescimento, formou
+recentemente um **Internal Innovation Hub** para experimentar novos
+recursos de AI que poderiam ser posteriormente adaptados em soluções de
+saúde regulamentadas. Antes de conectar sistemas médicos confidenciais,
+a equipe de inovação precisa de uma **área restrita segura e de baixo
+risco** para aprender a integrar APIs externas e fontes de dados ao
+**Microsoft Copilot Studio** usando o **Model Context Protocol (MCP)**.
 
-To do this, the team starts with a **simple, harmless example** — a
-*Jokes MCP Server* — that demonstrates how Copilot Studio can call
-real-time APIs through MCP. This lightweight prototype helps engineers,
-data scientists, and AI solution architects understand:
+Para fazer isso, a equipe começa com um **exemplo simples e inofensivo**
+— um *Jokes MCP Server* — que demonstra como o Copilot Studio pode
+chamar APIs em tempo real por meio do MCP. Este protótipo leve ajuda
+engenheiros, cientistas de dados e arquitetos de soluções de AI a
+entender:
 
-- how MCP servers are deployed to Azure,
+- como os servidores MCP são implementados no Azure,
 
-- how Copilot Studio can discover and consume MCP tools, and
+- como o Copilot Studio pode descobrir e consumir ferramentas MCP e
 
-- how real-time external data can be securely integrated into agents.
+- como os dados externos em tempo real podem ser integrados com
+  segurança aos agentes.
 
-By completing this lab, the Zava Innovation team establishes the
-foundation for connecting future MCP servers to real business systems —
-once governance and compliance measures are applied.
+Ao concluir este laboratório, a equipe de inovação da Zava estabelece a
+base para conectar futuros servidores MCP a sistemas de negócios reais,
+uma vez que as medidas de governança e conformidade sejam aplicadas.
 
-**Business Value:**
+## Valor comercial:
 
-- Encourages hands-on learning with MCP integration before applying it
-  to sensitive domains.
+- Incentiva o aprendizado prático com a integração do MCP antes de
+  aplicá-lo a domínios confidenciais.
 
-- Demonstrates end-to-end deployment and tool consumption in a secure,
-  Azure-ready setup.
+- Demonstra a implementação de ponta a ponta e o consumo de ferramentas
+  em uma configuração segura e pronta para o Azure.
 
-- Builds organizational readiness for next-generation, AI-driven
-  workflows.
+- Cria prontidão organizacional para fluxos de trabalho orientados por
+  IA de última geração.
 
-## Objective:
+## Objetivo:
 
-In this lab, you will simulate how Zava’s Innovation Hub experiments
-with the Model Context Protocol (MCP) to connect external APIs and
-knowledge sources with Microsoft Copilot Studio. You’ll learn how to
-deploy an MCP Server to Azure, register it as a tool in Copilot Studio,
-and integrate it into a conversational agent.
+Neste laboratório, você simulará como o Hub de Inovação da Zava
+experimenta com o Model Context Protocol (MCP) para conectar APIs
+externas e fontes de conhecimento com o Microsoft Copilot Studio. Você
+aprenderá a implantar um servidor MCP no Azure, registrá-lo como uma
+ferramenta no Copilot Studio e integrá-lo a um agente de conversação.
 
-By completing this lab, you will:
+Ao concluir este laboratório, você irá:
 
-- Understand how MCP enables secure, real-time data integration for
-  Copilot Studio agents.
+- Entender como o MCP permite a integração segura e em tempo real de
+  dados para os agentes do Copilot Studio.
 
-- Learn to deploy, configure, and connect an MCP Server using Azure
-  Developer CLI.
+- Aprender a implementar, configurar e conectar um servidor MCP usando
+  Azure Developer CLI.
 
-- Explore the end-to-end workflow of adding an MCP-powered tool to a
-  Copilot Studio agent.
+- Explorar o fluxo de trabalho completo de adicionar uma ferramenta com
+  tecnologia MCP a um agente do Copilot Studio.
 
-## Exercise 1: Deploy the MCP Server to Azure
+## Exercício 1: Implementar o servidor MCP no Azure
 
-In this exercise, you will **deploy** the **Microsoft MCP** (Model
-Context Protocol) Server from a local development environment to
-**Azure** using the Azure Developer CLI (azd). This establishes a
-**cloud-hosted endpoint** that can be **consumed** by **Copilot Studio**
-or other applications in later exercises.
+Neste exercício, você **implementará** o servidor **Microsoft
+MCP** (Model Context Protocol) de um ambiente de desenvolvimento local
+para o **Azure** usando o Azure Developer CLI (azd). Isso estabelece um
+**endpoint hospedado na nuvem** que pode ser **consumido** pelo
+**Copilot Studio** ou outros aplicativos em exercícios posteriores.
 
-1.  Open **Docker Desktop** from the lab VM.
+1.  Abra o **Docker Desktop** da VM do laboratório.
 
-	![](./media/image1.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-2.  Open the **Visual Studio Code** and select **OpenFolder**.
+2.  Abra o **Visual Studio Code** e selecione **OpenFolder**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image2.png)
 
-3.  Select the **mcsmcp** folder from **C:\LabFiles** and click on
-    **Select Folder**.
+3.  Selecione a pasta **mcsmcp** de **C:\LabFiles** e clique em **Select
+    Folder**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image3.png)
 
-4.  Select **Yes, I trust the authors** to continue.
+4.  Selecione **Yes, I trust the authors** para continuar.
 
 	![A screenshot of a computer AI-generated content may be
-	incorrect.](./media/image4.png)
+incorrect.](./media/image4.png)
 
-5.  From the **VS Code**, select **View** -\> **Terminal** to open the
+5.  No **VS Code**, selecione **View** -\> **Terminal** para abrir o
     terminal.
 
 	![A screenshot of a computer AI-generated content may be
@@ -92,154 +95,152 @@ incorrect.](./media/image3.png)
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image6.png)
 
-6.  Enter +++azd auth login+++ to login to **Azure**.
+6.  Insira +++azd auth login+++ para fazer login no **Azure**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-7.  **Login** using the credentials from the **Resources** tab.
+7.  **Faça login** usando as credenciais da guia **Resources**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-8.  Enter +++azd up+++ and click Enter to scaffold the project into
-    Azure.
+8.  Insira +++azd up+++ e pressione Enter para criar o projeto no Azure.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
+9.  Digite o nome como <+++mcsmcp@lab.LabInstance.Id>+++
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-10. Select **Enter** to accept the listed subscription.
+10. Clique em **Enter** para aceitar a assinatura listada.
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
-    
-13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
+11. Selecione **@lab.CloudResourceGroup(ResourceGroup1).Location** como
+    sua localização
+
+12. Use as marcas de seta para rolar para cima e para baixo na lista de
+    regiões e selecione a **região** identificada na etapa acima e
+    pressione **Enter**. A região na captura de tela e a atribuída a
+    você na VM do laboratório podem variar.
 
 	![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image12.png)
 
-14. This deploys the necessary resources in the Azure portal and outputs
-    a success message.
+13. Isso implementa os recursos necessários no portal do Azure e gera
+    uma mensagem de êxito.
 
-	![](./media/image13.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image13.png)
 
-15. The output also provides an **Endpoint url**. **Save** it to a
-    **notepad** to be used in the upcoming exercises.
+14. A saída também fornece uma **URL de endpoint**. **Salve-a** em um
+    **bloco de notas** para ser usada nos próximos exercícios.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-16. Add **/mcp** to the end of that URL and open it in a browser. You
-    will see an error inside a JSON message, which is ok. It means that
-    you are reaching the MCP server.
+15. Adicione **/mcp** ao final desse URL e abra-o em um navegador. Você
+    verá um erro dentro de uma mensagem JSON, o que está ok. Isso
+    significa que você está acessando o servidor MCP.
 
 	![](./media/image15.png)
 
-In this exercise, you opened the MCP Server project in Visual Studio
-Code, authenticated to Azure using the Azure Developer CLI, and deployed
-the solution to Azure using the azd up command. The deployment created
-the necessary Azure resources (such as a Container App and supporting
-infrastructure) and provided a public endpoint URL for the MCP Server.
-Verifying the endpoint in a browser confirmed successful deployment and
-connectivity, setting up the foundation for integrating the MCP Server
-with downstream components in the upcoming exercises.
+Neste exercício, você abriu o projeto do MCP Server no Visual Studio Code, autenticou no Azure usando a CLI do Desenvolvedor do Azure e implantou a solução no Azure usando o comando azd up. A implementação criou os recursos necessários do Azure (como um Aplicativo de Contêiner e infraestrutura de suporte) e forneceu uma URL de ponto de extremidade pública para o Servidor MCP. A verificação do endpoint em um navegador confirmou a implantação e a conectividade bem-sucedidas, configurando a base para integrar o MCP Server com componentes downstream nos próximos exercícios.
 
-## Exercise 2: Use the Jokes MCP Server in Microsoft Copilot Studio
+## Exercício 2: Usar o servidor MCP Jokes no Microsoft Copilot Studio
 
-### Task 1: Import the Connector
+### Tarefa 1: Importar o conector
 
-**Objective**
+**Objetivo**
 
-To import and configure a **custom MCP connector** in **Power Apps** for
-integration with the deployed MCP Server.
+Para importar e configurar um **conector MCP personalizado** no **Power
+Apps** para integração com o servidor MCP implantado.
 
-1.  Go to +++https://make.preview.powerapps.com/customconnectors+++
+1.  Vá em +++https://make.preview.powerapps.com/customconnectors+++
 
-2.  Select **+ New custom connector** -\> **Import from GitHub**.
+2.  Selecione **+ New custom connector** -\> **Import from GitHub**.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+	[A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-3.  Select the below details.
+3.  Selecione os detalhes abaixo.
 
-	- **Connector Type – Custom**
+    - **Connector Type – Custom**
 
-	- **Branch – dev**
+    - **Branch – dev**
 
-	- **Connector - MCP-Streamable-HTTP **
+    - **Connector - MCP-Streamable-HTTP**
 
-	Select **Continue**.
+	Selecione **Continue**.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image17.png)
 
-4.  Change the **Connector Name** to +++**Jokes MCP**+++.
+4.  Altere o **Connector Name** para +++**Jokes MCP**+++.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-5.  Paste your root URL (the part after https://) from the url that you
-    saved earlier, in the **Host** field select **Create connector**.
+5.  Cole a URL raiz (a parte após https://) da URL que você salvou
+    anteriormente, no campo **Host**, selecione **Create connector**.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image19.png) 
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
 
-	>[!Alert] **Warning**
-	>
-	>You may see a warning and an error upon creation – it should be resolved soon - but you can ignore it for now.
+	[Alerta!] **Aviso**
 
-6.  **Close** the connector.
+	Você pode ver um aviso e um erro na criação - deve ser resolvido em
+	breve - mas você pode ignorá-lo por enquanto.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
+6.  Clique em **Close** para fechar o conector.
+
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image21.png)
 
-In this task, you imported the **MCP-Streamable-HTTP** connector from
-GitHub into Power Apps, renamed it to **Jokes MCP**, and configured it
-with the Azure-hosted MCP Server URL. This establishes a connection
-between Power Platform and the MCP Server, enabling future interactions
-in subsequent tasks.
+	Nesta tarefa, você importou o conector **MCP-Streamable-HTTP** do GitHub
+para o Power Apps, renomeou-o para **Jokes MCP** e configurou-o com a
+URL do servidor MCP hospedada no Azure. Isso estabelece uma conexão
+entre o Power Platform e o MCP Server, permitindo interações futuras em
+tarefas subsequentes.
 
-### Task 2: Create an agent and add the MCP server as a tool
+### Tarefa 2: Criar um agente e adicionar o servidor MCP como uma ferramenta
 
-In this task, you will build a custom **Jokester** agent in Microsoft
-Copilot Studio and integrate it with the **Jokes MCP Server** using the
-Model Context Protocol (MCP) framework, enabling the agent to fetch and
-deliver dynamic jokes from the connected MCP endpoint.
+Nesta tarefa, você criará um agente **Jokester** personalizado no
+Microsoft Copilot Studio e o integrará ao **Jokes MCP Server** usando a
+estrutura MCP (Model Context Protocol), permitindo que o agente busque e
+entregue piadas dinâmicas do endpoint MCP conectado.
 
-1.  Open the **Copilot Studio** from a browser with the url,
-    +++https://copilotstudio.microsoft.com+++ and login with the
-    credentials from the **Resources** tab. Select **Get Started** to
-    enable the **trial** license.
+1.  Abra o **Copilot Studio** em um navegador com a url,
+    +++https://copilotstudio.microsoft.com+++/ e
+    faça login com as credenciais na guia **Resources**. Selecione **Get
+    Started** para habilitar a licença de **teste**.
 
 	![A screenshot of a web page AI-generated content may be
 incorrect.](./media/image22.png)
 
-2.  Select **Create** -\> **+ New agent**.
+2.  Selecione **Create** -\> **+ New agent**.
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image23.png)
 
-3.  Select the **Configure** tab to configure your agent.
+3.  Selecione a guia **Configure** para configurar seu agente.
 
 	![A screenshot of a login page AI-generated content may be
 incorrect.](./media/image24.png)
 
-4.  Enter the below details and select **Create**.
+4.  Insira os detalhes abaixo e selecione **Create**.
 
 	- **Name** – +++Jokester+++
-	
-	- **Description** –
 
-	```
-	A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.
-	```
+	- **Description** – +++A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.+++
 
 	- **Instructions** –
-
 	```
 	You are a joke-telling assistant. Your sole purpose is to deliver appropriate, clever, and engaging jokes upon request. Follow these rules:
 
@@ -252,166 +253,174 @@ incorrect.](./media/image24.png)
 	* Do not repeat jokes within the same session.
 	* Avoid explaining the joke unless explicitly asked.
 	* Be responsive, witty, and quick.
+
 	```
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-5.  The **agent** gets **created** as per the instructions provided.
+5.  O **agente** é **criado** de acordo com as instruções fornecidas.
 
 	![A logo of a company AI-generated content may be
-incorrect.](./media/image26.png)
+	incorrect.](./media/image26.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image27.png)
+	incorrect.](./media/image27.png)
 
-6.  Select **Settings** from the top right corner of the agent page.
+6.  Selecione **Settings** no canto superior direito da página do
+    agente.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-7.  In the **Settings** pane, select **No** under **Use generative AI
+7.  No painel **Settings**, selecione **No** em **Use generative AI
     orchestration for your agent responses**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-8.  Scroll down and disable **Use general knowledge** and **Use
-    information from the Web** under the Knowledge section.
+8.  Role para baixo e desative **Use general knowledge** e**Use
+    information from the Web** na seção **Knowledge**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-9.  Scroll up and select **Yes** under **Use generative AI orchestration
-    for your agent responses**.
+9.  Role para cima e selecione **Yes** em **Use generative AI
+    orchestration for your agent responses**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-10. Select **Save** and then **close** the Settings window.
+10. Selecione **Save** e feche a janela Settings.
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image32.png)
+	incorrect.](./media/image32.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+	incorrect.](./media/image33.png)
 
-11. From the agent’s **Overview** page, select **Tools**.
+11. Na página **Overview** do agente, selecione **Tools**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-12. Select **+ Add a tool** to add a new tool to the agent.
+12. Selecione **+ Add a tool** para adicionar uma nova ferramenta ao
+    agente.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-13. In the Add a tool window, select the **Model Context Protocol** tab.
+13. Na janela **Add a tool**, selecione a guia **Model Context
+    Protocol**
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image36.png)
 
-14. Select the **Jokes MCP** Server you created earlier.
+14. Selecione o **Jokes MCP Server** que você criou anteriormente.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-15. Select the **drop down** next to **Not connected** and then select
-    **Create new connection**.
+15. Selecione o **menu suspenso** ao lado de **Not connected** e, em
+    seguida, selecione **Create new connection**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-16. Select **Create** in the next screen.
+16. Selecione **Create** na próxima tela.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-17. Once the connection is established, select the **Add to agent**
-    button to add the MCP Server to the Jokester agent.
+17. Depois que a conexão for estabelecida, selecione o botão **Add to
+    agent** para adicionar o servidor MCP ao agente Jokester.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-18. Now the **MCP Server** has been added as a **tool** to the agent.
+18. Agora, o **servidor MCP** foi adicionado como uma **tool** ao
+    agente.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-19. Select **Refresh** in the Test pane before starting to test the
-    agent behaviour.
+19. Selecione **Refresh** no painel **Test** antes de começar a testar o
+    comportamento do agente.
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image42.png)
 
-20. Enter +++Can I get a Chuck Norris joke?+++ and select **Send**.
+20. Insira +++Can I get a Chuck Norris joke?+++ e selecione **Send**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image43.png)
 
-21. Select **Open connection manager**.
+21. Selecione **Open connection manager**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image44.png)
 
-22. Select **Connect** to establish the connection.
+22. Selecione **Connect** para estabelecer a conexão.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-23. Once the Jokes MCP connection is selected, select **Submit**.
+23. Depois que a conexão Jokes MCP for selecionada,
+    selecione **Submit**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-24. You can now see that in the **Manage your connections** page, the
-    Jokes MCP Server is in **connected** state.
+24. Agora você pode ver isso na página **Manage your connections**, o
+    servidor MCP do Jokes está com o **Status** como **Connected**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-25. Now that it is connected, navigate back to the Test pane and select
-    **Retry**.
+25. Agora que ele está conectado, navegue de volta para o painel
+    **Test** e selecione **Retry**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image48.png)
 
-26. You can now see that the MCP Server is being invoked and the agent
-    tries to generate a response from the Jokes MCP Server.
+26. Agora você pode ver que o servidor MCP está sendo invocado e o
+    agente tenta gerar uma resposta do servidor MCP Jokes.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-27. The agent uses the **MCP Server**, generates a response and
-    **populates** it in the **Test pane**.
+27. O agente usa o **servidor MCP**, gera uma resposta e a preenche no
+    **painel Teste**.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
 
-And this is the **Jokes MCP Server** working in **Microsoft Copilot
+E este é o **Jokes MCP Server** trabalhando no **Microsoft Copilot
 Studio**.
 
-In this task, you created a new agent named **Jokester** in Copilot
-Studio, configured its purpose and behavioral instructions for humor
-generation, and enabled **Generative AI Orchestration** for intelligent
-responses. You then connected the **Jokes MCP Server** as a tool via the
-Model Context Protocol, authenticated the connection, and successfully
-tested the integration by retrieving jokes through the agent’s test
-panel. This confirmed that the MCP server was properly connected and
-functioning within the Copilot Studio environment.
+Nesta tarefa, você criou um novo agente chamado **Jokester** no Copilot
+Studio, configurou sua finalidade e instruções comportamentais para
+geração de humor e ativou a **Orquestração de AI generativa** para
+respostas inteligentes. Em seguida, você conectou o **Jokes MCP Server**
+como uma ferramenta por meio do Model Context Protocol, autenticou a
+conexão e testou com êxito a integração recuperando piadas por meio do
+painel de teste do agente. Isso confirmou que o servidor MCP estava
+conectado corretamente e funcionando no ambiente do Copilot Studio.
 
-## Summary
+## Resumo
 
-In this lab, Zava’s Innovation Hub successfully explored how the **Model
-Context Protocol (MCP)** can extend Microsoft Copilot Studio with
-real-time, external data integration. Beginning with a safe and low-risk
-example — the **Jokes MCP Server** — participants learned how to deploy
-an MCP Server to **Azure** using the **Azure Developer CLI**, configure
-it as a **custom connector**, and consume it within a **Copilot Studio
-agent**.
+Neste laboratório, o Centro de Inovação da Zava explorou com sucesso
+como o **Model Context Protocol (MCP)** pode estender o Microsoft
+Copilot Studio com integração de dados externos em tempo real. Começando
+com um exemplo seguro e de baixo risco — o **Jokes MCP Server** — os
+participantes aprenderam a implantar um servidor MCP no **Azure** usando
+a CLI do **Azure Developer**, configurá-lo como um **conector
+personalizado** e consumi-lo em um **agente do Copilot Studio**.
 
-Through the exercises, you created a custom **Jokester** agent that
-connected securely to the Jokes MCP Server, demonstrating how Copilot
-Studio can invoke live API calls through MCP. The lab provided practical
-experience in setting up, authenticating, and testing MCP-based tools —
-establishing the foundation for integrating future, business-critical
-MCP servers with enterprise data systems.
+Por meio dos exercícios, você criou um agente **Jokester personalizado**
+que se conectou com segurança ao Jokes MCP Server, demonstrando como o
+Copilot Studio pode invocar chamadas de API ao vivo por meio do MCP. O
+laboratório forneceu experiência prática na configuração, autenticação e
+teste de ferramentas baseadas em MCP - estabelecendo a base para
+integrar futuros servidores MCP críticos para os negócios com sistemas
+de dados corporativos.
