@@ -1,90 +1,84 @@
-# Lab 4- Zava’s Journey to AI Integration – Building MCP-Powered Agents in Microsoft Copilot Studio
+# 실습 4 – Zava의 AI 통합 여정: Microsoft Copilot Studio에서 MCP 기반 에이전트 구축
 
-**Scenario:**
+## 시나리오:
 
-Zava, a fast-growing digital health organization, has recently formed an
-**Internal Innovation Hub** to experiment with new AI capabilities that
-could later be adapted into regulated healthcare solutions. Before
-connecting sensitive medical systems, the innovation team needs a
-**safe, low-risk sandbox** to learn how to integrate external APIs and
-data sources with **Microsoft Copilot Studio** using the **Model Context
-Protocol (MCP)**.
+빠르게 성장하는 디지털 헬스 조직인 Zava는 최근 내부 혁신 허브(**Internal
+Innovation Hub**)를 설립해, 향후 규제된 의료 솔루션에 적용될 수 있는
+새로운 AI 기능을 실험하고자 합니다. 민감한 의료 시스템을 연결하기 전에,
+혁신 팀은 **Model Context Protocol(MCP)**을 사용해 외부 API 및 데이터
+소스를 **Microsoft Copilot Studio**와 통합하는 방법을 학습할 수 있는
+**안전하고 위험도가 낮은 샌드박스**가 필요합니다.
 
-To do this, the team starts with a **simple, harmless example** — a
-*Jokes MCP Server* — that demonstrates how Copilot Studio can call
-real-time APIs through MCP. This lightweight prototype helps engineers,
-data scientists, and AI solution architects understand:
+이를 위해 팀은 **간단하고 무해한 예제**인 *Jokes MCP Server*로
+시작합니다. 이는 Copilot Studio가 MCP를 통해 실시간 API를 호출하는
+방법을 보여줍니다. 이 가벼운 프로토타입은 엔지니어, 데이터 과학자 및 AI
+솔루션 아키텍트가 다음을 이해하는 데 도움을 줍니다.
 
-- how MCP servers are deployed to Azure,
+- MCP 서버를 Azure에 배포하는 방법
 
-- how Copilot Studio can discover and consume MCP tools, and
+- Copilot Studio가 MCP 도구를 발견하고 활용하는 방법
 
-- how real-time external data can be securely integrated into agents.
+- 실시간 외부 데이터를 에이전트에 안전하게 통합하는 방법
 
-By completing this lab, the Zava Innovation team establishes the
-foundation for connecting future MCP servers to real business systems —
-once governance and compliance measures are applied.
+이 실습을 완료하면 Zava 혁신 팀은 향후 MCP 서버를 실제 비즈니스 시스템과
+연결할 기반을 마련할 수 있습니다(규제 및 컴플라이언스 적용 후).
 
-**Business Value:**
+## 비즈니스 가치:
 
-- Encourages hands-on learning with MCP integration before applying it
-  to sensitive domains.
+- 민감한 도메인에 적용하기 전 MCP 통합을 직접 경험하며 학습 가능
 
-- Demonstrates end-to-end deployment and tool consumption in a secure,
-  Azure-ready setup.
+- 보안이 확보된 Azure 환경에서 엔드 투 엔드 배포 및 도구 활용 시연
 
-- Builds organizational readiness for next-generation, AI-driven
-  workflows.
+- 차세대 AI 기반 워크플로우를 위한 조직 준비 강화
 
-## Objective:
+## 목표:
 
-In this lab, you will simulate how Zava’s Innovation Hub experiments
-with the Model Context Protocol (MCP) to connect external APIs and
-knowledge sources with Microsoft Copilot Studio. You’ll learn how to
-deploy an MCP Server to Azure, register it as a tool in Copilot Studio,
-and integrate it into a conversational agent.
+이번 실습에서는 Zava 혁신 허브가 MCP(Model Context Protocol)를 실험해
+외부 API와 지식 소스를 Microsoft Copilot Studio와 연결하는 과정을
+시뮬레이션합니다. MCP 서버를 Azure에 배포하고, Copilot Studio에서 도구로
+등록하고, 대화형 에이전트에 통합하는 방법을 배웁니다.
 
-By completing this lab, you will:
+이 실습을 완료하면:
 
-- Understand how MCP enables secure, real-time data integration for
-  Copilot Studio agents.
+- MCP가 Copilot Studio 에이전트에 실시간 데이터를 안전하게 통합하는
+  방법을 이해
 
-- Learn to deploy, configure, and connect an MCP Server using Azure
-  Developer CLI.
+- Azure Developer CLI를 사용하여 MCP 서버를 배포, 구성, 연결하는 방법
+  학습
 
-- Explore the end-to-end workflow of adding an MCP-powered tool to a
-  Copilot Studio agent.
+- MCP 기반 도구를 Copilot Studio 에이전트에 추가하는 엔드 투 엔드
+  워크플로우 탐색
 
-## Exercise 1: Deploy the MCP Server to Azure
+## 연습 1: Azure에 MCP Server 배포
 
-In this exercise, you will **deploy** the **Microsoft MCP** (Model
-Context Protocol) Server from a local development environment to
-**Azure** using the Azure Developer CLI (azd). This establishes a
-**cloud-hosted endpoint** that can be **consumed** by **Copilot Studio**
-or other applications in later exercises.
+이번 실습에서는 로컬 개발 환경에서 **Microsoft MCP**(Model Context
+Protocol) 서버를 Azure에 **배포**합니다. Azure Developer CLI(azd)를
+사용해 **클라우드 호스팅 엔드포인트**를 생성하며, 이후 실습에서
+**Copilot Studio** 또는 다른 애플리케이션에서 이 엔드포인트를 **활용**할
+수 있습니다.
 
-1.  Open **Docker Desktop** from the lab VM.
+1.  Lab VM에서**Docker Desktop**을 여세요.
 
-	![](./media/image1.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-2.  Open the **Visual Studio Code** and select **OpenFolder**.
+2.  **Visual Studio Code**을 열고 **OpenFolder**를 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image2.png)
 
-3.  Select the **mcsmcp** folder from **C:\LabFiles** and click on
-    **Select Folder**.
+3.  **mcsmcp**에 있는 **C:\LabFiles** 폴더를 선택한 후 **Select
+    Folder**를 클릭하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image3.png)
 
-4.  Select **Yes, I trust the authors** to continue.
+4.  계속 진행하려면 **Yes, I trust the authors**를 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
-	incorrect.](./media/image4.png)
+incorrect.](./media/image4.png)
 
-5.  From the **VS Code**, select **View** -\> **Terminal** to open the
-    terminal.
+5.  **VS Code**에서 **View** -\> **Terminal**을 선택해 터미널을 여세요.
 
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image5.png)
@@ -92,154 +86,152 @@ incorrect.](./media/image3.png)
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image6.png)
 
-6.  Enter +++azd auth login+++ to login to **Azure**.
+6.  터미널에 +++azd auth login+++을 입력해 **Azure**에 로그인하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-7.  **Login** using the credentials from the **Resources** tab.
+7.  **Resources** 탭에 있는 계정 정보를 사용하여 **로그인**하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-8.  Enter +++azd up+++ and click Enter to scaffold the project into
-    Azure.
+8.  +++azd up+++ 명령어를 입력하고 Enter 키를 눌러 프로젝트를 Azure에
+    배포하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
+9.  이름을 <+++mcsmcp@lab.LabInstance.Id>+++로 입력하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-10. Select **Enter** to accept the listed subscription.
+10. 표시된 구독을 확인하고 **Enter** 키를 눌러 수락하세요.
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
-    
-13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
+11. **@lab.CloudResourceGroup(ResourceGroup1).Location**을 위치로
+    선택하세요.
+
+12. 화살표 키를 사용해 지역 목록을 위아래로 스크롤하고 위 단계에서
+    식별된 지역(**region**)을 선택한 후 **Enter**를 누르세요. 스크린샷의
+    지역과 실습 VM에 할당된 지역은 다를 수 있습니다.
 
 	![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image12.png)
 
-14. This deploys the necessary resources in the Azure portal and outputs
-    a success message.
+13. 이 단계는 Azure 포털에 필요한 리소스를 배포하며, 완료되면 성공
+    메시지가 출력됩니다.
 
-	![](./media/image13.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image13.png)
 
-15. The output also provides an **Endpoint url**. **Save** it to a
-    **notepad** to be used in the upcoming exercises.
+14. 출력 결과에는 **Endpoint url**도 제공됩니다. 이후 실습에서 사용할 수
+    있도록 **메모장**에 **저장**하세요. 
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-16. Add **/mcp** to the end of that URL and open it in a browser. You
-    will see an error inside a JSON message, which is ok. It means that
-    you are reaching the MCP server.
+15. 해당 URL 끝 **/mcp**를 추가하고 브라우저에서 열어보세요. JSON 메시지
+    안에 오류가 표시되더라도 괜찮습니다. 이는 MCP 서버에 정상적으로
+    접근하고 있음을 의미합니다.
 
-	![](./media/image15.png)
+![](./media/image15.png)
 
-In this exercise, you opened the MCP Server project in Visual Studio
-Code, authenticated to Azure using the Azure Developer CLI, and deployed
-the solution to Azure using the azd up command. The deployment created
-the necessary Azure resources (such as a Container App and supporting
-infrastructure) and provided a public endpoint URL for the MCP Server.
-Verifying the endpoint in a browser confirmed successful deployment and
-connectivity, setting up the foundation for integrating the MCP Server
-with downstream components in the upcoming exercises.
+이번 실습에서는 Visual Studio Code에서 MCP Server 프로젝트를 열고, Azure Developer CLI를 사용해 Azure에 인증한 후 azd up 명령으로 솔루션을 Azure에 배포했습니다. 이 배포 과정에서 컨테이너 앱과 관련 인프라 같은 필요한 Azure 리소스가 생성되었으며, MCP Server용 퍼블릭 엔드포인트 URL도 제공되었습니다. 브라우저에서 엔드포인트를 확인함으로써 배포와 연결이 성공적으로 이루어졌음을 검증했으며, 이후 실습에서 MCP Server를 다른 구성 요소와 통합할 수 있는 기반을 마련했습니다.
 
-## Exercise 2: Use the Jokes MCP Server in Microsoft Copilot Studio
+## 연습 2: Microsoft Copilot Studio에서 Jokes MCP Server 사용
 
-### Task 1: Import the Connector
+### 작업 1: 커넥터 가져오기
 
-**Objective**
+**목표**
 
-To import and configure a **custom MCP connector** in **Power Apps** for
-integration with the deployed MCP Server.
+배포된 MCP Server와 통합하기 위해 **Power Apps**에서 **맞춤 MCP
+커넥터**를 가져오고 구성합니다.
 
-1.  Go to +++https://make.preview.powerapps.com/customconnectors+++
+1.  +++https://make.preview.powerapps.com/customconnectors+++로
+    이동하세요.
 
-2.  Select **+ New custom connector** -\> **Import from GitHub**.
+2.  **+ New custom connector** -\> **Import from GitHub**를 선택하세요.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-3.  Select the below details.
+3.  다음 세부 정보를 선택하세요.
 
-	- **Connector Type – Custom**
+    - **Connector Type – Custom**
 
-	- **Branch – dev**
+    - **Branch – dev**
 
-	- **Connector - MCP-Streamable-HTTP **
+    - **Connector - MCP-Streamable-HTTP**
 
-	Select **Continue**.
+	**Continue**를 선택하세요.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-4.  Change the **Connector Name** to +++**Jokes MCP**+++.
+4.  **Connector Name**을 +++**Jokes MCP**+++로 변경하세요.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-5.  Paste your root URL (the part after https://) from the url that you
-    saved earlier, in the **Host** field select **Create connector**.
+5.  이전에 저장한 URL에서 https:// 이후 부분을 **Host** 필드에
+    붙여넣고, **Create connector**를 선택하세요.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image19.png) 
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
 
-	>[!Alert] **Warning**
-	>
-	>You may see a warning and an error upon creation – it should be resolved soon - but you can ignore it for now.
+	[!Alert] **Warning**
 
-6.  **Close** the connector.
+	성 과정에서 경고나 오류가 나타날 수 있지만, 곧 해결되므로 지금은
+무시해도 됩니다.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
+6.  커넥터 창을 **닫으세요**.
+
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image21.png)
 
-In this task, you imported the **MCP-Streamable-HTTP** connector from
-GitHub into Power Apps, renamed it to **Jokes MCP**, and configured it
-with the Azure-hosted MCP Server URL. This establishes a connection
-between Power Platform and the MCP Server, enabling future interactions
-in subsequent tasks.
+이번 작업에서는 GitHub에서 **MCP-Streamable-HTTP** 커넥터를 Power Apps로
+가져오고, 이름을 **Jokes MCP**로 변경한 뒤, Azure에 호스팅된 MCP 서버
+URL로 구성했습니다. 이를 통해 Power Platform과 MCP 서버 간 연결이
+설정되어, 이후 작업에서 상호작용할 수 있는 기반이 마련됩니다.
 
-### Task 2: Create an agent and add the MCP server as a tool
+### 작업 2: 에이전트 생성 및 MCP 서버 도구 추가
 
-In this task, you will build a custom **Jokester** agent in Microsoft
-Copilot Studio and integrate it with the **Jokes MCP Server** using the
-Model Context Protocol (MCP) framework, enabling the agent to fetch and
-deliver dynamic jokes from the connected MCP endpoint.
+이번 작업에서는 Microsoft Copilot Studio에서 맞춤형 **Jokester**
+에이전트를 구축하고, Model Context Protocol(MCP) 프레임워크를
+사용해 **Jokes MCP Server**와 통합합니다. 이를 통해 에이전트가 연결된
+MCP 엔드포인트에서 동적으로 농담을 가져와 제공할 수 있습니다.
 
-1.  Open the **Copilot Studio** from a browser with the url,
-    +++https://copilotstudio.microsoft.com+++ and login with the
-    credentials from the **Resources** tab. Select **Get Started** to
-    enable the **trial** license.
+1.  브라우저에서 **Copilot Studio**를 열고 URL
+    +++[https://copilotstudio.microsoft.com+++](https://copilotstudio.microsoft.com+++/)로 접속한
+    후, **Resources** **탭**의 자격 증명을 사용해 로그인하세요.
+    Select **Get Started** 를 선택해 **trial** 라이선스를 활성화하세요.
 
 	![A screenshot of a web page AI-generated content may be
 incorrect.](./media/image22.png)
 
-2.  Select **Create** -\> **+ New agent**.
+2.  **Create** -\> **+ New agent**를 선택하세요.
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image23.png)
 
-3.  Select the **Configure** tab to configure your agent.
+3.  **Configure** 탭을 선택해 에이전트를 구성하세요.
 
 	![A screenshot of a login page AI-generated content may be
 incorrect.](./media/image24.png)
 
-4.  Enter the below details and select **Create**.
+4.  아래 정보를 입력하고 **Create**를 선택하세요.
 
 	- **Name** – +++Jokester+++
-	
-	- **Description** –
 
-	```
-	A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.
-	```
+	- **Description** – +++A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.+++
 
 	- **Instructions** –
-
 	```
 	You are a joke-telling assistant. Your sole purpose is to deliver appropriate, clever, and engaging jokes upon request. Follow these rules:
 
@@ -252,166 +244,163 @@ incorrect.](./media/image24.png)
 	* Do not repeat jokes within the same session.
 	* Avoid explaining the joke unless explicitly asked.
 	* Be responsive, witty, and quick.
+
 	```
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-5.  The **agent** gets **created** as per the instructions provided.
+5.  제공한 정보를 기반으로 **에이전트**가 **생성**됩니다.
 
 	![A logo of a company AI-generated content may be
-incorrect.](./media/image26.png)
+	incorrect.](./media/image26.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image27.png)
+	incorrect.](./media/image27.png)
 
-6.  Select **Settings** from the top right corner of the agent page.
+6.  에이전트 페이지 우측 상단에서 **Settings**을 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-7.  In the **Settings** pane, select **No** under **Use generative AI
-    orchestration for your agent responses**.
+7.  **Settings** 창에서 **Use generative AI orchestration for your agent
+    responses** 옵션을 **No**로 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-8.  Scroll down and disable **Use general knowledge** and **Use
-    information from the Web** under the Knowledge section.
+8.  아래로 스크롤해 Knowledge 섹션에서 **Use general knowledge**와 **Use
+    information from the Web** 옵션을 모두 비활성화하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-9.  Scroll up and select **Yes** under **Use generative AI orchestration
-    for your agent responses**.
+9.  위로 스크롤해 **Use generative AI orchestration for your agent
+    responses** 옵션을 **Yes**로 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-10. Select **Save** and then **close** the Settings window.
+10. **Save**을 선택한 후 Settings 창을 **닫으세요**.
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image32.png)
+	incorrect.](./media/image32.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+	incorrect.](./media/image33.png)
 
-11. From the agent’s **Overview** page, select **Tools**.
+11. 에이전트의 **Overview** 페이지에서 **Tools**를 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-12. Select **+ Add a tool** to add a new tool to the agent.
+12. **+ Add a tool**를 선택해 에이전트에 새 도구를 추가하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-13. In the Add a tool window, select the **Model Context Protocol** tab.
+13. Add a tool 창에서 **Model Context Protocol** 탭을 선택하세요.![A
+    screenshot of a computer AI-generated content may be
+    incorrect.](./media/image36.png)
 
-	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image36.png)
-
-14. Select the **Jokes MCP** Server you created earlier.
+14. 이전에 생성한 **Jokes MCP** Server를 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-15. Select the **drop down** next to **Not connected** and then select
-    **Create new connection**.
+15. **Not connected** 옆의 **드롭다운**을 선택한 후 **Create new
+    connection**을 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-16. Select **Create** in the next screen.
+16. 다음 화면에서 **Create**를 선택하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-17. Once the connection is established, select the **Add to agent**
-    button to add the MCP Server to the Jokester agent.
+17. 연결이 완료되면 **Add to agent** 버튼을 선택해 MCP Server를 Jokester
+    에이전트에 추가하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-18. Now the **MCP Server** has been added as a **tool** to the agent.
+18. 이제 **MCP Server**가 에이전트의 **도구**로 추가되었습니다.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-19. Select **Refresh** in the Test pane before starting to test the
-    agent behaviour.
+19. 이전트 동작을 테스트하기 전에 Test 창에서 **Refresh**를 선택하세요.
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image42.png)
 
-20. Enter +++Can I get a Chuck Norris joke?+++ and select **Send**.
+20. +++Can I get a Chuck Norris joke?+++ 를 입력하고 **Send**를
+    선택하세요.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image43.png)
 
-21. Select **Open connection manager**.
+21. **Open connection manager**를 선택하세요.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image44.png)
 
-22. Select **Connect** to establish the connection.
+22. **Connect**를 선택해 연결을 설정하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-23. Once the Jokes MCP connection is selected, select **Submit**.
+23. Jokes MCP 연결을 선택한 후 **Submit**을 클릭하세요.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-24. You can now see that in the **Manage your connections** page, the
-    Jokes MCP Server is in **connected** state.
+24. 이제 **Manage your connections** 페이지에서 Jokes MCP Server가
+    **connected** 상태임을 확인할 수 있습니다.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-25. Now that it is connected, navigate back to the Test pane and select
-    **Retry**.
+25. 연결이 완료되었으므로, Test 창으로 돌아가서 **Retry**를 선택하세요.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image48.png)
 
-26. You can now see that the MCP Server is being invoked and the agent
-    tries to generate a response from the Jokes MCP Server.
+26. 이제 MCP 서버가 호출되는 것을 확인할 수 있으며, 에이전트가 Jokes MCP
+    Server부터 응답을 생성하려고 시도합니다.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-27. The agent uses the **MCP Server**, generates a response and
-    **populates** it in the **Test pane**.
+27. 에이전트가 **MCP Server**를 사용해 응답을 생성하고, 생성된 응답이
+    **Test pane**에 **표시**됩니다.
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
 
-And this is the **Jokes MCP Server** working in **Microsoft Copilot
-Studio**.
+이것은 **Microsoft Copilot Studio**에서 작동하는 **Jokes MCP
+Server**입니다.
 
-In this task, you created a new agent named **Jokester** in Copilot
-Studio, configured its purpose and behavioral instructions for humor
-generation, and enabled **Generative AI Orchestration** for intelligent
-responses. You then connected the **Jokes MCP Server** as a tool via the
-Model Context Protocol, authenticated the connection, and successfully
-tested the integration by retrieving jokes through the agent’s test
-panel. This confirmed that the MCP server was properly connected and
-functioning within the Copilot Studio environment.
+이번 과제에서는 Copilot Studio에서 **Jokester**라는 새로운 에이전트를
+생성하고, 유머 생성용 목적과 동작 지침을 설정한 뒤, 지능형 응답을 위해
+**Generative AI Orchestration**을 활성화했습니다. 이후 Model Context
+Protocol을 통해 **Jokes MCP Server**를 도구로 연결하고, 인증을 완료한 뒤
+테스트 패널에서 에이전트를 통해 농담을 가져오는 방식으로 통합을
+성공적으로 검증했습니다. 이를 통해 MCP 서버가 Copilot Studio 환경 내에서
+올바르게 연결되고 작동함을 확인할 수 있었습니다.
 
-## Summary
+## 요약
 
-In this lab, Zava’s Innovation Hub successfully explored how the **Model
-Context Protocol (MCP)** can extend Microsoft Copilot Studio with
-real-time, external data integration. Beginning with a safe and low-risk
-example — the **Jokes MCP Server** — participants learned how to deploy
-an MCP Server to **Azure** using the **Azure Developer CLI**, configure
-it as a **custom connector**, and consume it within a **Copilot Studio
-agent**.
+이번 실습에서 Zava의 혁신 허브는 **Model Context Protocol(MCP)**이
+Microsoft Copilot Studio에 실시간 외부 데이터 통합 기능을 확장할 수 있는
+방법을 탐색했습니다. 안전하고 낮은 위험의 예제인 **Jokes MCP Server**를
+시작으로, 참가자들은 Azure Developer CLI를 사용하여 MCP 서버를
+**Azure**에 배포하고, 이를 커스텀 커넥터로 구성한 뒤 **Copilot Studio
+에이전트** 내에서 활용하는 방법을 배웠습니다.
 
-Through the exercises, you created a custom **Jokester** agent that
-connected securely to the Jokes MCP Server, demonstrating how Copilot
-Studio can invoke live API calls through MCP. The lab provided practical
-experience in setting up, authenticating, and testing MCP-based tools —
-establishing the foundation for integrating future, business-critical
-MCP servers with enterprise data systems.
+실습을 통해 참가자들은 Jokes MCP 서버에 안전하게 연결된 맞춤형
+**Jokester** 에이전트를 생성하고, Copilot Studio가 MCP를 통해 라이브 API
+호출을 수행할 수 있음을 확인했습니다. 또한 MCP 기반 도구를 설정, 인증,
+테스트하는 실무 경험을 제공하여, 향후 기업 데이터 시스템과 통합되는 핵심
+MCP 서버 구현을 위한 기초를 마련했습니다.
