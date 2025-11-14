@@ -1,90 +1,86 @@
-# Lab 4- Zava’s Journey to AI Integration – Building MCP-Powered Agents in Microsoft Copilot Studio
+# ラボ 4 - Zava のAI 統合への旅 - Microsoft Copilot Studio での MCP 搭載エージェントの構築
 
-**Scenario:**
+## シナリオ：
 
-Zava, a fast-growing digital health organization, has recently formed an
-**Internal Innovation Hub** to experiment with new AI capabilities that
-could later be adapted into regulated healthcare solutions. Before
-connecting sensitive medical systems, the innovation team needs a
-**safe, low-risk sandbox** to learn how to integrate external APIs and
-data sources with **Microsoft Copilot Studio** using the **Model Context
-Protocol (MCP)**.
+急成長中のデジタルヘルス企業であるZavaは、将来的に規制対象のヘルスケアソリューションに導入可能な新しいAI機能の実験を行うため、**社内イノベーションハブ**を最近設立しました。機密性の高い医療システムを接続する前に、イノベーションチームは、**Model
+Context Protocol（MCP）を使用して外部APIとデータソースをMicrosoft
+Copilot
+Studio**に統合する方法を学習するための**、安全でリスクの低いサンドボックスを必要とし**ています。
 
-To do this, the team starts with a **simple, harmless example** — a
-*Jokes MCP Server* — that demonstrates how Copilot Studio can call
-real-time APIs through MCP. This lightweight prototype helps engineers,
-data scientists, and AI solution architects understand:
+これを実現するために、チームは**シンプルで無害なサンプル**である*Jokes
+MCP Serverから着手しました*。これは、Copilot
+StudioがMCPを介してリアルタイムAPIを呼び出す方法を示すものです。この軽量なプロトタイプは、エンジニア、データサイエンティスト、AIソリューションアーキテクトが以下の点を理解するのに役立ちます。
 
-- how MCP servers are deployed to Azure,
+- MCP SERVERをAzureに展開する方法
 
-- how Copilot Studio can discover and consume MCP tools, and
+- Copilot StudioがMCPツールを発見し、利用する方法
 
-- how real-time external data can be securely integrated into agents.
+- リアルタイムの外部データをエージェントに安全に統合する方法。
 
-By completing this lab, the Zava Innovation team establishes the
-foundation for connecting future MCP servers to real business systems —
-once governance and compliance measures are applied.
+このラボを完了することで、 Zava Innovation
+チームは、ガバナンスとコンプライアンス対策を適用した後、将来の MCP
+SERVERを実際のビジネス システムに接続するための基盤を確立します。
 
-**Business Value:**
+## ビジネス価値:
 
-- Encourages hands-on learning with MCP integration before applying it
-  to sensitive domains.
+- 機密性の高いドメインに適用する前に、MCP
+  統合による実践的な学習を奨励します。
 
-- Demonstrates end-to-end deployment and tool consumption in a secure,
-  Azure-ready setup.
+- 安全な Azure
+  対応セットアップでのエンドツーエンドの展開とツールの使用を示します。
 
-- Builds organizational readiness for next-generation, AI-driven
-  workflows.
+- 次世代の AI 主導型ワークフローに向けた組織の準備を構築します。
 
-## Objective:
+## 客観的：
 
-In this lab, you will simulate how Zava’s Innovation Hub experiments
-with the Model Context Protocol (MCP) to connect external APIs and
-knowledge sources with Microsoft Copilot Studio. You’ll learn how to
-deploy an MCP Server to Azure, register it as a tool in Copilot Studio,
-and integrate it into a conversational agent.
+このラボでは、 ZavaのイノベーションハブがModel Context
+Protocol（MCP）を用いて外部APIやナレッジソースをMicrosoft Copilot
+Studioに接続する実験をシミュレートします。MCP
+SERVERをAzureにデプロイし、Copilot
+Studioにツールとして登録し、会話エージェントに統合する方法を学びます。
 
-By completing this lab, you will:
+このラボを完了すると、次のことができるようになります。
 
-- Understand how MCP enables secure, real-time data integration for
-  Copilot Studio agents.
+- MCP が Copilot Studio エージェントの安全なリアルタイム
+  データ統合をどのように実現するかを理解します。
 
-- Learn to deploy, configure, and connect an MCP Server using Azure
-  Developer CLI.
+- Azure Developer CLI を使用して MCP
+  SERVERをデプロイ、構成、接続する方法を学習します。
 
-- Explore the end-to-end workflow of adding an MCP-powered tool to a
-  Copilot Studio agent.
+- MCP を利用したツールを Copilot Studio
+  エージェントに追加するエンドツーエンドのワークフローについて説明します。
 
-## Exercise 1: Deploy the MCP Server to Azure
+## 演習 1: MCP SERVERを Azure にデプロイする
 
-In this exercise, you will **deploy** the **Microsoft MCP** (Model
-Context Protocol) Server from a local development environment to
-**Azure** using the Azure Developer CLI (azd). This establishes a
-**cloud-hosted endpoint** that can be **consumed** by **Copilot Studio**
-or other applications in later exercises.
+この演習では、 Azure Developer CLI ( azd )
+を使用して、ローカル開発環境から**Azureに**Microsoft **MCP (Model
+Context Protocol)**
+サーバーをデプロイします。これにより、後の演習で**Copilot
+Studio**やその他のアプリケーションが使用できる**クラウドホスト型エンドポイント**が確立されます。
 
-1.  Open **Docker Desktop** from the lab VM.
+1.  ラボ VM から**Docker Desktop を**開きます。
 
-	![](./media/image1.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image1.png)
 
-2.  Open the **Visual Studio Code** and select **OpenFolder**.
+2.  **Visual Studio Code**を開き、 **OpenFolder** を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image2.png)
 
-3.  Select the **mcsmcp** folder from **C:\LabFiles** and click on
-    **Select Folder**.
+3.  **C:\LabFiles**から**mcsmcp**フォルダを選択し、 **「Select
+    Folder」**をクリックします。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image3.png)
 
-4.  Select **Yes, I trust the authors** to continue.
+4.  **「Yes, I trust the authors** **」**を選択して続行します。
 
 	![A screenshot of a computer AI-generated content may be
-	incorrect.](./media/image4.png)
+incorrect.](./media/image4.png)
 
-5.  From the **VS Code**, select **View** -\> **Terminal** to open the
-    terminal.
+5.  **VS Code**から、 **「View」** -\>
+    **「Terminal」**を選択してターミナルを開きます。
 
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image5.png)
@@ -92,153 +88,153 @@ incorrect.](./media/image3.png)
 	![A screenshot of a computer AI-generated content may be
 	incorrect.](./media/image6.png)
 
-6.  Enter +++azd auth login+++ to login to **Azure**.
+6.  **Azure**にログインするには、 +++ azd auth login+++と入力します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-7.  **Login** using the credentials from the **Resources** tab.
+7.  **Resources**タブの資格情報を使用して**ログイン**します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-8.  Enter +++azd up+++ and click Enter to scaffold the project into
-    Azure.
+8.  +++ azd up+++ と入力し、Enter をクリックしてプロジェクトを Azure
+    にスキャフォールディングします。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
+9.  名前を[+++
+    mcsmcp@lab.LabInstance.Id](mailto:+++mcsmcp@lab.LabInstance.Id)
+    +++として入力します
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-10. Select **Enter** to accept the listed subscription.
+10. リストされているサブスクリプションを承認するには、
+    **\[Enter\]**を選択します。
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
-    
-13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
+11. 場所として**@lab.CloudResourceGroup(ResourceGroup1).Location**を選択します。
+
+12. 矢印マークを使ってリージョンリストを上下にスクロールし、上記の手順で特定したリージョンを選択して**Enter**
+    キーを押します。スクリーンショットのリージョンとラボVMで割り当てられたリージョンは異なる場合があります。
 
 	![A screenshot of a computer program AI-generated content may be
 incorrect.](./media/image12.png)
 
-14. This deploys the necessary resources in the Azure portal and outputs
-    a success message.
+13. これにより、Azure
+    ポータルに必要なリソースがデプロイされ、成功メッセージが出力されます。
 
-	![](./media/image13.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image13.png)
 
-15. The output also provides an **Endpoint url**. **Save** it to a
-    **notepad** to be used in the upcoming exercises.
+14. 出力には**Endpoint
+    urlも表示されます**。これを**メモ帳**に**保存して**、今後の演習で使用してください。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-16. Add **/mcp** to the end of that URL and open it in a browser. You
-    will see an error inside a JSON message, which is ok. It means that
-    you are reaching the MCP server.
+15. URLの末尾に**「/
+    mcp」**を追加し、ブラウザで開いてください。JSONメッセージ内にエラーが表示されますが、これは問題ありません。MCP
+    SERVERにアクセスしていることを意味します。
 
 	![](./media/image15.png)
 
-In this exercise, you opened the MCP Server project in Visual Studio
-Code, authenticated to Azure using the Azure Developer CLI, and deployed
-the solution to Azure using the azd up command. The deployment created
-the necessary Azure resources (such as a Container App and supporting
-infrastructure) and provided a public endpoint URL for the MCP Server.
-Verifying the endpoint in a browser confirmed successful deployment and
-connectivity, setting up the foundation for integrating the MCP Server
-with downstream components in the upcoming exercises.
+	この演習では、Visual Studio Code で MCP Server プロジェクトを開き、Azure Developer CLI を使用して Azure に認証し、 azd up コマンドを使用してソリューションを Azure にデプロイしました。このデプロイにより、必要な Azure リソース（コンテナー アプリやサポート インフラストラクチャなど）が作成され、MCP Server のパブリック エンドポイント URL が提供されました。ブラウザーでエンドポイントを確認することで、デプロイと接続が正常に完了したことが確認され、以降の演習で MCP Server と下流コンポーネントを統合するための基盤が構築されました。
 
-## Exercise 2: Use the Jokes MCP Server in Microsoft Copilot Studio
+## 演習 2: Microsoft Copilot Studio で Jokes MCP SERVERを使用する
 
-### Task 1: Import the Connector
+### タスク1: コネクタをインポートする
 
-**Objective**
+**客観的**
 
-To import and configure a **custom MCP connector** in **Power Apps** for
-integration with the deployed MCP Server.
+展開された MCP SERVERとの統合のために、 **Power Apps**で**カスタム MCP
+コネクタを**インポートして構成します。
 
-1.  Go to +++https://make.preview.powerapps.com/customconnectors+++
+1.  +++https://make.preview.powerapps.com/customconnectors+++にアクセスして[ください+++](https://make.preview.powerapps.com/customconnectors+++)
 
-2.  Select **+ New custom connector** -\> **Import from GitHub**.
+2.  **+ New custom connector** -\> **Import from GitHub**を選択します。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image16.png)
 
-3.  Select the below details.
+3.  以下の詳細を選択してください。
 
-	- **Connector Type – Custom**
+    - **Connector Type – Custom**
 
-	- **Branch – dev**
+    - **Branch – dev**
 
-	- **Connector - MCP-Streamable-HTTP **
+    - **Connector - MCP-Streamable-HTTP**
 
-	Select **Continue**.
+	**[Continue]**を選択します。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image17.png)
 
-4.  Change the **Connector Name** to +++**Jokes MCP**+++.
+4.  **Connector Name**を**+++ Jokes MCP +++**に変更します。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image18.png)
 
-5.  Paste your root URL (the part after https://) from the url that you
-    saved earlier, in the **Host** field select **Create connector**.
+5.  先ほど保存したURLからルート URL (https:// の後の部分) を貼り付け、
+    **[Host]**フィールドで**\[Create connector\]** を選択します。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image19.png) 
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image19.png)
 
-	>[!Alert] **Warning**
-	>
-	>You may see a warning and an error upon creation – it should be resolved soon - but you can ignore it for now.
+[!Alert]**警告**
 
-6.  **Close** the connector.
+作成時に警告とエラーが表示される場合がありますが、すぐに解決されるはずですが、今のところは無視できます。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
+6.  コネクタ**を閉じます。**
+
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image20.png)
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image21.png)
 
-In this task, you imported the **MCP-Streamable-HTTP** connector from
-GitHub into Power Apps, renamed it to **Jokes MCP**, and configured it
-with the Azure-hosted MCP Server URL. This establishes a connection
-between Power Platform and the MCP Server, enabling future interactions
-in subsequent tasks.
+	このタスクでは、 GitHub から**MCP- Streamable -HTTP**コネクタを Power
+Apps にインポートし、名前を**Jokes MCP**に変更し、Azure
+でホストされている MCP SERVERの URL を設定しました。これにより、Power
+Platform と MCP
+SERVER間の接続が確立され、後続のタスクでのやり取りが可能になります。
 
-### Task 2: Create an agent and add the MCP server as a tool
+### タスク2: エージェントを作成し、MCP SERVERをツールとして追加する
 
-In this task, you will build a custom **Jokester** agent in Microsoft
-Copilot Studio and integrate it with the **Jokes MCP Server** using the
-Model Context Protocol (MCP) framework, enabling the agent to fetch and
-deliver dynamic jokes from the connected MCP endpoint.
+Microsoft Copilot Studio でカスタム**Jokesterエージェントを構築し、Model
+Context Protocol(MCP) フレームワークを使用してそれをJokes** MCP
+SERVER**と統合**し、エージェントが接続された MCP
+エンドポイントから動的なジョークを取得して配信できるようにします。
 
-1.  Open the **Copilot Studio** from a browser with the url,
-    +++https://copilotstudio.microsoft.com+++ and login with the
-    credentials from the **Resources** tab. Select **Get Started** to
-    enable the **trial** license.
+1.  ブラウザからURL +++
+    [https://copilotstudio.microsoft.com+++に](https://copilotstudio.microsoft.com+++/)アクセスし、
+    **Copilot Studio**にログインします。
+    **「Resources」**タブの資格情報でログインします。 **「Get
+    started」**を選択して試用ライセンスを有効にします。
 
 	![A screenshot of a web page AI-generated content may be
 incorrect.](./media/image22.png)
 
-2.  Select **Create** -\> **+ New agent**.
+2.  **[Create]** -> **[+ New agent]**を選択します。
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image23.png)
 
-3.  Select the **Configure** tab to configure your agent.
+3.  エージェントを構成するには、 **\[Configure\]**タブを選択します。
 
 	![A screenshot of a login page AI-generated content may be
 incorrect.](./media/image24.png)
 
-4.  Enter the below details and select **Create**.
+4.  以下の詳細を入力し、 **「Create」**を選択します。
 
-	- **Name** – +++Jokester+++
-	
-	- **Description** –
+- **Name** – +++Jokester+++
 
-	```
-	A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.
-	```
+- **Description** – +++A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.+++
 
-	- **Instructions** –
+- **説明書**-
 
 	```
 	You are a joke-telling assistant. Your sole purpose is to deliver appropriate, clever, and engaging jokes upon request. Follow these rules:
@@ -252,166 +248,167 @@ incorrect.](./media/image24.png)
 	* Do not repeat jokes within the same session.
 	* Avoid explaining the joke unless explicitly asked.
 	* Be responsive, witty, and quick.
+
 	```
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-5.  The **agent** gets **created** as per the instructions provided.
+5.  提供された指示に従ってエージェント**が作成され**ます。
 
 	![A logo of a company AI-generated content may be
-incorrect.](./media/image26.png)
+	incorrect.](./media/image26.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image27.png)
+	incorrect.](./media/image27.png)
 
-6.  Select **Settings** from the top right corner of the agent page.
+6.  エージェント ページの右上隅から**\[Settings\]**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-7.  In the **Settings** pane, select **No** under **Use generative AI
-    orchestration for your agent responses**.
+7.  **[Settings]**ペインで、 **[Use generative AI orchestration for
+    your agent responses]**の下の**[No]**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image29.png)
 
-8.  Scroll down and disable **Use general knowledge** and **Use
-    information from the Web** under the Knowledge section.
+8.  下にスクロールして、 「Knowledge」セクションの**「Use general
+    knowledge** **」**と**「Use information from the
+    Web」**を無効にします。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-9.  Scroll up and select **Yes** under **Use generative AI orchestration
-    for your agent responses**.
+9.  上にスクロールして、 **「Use generative AI orchestration for your
+    agent responses」**の下の**「Yes」**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-10. Select **Save** and then **close** the Settings window.
+10. **\[Save\]**を選択して、設定ウィンドウを**閉じます。**
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image32.png)
+	incorrect.](./media/image32.png)
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+	incorrect.](./media/image33.png)
 
-11. From the agent’s **Overview** page, select **Tools**.
+11. エージェントの**Overview**ページから、 **\[Tools\]**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image34.png)
 
-12. Select **+ Add a tool** to add a new tool to the agent.
+12. エージェントに新しいツールを追加するには、 **「+ Add a
+    tool」**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-13. In the Add a tool window, select the **Model Context Protocol** tab.
+13. \[Add a tool\] ウィンドウで、 **\[Model Context
+    Protocol\]**タブを選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image36.png)
 
-14. Select the **Jokes MCP** Server you created earlier.
+14. **Jokes** MCP Serverを選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-15. Select the **drop down** next to **Not connected** and then select
-    **Create new connection**.
+15. **\[Not connected\]**の横にあるドロップダウンを選択し、 **\[Create
+    new connection\]**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-16. Select **Create** in the next screen.
+16. 次の画面で**「Create」**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-17. Once the connection is established, select the **Add to agent**
-    button to add the MCP Server to the Jokester agent.
+17. 接続が確立されたら、 **「Add to agent」**ボタンを選択して、MCP
+    SERVERを Jokester エージェントに追加します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-18. Now the **MCP Server** has been added as a **tool** to the agent.
+18. これで、 MCP
+    Serverがエージェントへの**ツール**として追加されました。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-19. Select **Refresh** in the Test pane before starting to test the
-    agent behaviour.
+19. エージェントの動作のテストを開始する前に、テスト
+    ペインで**\[Refresh\]**を選択します。
 
 	![A screenshot of a phone AI-generated content may be
 incorrect.](./media/image42.png)
 
-20. Enter +++Can I get a Chuck Norris joke?+++ and select **Send**.
+20. +++Can I get a Chuck Norris joke?+++ と入力し、
+    **\[Send\]**を選択します。
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image43.png)
 
-21. Select **Open connection manager**.
+21. **\[Open connection manager\]**を選択します。
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image44.png)
 
-22. Select **Connect** to establish the connection.
+22. 接続を確立するには、 **「Connect」**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-23. Once the Jokes MCP connection is selected, select **Submit**.
+23. Jokes MCP 接続を選択したら、 **\[Submit\]**を選択します。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-24. You can now see that in the **Manage your connections** page, the
-    Jokes MCP Server is in **connected** state.
+24. **\[Manage your connections」**ページで、Jokes MCP
+    SERVERが**接続状態になっている**ことがわかります。
 
-	![A screenshot of a computer AI-generated content may be
+		![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-25. Now that it is connected, navigate back to the Test pane and select
-    **Retry**.
+25. 接続されたので、\[Test\] ペインに戻り、 **\[Retry\]**を選択します。
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image48.png)
 
-26. You can now see that the MCP Server is being invoked and the agent
-    tries to generate a response from the Jokes MCP Server.
+26. これで、MCP Serverが呼び出され、エージェントがジョークMCP
+    SERVERから応答を生成しようとしていることがわかります。
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-27. The agent uses the **MCP Server**, generates a response and
-    **populates** it in the **Test pane**.
+27. エージェントはMCP Serverを使用して応答を生成し、それを**テスト
+    ペイン**に**入力します**。
 
-	![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
+	![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image50.png)
 
-And this is the **Jokes MCP Server** working in **Microsoft Copilot
-Studio**.
+これは、 **Microsoft Copilot Studio**で動作する**Jokes MCP
+Serverです**。
 
-In this task, you created a new agent named **Jokester** in Copilot
-Studio, configured its purpose and behavioral instructions for humor
-generation, and enabled **Generative AI Orchestration** for intelligent
-responses. You then connected the **Jokes MCP Server** as a tool via the
-Model Context Protocol, authenticated the connection, and successfully
-tested the integration by retrieving jokes through the agent’s test
-panel. This confirmed that the MCP server was properly connected and
-functioning within the Copilot Studio environment.
+	**「Jokester」**という新しいエージェントを作成し、ユーモア生成のための目的と行動指示を設定し、インテリジェントな応答のために**Generative
+AI Orchestration** を有効にしました。次に、Model Context
+Protocolを介してツールとして**Jokes MCP
+Server**に接続し、接続を認証し、エージェントのテストパネルからジョークを取得することで統合テストに成功しました。これにより、MCP
+SERVERが Copilot Studio
+環境内で適切に接続され、機能していることが確認できました。
 
-## Summary
+## まとめ
 
-In this lab, Zava’s Innovation Hub successfully explored how the **Model
-Context Protocol (MCP)** can extend Microsoft Copilot Studio with
-real-time, external data integration. Beginning with a safe and low-risk
-example — the **Jokes MCP Server** — participants learned how to deploy
-an MCP Server to **Azure** using the **Azure Developer CLI**, configure
-it as a **custom connector**, and consume it within a **Copilot Studio
-agent**.
+このラボでは、 Zavaのイノベーションハブが、**Model Context
+Protocol（MCP）**を用いてMicrosoft Copilot
+Studioをリアルタイムの外部データ統合によって拡張する方法を検証しました。参加者は、安全でリスクの低い例として**Jokes
+MCP Serverを取り上げ、 Azure Developer CLIを**使用してMCP
+Serverを**Azure**にデプロイし、カスタムコネクタとして構成し、 **Copilot
+Studio**エージェント内で利用する方法を学習しました。
 
-Through the exercises, you created a custom **Jokester** agent that
-connected securely to the Jokes MCP Server, demonstrating how Copilot
-Studio can invoke live API calls through MCP. The lab provided practical
-experience in setting up, authenticating, and testing MCP-based tools —
-establishing the foundation for integrating future, business-critical
-MCP servers with enterprise data systems.
+演習を通して、Jokes MCP
+SERVERに安全に接続するカスタム**Jokester**エージェントを作成し、Copilot
+StudioがMCPを介してライブAPI呼び出しを実行する方法を実証しました。ラボでは、MCPベースのツールの設定、認証、テストに関する実践的な経験を積むことができ、将来的にビジネスクリティカルなMCP
+SERVERとエンタープライズデータシステムを統合するための基盤を構築しました。
