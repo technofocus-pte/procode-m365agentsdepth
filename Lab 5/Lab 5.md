@@ -1,613 +1,616 @@
-# Lab 5 - Create a Retail agent in Copilot Studio that leverages Azure AI Search and Bring your own model for your prompts
+# ラボ - Copilot Studio で Azure AI Search を活用した小売エージェントを作成し、プロンプト用に独自のモデルを導入する
 
-Lab duration – 60 minutes
+ラボの所要時間 – 60分
 
-## Objective
+## 客観的
 
-In a retail store site, customers frequently ask about product
-specifications, warranty terms, or troubleshooting guides. Static FAQ
-chatbots can’t cover all variations.
+小売店のサイトでは、顧客から製品の仕様、保証条件、トラブルシューティングガイドなどについて頻繁に質問が寄せられます。静的なFAQチャットボットでは、あらゆる質問に対応することはできません。
 
-To help this scenario, the following will be implemented in this lab
+このシナリオを支援するために、このラボでは次のことを実装します。
 
-- Product manuals, warranty documents, and FAQ PDFs are indexed into
-  **Azure AI Search**.
+- 製品マニュアル、保証書、FAQ PDF は、 **Azure AI
+  Search**にインデックス付けされます。
 
-- A Copilot Studio agent retrieves the right snippet when a customer
-  asks a question regarding the products.
+- Copilot Studio
+  エージェントは、顧客が製品に関して質問したときに適切なスニペットを取得します。
 
-- The agent gives a natural-language answer plus a link to the relevant
-  product manual.
+- エージェントは自然言語による回答と、関連する製品マニュアルへのリンクを提供します。
 
-This gives a reduced call-center load, 24/7 customer support and a
-higher customer satisfaction.
+これにより、コールセンターの負荷が軽減され、24 時間 365
+日の顧客サポートが提供され、顧客満足度が向上します。
 
-We will also learn how to bring your own model from Azure AI Foundry
-into the Copilot Studio.
+また、Azure AI Foundry から独自のモデルを Copilot Studio
+に取り込む方法についても学習します。
 
-## Exercise 1: Create an Azure AI Search resource
+## 演習 1: Azure AI Search リソースを作成する
 
-In this exercise, we will first create an Azure AI Search resource,
-which will be used to search through the documents.
+この演習では、まずドキュメントの検索に使用する Azure AI Search
+リソースを作成します。
 
-1.  From the Home page of the Azure portal, select **Azure AI Foundry.**
+1.  Azure ポータルのホーム ページから、 **Azure AI Foundry**
+    を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image1.png)
 
-2.  In the **AI Foundry page**, select **AI Search** from the left pane
-    and then select **+ Create**.
+2.  **AI Foundry ページ**で、左側のペインから**AI Search**を選択し、 **+
+    Create を選択**します。
 
     ![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image2.png)
 
-3.  Enter the below details and select **Review + create**.
+3.  以下の詳細を入力し、 **\[Review + create\]**を選択します。
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
-    
-    - Service name – +++ **documentstore53853922@lab.labinstanceid()**+++
-    
-    - Location – Select your **assigned region**
-    
+    - Subscription –**割り当てられたサブスクリプション**を選択します
+
+    - Resource group –**割り当てられたリソース グループ**(
+    **ResourceGroup1** )を選択します。
+
+    - Service name – +++ **documentstore53853922@lab.labinstanceid( )** +++
+
+    - Location –**割り当てられた地域を**選択してください
+
     ![](./media/image3.png)
 
-4.  Once the validation passes, select **Create**.
+4.  検証に合格したら、 **\[Create\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-5.  The deployment takes a few minutes. Select **Go to resource** once
-    the search service is created.
+5.  デプロイには数分かかります。検索サービスが作成されたら、 **「Go to
+    resource」**を選択してください**。**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image5.png)
 
-6.  From the **Overview** page, copy the Url value and save it in a
-    notepad to be used in a future exercise.
+6.  **「Overview」ページ**から、
+    Url値をコピーし、今後の演習で使用するためにメモ帳に保存します。
 
     ![](./media/image6.png)
 
-7.  Select **Keys** under **Settings** from the left pane. Copy the
-    **Primary admin key** and save it in a notepad for using it in the
-    upcoming exercises.
+7.  左ペインの**「Settings」**から**「Keys」**を選択します。**Primary
+    admin
+    key**をコピーし、メモ帳に保存して、今後の演習で使用してください。
 
     ![](./media/image7.png)
 
-8.  Select **Identity** under **Settings** from the left pane.
+8.  左側のペインの**\[Settings\]
+    の**下にある**\[Identity\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-9.  Toggle the Status to **On** under **System assigned** and then click
-    on **Save**.
+9.  **「System assigned」**のステータスを**On**に切り替えて、
+    **「Save」**をクリックします。
 
     ![A screenshot of a computer screen AI-generated content may be
 incorrect.](./media/image9.png)
 
-10. Select **Yes** in the **Enable system assigned managed identity**
-    confirmation dialog. This setting will enable the search service to
-    be listed under the managed identity resources, which can then be
-    assigned roles as required.
+10. **「Enable system assigned managed
+    identity」**確認ダイアログで**「Yes」**を選択します。この設定により、検索サービスがマネージドIDリソースのリストに表示されるようになり、必要に応じてロールを割り当てることができます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-## Exercise 2: Create a Storage account
+## 演習 2: ストレージ アカウントを作成する
 
-This exercise is to create a storage account with Blob storage and
-upload the documents required supporting the retail customers in it.
+この演習では、Blob ストレージを使用してストレージ
+アカウントを作成し、小売顧客のサポートに必要なドキュメントをアップロードします。
 
-1.  From the Home page of the Azure portal,
-    (+++https://portal.azure.com/+++), select **Storage accounts**.
+1.  Azure ポータルのホーム ページ(+++https://portal.azure.com/+++)
+    から、 **\[Storage accounts\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-2.  Select **+ Create** to create a new Storage account.
+2.  新しいストレージ アカウントを作成するには、
+    **\[+Create\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-3.  Enter the below details, accept the default values in the other
-    fields and click on **Review + create**.
+3.  以下の詳細を入力し、他のフィールドではデフォルト値を受け入れて、
+    **「Review+ create」**をクリックします。
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
-    
-    - Region – Select your **assigned region**
-    
-    - Storage account name – +++ **docstore@lab.LabInstanceId()**+++
-    
-    - Primary service – Select **Azure Blob Storage or Azure Data Lake
-      Storage Gen 2**
+    - Subscription –**割り当てられたサブスクリプションを選択します**
+
+    - Resource group –**割り当てられたリソース グループ**(
+    **ResourceGroup1** )を選択します。
+
+    - Region –**割り当てられた地域を選択してください**
+
+    - Storage account name – +++ **docstore@lab.LabInstanceId ( )** +++
+
+    - Primary service – **Azure Blob Storage or Azure Data Lake Storage Gen
+    2**を選択します。
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image13.png)
 
-4.  Once the validation passes, click on **Create**.
+4.  検証に合格したら、 **「Create」**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image14.png)
 
-5.  Once the resource creation succeeds, click on **Go to resource**.
+5.  リソースの作成が成功したら、 **「Go to
+    resource」**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image15.png)
+    incorrect.](./media/image15.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
+    incorrect.](./media/image16.png)
 
-6.  Select **Containers** under **Data storage**. Select **+
-    Container**, enter the name as +++**documents**+++ and click on
-    **Create** to create the container.
+6.  **「Data storage」**の**「Containers」**を選択します。
+    **「+Container」を選択し**、名前に「+++ **documents**
+    +++」と入力して**「Create」**をクリックし、コンテナーを作成します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image17.png)
 
-7.  Select the created container **documents** to upload the leave
-    policy document into it.
+7.  作成されたコンテナ**ドキュメント**を選択し、そこに休暇ポリシー
+    ドキュメントをアップロードします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image18.png)
 
-8.  Click on **Upload** and then select **Browse for files**.
+8.  **「Upload」**をクリックし、 **「Browse for files」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image19.png)
 
-9.  Select the **documents** from **C:\LabFiles\AISearch** folder and
-    then click on **Upload**.
+9.  **C:\LabFiles\AISearch**フォルダから**ドキュメント**を選択します
+    次に、 **\[Upload\]**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image20.png)
+    incorrect.](./media/image20.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image21.png)
+    incorrect.](./media/image21.png)
 
-10. Navigate to the **<docstore@lab.LabInstanceId()>** Storage account
-    (Select **Storageaccounts** from the **Home page** of the Azure
-    portal and select **docstore@lab.LabInstanceId()**) and select
-    **Access Control (IAM)** from the left pane. Select **Add -\> Add
-    role assignment**.
+10. [**docstore@lab.LabInstanceId()**](mailto:docstore@lab.LabInstanceId())に移動します
+    ストレージ アカウント ( Azure ポータルの**ホーム
+    ページ**から**\[Storageaccounts\]**を選択し、
+    **docstore@lab.LabInstanceId ()**を選択)
+    を選択し、左側のペインから**\[Access Control
+    (IAM)\]を選択します。\[Add\] -\> \[Add role
+    assignment\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-11. Search for +++**Storage Blob Data Reader**+++, select it and click
-    on **Next**.
+11. +++ **Storage Blob Data Reader** +++
+    を検索し、選択して**「Next」**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image23.png)
 
-12. Click on **+Select members**, search for and select your **user
-    id**, select your **user id** that gets listed and then click on
-    **Select**. This adds the Storage Blob Data Reader role to your user
-    id.
+12. **「+ Select
+    members」**をクリックし、**ユーザーIDを**検索して選択し、リストに表示されたユーザーIDを選択して**「Select」**をクリックします。これにより、ストレージBLOBデータリーダーロールがユーザーIDに追加されます。
 
     ![A screenshot of a group of people AI-generated content may be
 incorrect.](./media/image24.png)
 
-13. Select **Managed identity** and then select **+ Select members**.
-    Select **Search service** under **Managed identity** and select the
-    **searchleaves** search service that gets listed.
+13. **「Managed identity」**を選択し、 **「+ Select
+    members」**を選択します。 **「Managed identity」**の下の**「Search
+    service」**を選択し、リストに表示される**searchleaves**検索サービスを選択します。
 
     ![](./media/image25.png)
 
-14. Click on **Select** to select the search service.
+14. **「Select」**をクリックして検索サービスを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image26.png)
 
-15. Back in the Add role assignment screen, click on **Review +
-    assign**.
+15. Add role assignment画面に戻り、**Review + assign**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-16. Select **Review + assign** again in the next screen.
+16. 次の画面でもう一度**「Review + assign」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-17. Proceed to the next step once the roles are added.
+17. ロールを追加したら次の手順に進みます。
 
     ![](./media/image29.png)
 
-In this exercise, we have created a Storage account and added the
-documents and required Role permissions to it.
+この演習では、ストレージ
+アカウントを作成し、ドキュメントと必要なロール権限を追加しました。
 
-## Exercise 3: Create an Azure OpenAI Service and deploy a model 
+## 演習 3: Azure OpenAI サービスを作成し、モデルをデプロイする
 
-The AI Search service will have to vectorize the data uploaded, in order
-to perform the search over the documents. To vectorize the data, an
-embedding model needs to be deployed. In this exercise, you will create
-an Azure OpenAI Service and deploy the text-embedding model in it.
+AI検索サービスは、ドキュメント検索を実行するために、アップロードされたデータをベクトル化する必要があります。データをベクトル化するには、埋め込みモデルをデプロイする必要があります。この演習では、Azure
+OpenAIサービスを作成し、そこにテキスト埋め込みモデルをデプロイします。
 
-1.  From the Azure portal Home page, search for select +++Azure
-    OpenAI++.
+1.  Azure ポータルのホーム ページで、+++Azure OpenAI++
+    を検索して選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-2.  Select **+ Create**.
+2.  **+ Create**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image31.png)
 
-3.  Enter the below details and select **Next**.
+3.  以下の詳細を入力し、 **「Next」**を選択します。
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
-    
-    - Region – Select your **assigned region**
-    
-    - Name – +++**openaiservice52374668**+++
-    
-    - Pricing tier – Select **Standard**
-    
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image32.png)
-    
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image33.png)
+    - Subscription –**割り当てられたサブスクリプション**を選択します
 
-4.  Select **Next** in the next 2 screens select **Create** in the
-    **Review + submit** screen.
+    - Resource group –**割り当てられたリソース グループ**(
+    **ResourceGroup1** )を選択します。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image34.png)
+    - Region –**割り当てられた地域**を選択してください
 
-5.  Click on **Go to resource** once the service is created.
+    - Name – +++ **openaiservice52374668** +++
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image35.png)
+    - Pricing tier – **Standard**を選択
 
-6.  Select **Access control (IAM)** from the left pane, select **Add -\>
-    Add role assignment**.
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image32.png)
+
+    ![A screenshot of a computer AI-generated content may be
+    incorrect.](./media/image33.png)
+
+4.  次の 2 つの画面で**\[Next\]**を選択し、 **\[Review +
+    submit\]**画面で**\[Create\]**を選択します。
+
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image34.png)
+
+5.  サービスが作成されたら、 **「Go to resource」**をクリックします。
+
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image35.png)
+
+6.  左側のペインから**\[Access control (IAM)\]**を選択し、 **\[Add\] -\>
+    \[Add role assignment\]**を選択します。
 
     ![](./media/image36.png)
 
-7.  Search for +++**Cognitive Services OpenAI User**+++, select the role
-    and click on **Next**.
+7.  +++**Cognitive Services OpenAI
+    User**+++を検索し、役割を選択して\[**Next**\]をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image37.png)
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/image37.png)
 
-8.  Select **+ Select members**, search for your **user id**, select it
-    and click on **Select**.
+8.  **+ Select members**を選択し、**ユーザー
+    IDを検索**して選択し、**Select**をクリックします。
 
     ![](./media/image38.png)
 
-9.  Back in the **Add role assignment** screen, select **Managed
-    identity**. Then select **+ Select members**. In the **Select
-    managed identities** screen, select **Search service** under
-    **Managed identity** and select the
-    **documentstore@lab.LabInstanceId()** service.
+9.  **[Add role assignment」**画面に戻り、 **「Managed
+    identity」**を選択します。次に、 **「+ Select
+    members」**を選択します。 **「Select managed identities」**画面で、
+    **「Managed identity」**の下にある**「Search service」**を選択し、
+    **documentstore@lab.LabInstanceId ( )**サービスを選択します。
 
     ![](./media/image39.png)
 
-10. Once selected, click on **Select**.
+10. 選択したら、 **「Select」**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image40.png)
 
-11. Select Review + assign in the next 2 screens.
+11. 次の 2 つの画面で \[Review + assign\] を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-12. Wait for a **success** message on the role additions before
-    proceeding with the next tasks.
+12. 次のタスクに進む前に、ロールの追加に関する**成功**メッセージを待ちます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image42.png)
 
-13. From the **Overview** page of the Azure OpenAI Service resource,
-    select **Go to Azure AI Foundry portal** to open the Azure OpenAI
-    Service there and deploy a model.
+13. Azure OpenAI サービス リソースの**Overview**ページで、**Go to Azure
+    AI Foundry portal**を選択し、そこで Azure OpenAI
+    サービスを開いてモデルをデプロイします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image43.png)
 
-14. Select **Deployments** from the left pane. Select **+ Deploy model**
-    -\> **From base models**.
+14. 左ペインから**「Deployment」**を選択します。 **「+ Deploy model**
+    -\> **From base models」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image44.png)
 
-15. Search for +++**text-embedding**+++, select
-    **text-embedding-3-large** and then select **Confirm**.
+15. +++ **text-embedding** +++ を検索し、
+    **text-embedding-3-large**を選択してから、Confirmを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-16. Select **Deploy** in the Deploy text-embedding-3-large.
+16. 「Deploy text-embedding-3-large」で**「Deploy」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-17. The model gets deployed and the screen is loaded with the deployment
-    details.
+17. モデルがデプロイされ、デプロイの詳細が画面に読み込まれます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-## Exercise 4: Create a vector index
+## 演習4: ベクトルインデックスを作成する
 
-The AI Search resource needs a Vector index to perform the vector
-search. You will vectorize the uploaded data in this exercise.
+AI検索リソースは、ベクター検索を実行するためにベクターインデックスを必要とします。この演習では、アップロードされたデータをベクター化します。
 
-1.  From the Azure portal, go to the
-    **documentstore@lab.LabInstanceId()**, AI Search service resource.
-    Select **Import and vectorize data**.
+1.  Azureポータルから、 AI
+    Searchサービスリソースの**documentstore@lab.LabInstanceId (
+    )**にアクセスします。 **「Import and vectorize
+    data」**を選択します。
 
     ![](./media/image48.png)
 
-2.  Select the **Azure Blob Storage** option.
+2.  **Azure Blob Storage**オプションを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-3.  Select the **RAG** option in the **What scenarios are you
-    targeting?** screen.
+3.  **「What scenarios are you
+    targeting?」**画面で**RAG**オプションを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image50.png)
 
-4.  Enter the below details, accept the other values as default and
-    click **Next**.
+4.  以下の詳細を入力し、他の値はデフォルトのままにして、
+    **「Next」**をクリックします。
 
-    - Subscription – Select your **assigned subscription**
-    
-    - Storage account- Select the **docstore@lab@LabInstanceId()**
-    
-    - Blob-container – Select **documents**
-    
+    - Subscription –**割り当てられたサブスクリプション**を選択します
+
+    - Storage account - **docstore@lab@ LabInstanceId ( )**を選択します。
+
+    - BLOB-container –**documents**を選択
+
     ![](./media/image51.png)
 
-5.  In the Vectorize your text screen, the subscription is
-    pre-populated. Enter the below details and click **Next**.
+5.  「Vectorize your
+    text」画面では、サブスクリプション情報が事前に入力されています。以下の情報を入力し、
+    **「Next」**をクリックしてください。
 
-    - Azure OpenAI resource – Select **openaiservice@lab.LabInstanceId()**
-    
-    - Model deployment – Select **text-embedding-3-large**
-    
-    - Authentication type – Select **System assigned identity**
-    
-    - Select the checkbox to acknowledge the cost alert of Azure OpenAI.
-    
+    - Azure OpenAI resource – **openaiservice@lab.LabInstanceId ( )** を選択
+
+    - Model deployment – **text-embedding-3-large**を選択
+
+    - Authentication type – **System assigned identity**を選択
+
+    - Azure OpenAI
+    のコストアラートを確認するには、チェックボックスをオンにします。
+
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image52.png)
 
-6.  Select Next in the **Vectorize and enrich your images** screen since
-    we are not dealing with images here and select **Next** in the
-    **Advanced settings** screen as well.
+6.  ここでは画像を扱わないため、「**Vectorize and enrich your
+    images」**画面で「**Next**」を選択し、 **「Advanced
+    settings」**画面でも**「Next」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image53.png)
+    incorrect.](./media/image53.png)
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image54.png)
+    incorrect.](./media/image54.png)
 
-7.  Select **Create** in the **Review + create** screen.
+7.  **\[Review + create\]** 画面で**\[Create\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image55.png)
 
-8.  Click on **Close** in the success dialog box.
+8.  成功ダイアログボックスで**「Close」**をクリックします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image56.png)
 
-## Exercise 5: Create a retail assistant agent
+## 演習5: 小売アシスタントエージェントを作成する
 
-In this exercise, you will create a retail assistant agent in Copilot
-Studio.
+この演習では、Copilot Studio で小売アシスタント
+エージェントを作成します。
 
-1.  Login to +++https://copilotstudio.microsoft.com+++ using your login
-    credentials.
+1.  ログイン資格情報を使用して、+++https://copilotstudio.microsoft.com+++
+    にログインします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image57.png)
 
-2.  Select **Create** from the left pane.
+2.  左側のペインから**\[Create\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image58.png)
 
-3.  Select **+ New agent** to create a new agent.
+3.  新しいエージェントを作成するには、 **「+ New agent」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image59.png)
 
-4.  Enter +++You are a Retail assistant agent for customers HR who will
-    answer questions related to the store products+++ and select
-    **Send**.
+4.  +++ You are a Retail assistant agent for customers HR who will
+    answer questions related to the store products
+    +++と入力し、\[**Send\]**を選択します。
 
     ![](./media/image60.png)
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image61.png)
 
-5.  Once the agent is created, in the Test pane, enter +++What is the
-    warranty period for Washing machine?+++ and click **Send.**
+5.  エージェントが作成されたら、\[Test\] ペインに「+++ What is the
+    warranty period for Washing machine?+++」と入力し、 **\[Send\]**
+    をクリックします**。**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image62.png)
 
-6.  It gives a generalized reply as in the screenshot below.
+6.  以下のスクリーンショットのように、一般的な返信が返されます。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image63.png)
 
-## Exercise 6: Add the Azure AI Search as a knowledge source
+## 演習 6: Azure AI Search をナレッジ ソースとして追加する
 
-In this exercise, you will add the Azure AI Search that you created from
-the Azure portal, as a knowledge source to the Retail assistance agent
-in Copilot Studio.
+この演習では、Azure ポータルから作成した Azure AI Search を、Copilot
+Studio の小売支援エージェントへのナレッジ ソースとして追加します。
 
-1.  From the **Overview** page of the agent, select **+ Add knowledge**.
+1.  エージェントの**Overview**ページから、 **「+ Add
+    knowledge」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image64.png)
 
-2.  Select **Azure AI Search** from the list of knowledge sources
-    available.
+2.  利用可能なナレッジ ソースのリストから**Azure AI Search**
+    を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image65.png)
 
-3.  Click on the **drop down** next to **Not connected** in the next
-    screen and select **Create new connection**.
+3.  次の画面で**「Not
+    connected」**の横にある**ドロップダウン**をクリックし、 **「Create
+    new connection」**を選択します。
 
     ![A screenshot of a search engine AI-generated content may be
 incorrect.](./media/image66.png)
 
-4.  Enter the **Endpoint url** and the **Admin key** values which we
-    saved to a notepad in a previous exercise and then click on
-    **Create** to create the connection.
+4.  前の演習でメモ帳に保存した**エンドポイントURL**と**Admin
+    key**の値を入力し、 **\[Create\]**をクリックして接続を作成します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image67.png)
 
-5.  Once the connection is established, the available index is listed
-    and already selected. Click on **Add to agent**.
+5.  接続が確立されると、利用可能なインデックスがリストされ、既に選択されています。
+    **「Add to agent」**をクリックしてください。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image68.png)
 
-6.  The AI Search service is added as a knowledge source to the agent
-    and is in **Ready** state now.
+6.  AI SEARCH SERVICEがエージェントにナレッジ
+    ソースとして追加され、現在は**準備完了**状態になっています。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image69.png)
 
-7.  Now, let us test the agent with the same question we have tried
-    before.
+7.  ここで、以前試したのと同じ質問でエージェントをテストしてみましょう。
 
-8.  In the Test pane, enter +++ What is the warranty period for Washing
-    machine?+++ and click **Send.**
+8.  Testペインに +++ What is the warranty period for Washing machine?+++
+    と入力し、\[**Send**\] をクリックします**。**
 
     ![](./media/image70.png)
 
-9.  You can see that the response from the agent now is from the
-    document uploaded in the AI Search service.
+9.  エージェントからの応答が、AI Search
+    serviceにアップロードされたドキュメントからのものであることがわかります。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image71.png)
 
-## Exercise 7: Deploy a Model in Azure AI Foundry
+## 演習 7: Azure AI Foundry にモデルをデプロイする
 
-In this exercise, you will deploy a model in the Azure AI Foundry to use
-it in the Copilot Studio (in the next exercise).
+この演習では、Azure AI Foundry にモデルをデプロイし、Copilot Studio
+(次の演習) で使用します。
 
-1.  Open the Azure AI Foundry Azure OpenAI resource created earlier.
+1.  先ほど作成した Azure AI Foundry Azure OpenAI リソースを開きます。
 
-2.  From the left pane, select **Deployments**.
+2.  左側のペインから、 **\[Deployments\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image72.png)
 
-3.  Select the drop down next to the **+ Deploy model** and select
-    **Deploy base model**.
+3.  **\[+Deploy model」**の横にあるドロップダウンを選択し、 **「Deploy
+    base model」**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image73.png)
 
-4.  Select **gpt-4o** and select **Confirm**.
+4.  **gpt-4o**を選択し、 **\[Confirm\]**を選択します。
 
     ![](./media/image74.png)
 
-5.  In the Deploy gpt-4o dialog, enter the **Deployment name** as
-    +++**ModelforMCS**+++, accept the other defaults and select
-    **Deploy.**
+5.  \[Deploy gpt-4o\] ダイアログで、**Deployment name**として +++
+    **ModelforMCS** +++
+    と入力し、他のデフォルトを受け入れて**\[Deploy\]** を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image75.png)
 
-6.  Copy the Target URI and key values to a notepad to be used during
-    the connection creation from the Copilot Studio.
+6.  Copilot Studio からの接続作成時に使用されるTarget URL
+    とキー値をメモ帳にコピーします。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image76.png)
 
-Now that the model is deployed, you can use it in Copilot Studio’s agent
-prompt.
+モデルがデプロイされたので、Copilot Studio のエージェント
+プロンプトで使用できるようになりました。
 
-## Exercise 8: Create a prompt in the Copilot Studio and use the model created in Azure AI Foundry
+## 演習 8: Copilot Studio でプロンプトを作成し、Azure AI Foundry で作成されたモデルを使用する
 
-In this exercise, you will learn how to bring the deployed model from
-Azure AI Foundry in the Copilot Studio. Here, we are using a base model
-that is deployed. We can also create a fine tuned model as per the
-business requirements and then use it in Copilot Studio.
+に取り込む方法を学習します。ここでは、デプロイ済みのベースモデルを使用します。ビジネス要件に合わせて微調整したモデルを作成し、Copilot
+Studio で使用することもできます。
 
-1.  From the Copilot Studio agent, select **Tools** from the top menu
-    bar.
+1.  Copilot Studio エージェントで、上部のメニュー
+    バーから**\[Tool\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image77.png)
 
-2.  Select **+ New tool** to add a new tool to the agent
+2.  エージェントに新しいツールを追加するには、 **「+New
+    tool」**を選択します
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image78.png)
 
-3.  Select Prompt since we are going to add a new prompt.
+3.  新しいプロンプトを追加するので、「Prompt」を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image79.png)
 
-4.  In the Custom prompt screen, select the drop down next to the
-    **model** name.
+4.  **モデル名**の横にあるドロップダウンを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image80.png)
 
-5.  Select + against **Azure AI Foundry Models** to add the model
-    deployed in Azure AI Foundry and select **Connect a new model**.
+5.  **Azure AI Foundry Models**に対して + を選択して、 Azure AI Foundry
+    にデプロイされたモデルを追加し、**Connect a new
+    model**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image81.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image82.png)
 
-6.  Enter the below details and click on Connect.
+6.  以下の詳細を入力し、「Connect」をクリックします。
 
     - Model deployment name - +++ModelforMCS+++
-    
+
     - Base model name - +++gpt-4o+++
-    
-    - Azure model endpoint URL – Enter the target url saved earlier
-    
-    - API Key – Enter the model API key saved earlier.
+
+    - Azure model endpoint URL –
+    以前保存したターゲットURLを入力してください。
+
+    - API Key – 以前保存したモデルのAPIキーを入力してください。
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image83.png)
+    incorrect.](./media/image83.png)
 
     ![A screen shot of a computer AI-generated content may be
-incorrect.](./media/image84.png)
+    incorrect.](./media/image84.png)
 
-7.  Once connected, select **Close**.
+7.  接続したら、 **\[Close\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image85.png)
 
-8.  You can see that the model ModelforMCS is selected now
+8.  モデルModelforMCSが選択されていることがわかります。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image86.png)
 
-9.  Rename the prompt to +++WM Types+++. Enter +++What are the different
-    types of Washing Machines?+++ and select **Test**.
+9.  プロンプトの名前を「+++WM Types+++」に変更します。「+++What are the
+    different types of Washing Machines?+ ++」と入力し、
+    **「Test」**を選択します。
 
     ![](./media/image87.png)
 
-10. Select **Save** to save the prompt.
+10. プロンプトを保存するには、 **\[Save\]**を選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image88.png)
 
-11. Select the **Add to agent** option to add the prompt to the agent.
+11. エージェントにプロンプトを追加するには、 「**Add to
+    agent」**オプションを選択します。
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image89.png)
@@ -615,13 +618,15 @@ incorrect.](./media/image89.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image90.png)
 
-With this feature, we can fine-tune the model in Azure AI Foundry and
-use it in Copilot Studio with ease. We can bring in the vast ecosystem
-of the models in the Azure AI Foundry easily into the Copilot Studio.
+この機能により、Azure AI Foundry でモデルを微調整し、Copilot Studio
+で簡単に使用できるようになります。Azure AI Foundry
+の広大なモデルのエコシステムを Copilot Studio
+に簡単に取り込むことができます。
 
-## Summary
+## まとめ
 
-In this lab, we have learnt to connect the agent from the Copilot Studio
-to an Azure AI Search service as a knowledge source and test the agent
-based on the source. We have also learnt to bring the model deployed in
-Azure AI Foundry into the Copilot Studio.
+このラボでは、Copilot Studio のエージェントを知識ソースとして Azure AI
+Search
+サービスに接続し、そのソースに基づいてエージェントをテストする方法を学習しました。また、Azure
+AI Foundry にデプロイされたモデルを Copilot Studio
+に取り込む方法も学習しました。
