@@ -1,388 +1,343 @@
-# Lab 2 - Build an instructions-based Geo locator game agent using Microsoft 365 Agents Toolkit
+#  Microsoft 365 Agents Toolkitを使用して、指示ベースのジオロケーター ゲーム エージェントを構築する
 
-**Estimated Time: 30 mins**
+**所要時間: 30分**
 
-## Objective
+## 客観的
 
-The objective of this lab is to empower participants to build a
-declarative agent for Microsoft 365 Copilot using Microsoft 365 Agents
-Toolkit. By completing the lab, participants will create a geo-location
-game that provides a fun and educational break from work. The lab
-focuses on understanding the structure of declarative agents,
-configuring them with instructions, and integrating them into the
-Microsoft 365 ecosystem for customized Copilot interactions.
+このラボの目的は、参加者がMicrosoft 365 Agents Toolkitを用いてMicrosoft
+365
+Copilot用の宣言型エージェントを構築できるようにすることです。ラボを完了することで、参加者は仕事の合間に楽しく学べる位置情報ゲームを作成できるようになります。ラボでは、宣言型エージェントの構造を理解し、指示に従って設定し、Microsoft
+365エコシステムに統合してCopilotのインタラクションをカスタマイズすることに重点を置きます。
 
-## Solution
+## 解決
 
-Participants will install Microsoft 365 Agents Toolkit in Visual Studio
-Code and set up their development environment. Using a template, they
-will scaffold a declarative agent named Geo Locator Game. They will
-customize the agent's instructions and update its configuration files,
-such as instruction.txt and manifest.json. The lab also guides
-participants in enhancing the agent with unique identifiers, custom
-icons, and testing functionality. The result is a fully functional,
-engaging Copilot application tailored to deliver clues about cities
-while integrating seamlessly with Microsoft 365.
+参加者はVisual Studio CodeにMicrosoft 365 Agents
+Toolkitをインストールし、開発環境をセットアップします。テンプレートを使用して、「Geo
+Locator
+Game」という宣言型エージェントのスキャフォールディングを行います。エージェントの指示をカスタマイズし、instruction.txtやmanifest.jsonなどの構成ファイルを更新します。また、このラボでは、参加者がエージェントに固有の識別子、カスタムアイコン、テスト機能を追加する方法についても指導します。その結果、Microsoft
+365とシームレスに統合しながら、都市に関するヒントを提供するようにカスタマイズされた、完全に機能する魅力的なCopilotアプリケーションが完成します。
 
-## Exercise 1: Set up your development environment for Microsoft 365 Copilot
+## 演習 1: Microsoft 365 Copilot の開発環境をセットアップする
 
-### Task 1: Install Microsoft 365 Agents Toolkit
+### タスク 1: Microsoft 365 Agents Toolkitをインストールする
 
-1.  Open Visual Studio Code and click on the **Extensions** toolbar
-    button.
+1.  Visual Studio Code を開き、**Extensions**ツールバー
+    ボタンをクリックします。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image1.png)
 
-2.  Search for +++Microsoft 365 agents+++ and locate **Microsoft 365
-    Agents Toolkit**.
+2.  +++ **Microsoft 365 agents**+++ を検索し、 **Microsoft 365 Agents
+    Toolkitを見つけます**。
 
-    ![image](./media/image2.png)
+	![image](./media/image2.png)
 
-3.  Select **Install**.
+3.  **Installを**選択します。
 
-    ![image](./media/image3.png)
+	![image](./media/image3.png)
 
-4.  Once the installation is complete, the **Microsoft 365 Agents
-    Toolkit** icon will appear on the left navigation bar.
+4.  インストールが完了すると、 **Microsoft 365 Agents
+    Toolkitの**アイコンが左側のナビゲーション バーに表示されます。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image4.png)
 
-	>[!note] Microsoft 365 Agents Toolkit is an evolution of
-	Teams Toolkit. It is in a transition phase and at places it shows up as
-	Teams toolkit and at places it shows up as Microsoft 365 Agents Toolkit.
+[!Note]**注:** Microsoft 365 Agents Toolkit は Teams Toolkit
+の進化版です。現在移行段階にあり、一部では Teams
+ツールキットとして、一部では Microsoft 365 Agents Toolkit
+として表示されます。
 
-## Exercise 2: First declarative agent
+## 練習問題2: 最初の宣言的行為主体
 
-In this lab, you'll build a simple declarative agent using Microsoft 365
-Agents Toolkit for Visual Studio Code. Your agent is designed to give
-you a fun and educational break from work by helping you explore cities
-across the globe. It presents abstract clues for you to guess a city,
-with fewer points awarded the more clues you use. At the end, your final
-score will be revealed.
+このラボでは、Visual Studio Code 用の Microsoft 365 Agents Toolkit
+を使用して、シンプルな宣言型エージェントを構築します。このエージェントは、世界中の都市を探索することで、仕事の合間に楽しく学びのひとときを過ごせるよう設計されています。抽象的なヒントを提示して都市を推測しますが、ヒントを多く使うほど得点が低くなります。最後に、最終スコアが発表されます。
 
-In this exercise you will learn:
+この演習では以下のことを学習します。
 
-- What is a declarative agent for Microsoft 365 Copilot
+- Microsoft 365 Copilot の宣言型エージェントとは
 
-- Create a declarative agent using Microsoft 365 Agents Toolkit template
+- Microsoft 365 Agents Toolkit
+  テンプレートを使用して宣言型エージェントを作成する
 
-- Customize the agent to create the geo locator game using instructions
+- 指示に従ってエージェントをカスタマイズし、ジオロケーターゲームを作成します
 
-- Learn how to run and test your app
+- アプリの実行とテストの方法を学ぶ
 
-- For bonus exercise, you will need a SharePoint teams site
+- ボーナス演習では、SharePointチームサイトが必要になります
 
-**Introduction**
+**導入**
 
-Declarative agents leverage the same scalable infrastructure and
-platform of Microsoft 365 Copilot, tailored specifically to meet focus
-on a special area of your needs. They function as subject matter experts
-in a specific area or business need, allowing you to use the same
-interface as a standard Microsoft 365 Copilot chat while ensuring they
-focus exclusively on the specific task at hand.
+宣言型エージェントは、Microsoft 365 Copilot
+と同じスケーラブルなインフラストラクチャとプラットフォームを活用し、お客様のニーズの特定の領域に特化して対応します。特定の分野やビジネスニーズにおける専門家として機能し、標準的な
+Microsoft 365 Copilot
+チャットと同じインターフェイスを使用しながら、エージェントが特定のタスクに集中できるようにします。
 
-Welcome on board to building your own declarative agent ! Let's dive in
-and make your Copilot work magic!
+宣言型エージェントの構築へようこそ！さあ、Copilot
+を魔法のように動かしてみましょう！
 
-In this lab you will start out building a declarative agent using
-Microsoft 365 Agents Toolkit with a default template used in the tool.
-This is to help you get started with something. Next, you will modify
-your agent to be focused on a geo location game.
+このラボでは、Microsoft 365 Agents Toolkit
+のデフォルトテンプレートを使用して、宣言型エージェントの構築から始めます。これは、何かを始める際の手助けとなります。次に、エージェントを地理位置情報ゲームに特化したものに修正します。
 
-The goal of your AI is to provide a fun break from work while helping
-you learn about different cities around the world. It offers abstract
-clues for you to identify a city. The more clues you need, the fewer
-points you earn. At the end of the game, it will reveal your final
-score.
+AIの目的は、世界中の様々な都市について学びながら、仕事の合間に楽しいひとときを過ごすことです。AIは抽象的な手がかりを提示し、都市を特定します。手がかりが多ければ多いほど、獲得できるポイントは少なくなります。ゲーム終了時に、最終スコアが表示されます。
 
 ![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image5.png)
 
-You will also give your agent some files to refer to a secret diary 🕵🏽
-and a map 🗺️ to give more challenges to the player.
+また、エージェントに秘密の日記🕵🏽や地図🗺️を参照するためのファイルをいくつか提供し、プレイヤーにさらなる課題を与えます。
 
-So, let's begin
+それでは始めましょう
 
-**Anatomy of a Declarative agent**
+**宣言的エージェントの解剖**
 
-You will see as we develop more and more extensions to Copilot, that in
-the end what you will build is collection of few files in a zip file
-which we will refer to as an app package that you will then install and
-use. So, it's important you have a basic understanding of what the app
-package consists of. The app package of a declarative agent is like a
-Teams app if you have built one before with additional elements. See the
-table to see all the core elements. You will also see that the app
-deployment process is very similar to deploying a Teams app.
+していくと、最終的に構築するのはいくつかのファイルを zip
+ファイルにまとめたコレクションになります。これをアプリ
+パッケージと呼びます。アプリ
+パッケージをインストールして使用します。そのため、アプリ
+パッケージの構成について基本的な理解が重要です。宣言型エージェントのアプリ
+パッケージは、以前に Teams アプリを追加したことがある方なら、そのアプリ
+パッケージに似ています。すべてのコア要素については、表をご覧ください。また、アプリの展開プロセスも
+Teams アプリの展開と非常によく似ていることがわかります。
 
+|	要素|説明	|	|
+|:------|:-----|:----------|
+|アプリマニフェスト	|アプリの構成、機能、必要なリソース、重要な属性について説明します。	|	manifest.json|
+|アプリアイコン	|宣言エージェントには、カラー(192x192) とアウトライン (32x32) のアイコンが必要です。	|icon.png, color.png	|
+|宣言型エージェントマニフェスト	|エージェントの構成、手順、必須フィールド、機能、会話の開始、およびアクションについて説明します。	|	declarativeAgent.json|
 
+**注:** SharePoint、OneDrive、Web
+検索などから参照データを追加したり、プラグインやコネクタなどの拡張機能を宣言型エージェントに追加したりできます。プラグインの追加方法については、このパスの今後のラボで学習します。
 
-**Note:** You can add reference data from SharePoint, OneDrive, Web
-search etc. and add extension capabilities to a declarative agent like
-plugins and connectors. You will learn how to add a plugin in the
-upcoming labs in this path.
+**宣言型エージェントの機能**
 
-**Capabilities of a Declarative agent**
+指示を追加するだけでなく、アクセスすべき知識ベースを指定することで、エージェントのコンテキストとデータへの集中度を高めることができます。これらは「機能」と呼ばれ、3種類の機能がサポートされています。
 
-You can enhance the agent's focus on context and data by not only adding
-instructions but also specifying the knowledge base it should access.
-They are called capabilities and there are three types of capabilities
-supported.
+- **Microsoft Graph コネクタ**- Graph
+  コネクタの接続をエージェントに渡し、エージェントがコネクタの知識にアクセスして利用できるようにします。
 
-- **Microsoft Graph Connectors** - Pass connections of Graph connectors
-  to the agent, allowing the agent to access and utilize the connector's
-  knowledge.
+- **OneDrive および SharePoint** -
+  エージェントがコンテンツにアクセスできるように、ファイルとサイトの URL
+  をエージェントに提供します。
 
-- **OneDrive and SharePoint** - Provides URLs of files and sites to
-  agent, for it to gain access to those contents.
+- **Web サーチ**- エージェントのナレッジ ベースの一部として Web
+  コンテンツを有効または無効にします。
 
-- **Web search** - Enables or disables web content as part of the
-  agent's knowledge base.
-
-    ![A screenshot of a computer AI-generated content may be
+![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-**One Drive and SharePoint**
+**One DriveとSharePoint**
 
-URLs should be full path to SharePoint items (site, document library,
-folder, or file). You can use the "Copy direct link" option in
-SharePoint to get the full path or files and folders. To achieve this,
-right-click on the file or folder and select Details. Navigate to Path
-and click on the copy icon. Not specifying the URLs, the entire corpus
-of OneDrive and SharePoint content available to the logged in user will
-be used by the agent.
+URLはSharePointアイテム（サイト、ドキュメントライブラリ、フォルダー、またはファイル）へのフルパスで指定する必要があります。SharePointの「直接リンクをコピー」オプションを使用すると、ファイルやフォルダーのフルパスを取得できます。これを行うには、ファイルまたはフォルダーを右クリックし、「詳細」を選択します。「パス」に移動し、コピーアイコンをクリックします。URLを指定しない場合、エージェントはログインユーザーが利用できるOneDriveおよびSharePointコンテンツの全コーパスを使用します。
 
-**Microsoft Graph Connector**
+**Microsoft Graph コネクタ**
 
-Not specifying the connections, the entire corpus of Graph Connectors
-content available to the logged in user will be used by the agent.
+接続を指定しないと、ログインしたユーザーが利用できるグラフ コネクタ
+コンテンツのコーパス全体がエージェントによって使用されます。
 
-**Web search**
+**Webサーチ**
 
-At the moment you cannot pass specific websites or domains, and this
-acts only as a toggle on and off to use web.
+現時点では、特定の Web サイトまたはドメインを渡すことはできず、これは
+Web の使用のオン/オフを切り替えるものとしてのみ機能します。
 
-## Exercise 3: Scaffold a declarative agent from template**
+## 演習3: テンプレートから宣言型エージェントを構築する
 
-You can use just any editor to create a declarative agent if you know
-the structure of the files in the app package mentioned above. But
-things are easier if you use a tool like Microsoft 365 Agents Toolkit to
-not only create these files for you but also help you deploy and publish
-your app. So, to keep things as simple as possible you will use
-Microsoft 365 Agents Toolkit.
+前述のアプリパッケージ内のファイル構造を理解していれば、任意のエディタを使用して宣言型エージェントを作成できます。しかし、Microsoft
+365 Agents
+Toolkitのようなツールを使用すると、これらのファイルの作成だけでなく、アプリの展開と公開もサポートされるため、作業がより簡単になります。そのため、作業を可能な限りシンプルにするために、Microsoft
+365 Agents Toolkitを使用します。
 
-### Task 1: Use Microsoft 365 Agents Toolkit to create a declarative agent app
+### タスク 1: Microsoft 365 Agents Toolkitを使用して宣言型エージェント アプリを作成する
 
-1.  Go to the Microsoft 365 Agents Toolkit extension in your Visual
-    Studio Code editor and select **Create a New App.**
+1.  Visual Studio コード エディターで Microsoft 365 Agents
+    Toolkit拡張機能に移動し、\[**Create a new app\]** を選択します。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-2.  A panel opens up where you need to select **Agent** from the list of
-    project types.
+2.  プロジェクト
+    タイプのリストから**Agentを**選択する必要があるパネルが開きます。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-3.  Next, you will be asked to choose the app feature of Copilot Agent.
-    Choose **declarative agent**.
+3.  次に、Copilot Agent
+    のアプリ機能を選択するよう求められます。**Declarative
+    agent**を選択してください。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-4.  Next, you will be asked to choose want to create a basic declarative
-    agent or one with an API plugin. Choose the **No Plugin** option.
+4.  基本的な宣言型エージェントを作成するか、APIプラグイン付きのエージェントを作成するかを選択するよう求められます。「**No
+    Plugin**」オプションを選択して**ください**。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-5.  Next, select the **Default folder** option for specifying where the
-    project folder has to be created.
+5.  次に、プロジェクト フォルダーを作成する場所を指定するための
+    \[Default folder\] オプションを**選択します**。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-6.  Next, give it an application name +++**Geo Locator Game**+++ and
-    select Enter.
+6.  次に、アプリケーション名に「**+++Geo Locator
+    Game+++**」と入力し、\[Enter\] を選択します。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-	The project will be created in a few seconds in the folder you mentioned
-	and will open in a new project window of Visual Studio Code. This is
-	your working folder.
+	数秒以内に指定したフォルダにプロジェクトが作成され、Visual Studio Code
+の新しいプロジェクトウィンドウで開きます。これが作業フォルダです。
 
-7.  If a prompt appears regarding the trustworthiness of the source,
-    click on **Yes, I trust the authors.**
+7.  ソースの信頼性に関するプロンプトが表示された場合は、 **「Yes, I
+    trust the authors」**をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image13.png)
 
-	![](./media/image14.png)
+	![A screenshot of a computer AI-generated content may be incorrect.](./media/image14.png)
 
-Well done! You have successfully set up the base declarative agent! Now,
-proceed to examine the files contained within to be able to customize it
-to make the geo locator game app.
+よくできました！ベースとなる宣言型エージェントの設定に成功しました！次は、その中のファイルを調べてカスタマイズし、ジオロケーターゲームアプリを作成しましょう。
 
-### Task 2: Set up accounts in Microsoft 365 Agents Toolkit
+### タスク 2: Microsoft 365 Agents Toolkitでアカウントを設定する
 
-1.  Now select the Microsoft 365 Agents Toolkit icon in the left
-    Under **Accounts** click **Sign in to Microsoft 365** and log in
-    with your **User1 credentials** under the **Azure Portal** section
-    in the **Resources** tab.
+1.  次に、左側の \[**Accounts\]にある Microsoft 365 Agents Toolkit
+    アイコンを選択し、 \[Sign in to Microsoft 365\]**をクリックして、
+    **\[Resources\]タブの\[Azure
+    Portal\]**セクションでUser1**の資格情報**を使用してログインします。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image15.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image15.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image16.png)
 
-2.  A browser window will pop up and offer to log into Microsoft 365.
+2.  ブラウザ ウィンドウがポップアップ表示され、Microsoft 365
+    へのログインが求められます。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image17.png)
 
-3.  Select **Allow access** in the Security Alert dialog.
+3.  「Security Alert」ダイアログで**「Allow access」**を選択します。
 
-    ![A screenshot of a computer security alert AI-generated content may be
+	![A screenshot of a computer security alert AI-generated content may be
 incorrect.](./media/image18.png)
 
-4.  When the browser window says "You are signed in now and close this
-    page", please do so.
+4.  ブラウザウィンドウに「You are signed in now and close this
+    page」と表示されたら、サインインしてください。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image19.png)
 
-5.  Verify that the **Custom App Upload Enabled** checker has a green
-    checkmark.
+5.  **Custom App Upload
+    Enabled** チェッカーに緑色のチェックマークが付いていることを確認します。
 
-    ![image](./media/image20.png)
+	![image](./media/image20.png)
 
-### Task 3: Understanding the files in the app
+### タスク3: アプリ内のファイルを理解する
 
+基本プロジェクトの外観は次のとおりです。
 
-1.  The file of interest for our lab is primarily
-    the **appPackage/instruction.txt** file which is the core directives
-    needed for your agent. It's a plain text file and you can write
-    natural language instructions in it.
+|フォルダ/ファイル	|コンテンツ	|
+|:----|:----|
+|	. vscode|VSCodeファイル	|
+|appPackage	|Teams アプリケーション マニフェスト、GPT マニフェスト、API 仕様のテンプレート	|
+|env	|デフォルトの.env.devファイルを持つ環境ファイル	|
+|appPackage/color.png	|アプリケーションロゴ画像	|
+|appPackage/outline.png	|	アプリケーションロゴのアウトライン画像|
+|	appPackage/declarativeAgent.json|宣言型エージェントの設定と構成を定義します。	|
+|	appPackage/instruction.txt|動作を定義します。	|
+|appPackage/manifest.json	|宣言型エージェントのメタデータを定義するTeamsアプリケーション マニフェスト。	|
+|teamsapp.yml	|Microsoft 365 Agents Toolkit のメインプロジェクトファイル。このプロジェクトファイルでは、プロパティと構成ステージ定義という2つの主要な要素を定義します。	|
 
-    ![A screenshot of a computer AI-generated content may be
+1.  このラボで特に注目すべきファイルは、エージェントに必要なコアディレクティブが記述された**appPackage/instruction.txt**ファイルです。これはプレーンテキストファイルで、自然言語による指示を記述できます。
+
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image21.png)
 
-2.  Another important file is **appPackage/declarativeAgent.json** where
-    there is a schema to be followed to extend Microsoft 365 Copilot
-    with the new declarative agent. Let's look at what properties the
-    schema of this file has.
+2.  もう一つの重要なファイルは**appPackage/declarativeAgent.json**です。このファイルには、Microsoft
+    365 Copilot
+    を新しい宣言型エージェントで拡張するためのスキーマが含まれています。このファイルのスキーマがどのようなプロパティを持っているか見てみましょう。
 
-    - The $schema is the schema reference
+    - $schemaはスキーマ参照です
 
-    - The version is the schema version
+    - バージョンはスキーマバージョンです
 
-    - The name key represents the name of the declarative agent.
+    - 名前キーは宣言エージェントの名前を表します。
 
-    - The description provides a description.
+    - 説明には説明が提供されます。
 
-    - The instructions the path to the **instructions.txt** file which
-      holds directives which will determine the operational behavior.
-      You can also put your instructions as plain text as a value here.
-      But for this lab we will use the **instructions.txt** file.
+    - 操作動作を決定する指示を含む**instructions.txt**ファイルへのパスです。指示をプレーンテキストで値として入力することもできますが、このラボでは**instructions.txt**ファイルを使用します。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image22.png)
 
-3.  Another important file is the **appPackage/manifest.json** file,
-    which contains crucial metadata, including the package name, the
-    developer’s name, and references to the copilot agents utilized by
-    the application. The following section from the manifest.json file
-    illustrates these details:
+3.  もう一つの重要なファイルは**appPackage/manifest.json**ファイルです。このファイルには、パッケージ名、開発者名、アプリケーションで使用されるコパイロットエージェントへの参照など、重要なメタデータが含まれています。manifest.json
+    ファイルの次のセクションは、これらの詳細を示しています。
 
 	```
 	"copilotAgents": {
+			"declarativeAgents": [            
+				{
+					"id": "declarativeAgent",
+					"file": "declarativeAgent.json"
+				}
+			]
+		},
 
-	"declarativeAgents": \[
-
-	{
-
-	"id": "declarativeAgent",
-
-	"file": "declarativeAgent.json"
-
-	}
-
-	\]
-
-	},
 	```
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image23.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image23.png)
 
-4.  You could also update the logo files color.png and outline.png to
-    make it match your application's brand. In today's lab you will
-    change **color.png** icon for the agent to stand out.
+4.  アプリケーションのブランドに合わせて、ロゴファイル（color.pngとoutline.png）を更新することもできます。本日のラボでは、エージェントのアイコンを目立たせるために、
+    **color.png**アイコンを変更します**。**
 
-## Exercise 4: Update instructions and icons
+## 演習4: 指示とアイコンを更新する
 
-### Task 1: Update icons and manifests
+### タスク1: アイコンとマニフェストを更新する
 
-1.  First, we will replace the logo. We will replace the
-    image **color.png** in the project with a new one. Copy the
-    image **color.png** located in **C:\LabFiles** and replace the image
-    of same name in the folder **appPackage** in your root project(The
-    path should be **C:\Users\Student\TeamsApps\Geo Locator
-    Game\appPackage**).
+1.  まず、ロゴを置き換えます。プロジェクト内の画像**color.png
+    を新しい画像に置き換えます。C
+    :\LabFiles**にある画像**color.pngをコピーし、ルートプロジェクトのappPackage**フォルダ（パスは**C:\Users\Student\TeamsApps\Geo
+    Locator Game\appPackage）**にある同名の画像を置き換えます。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image24.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image24.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image25.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image25.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image26.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image26.png)
 
-2.  Next, go to the file **appPackage/manifest.json** in your root
-    project and find the node **copilotAgents**. Update the id value of
-    the declarativeAgents array's first entry
-    from declarativeAgent to +++dcGeolocator+++ to make this ID unique.
+2.  **appPackage/manifest.json**ファイルに移動し、
+    **copilotAgents**ノードを見つけます。
+    declarativeAgents配列の最初のエントリの id
+    値をdeclarativeAgentから+++ dcGeolocator +++
+    に更新して、このIDを一意にします。
 
 	```
 	"copilotAgents": {
-
-	"declarativeAgents": \[
-
-	{
-
-	"id": "dcGeolocator",
-
-	"file": "declarativeAgent.json"
-
-	}
-
-	\]
-
-	},
-	```
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image27.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image28.png)
-
-3.  Next, go to the file **appPackage/instruction txt** and copy paste
-    the below instruction to overwrite the existing contents of the
-    file.
+			"declarativeAgents": [            
+				{
+					"id": "dcGeolocator",
+					"file": "declarativeAgent.json"
+				}
+			]
+		},
 
 	```
-	System Role: You are the game host for a geo-location guessing game.
-	Your goal is to provide the player with clues about a specific city
-	and guide them through the game until they guess the correct answer.
-	You will progressively offer more detailed clues if the player guesses
-	incorrectly. You will also reference PDF files in special rounds to
-	create a clever and immersive game experience.
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image27.png)
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image28.png)
+
+3.  次に、ファイル**appPackage /instruction
+    txt**に移動し、以下の命令をコピーして貼り付け、ファイルの既存の内容を上書きします。
+
+	```
+	System Role: You are the game host for a geo-location guessing game. Your goal is to provide the player with clues about a specific city and guide them through the game until they guess the correct answer. You will progressively offer more detailed clues if the player guesses incorrectly. You will also reference PDF files in special rounds to create a clever and immersive game experience.
 
 	Game play Instructions:
 
@@ -390,56 +345,40 @@ incorrect.](./media/image28.png)
 
 	Use the following prompt to welcome the player and explain the rules:
 
-	Welcome to the Geo Location Game! I’ll give you clues about a city,
-	and your task is to guess the name of the city. After each wrong
-	guess, I’ll give you a more detailed clue. The fewer clues you use,
-	the more points you score! Let’s get started. Here’s your first clue:
+	Welcome to the Geo Location Game! I’ll give you clues about a city, and your task is to guess the name of the city. After each wrong guess, I’ll give you a more detailed clue. The fewer clues you use, the more points you score! Let’s get started. Here’s your first clue:
 
 	Clue Progression Prompts
 
-	Start with vague clues and become progressively specific if the player
-	guesses incorrectly. Use the following structure:
+	Start with vague clues and become progressively specific if the player guesses incorrectly. Use the following structure:
 
-	Clue 1: Provide a general geographical clue about the city (e.g.,
-	continent, climate, latitude/longitude).
+	Clue 1: Provide a general geographical clue about the city (e.g., continent, climate, latitude/longitude).
 
-	Clue 2: Offer a hint about the city’s landmarks or natural features
-	(e.g., a famous monument, a river).
+	Clue 2: Offer a hint about the city’s landmarks or natural features (e.g., a famous monument, a river).
 
-	Clue 3: Give a historical or cultural clue about the city (e.g.,
-	famous events, cultural significance).
+	Clue 3: Give a historical or cultural clue about the city (e.g., famous events, cultural significance).
 
-	Clue 4: Offer a specific clue related to the city’s cuisine, local
-	people, or industry.
+	Clue 4: Offer a specific clue related to the city’s cuisine, local people, or industry.
 
 	Response Handling
 
 	After the player’s guess, respond accordingly:
-
 	If the player guesses correctly, say:
 
-	That’s correct! You’ve guessed the city in \[number of clues\] clues
-	and earned \[score\] points. Would you like to play another round?
+	That’s correct! You’ve guessed the city in [number of clues] clues and earned [score] points. Would you like to play another round?
 
 	If the guess is wrong, say:
 
-	Nice try! \[followed by more clues\]
+	Nice try! [followed by more clues]
 
 	PDF-Based Scenario
 
-	For special rounds, use a PDF file to provide clues from a historical
-	document, traveler's diary, or ancient map:
+	For special rounds, use a PDF file to provide clues from a historical document, traveler's diary, or ancient map:
 
-	This round is different! I’ve got a secret document to help us. I’ll
-	read clues from this \[historical map/traveler’s diary\] and guide you
-	to guess the city. Here’s the first clue:
+	This round is different! I’ve got a secret document to help us. I’ll read clues from this [historical map/traveler’s diary] and guide you to guess the city. Here’s the first clue:
 
 	Reference the specific PDF to extract details:
-
 	Traveler's Diary PDF,Historical Map PDF.
-
-	Use emojis where necessary to have friendly tone.
-
+	Use emojis where necessary to have friendly tone. 
 	Scorekeeping System
 
 	Track how many clues the player uses and calculate points:
@@ -457,139 +396,118 @@ incorrect.](./media/image28.png)
 	After the player guesses the city or exhausts all clues, prompt:
 
 	Would you like to play another round, try a special challenge?
-	```
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image29.png)
-
-4.  Notice this line in **appPackage/declarativeAgent.json**:
 
 	```
+
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image29.png)
+
+4.  **appPackage/declarativeAgent.json**の次の行に注目してください:
+
 	"instructions": "$\[file('instruction.txt')\]",
-	```
 
-	This brings in your instructions from the **instruction.txt** file. If
-	you want to modularize your packaging files, you can use this technique
-	in any of the JSON files in the **appPackage** folder.
+	**instruction.txt**ファイルから指示が読み込まれます。パッケージファイルをモジュール化したい場合は、**appPackage**フォルダ内の任意の
+JSON ファイルでこの手法を使用できます。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-### Task 2 : Add conversation starters
+### タスク2: 会話のきっかけを追加する
 
-You can enhance user engagement with the declarative agent by adding
-conversation starters to it.
+会話のきっかけを追加することで、宣言型エージェントに対するユーザー
+エンゲージメントを強化できます。
 
-Some of the benefits of having conversation starters are:
+会話のきっかけを持つことの利点は次のとおりです。
 
-- **Engagement**: They help initiate interaction, making users feel more
-  comfortable and encouraging participation.
+- **エンゲージメント**:
+  インタラクションを開始し、ユーザーの安心感を高め、参加を促します。
 
-- **Context Setting**: Starters set the tone and topic of the
-  conversation, guiding users on how to proceed.
+- **コンテキスト設定**:
+  スターターは会話のトーンとトピックを設定し、ユーザーにどのように進めるかをガイドします。
 
-- **Efficiency**: By leading with a clear focus, starters reduce
-  ambiguity, allowing the conversation to progress smoothly.
+- **効率性**:
+  明確な焦点を先導することで、スターターは曖昧さを減らし、会話をスムーズに進めることができます。
 
-- **User Retention**: Well-designed starters keep users interested,
-  encouraging repeat interactions with the AI.
+- **ユーザー維持**:
+  適切に設計されたスターターはユーザーの興味を維持し、AI
+  との繰り返しのやり取りを促します。
 
-1.  Open file **declarativeAgent.json** and right after
-    the instructions node add a comma press enter, and paste below code.
+1.  ファイル**declarativeAgent.jsonを**開き**、**instructionsノードの直後にコンマを追加してEnter
+    キーを押し、以下のコードを貼り付けます。
 
 	```
-	"conversation_starters": \[
+	"conversation_starters": [
+		{ 
+				"title": "Getting Started",
+				"text":"I am ready to play the Geo Location Game! Give me a city to guess, and start with the first clue." 
+			},
+			{
+				"title": "Ready for a Challenge",
+				"text": "Let us try something different. Can we play a round using the travelers diary?"
+			},
+			{ 
+				"title": "Feeling More Adventurous",
+				"text": "I am in the mood for a challenge! Can we play the game using the historical map? I want to see if I can figure out the city from those ancient clues."
+			}
+		]
 
-	{
-
-	"title": "Getting Started",
-
-	"text":"I am ready to play the Geo Location Game! Give me a city to
-	guess, and start with the first clue."
-
-	},
-
-	{
-
-	"title": "Ready for a Challenge",
-
-	"text": "Let us try something different. Can we play a round using the
-	travelers diary?"
-
-	},
-
-	{
-
-	"title": "Feeling More Adventurous",
-
-	"text": "I am in the mood for a challenge! Can we play the game using
-	the historical map? I want to see if I can figure out the city from
-	those ancient clues."
-
-	}
-
-	\]
 	```
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image31.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image31.png)
 
-	Now all the changes are done to the agent, it's time to test it.
+これでエージェントへの変更がすべて完了したので、テストする準備が整いました。
 
-2.  Go to **Files** from the top bar and click on the **Save All.**
+2.  上部のバーから**「Files」**に移動し、「**Save
+    All」**をクリックします。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
 
-### Task 3: Test the app
+### タスク3: アプリをテストする
 
-1.  To test the app, go to the Microsoft 365 Agents Toolkit extension
-    in Visual Studio Code. This will open up the left pane.
-    Under **LIFECYCLE** select **Provision**. You can see the value of
-    Microsoft 365 Agents Toolkit here, as it makes publishing so simple.
+1.  アプリをテストするには、Visual Studio Code で Microsoft 365 Agents
+    Toolkit
+    拡張機能にアクセスしてください。すると左側のペインが開きます。
+    **「LIFECYCLE」で「Provision」**を選択してください。Microsoft 365
+    Agents Toolkit
+    の真価は、ここでお分かりいただけるでしょう。公開が非常に簡単になります。
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image33.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image33.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image34.png)
+	![A screenshot of a computer AI-generated content may be
+	incorrect.](./media/image34.png)
 
-2.  If prompted, sign in with your credentials.
+2.  プロンプトが表示されたら、資格情報を使用してサインインします。
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image35.png)
 
-3.  In this step Microsoft 365 Agents Toolkit will package up all the
-    files inside the appPackage folder as a zip file and install the
-    declarative agent to your own app catalog.
+3.  appPackageフォルダー内のすべてのファイルがzip
+    ファイルとしてパッケージ化され、宣言型エージェントが独自のアプリカタログにインストールされます。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image36.png)
 
-4.  Open a browser and navigate to
-    +++https://m365.cloud.microsoft/chat/+++ into your
-    developer tenant. Open the Geo Locator Game from the left pane.
+4.  4\. ブラウザを開き、開発者テナントにログインした状態で
+    +++*https://m365.cloud.microsoft/chat/*+++
+    にアクセスします。左側のペインから「Geo Locator Game」を開きます。
 
-    ![image](./media/image37.png)
+	![image](./media/image37.png)
 
-5.  Once launched, you will be in this focused chat window with the
-    agent. And you will see the conversation starters as marked below:
+5.  起動すると、エージェントとのチャットウィンドウが開きます。会話のきっかけとなる項目が以下のように表示されます。
 
-    ![image](./media/image38.png)
+	![image](./media/image38.png)
 
-6.  Select one of the conversation starters and it will fill your
-    compose message box with the starter prompt, just waiting for you to
-    hit "Enter". It is still only your assistant and will wait for you
-    to take action.
+6.  会話のきっかけとなるもののいずれかを選択すると、メッセージ作成ボックスにきっかけとなるプロンプトが表示され、「Enter」キーを押すのを待ちます。これはあくまでもあなたのアシスタントであり、あなたがアクションを起こすまで待機します。
 
-    ![A screenshot of a computer AI-generated content may be
+	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-7.  Try answering the question and exploring the game that you
-    developed.
+7.  質問に答えて、開発したゲームを探索してみましょう。
 
-## Summary:
+## まとめ：
 
-In this lab, we have learnt to build a declarative agent using the
-Microsoft 365 Agents Toolkit and test the agent’s functionality.
-
+このラボでは、Microsoft 365 Agents
+Toolkitを使用して宣言型エージェントを構築し、エージェントの機能をテストする方法を学習しました。
