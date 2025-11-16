@@ -24,38 +24,7 @@ icons, and testing functionality. The result is a fully functional,
 engaging Copilot application tailored to deliver clues about cities
 while integrating seamlessly with Microsoft 365.
 
-## Exercise 1: Set up your development environment for Microsoft 365 Copilot
-
-### Task 1: Install Microsoft 365 Agents Toolkit
-
->[!Alert] **Important:**  Ignore this exercise if you have completed the Lab 1.
->
-1.  Open Visual Studio Code and click on the **Extensions** toolbar
-    button.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image1.png)
-
-2.  Search for +++Microsoft 365 agents+++ and locate **Microsoft 365
-    Agents Toolkit**.
-
-    ![image](./media/image2.png)
-
-3.  Select **Install**.
-
-    ![image](./media/image3.png)
-
-4.  Once the installation is complete, the **Microsoft 365 Agents
-    Toolkit** icon will appear on the left navigation bar.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image4.png)
-
-	>[!note] Microsoft 365 Agents Toolkit is an evolution of
-	Teams Toolkit. It is in a transition phase and at places it shows up as
-	Teams toolkit and at places it shows up as Microsoft 365 Agents Toolkit.
-
-## Exercise 2: First declarative agent
+## Exercise 1: First declarative agent
 
 In this lab, you'll build a simple declarative agent using Microsoft 365
 Agents Toolkit for Visual Studio Code. Your agent is designed to give
@@ -165,7 +134,7 @@ content available to the logged in user will be used by the agent.
 At the moment you cannot pass specific websites or domains, and this
 acts only as a toggle on and off to use web.
 
-## Exercise 3: Scaffold a declarative agent from template
+## Exercise 2: Scaffold a declarative agent from template
 
 You can use just any editor to create a declarative agent if you know
 the structure of the files in the app package mentioned above. But
@@ -222,7 +191,7 @@ Well done! You have successfully set up the base declarative agent! Now,
 proceed to examine the files contained within to be able to customize it
 to make the geo locator game app.
 
-### Task 3: Understanding the files in the app
+### Task 2: Understanding the files in the app
 
 |	**Folder/File** | **Contents**	|
 |:----|:-----|
@@ -293,23 +262,7 @@ incorrect.](./media/image23.png)
 
 ### Task 1: Update icons and manifests
 
-1.  First, we will replace the logo. We will replace the
-    image **color.png** in the project with a new one. Copy the
-    image **color.png** located in **C:\LabFiles** and replace the image
-    of same name in the folder **appPackage** in your root project(The
-    path should be **C:\Users\Student\TeamsApps\Geo Locator
-    Game\appPackage**).
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image24.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image25.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image26.png)
-
-2.  Next, go to the file **appPackage/manifest.json** in your root
+1.  Go to the file **appPackage/manifest.json** in your root
     project and find the node **copilotAgents**. Update the id value of
     the declarativeAgents array's first entry
     from declarativeAgent to +++dcGeolocator+++ to make this ID unique.
@@ -513,6 +466,7 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
 
 
 
