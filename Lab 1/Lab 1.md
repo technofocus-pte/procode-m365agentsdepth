@@ -344,21 +344,23 @@ created.
     ![](./media/image25.png)
 
 3.  Open your web browser and navigate to
-    +++https://m365.cloud.microsoft/chat+++ to open Copilot app.
-
-4.  Select the **RepairServiceAgent** from the list of **Agents**
+    +++https://m365.cloud.microsoft/chat+++ to open Copilot app and click on **Expand Navigation**.
+   
+    ![](./media/im1.png)
+	
+5.  Select the **RepairServiceAgent** from the list of **Agents**
     available in the Microsoft 365 Copilot interface. This will take a
     while, and you will be able to see a toaster message showing the
     progress of the task to provision.
 
-    ![](./media/image26.png)
+    ![](./media/im2.png)
 
-5.  Select the conversation starter **List repairs** and send the
+7.  Select the conversation starter **List repairs** and send the
     prompt.
 
     ![](./media/image27.png)
 
-6.  This initiates the conversation with your agent and you can see the
+8.  This initiates the conversation with your agent and you can see the
     response from the agent with the list of repairs.
 
     ![](./media/image28.png)
