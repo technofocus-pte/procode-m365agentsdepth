@@ -656,11 +656,7 @@ analyst to test.
 13. Next, copy the prompt below and paste it to the message box and hit
     enter to send it.
 
-	```
-	Classify repair items based on title into three distinct categories:
-	Routine Maintenance, Critical, and Low Priority. Then, generate a chart
-	displaying the percentage representation of each category.
-	```
+	+++	Classify repair items based on title into three distinct categories: Routine Maintenance, Critical, and Low Priority. Then, generate a chart displaying the percentage representation of each category.+++
 
 	![](./media/image47.png)
 
