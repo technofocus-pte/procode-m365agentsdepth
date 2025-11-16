@@ -75,7 +75,7 @@ Code.
 
     ![](./media/image2.png)
 
-2.  Search and select +++Microsoft 365 Agents Toolkit+++ and click
+2.  Search for and select +++Microsoft 365 Agents Toolkit+++ and click
     on **Install**.
 
     ![](./media/image3.png)
@@ -120,8 +120,8 @@ via an existing API service to help users manage car repair records.
 
     ![](./media/image10.png)
 
-4.  Next, select the folder **ServiceAgent** from the Desktop. This is
-    the location, where you want the agents toolkit will scaffold the
+4.  Next, select **Browse** and then select the folder **ServiceAgent** from the Desktop. This is
+    the location, where you want the agents toolkit to scaffold the
     agent project.
 
     ![](./media/image11.png)
@@ -134,15 +134,17 @@ via an existing API service to help users manage car repair records.
 
 	![](./media/image13.png)
 
-6.  You'll need to sign into the **Microsoft 365 Agents Toolkit** in
+6. Select **Yes, I trust the authors** option in the confirmation dialog.
+
+7.  You'll need to sign into the **Microsoft 365 Agents Toolkit** in
     order to upload and test your agent from within it.
 
-7.  Within the project window, select the **Microsoft 365 Agents Toolkit
+8.  Within the project window, select the **Microsoft 365 Agents Toolkit
     icon** ![m365atk-icon](./media/image7.png) again from the left side
     menu. This will open the Agent Toolkit’s activity bar with sections
     like Accounts, Environment, Development etc.
 
-8.  Under **Accounts** section select **Sign in to Microsoft 365**.
+9.  Under **Accounts** section select **Sign in to Microsoft 365**.
 
 	![](./media/image14.png)
 
