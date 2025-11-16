@@ -258,9 +258,9 @@ incorrect.](./media/image23.png)
     make it match your application's brand. In today's lab you will
     change **color.png** icon for the agent to stand out.
 
-## Exercise 4: Update instructions and icons
+## Exercise 4: Update instructions
 
-### Task 1: Update icons and manifests
+### Task 1: Update manifests
 
 1.  Go to the file **appPackage/manifest.json** in your root
     project and find the node **copilotAgents**. Update the id value of
@@ -466,6 +466,7 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
 
 
 
