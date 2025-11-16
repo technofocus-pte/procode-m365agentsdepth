@@ -2,7 +2,7 @@
 
 ## Objective
 
-In this lab your will build a Declarative Agent with TypeSpec definition
+In this lab you will build a Declarative Agent with TypeSpec definition
 using Microsoft 365 Agents Toolkit. You will create an agent
 called RepairServiceAgent, which interacts with repairs data via an
 existing API service to help users manage car repair records.
