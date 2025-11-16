@@ -199,7 +199,9 @@ includes: -
 
 2.  Begin by defining your agent for the repair scenario. Replace the
     **@agent** and **@instruction** definitions with below code snippet.
-    
+
+	>[!Alert] Use the **Copy** option in the code block below and **paste** it in the file. The Type option might get the code pasted with a wrong indentation.
+ 
     ```
     @agent(
       "RepairServiceAgent",
