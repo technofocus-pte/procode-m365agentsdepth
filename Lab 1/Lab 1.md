@@ -665,6 +665,8 @@ analyst to test.
 
     ![](./media/image48.png)
 
+15. Close the browser and VS Code windows.
+
 ## Summary:
 
 In this lab, you have:
