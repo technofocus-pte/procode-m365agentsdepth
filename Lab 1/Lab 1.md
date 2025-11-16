@@ -1,4 +1,4 @@
-# Lab 1 - Build a RepairService declarative agent with TypeSpec definition using Microsoft 365 Agents Toolkit
+<img width="630" height="363" alt="image" src="https://github.com/user-attachments/assets/a3483789-8855-49bc-bd12-e91d6f604398" /># Lab 1 - Build a RepairService declarative agent with TypeSpec definition using Microsoft 365 Agents Toolkit
 
 ## Objective
 
@@ -665,7 +665,17 @@ analyst to test.
 
     ![](./media/image48.png)
 
-15. Close the browser and VS Code windows.
+15. Open the link +++https://dev.teams.microsoft.com+++.
+
+16. Select **Apps** from the left pane.
+
+    ![](./media/im11.png)
+    
+17. You will find the **RepairServiceAgent** under Apps.
+
+18. Scroll to the right, click on the **3 dots** and select **Delete**. This needs to be done in order to provision another agent. Since you will be creating another agent in the next lab, this step needs to be done.
+
+    ![](./media/im12.png)
 
 ## Summary:
 
