@@ -1,4 +1,4 @@
-<img width="630" height="363" alt="image" src="https://github.com/user-attachments/assets/a3483789-8855-49bc-bd12-e91d6f604398" /># Lab 1 - Build a RepairService declarative agent with TypeSpec definition using Microsoft 365 Agents Toolkit
+# Lab 1 - Build a RepairService declarative agent with TypeSpec definition using Microsoft 365 Agents Toolkit
 
 ## Objective
 
