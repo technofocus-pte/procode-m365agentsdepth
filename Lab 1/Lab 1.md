@@ -360,6 +360,10 @@ created.
 
     ![](./media/image27.png)
 
+8.	IF there is a popup to that asks for the connectio to the API, select **Always allow**.
+
+    ![](./media/im3.png)
+  	   
 8.  This initiates the conversation with your agent and you can see the
     response from the agent with the list of repairs.
 
@@ -559,7 +563,7 @@ an adaptive card for the repair item.
 5.  Since the agent now supports additional functionality, update the
     instructions accordingly to reflect this enhancement.
 
-6.  In the same **main.tsp** file, update instructions definition to
+6.  In **main.tsp** file, update instructions definition to
     have additional directives for the agent. Replace the existing
     **@instructions** code block with the below code block.
 
