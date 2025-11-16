@@ -214,10 +214,8 @@ includes: -
 
     ![](./media/image19.png)
 
-4.  Next, add a conversation starter for the agent. Just below the
-    instructions you will see a commented-out code for a conversation
-    starter. Replace the @conversationStarter block (Should be the lines
-    from 22 to 25) with the below code.
+4.  Next, add a conversation starter for the agent.
+   	Just below the **instructions** block, you will see a commented-out code for a **conversation starter**. Replace the **@conversationStarter** block (Should be the lines from 22 to 25) with the below code.
 
     ```
     @conversationStarter(#{
