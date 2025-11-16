@@ -165,7 +165,7 @@ content available to the logged in user will be used by the agent.
 At the moment you cannot pass specific websites or domains, and this
 acts only as a toggle on and off to use web.
 
-## Exercise 3: Scaffold a declarative agent from template**
+## Exercise 3: Scaffold a declarative agent from template
 
 You can use just any editor to create a declarative agent if you know
 the structure of the files in the app package mentioned above. But
@@ -176,35 +176,29 @@ Microsoft 365 Agents Toolkit.
 
 ### Task 1: Use Microsoft 365 Agents Toolkit to create a declarative agent app
 
-1.  Go to the Microsoft 365 Agents Toolkit extension in your Visual
-    Studio Code editor and select **Create a New App.**
+1.  Go to the **Microsoft 365 Agents Toolkit** extension in your Visual
+    Studio Code editor and select **Create a New Agent/App.**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image7.png)
+incorrect.](./media/im5.png)
 
-2.  A panel opens up where you need to select **Agent** from the list of
+2.  A panel opens up where you need to select **Declarative Agent** from the list of
     project types.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image8.png)
-
-3.  Next, you will be asked to choose the app feature of Copilot Agent.
-    Choose **declarative agent**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image9.png)
+incorrect.](./media/im6.png)
 
 4.  Next, you will be asked to choose want to create a basic declarative
-    agent or one with an API plugin. Choose the **No Plugin** option.
+    agent or one with an action. Choose the **No Action** option.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image10.png)
+incorrect.](./media/im7.png)
 
 5.  Next, select the **Default folder** option for specifying where the
     project folder has to be created.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image11.png)
+incorrect.](./media/im8.png)
 
 6.  Next, give it an application name +++**Geo Locator Game**+++ and
     select Enter.
@@ -220,47 +214,13 @@ incorrect.](./media/image12.png)
     click on **Yes, I trust the authors.**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image13.png)
+incorrect.](./media/im9.png)
 
-	![](./media/image14.png)
+	![](./media/im10.png)
 
 Well done! You have successfully set up the base declarative agent! Now,
 proceed to examine the files contained within to be able to customize it
 to make the geo locator game app.
-
-### Task 2: Set up accounts in Microsoft 365 Agents Toolkit
-
-1.  Now select the Microsoft 365 Agents Toolkit icon in the left
-    Under **Accounts** click **Sign in to Microsoft 365** and log in
-    with your **User1 credentials** under the **Azure Portal** section
-    in the **Resources** tab.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image15.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
-
-2.  A browser window will pop up and offer to log into Microsoft 365.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image17.png)
-
-3.  Select **Allow access** in the Security Alert dialog.
-
-    ![A screenshot of a computer security alert AI-generated content may be
-incorrect.](./media/image18.png)
-
-4.  When the browser window says "You are signed in now and close this
-    page", please do so.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image19.png)
-
-5.  Verify that the **Custom App Upload Enabled** checker has a green
-    checkmark.
-
-    ![image](./media/image20.png)
 
 ### Task 3: Understanding the files in the app
 
@@ -553,6 +513,7 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
 
 
 
