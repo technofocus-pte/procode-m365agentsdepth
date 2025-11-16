@@ -28,6 +28,8 @@ while integrating seamlessly with Microsoft 365.
 
 ### Task 1: Install Microsoft 365 Agents Toolkit
 
+>[!Alert] **Important:**  Ignore this exercise if you have completed the Lab 1.
+>
 1.  Open Visual Studio Code and click on the **Extensions** toolbar
     button.
 
@@ -551,5 +553,6 @@ incorrect.](./media/image39.png)
 
 In this lab, we have learnt to build a declarative agent using the
 Microsoft 365 Agents Toolkit and test the agent’s functionality.
+
 
 
