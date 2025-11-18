@@ -51,8 +51,8 @@ Service and how it integrates with various AI models and tools.
 Azure AI Foundry is your launchpad for building AI agents. In this task,
 you’ll log in to Azure AI Foundry with your login credentials.
 
-1.  Open the browser and navigate to +++<https://ai.azure.com>+++ and
-    sign to your Azure account.
+1.  Open the browser and navigate to +++https://ai.azure.com+++ and
+    **Sign in** using your credentials from the **Resources** tab.
 
     ![](./media/image1.png)
 
