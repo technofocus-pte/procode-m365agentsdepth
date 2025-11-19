@@ -173,7 +173,7 @@ Copilot, and other preferred channels.
 
     Select **Close** in the **Sign in** window.
 
-    ![](./media/image18.png)
+    ![](./media/im19.png)
     
 5.  Search for +++**Microsoft**+++and select **Microsoft 365 Agents** template. Click on **Next**.
 
