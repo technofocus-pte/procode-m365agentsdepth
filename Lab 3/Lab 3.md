@@ -163,36 +163,32 @@ Microsoft 365 Agents SDK. This SDK lets you build multi-channel,
 production-ready agents that can run in Microsoft Teams, Microsoft 365
 Copilot, and other preferred channels.
 
-1.  From Windows Start, search for Visual and open **Visual Studio
-    2022**. Select **Skip and add accounts later**.
+1.  From **Desktop**, open **Visual Studio 2022**.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image15.png)
-
-2.  Select **Start Visual Studio**.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image16.png)
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/im18.png)
 
 3.  Select **Create a new project**.
 
     ![](./media/image17.png)
 
-4.  Search for +++**Microsoft**+++and select **Microsoft 365
-    Agents** template. Click on **Next**.
+    Select **Close** in the **Sign in** window.
+
+    ![](./media/image18.png)
+    
+5.  Search for +++**Microsoft**+++and select **Microsoft 365 Agents** template. Click on **Next**.
 
     ![A screenshot of a computer project AI-generated content may be incorrect.](./media/image18.png)
 
-5.  Provide a name for your agent as +++**ContosoHRAgent**+++ and
+6.  Provide a name for your agent as +++**ContosoHRAgent**+++ and
     select **Create**.
 
     ![](./media/image19.png)
 
-6.  From the list of templates, select **Echo Bot** and
-    select **Create**.
+7.  Scroll down in the list of templates, select **Echo Bot** and select **Create**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
 
-7.  Select **Allow access** in the pop up.
+8.  Select **Allow access** in the pop up.
 
     ![A screenshot of a computer error AI-generated content may be incorrect.](./media/image21.png)
 
@@ -253,9 +249,7 @@ incorrect.](./media/image16.png)
 
     ![](./media/image30.png)
 
-15. Wait until the agent's message "Hello and Welcome!", then type
-    anything such as “Hi”, “Hello”. Observe that the agent echoes
-    everything back.
+15. Wait until the agent's message "Hello and Welcome!" (If you dont get a welcome message, refresh the browser once), then type anything such as “Hi”, “Hello”. Observe that the agent echoes everything back.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image31.png)
 
@@ -282,8 +276,7 @@ Teams or Copilot Chat.
 1.  Add **Semantic Kernel Nuget** Package. This package will provide
     support for Azure AI integration.
 
-2.  Right-click to **ContosoHRAgent** project and select **Manage Nuget
-    Packages for Solution**.
+2.  Right-click to **ContosoHRAgent solution** and select **Manage Nuget Packages for Solution**.
 
     ![](./media/image34.png)
 
@@ -333,8 +326,7 @@ agent to interact with generative AI models.
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image42.png)
 
-10. Enter the class name as +++**FileReference.cs**+++ and select
-    **Create**.
+10. Enter the class name as +++**FileReference.cs**+++ and hit **Enter** to create the class.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image43.png)
@@ -556,7 +548,7 @@ Foundry project and agent.
 
 2.  Final version of the **appsettings.json** will look like below.
 
-    ```no-copy
+    ```
     {
       "AgentApplicationOptions": {
         "StartTypingTimer": false,
@@ -612,7 +604,7 @@ In this task, you will test the created agent in Teams.
     is to get the path where the Azure CLI is installed and update the
     Path Environment variable.
 
-    Copy and paste the paths that are listed as the output.
+    Copy and paste the paths that are listed as the output to a notepad.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image51.png)
@@ -707,7 +699,7 @@ incorrect.](./media/image65.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image66.png)
 
-You're now ready to run your integrated agent and test it live in
+   You're now ready to run your integrated agent and test it live in
 Microsoft Teams.
 
 15. Hit **Start** or **F5** to start debugging. Microsoft Teams will
@@ -737,6 +729,8 @@ incorrect.](./media/image69.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image70.png)
 
+17. Stop debugging from **Visual Studio 2022**.
+
 ## Exercise 5:  Bring your agent to Copilot Chat
 
 In this exercise, you’ll bring your custom engine agent into Copilot
@@ -744,8 +738,8 @@ Chat by updating the agent's manifest. By enabling copilotAgents in the
 app manifest, you’ll make your AI-powered assistant available directly
 inside the Copilot experience.
 
-1.  Open **M365Agent/AppPackage/manifest.json**, update the manifest
-    schema and version as following.
+1.  From Visual Studio 2022, open **M365Agent/AppPackage/manifest.json**, update the manifest
+    schema and version as following (Replace the first 2 lines).
 
     ```
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.22/MicrosoftTeams.schema.json",
@@ -816,9 +810,6 @@ conversation starters to help users get started quickly.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image73.png)
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image19.png)
-
 5.  In the File Explorer go to your project folder. The path will be
     **C:\Users\Admin\source\repos\ContosoHRAgent\ContosoHRAgent** if you
     have not changed the path during the project setup. Navigate to
@@ -828,17 +819,17 @@ incorrect.](./media/image19.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image74.png)
 
-6.  Your app will pop-up on Teams again, select **Add**
+7.  Your app will pop-up on Teams again, select **Add**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image75.png)
 
-7.  Select **Open with Copilot** to test your agent on Copilot.
+8.  Select **Open with Copilot** to test your agent on Copilot.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image76.png)
 
-8.  Select the conversation starter, **PerksPlus Details** and hit
+9.  Select the conversation starter, **PerksPlus Details** and hit
     **Send**.
 
     ![](./media/image77.png)
@@ -846,7 +837,7 @@ incorrect.](./media/image76.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image78.png)
 
-9.  Observe that you are getting the response from the AI Foundry agent,
+10.  Observe that you are getting the response from the AI Foundry agent,
     now on Copilot Chat.
 
     ![A screenshot of a chat AI-generated content may be
