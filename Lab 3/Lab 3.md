@@ -82,7 +82,7 @@ you’ll log in to Azure AI Foundry with your login credentials.
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image6.png)
 
-Now that you're inside the Agents Playground, you'll customize your
+   Now that you're inside the Agents Playground, you'll customize your
 agent's identity and behavior to match a real-world scenario: an
 internal HR Agent at Contoso.
 
@@ -105,9 +105,11 @@ internal HR Agent at Contoso.
     - What happens during a performance review?
 
     ```
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/im16.png)
 
-9.  In the Knowledge section, select **+ Add** and select **Files**,
-    then Select **local files**.
+10.  In the Knowledge section, select **+ Add** and select **Files**,
+    then **Select local files**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
@@ -118,36 +120,36 @@ incorrect.](./media/image8.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-10. Navigate to **C:\Labfiles\M365 Agents SDK** and select all the files
+11. Navigate to **C:\Labfiles\M365 Agents SDK** and select all the files
     inside that and click **Open**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-11. Select **Upload and save** to upload them. This will create a vector
+12. Select **Upload and save** to upload them. This will create a vector
     store for our agent.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-12. When you upload documents, Foundry automatically converts them into
+13. When you upload documents, Foundry automatically converts them into
     vectors, a format that allows the agent to search and retrieve
     relevant information efficiently.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image12.png)
 
-13. Save the **Agent id** to a notepad, that'll be required in the next
+14. Save the **Agent id** to a notepad, that'll be required in the next
     exercises. You can find your Agent id in the agent’s details.
 
     ![A screenshot of a computer screen AI-generated content may be
 incorrect.](./media/image13.png)
 
-14. Also, go to the **Overview** page and save the value of **Azure AI
+15. Also, go to the **Overview** page and save the value of **Azure AI
     Foundry project endpoint** to the notepad.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image14.png)
+incorrect.](./media/im17.png)
 
 By customizing the instructions and uploading relevant documents, you're
 teaching the agent how to behave and what knowledge to rely on. This is
