@@ -54,31 +54,29 @@ you’ll log in to Azure AI Foundry with your login credentials.
 1.  Open the browser and navigate to +++https://ai.azure.com+++ and
     **Sign in** using your credentials from the **Resources** tab.
 
-    ![](./media/image1.png)
+    ![](./media/im13.png)
 
 2.  From the Azure AI Foundry homepage, select **Create an agent**.
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image2.png)
+    ![](./media/im14.png)
 
-3.  Leave the project name as recommended and select **Create**.
+3.  Leave the project name as recommended, select the Resource group that starts with **ResourceGroup1** and select **Create**.
 
-    ![A screenshot of a project AI-generated content may be incorrect.](./media/image3.png)
+    ![](./media/im15.png)
 
 4.  This will scaffold a new project for you in Azure AI Foundry, it
     usually takes 3-5 minutes.
 
-5.  When your project is created, you'll be redirected to your project,
-    extend the left side bar and select **Agents**. This will open the
-    Agents Playground.
+5.  When your project is created, you'll land in the **Agents Playground**.
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image4.png)
 
 6.  Select **Agents** from the left pane. You will see that a new Agent
-    is created for you.
+    is created for you. Select the **agent**.
 
     ![](./media/image5.png)
 
-7.  **Select** the **Agent**, scroll down and select **Try in
+7.  Scroll down and select **Try in
     playground**.
 
     ![A screenshot of a computer AI-generated content may be
