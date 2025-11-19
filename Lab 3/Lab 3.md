@@ -108,7 +108,7 @@ internal HR Agent at Contoso.
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/im16.png)
 
-10.  In the Knowledge section, select **+ Add** and select **Files**,
+10. In the Knowledge section, select **+ Add** and select **Files**,
     then **Select local files**.
 
     ![A screenshot of a computer AI-generated content may be
@@ -837,7 +837,7 @@ incorrect.](./media/image76.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image78.png)
 
-10.  Observe that you are getting the response from the AI Foundry agent,
+10. Observe that you are getting the response from the AI Foundry agent,
     now on Copilot Chat.
 
     ![A screenshot of a chat AI-generated content may be
