@@ -8,7 +8,7 @@ In this lab, you will develop a custom engine agent that runs across
 Microsoft Teams, Microsoft 365 Copilot Chat, and even external channels
 using the Microsoft 365 Agents SDK and Semantic Kernel.
 
-In Azure AI Foundry, you’ll define your agent’s core instructions,
+In Microsoft Foundry, you’ll define your agent’s core instructions,
 tools, and personality. From there, you’ll use the Microsoft 365 Agents
 SDK and Visual Studio to bring your agent to life, customizing its
 behaviors and integrating it with Semantic Kernel for orchestration.
@@ -17,20 +17,20 @@ Chat, and see it come to life across Microsoft 365 applications.
 
 In this lab, you will learn to
 
-- Prepare your agent in Azure AI Foundry
+- Prepare your agent in Microsoft Foundry
 
 - Build your first agent using the M365 Agents SDK
 
 - Configure your agent’s properties using the SDK
 
-- Integrate your agent with Teams using Azure AI Foundry
+- Integrate your agent with Teams using Microsoft Foundry
 
 - Bring your agent into Microsoft 365 Copilot Chat
 
-## Exercise 1: Prepare your agent in Azure AI Foundry
+## Exercise 1: Prepare your agent in Microsoft Foundry
 
 In this exercise, you’ll begin your journey by preparing a custom engine
-agent using Azure AI Foundry, Microsoft’s platform for creating,
+agent using Microsoft Foundry, Microsoft’s platform for creating,
 configuring, and scaling AI agents. You'll explore the **Agents
 Playground**, define your agent's role, personalize its instructions,
 and connect it to relevant internal documents to support
@@ -42,21 +42,21 @@ simulate a real-world Human Resources agent for Contoso Electronics that
 can answer questions based on uploaded documents like the Employee
 Handbook, Role Library, and Benefit Plans.
 
-Azure AI Foundry is a platform that enables developers to build, deploy,
+Microsoft Foundry is a platform that enables developers to build, deploy,
 and scale AI agents with ease. You'll learn how to configure an agent,
 and test its functionality using the Agents Playground. This hands-on
 experience will provide insight into the capabilities of Azure AI Agent
 Service and how it integrates with various AI models and tools.
 
-Azure AI Foundry is your launchpad for building AI agents. In this task,
-you’ll log in to Azure AI Foundry with your login credentials.
+Microsoft Foundry is your launchpad for building AI agents. In this task,
+you’ll log in to Microsoft Foundry with your login credentials.
 
 1.  Open the browser and navigate to +++https://ai.azure.com+++ and
     **Sign in** using your credentials from the **Resources** tab.
 
     ![](./media/im13.png)
 
-2.  From the Azure AI Foundry homepage, select **Create an agent**.
+2.  From the Microsoft Foundry homepage, select **Create an agent**.
 
     ![](./media/im14.png)
 
@@ -64,7 +64,7 @@ you’ll log in to Azure AI Foundry with your login credentials.
 
     ![](./media/im15.png)
 
-4.  This will scaffold a new project for you in Azure AI Foundry, it
+4.  This will scaffold a new project for you in Microsoft Foundry, it
     usually takes 3-5 minutes.
 
 5.  When your project is created, you'll land in the **Agents Playground**.
@@ -157,7 +157,7 @@ a simplified form of Retrieval-Augmented Generation (RAG).
 
 ## Exercise 2 : Build your first agent using M365 Agents SDK
 
-Now that you’ve seen how to build an agent using Azure AI Foundry, let’s
+Now that you’ve seen how to build an agent using Microsoft Foundry, let’s
 switch gears and explore how to build your own agent locally using the
 Microsoft 365 Agents SDK. This SDK lets you build multi-channel,
 production-ready agents that can run in Microsoft Teams, Microsoft 365
@@ -400,17 +400,17 @@ incorrect.](./media/image44.png)
 messages—demonstrating how state is stored and modified during an
 ongoing conversation.
 
-## Exercise 4: Integrate Azure AI Foundry Agent with M365 Agents SDK
+## Exercise 4: Integrate Microsoft Foundry Agent with M365 Agents SDK
 
 You’ve built an agent using the M365 Agents SDK and configured it with
 generative AI capabilities. Now, you’ll connect this local agent to the
-Azure AI Foundry agent you created earlier. This enables your agent to
+Microsoft Foundry agent you created earlier. This enables your agent to
 respond using enterprise data and instructions stored in the Foundry
 project, bringing everything full circle.
 
-### Task 1: Configure EchoBot.cs to Connect with Azure AI Foundry Agent
+### Task 1: Configure EchoBot.cs to Connect with Microsoft Foundry Agent
 
-In this task, you’ll connect to the Azure AI Foundry agent by adding a
+In this task, you’ll connect to the Microsoft Foundry agent by adding a
 client to fetch and invoke your Foundry-hosted model inside the
 EchoBot.cs.
 
@@ -436,7 +436,7 @@ incorrect.](./media/image46.png)
         // Listen for ANY message to be received. MUST BE AFTER ANY OTHER MESSAGE HANDLERS 
         OnActivity(ActivityTypes.Message, OnMessageAsync);
     
-        // Azure AI Foundry Project ConnectionString
+        // Microsoft Foundry Project ConnectionString
         string projectEndpoint = configuration["AIServices:ProjectEndpoint"];
         if (string.IsNullOrEmpty(projectEndpoint))
         {
@@ -444,7 +444,7 @@ incorrect.](./media/image46.png)
         }
         _projectClient = new PersistentAgentsClient(projectEndpoint, new AzureCliCredential());
     
-        // Azure AI Foundry Agent Id
+        // Microsoft Foundry Agent Id
         _agentId = configuration["AIServices:AgentID"];
         if (string.IsNullOrEmpty(_agentId))
         {
@@ -729,7 +729,7 @@ incorrect.](./media/image68.png)
     
     - +++What values guide behavior and decision-making at Contoso Electronics?+++
 
-    You should observe that you are getting similar responses with the agent you've created on Azure AI Foundry.
+    You should observe that you are getting similar responses with the agent you've created on Microsoft Foundry.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image69.png)
@@ -855,11 +855,11 @@ incorrect.](./media/image79.png)
 ## Summary
 
 In this lab, you've just built your Custom Engine Agent using the
-Microsoft 365 Agents SDK and Azure AI Foundry.
+Microsoft 365 Agents SDK and Microsoft Foundry.
 
 You learned how to
 
-  - Configure an AI agent in Azure AI Foundry using the Agent Playground
+  - Configure an AI agent in Microsoft Foundry using the Agent Playground
   
   - Upload enterprise documents to ground your agent’s responses
   
@@ -867,7 +867,7 @@ You learned how to
   
   - Add Semantic Kernel and connect to Azure AI Agent Service
   
-  - Integrate your bot with the Azure AI Foundry agent for real-time,
+  - Integrate your bot with the Microsoft Foundry agent for real-time,
     grounded reasoning
   
   - Deploy and test your agent in **Microsoft Teams** and **Copilot Chat**
