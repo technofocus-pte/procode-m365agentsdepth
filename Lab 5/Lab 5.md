@@ -170,9 +170,9 @@ incorrect.](./media/image20.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image21.png)
 
-10. Navigate to the **<docstore@lab.labinstanceid()>** Storage account
+10. Navigate to the **docstoreXXXXXXX** Storage account
     (Select **Storageaccounts** from the **Home page** of the Azure
-    portal and select **docstore@lab.labinstanceid()**) and select
+    portal and select the resource that starts with **docstore**) and select
     **Access Control (IAM)** from the left pane. Select **Add -\> Add
     role assignment**.
 
@@ -284,8 +284,7 @@ incorrect.](./media/image31.png)
 9.  Back in the **Add role assignment** screen, select **Managed
     identity**. Then select **+ Select members**. In the **Select
     managed identities** screen, select **Search service** under
-    **Managed identity** and select the
-    **documentstore@lab.labinstanceid()** service.
+    **Managed identity** and select the resource that starts with **documentstore** service.
 
     ![](./media/image39.png)
 
@@ -340,8 +339,8 @@ incorrect.](./media/image47.png)
 The AI Search resource needs a Vector index to perform the vector
 search. You will vectorize the uploaded data in this exercise.
 
-1.  From the Azure portal, go to the
-    **documentstore@lab.labinstanceid()**, AI Search service resource.
+1.  From the Azure portal, go to the AI Search service resource that starts with
+    **documentstore**.
     Select **Import and vectorize data**.
 
     ![](./media/image48.png)
@@ -362,7 +361,7 @@ incorrect.](./media/image50.png)
 
     - Subscription – Select your **assigned subscription**
     
-    - Storage account- Select the **docstore@lab@labinstanceid()**
+    - Storage account- Select the account that starts with **docstore**
     
     - Blob-container – Select **documents**
     
@@ -371,7 +370,7 @@ incorrect.](./media/image50.png)
 5.  In the Vectorize your text screen, the subscription is
     pre-populated. Enter the below details and click **Next**.
 
-    - Azure OpenAI resource – Select **openaiservice@lab.labinstanceid()**
+    - Azure OpenAI resource – Select **openaiserviceXXXXXX**
     
     - Model deployment – Select **text-embedding-3-large**
     
