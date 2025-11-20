@@ -30,10 +30,12 @@ into the Copilot Studio.
 In this exercise, we will first create an Azure AI Search resource,
 which will be used to search through the documents.
 
-1.  From the Home page of the Azure portal, select **Azure AI Foundry.**
+1. Open a browser, navigate to +++https://portal.azure.com+++ and login using the credentials from the **Resources** tab.
+   
+1.  From the Home page of the Azure portal, select **Foundry.**
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image1.png)
+incorrect.](./media/im21.png)
 
 2.  In the **AI Foundry page**, select **AI Search** from the left pane
     and then select **+ Create**.
