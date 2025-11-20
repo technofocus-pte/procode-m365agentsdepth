@@ -234,10 +234,10 @@ an Azure OpenAI Service and deploy the text-embedding model in it.
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-2.  Select **+ Create**.
+2.  Select **+ Create -> Azure OpenAI**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image31.png)
+incorrect.](./media/im22.png)
 
 3.  Enter the below details and select **Next**.
 
@@ -248,7 +248,7 @@ incorrect.](./media/image31.png)
     
     - Region – Select your **assigned region**
     
-    - Name – +++**openaiservice52374668**+++
+    - Name – +++**openaiservice@lab.labinstanceid()**+++ 
     
     - Pricing tier – Select **Standard**
     
