@@ -3,7 +3,7 @@
 Lab duration – 60 minutes
 
 ## Objective
-check
+
 In a retail store site, customers frequently ask about product
 specifications, warranty terms, or troubleshooting guides. Static FAQ
 chatbots can’t cover all variations.
@@ -50,7 +50,7 @@ incorrect.](./media/image2.png)
     - Resource group – Select your **assigned Resource group**
       (**ResourceGroup1**)
     
-    - Service name – +++**documentstore@lab.labinstanceid()**+++
+    - Service name – +++ **documentstore@lab.labinstanceid()**+++
     
     - Location – Select your nearest region
     
@@ -248,7 +248,7 @@ incorrect.](./media/im22.png)
     
     - Region – Select your **assigned region**
     
-    - Name – +++**openaiservice@lab.labinstanceid()**+++ 
+    - Name – +++ **openaiservice@lab.labinstanceid()**+++ 
     
     - Pricing tier – Select **Standard**
     
