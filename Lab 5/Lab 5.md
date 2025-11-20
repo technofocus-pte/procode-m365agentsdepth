@@ -3,7 +3,7 @@
 Lab duration – 60 minutes
 
 ## Objective
-
+check
 In a retail store site, customers frequently ask about product
 specifications, warranty terms, or troubleshooting guides. Static FAQ
 chatbots can’t cover all variations.
