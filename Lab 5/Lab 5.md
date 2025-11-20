@@ -229,8 +229,7 @@ to perform the search over the documents. To vectorize the data, an
 embedding model needs to be deployed. In this exercise, you will create
 an Azure OpenAI Service and deploy the text-embedding model in it.
 
-1.  From the Azure portal Home page, search for select +++Azure
-    OpenAI++.
+1.  From the Azure portal Home page, search for select +++Azure OpenAI+++.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
