@@ -50,7 +50,7 @@ incorrect.](./media/image2.png)
     - Resource group – Select your **assigned Resource group**
       (**ResourceGroup1**)
     
-    - Service name – +++ **documentstore53853922@lab.labinstanceid()**+++
+    - Service name – +++**documentstore@lab.labinstanceid()**+++
     
     - Location – Select your nearest region
     
@@ -123,7 +123,7 @@ incorrect.](./media/image12.png)
     
     - Region – Select your **assigned region**
     
-    - Storage account name – +++ **docstore@lab.labinstanceid()**+++ 
+    - Storage account name – +++**docstore@lab.labinstanceid()**+++
     
     - Primary service – Select **Azure Blob Storage or Azure Data Lake
       Storage Gen 2**
