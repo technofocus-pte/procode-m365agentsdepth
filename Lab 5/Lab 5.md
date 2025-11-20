@@ -52,7 +52,7 @@ incorrect.](./media/image2.png)
     
     - Service name – +++ **documentstore53853922@lab.labinstanceid()**+++
     
-    - Location – Select your **assigned region**
+    - Location – Select your nearest region
     
     ![](./media/image3.png)
 
@@ -123,7 +123,7 @@ incorrect.](./media/image12.png)
     
     - Region – Select your **assigned region**
     
-    - Storage account name – +++ **docstore@lab.LabInstanceId()**+++
+    - Storage account name – +++ **docstore@lab.labinstanceid()**+++ 
     
     - Primary service – Select **Azure Blob Storage or Azure Data Lake
       Storage Gen 2**
@@ -170,9 +170,9 @@ incorrect.](./media/image20.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image21.png)
 
-10. Navigate to the **<docstore@lab.LabInstanceId()>** Storage account
+10. Navigate to the **<docstore@lab.labinstanceid()>** Storage account
     (Select **Storageaccounts** from the **Home page** of the Azure
-    portal and select **docstore@lab.LabInstanceId()**) and select
+    portal and select **docstore@lab.labinstanceid()**) and select
     **Access Control (IAM)** from the left pane. Select **Add -\> Add
     role assignment**.
 
@@ -285,7 +285,7 @@ incorrect.](./media/image31.png)
     identity**. Then select **+ Select members**. In the **Select
     managed identities** screen, select **Search service** under
     **Managed identity** and select the
-    **documentstore@lab.LabInstanceId()** service.
+    **documentstore@lab.labinstanceid()** service.
 
     ![](./media/image39.png)
 
@@ -341,7 +341,7 @@ The AI Search resource needs a Vector index to perform the vector
 search. You will vectorize the uploaded data in this exercise.
 
 1.  From the Azure portal, go to the
-    **documentstore@lab.LabInstanceId()**, AI Search service resource.
+    **documentstore@lab.labinstanceid()**, AI Search service resource.
     Select **Import and vectorize data**.
 
     ![](./media/image48.png)
@@ -362,7 +362,7 @@ incorrect.](./media/image50.png)
 
     - Subscription – Select your **assigned subscription**
     
-    - Storage account- Select the **docstore@lab@LabInstanceId()**
+    - Storage account- Select the **docstore@lab@labinstanceid()**
     
     - Blob-container – Select **documents**
     
@@ -371,7 +371,7 @@ incorrect.](./media/image50.png)
 5.  In the Vectorize your text screen, the subscription is
     pre-populated. Enter the below details and click **Next**.
 
-    - Azure OpenAI resource – Select **openaiservice@lab.LabInstanceId()**
+    - Azure OpenAI resource – Select **openaiservice@lab.labinstanceid()**
     
     - Model deployment – Select **text-embedding-3-large**
     
