@@ -50,7 +50,7 @@ incorrect.](./media/image2.png)
     - Resource group – Select your **assigned Resource group**
       (**ResourceGroup1**)
     
-    - Service name – +++ **documentstore@lab.labinstanceid()**+++
+    - Service name – +++**documentstore@lab.labinstance.id()**+++
     
     - Location – Select your nearest region
     
@@ -123,7 +123,7 @@ incorrect.](./media/image12.png)
     
     - Region – Select your **assigned region**
     
-    - Storage account name – +++**docstore@lab.labinstanceid()**+++
+    - Storage account name – +++**docstore@lab.labinstance.id()**+++
     
     - Primary service – Select **Azure Blob Storage or Azure Data Lake
       Storage Gen 2**
@@ -248,7 +248,7 @@ incorrect.](./media/im22.png)
     
     - Region – Select your **assigned region**
     
-    - Name – +++ **openaiservice@lab.labinstanceid()**+++ 
+    - Name – +++ **openaiservice@lab.labinstance.id()**+++ 
     
     - Pricing tier – Select **Standard**
     
