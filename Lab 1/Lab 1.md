@@ -388,7 +388,7 @@ In this task, you will modify the agent and add operations like
 1.  Go to file **actions.tsp** and copy paste below snippet just
     after **listRepairs** operation to add these new
     operations **createRepair**, **updateRepair** and **deleteRepair**.
-    Here you are also defining the Repair item data model.
+    Here you are also defining the Repair item data model. (Do not disturn the existing closing bracket)
 
 	```
 	/**
