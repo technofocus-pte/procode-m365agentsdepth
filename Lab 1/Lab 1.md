@@ -152,7 +152,7 @@ via an existing API service to help users manage car repair records.
 
     ![](./media/image15.png)
     
-10. Login with your **Admin user nane** and **password** from the **Resources** tab.
+10. Login with your **Admin user name** and **password** from the **Resources** tab.
 
     ![](./media/im13.png)
 
@@ -160,6 +160,8 @@ via an existing API service to help users manage car repair records.
     window.
 
 	![](./media/image16.png)
+
+	>[!Note] **Note:** If there is a message on Custom App Upload Disabled, safely ignore it.
 
 ### Task 2: Define your agent
 
