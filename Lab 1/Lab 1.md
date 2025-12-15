@@ -629,27 +629,9 @@ analyst to test.
 
 	![](./media/image41.png)
 
-9.  The agent responds with the **created item** shown in a rich
-    **adaptive card**.
+9.  The agent responds with the **created item**.
 
     ![](./media/image42.png)
-
-10. Next, re-check reference cards work. Send below prompt in the
-    conversation.
-
-	+++List all my repairs+++.
-
-	Select **Always allow** in the confirmation dialog.
-
-	![](./media/image43.png)
-
-	![](./media/image44.png)
-
-11. The agent will respond with the list of repairs assigned to you.
-    with each item referenced with an adaptive card. In this case, it
-    should only be the rear camera issue that you just added.
-
-	![](./media/image45.png)
 
 12. Next, you will test the new analytical capability of your agent.
     Open a new chat by selecting the **New chat** button on the top
@@ -660,7 +642,7 @@ analyst to test.
 13. Next, copy the prompt below and paste it to the message box and hit
     enter to send it.
 
-	+++	Classify repair items based on title into three distinct categories: Routine Maintenance, Critical, and Low Priority. Then, generate a chart displaying the percentage representation of each category.+++
+	+++Classify repair items based on title into three distinct categories: Routine Maintenance, Critical, and Low Priority. Then, generate a chart displaying the percentage representation of each category.+++
 
 	![](./media/image47.png)
 
