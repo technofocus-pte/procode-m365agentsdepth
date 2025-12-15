@@ -148,13 +148,15 @@ via an existing API service to help users manage car repair records.
 
 	![](./media/image14.png)
 
-9.  This will open a dialog from the editor to sign in or create a
-    Microsoft 365 developer sandbox or Cancel. Select **Sign in** and
-    login with your credentials.
+9.  This will open a dialog from the editor to sign in or create a Microsoft 365 developer sandbox or Cancel. Select **Sign in**.
 
     ![](./media/image15.png)
+    
+10. Login with your **Admin user nane** and **password** from the **Resources** tab.
 
-10. Once signed in, **close** the browser and go back to the project
+    ![](./media/im13.png)
+
+11. Once signed in, **close** the browser and go back to the project
     window.
 
 	![](./media/image16.png)
