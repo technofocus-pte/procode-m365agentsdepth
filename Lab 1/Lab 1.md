@@ -364,7 +364,7 @@ created.
 
     ![](./media/image27.png)
 
-8.	IF there is a popup to that asks for the connectio to the API, select **Always allow**.
+8.	If there is a popup that asks for the connection to the API, select **Always allow**.
 
     ![](./media/im3.png)
   	   
