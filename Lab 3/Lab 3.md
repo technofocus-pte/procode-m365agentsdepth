@@ -52,7 +52,7 @@ Microsoft Foundry is your launchpad for building AI agents. In this task,
 you’ll log in to Microsoft Foundry with your login credentials.
 
 1.  Open the browser and navigate to +++https://ai.azure.com+++ and
-    **Sign in** using your credentials from the **Resources** tab.
+    **Sign in** using your credentials (**Username** and **TAP**) from the **Resources** tab.
 
     ![](./media/im13.png)
 
