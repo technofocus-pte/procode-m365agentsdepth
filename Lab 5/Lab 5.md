@@ -188,7 +188,7 @@ incorrect.](./media/image22.png)
 incorrect.](./media/image23.png)
 
 12. Click on **+Select members**, search for and select your **user
-    id** (@lab.CloudPortalCredential(User1).Username), select your **user id** that gets listed and then click on
+    id** (+++@lab.CloudPortalCredential(User1).Username+++), select your **user id** that gets listed and then click on
     **Select**. This adds the Storage Blob Data Reader role to your user
     id.
 
