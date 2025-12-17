@@ -180,7 +180,7 @@ integration with the deployed MCP Server.
 
 	- **Branch – dev**
 
-	- **Connector - MCP-Streamable-HTTP **
+	- **Connector - MCP-Streamable-HTTP**
 
 	Select **Continue**.
 
