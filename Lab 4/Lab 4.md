@@ -262,26 +262,26 @@ incorrect.](./media/image24.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image25.png)
 
-5.  The **agent** gets **created** as per the instructions provided.
-
 	![A logo of a company AI-generated content may be
-incorrect.](./media/image26.png)
+incorrect.](./media/)
+
+6.  The **agent** gets **created** as per the instructions provided.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image27.png)
 
-6.  Select **Settings** from the top right corner of the agent page.
+7.  Select **Settings** from the top right corner of the agent page.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-7.  Scroll down and disable **Use general knowledge** and **Use
+8.  Scroll down and disable **Use general knowledge** and **Use
     information from the Web** under the Knowledge section.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-8. Select **Save** and then **close** the Settings window.
+9. Select **Save** and then **close** the Settings window.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
