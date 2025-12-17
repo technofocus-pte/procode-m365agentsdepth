@@ -276,25 +276,13 @@ incorrect.](./media/image27.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-7.  In the **Settings** pane, select **No** under **Use generative AI
-    orchestration for your agent responses**.
-
-	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image29.png)
-
-8.  Scroll down and disable **Use general knowledge** and **Use
+7.  Scroll down and disable **Use general knowledge** and **Use
     information from the Web** under the Knowledge section.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image30.png)
 
-9.  Scroll up and select **Yes** under **Use generative AI orchestration
-    for your agent responses**.
-
-	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image31.png)
-
-10. Select **Save** and then **close** the Settings window.
+8. Select **Save** and then **close** the Settings window.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image32.png)
@@ -317,78 +305,79 @@ incorrect.](./media/image35.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image36.png)
 
-14. Select the **Jokes MCP** Server you created earlier.
+14. Select the **MCP Server Streamable HTTP Jokes MCP** Server you created earlier.
+
+    >[!Note] **Note:** Search for Jokes MCP from the search bar and select **MCP Server Streamable HTTP Jokes MCP** that you created.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image37.png)
 
-15. Select the **drop down** next to **Not connected** and then select
+16. Select the **drop down** next to **Not connected** and then select
     **Create new connection**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image38.png)
 
-16. Select **Create** in the next screen.
+17. Select **Create** in the next screen.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image39.png)
 
-17. Once the connection is established, select the **Add to agent**
+18. Once the connection is established, select the **Add and configure**
     button to add the MCP Server to the Jokester agent.
 
 	![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image40.png)
+incorrect.](./media/im4.png)
 
-18. Now the **MCP Server** has been added as a **tool** to the agent.
+19. Now the **MCP Server** has been added as a **tool** to the agent.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image41.png)
 
-19. Select **Refresh** in the Test pane before starting to test the
-    agent behaviour.
+20. Open the **Test pane** to test the agent behaviour.
 
 	![A screenshot of a phone AI-generated content may be
-incorrect.](./media/image42.png)
+incorrect.](./media/im5.png)
 
-20. Enter +++Can I get a Chuck Norris joke?+++ and select **Send**.
+21. Enter +++Can I get a Chuck Norris joke?+++ and select **Send**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image43.png)
 
-21. Select **Open connection manager**.
+22. Select **Open connection manager**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image44.png)
 
-22. Select **Connect** to establish the connection.
+23. Select **Connect** to establish the connection.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image45.png)
 
-23. Once the Jokes MCP connection is selected, select **Submit**.
+24. Once the Jokes MCP connection is selected, select **Submit**.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image46.png)
 
-24. You can now see that in the **Manage your connections** page, the
+25. You can now see that in the **Manage your connections** page, the
     Jokes MCP Server is in **connected** state.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image47.png)
 
-25. Now that it is connected, navigate back to the Test pane and select
+26. Now that it is connected, navigate back to the Test pane and select
     **Retry**.
 
 	![A screenshot of a chat AI-generated content may be
 incorrect.](./media/image48.png)
 
-26. You can now see that the MCP Server is being invoked and the agent
+27. You can now see that the MCP Server is being invoked and the agent
     tries to generate a response from the Jokes MCP Server.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image49.png)
 
-27. The agent uses the **MCP Server**, generates a response and
+28. The agent uses the **MCP Server**, generates a response and
     **populates** it in the **Test pane**.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image50.png)
