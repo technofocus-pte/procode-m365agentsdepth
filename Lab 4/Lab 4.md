@@ -190,7 +190,7 @@ integration with the deployed MCP Server.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
 
-6.  Paste your root URL (the part after https://) from the url that you
+6.  Paste your root URL (the part **after https://**. Make sure** not to have /** at the **end**) from the url that you
     saved earlier, in the **Host** field select **Create connector**.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image19.png) 
@@ -224,12 +224,7 @@ deliver dynamic jokes from the connected MCP endpoint.
     enable the **trial** license.
 
 	![A screenshot of a web page AI-generated content may be
-incorrect.](./media/image22.png)
-
-2.  Select **Create** -\> **+ New agent**.
-
-	![A screenshot of a phone AI-generated content may be
-incorrect.](./media/image23.png)
+incorrect.](./media/im3.png)
 
 3.  Select the **Configure** tab to configure your agent.
 
@@ -238,8 +233,11 @@ incorrect.](./media/image24.png)
 
 4.  Enter the below details and select **Create**.
 
+
 	- **Name** – +++Jokester+++
-	
+
+	  >[!Note] **Note:** Select **Copy** and then **paste** it in the respective fields for the values of **Description** and **Instructions** below
+   
 	- **Description** –
 
 	```
