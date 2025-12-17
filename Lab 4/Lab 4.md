@@ -97,28 +97,30 @@ incorrect.](./media/image3.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image7.png)
 
-7.  **Login** using the credentials from the **Resources** tab.
+7.  **Login** using the credentials (**Username** and **TAP**) from the **Resources** tab.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image8.png)
 
-8.  Enter +++azd up+++ and click Enter to scaffold the project into
+	![](./media/im1.png)
+
+9.  Enter +++azd up+++ and click Enter to scaffold the project into
     Azure.
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-9.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
+10.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
 
-10. Select **Enter** to accept the listed subscription.
+11. Select **Enter** to accept the listed subscription.
 
 	![A screen shot of a computer AI-generated content may be
 incorrect.](./media/image11.png)
 
-11. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
+12. Select **@lab.CloudResourceGroup(ResourceGroup1).Location** as your location  
     
 13. Use the arrow marks to scroll up and down the list of regions and select the **region** identified in the above step and hit **Enter**. The region in the screenshot and the one assigned to you in the lab VM may vary.
 
