@@ -162,13 +162,15 @@ with downstream components in the upcoming exercises.
 To import and configure a **custom MCP connector** in **Power Apps** for
 integration with the deployed MCP Server.
 
-1.  Go to +++https://make.preview.powerapps.com/customconnectors+++
+1.  Go to +++https://make.preview.powerapps.com/customconnectors+++ and login using the **Username** and **TAP** from the **Resources** tab.
+	
+	![](./media/im1.png)
 
-2.  Select **+ New custom connector** -\> **Import from GitHub**.
+3.  Select **+ New custom connector** -\> **Import from GitHub**.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image16.png)
 
-3.  Select the below details.
+4.  Select the below details.
 
 	- **Connector Type – Custom**
 
@@ -180,11 +182,11 @@ integration with the deployed MCP Server.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image17.png)
 
-4.  Change the **Connector Name** to +++**Jokes MCP**+++.
+5.  Change the **Connector Name** to +++**Jokes MCP**+++.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image18.png)
 
-5.  Paste your root URL (the part after https://) from the url that you
+6.  Paste your root URL (the part after https://) from the url that you
     saved earlier, in the **Host** field select **Create connector**.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image19.png) 
@@ -193,7 +195,7 @@ integration with the deployed MCP Server.
 	>
 	>You may see a warning and an error upon creation – it should be resolved soon - but you can ignore it for now.
 
-6.  **Close** the connector.
+7.  **Close** the connector.
 
 	![A screenshot of a computer AI-generated content may be incorrect.](./media/image20.png)
 
