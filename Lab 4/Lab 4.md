@@ -110,7 +110,7 @@ incorrect.](./media/image8.png)
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image9.png)
 
-10.  Enter the name as +++mcsmcp@lab.LabInstance.Id+++
+10. Enter the name as +++mcsmcp@lab.LabInstance.Id+++
 
 	![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image10.png)
