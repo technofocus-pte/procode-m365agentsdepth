@@ -124,7 +124,7 @@ incorrect.](./media/image12.png)
     - Resource group – Select your **assigned Resource group**
       (that starts with **ResourceGroup1**)
     
-    - Region – Select your **assigned region**
+    - Region – Select your same region you used for the search service
     
     - Storage account name – +++**docstore@lab.labinstance.id**+++
     
@@ -248,7 +248,7 @@ incorrect.](./media/im22.png)
     - Resource group – Select your **assigned Resource group**
       (that starts with **ResourceGroup1**)
     
-    - Region – Select your **assigned region**
+    - Region – Select your same region you used before
     
     - Name – +++**openaiservice@lab.labinstance.id**+++ 
     
@@ -322,7 +322,7 @@ incorrect.](./media/image44.png)
     **text-embedding-3-large** and then select **Confirm**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image45.png)
+incorrect.](./media/im8.png)
 
 16. Select **Deploy** in the Deploy text-embedding-3-large.
 
@@ -410,6 +410,9 @@ Studio.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/im1.png)
+
+    ![A screenshot of a computer AI-generated content may be
+incorrect.](./media/im3.png)
 
 4.  Ensure that the **Configure** tab is selected in the Agent creation pane that is open now. Enter the below details and select Create.
    
@@ -506,7 +509,7 @@ incorrect.](./media/image73.png)
 
 4.  Select **gpt-4o** and select **Confirm**.
 
-    ![](./media/image74.png)
+    ![](./media/im12.png)
 
 5.  In the Deploy gpt-4o dialog, enter the **Deployment name** as
     +++**ModelforMCS**+++, accept the other defaults and select
