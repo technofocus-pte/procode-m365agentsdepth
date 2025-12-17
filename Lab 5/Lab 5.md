@@ -51,7 +51,7 @@ incorrect.](./media/image2.png)
     - Subscription – Select your **assigned subscription**
     
     - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
+      (that starts with **ResourceGroup1**)
     
     - Service name – +++**documentstore@lab.labinstance.id**+++
     
@@ -122,16 +122,16 @@ incorrect.](./media/image12.png)
     - Subscription – Select your **assigned subscription**
     
     - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
+      (that starts with **ResourceGroup1**)
     
     - Region – Select your **assigned region**
     
     - Storage account name – +++**docstore@lab.labinstance.id**+++
     
-    - Primary service – Select **Azure Blob Storage or Azure Data Lake
+    - Preferred storage type – Select **Azure Blob Storage or Azure Data Lake
       Storage Gen 2**
 
-    ![A screenshot of a computer AI-generated content may be incorrect.](./media/image13.png)
+    ![A screenshot of a computer AI-generated content may be incorrect.](./media/im6.png)
 
 4.  Once the validation passes, click on **Create**.
 
