@@ -197,7 +197,7 @@ incorrect.](./media/image24.png)
 
 13. Select **Managed identity** and then select **+ Select members**.
     Select **Search service** under **Managed identity** and select the
-    **searchleaves** search service that gets listed.
+    **docuemntstorexxxx** search service that gets listed.
 
     ![](./media/image25.png)
 
@@ -217,7 +217,7 @@ incorrect.](./media/image27.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image28.png)
 
-17. Proceed to the next step once the roles are added.
+17. Proceed to the next step once you receive a success message on role addition.
 
     ![](./media/image29.png)
 
@@ -246,7 +246,7 @@ incorrect.](./media/im22.png)
     - Subscription – Select your **assigned subscription**
     
     - Resource group – Select your **assigned Resource group**
-      (**ResourceGroup1**)
+      (that starts with **ResourceGroup1**)
     
     - Region – Select your **assigned region**
     
@@ -277,7 +277,7 @@ incorrect.](./media/im22.png)
 
     ![A screenshot of a computer AI-generated content may be incorrect.](./media/image37.png)
 
-8.  Select **+ Select members**, search for your **user id**, select it
+8.  Select **+ Select members**, search for your **user id** (+++@lab.CloudPortalCredential(User1).Username+++), select it
     and click on **Select**.
 
     ![](./media/image38.png)
@@ -306,14 +306,14 @@ incorrect.](./media/image41.png)
 incorrect.](./media/image42.png)
 
 13. From the **Overview** page of the Azure OpenAI Service resource,
-    select **Go to Azure AI Foundry portal** to open the Azure OpenAI
+    select **Go to Foundry portal** to open the Azure OpenAI
     Service there and deploy a model.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image43.png)
+incorrect.](./media/im7.png)
 
 14. Select **Deployments** from the left pane. Select **+ Deploy model**
-    -\> **From base models**.
+    -\> **Deploy base model**.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image44.png)
@@ -341,10 +341,9 @@ The AI Search resource needs a Vector index to perform the vector
 search. You will vectorize the uploaded data in this exercise.
 
 1.  From the Azure portal, go to the AI Search service resource that starts with
-    **documentstore**.
-    Select **Import and vectorize data**.
+    **documentstore**. Select **Import data (new)**.
 
-    ![](./media/image48.png)
+    ![](./media/im9.png)
 
 2.  Select the **Azure Blob Storage** option.
 
@@ -407,37 +406,28 @@ In this exercise, you will create a retail assistant agent in Copilot
 Studio.
 
 1.  Login to +++https://copilotstudio.microsoft.com+++ using your login
-    credentials.
+    credentials from the Resources tab and select **Get Started** to start the **Copilot Studio trial**.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image57.png)
+incorrect.](./media/im1.png)
 
-2.  Select **Create** from the left pane.
+4.  Ensure that the **Configure** tab is selected in the Agent creation pane that is open now. Enter the below details and select Create.
+   
+    - Name - +++Retail assistant+++
+  
+    - Description - +++You are a Retail assistant agent for customers HR who will answer questions related to the store products+++
 
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image58.png)
+    ![](./media/im10.png)
 
-3.  Select **+ New agent** to create a new agent.
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image59.png)
-
-4.  Enter +++You are a Retail assistant agent for customers HR who will
-    answer questions related to the store products+++ and select
-    **Send**.
-
-    ![](./media/image60.png)
-
-    ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image61.png)
-
-5.  Once the agent is created, in the Test pane, enter +++What is the
+    ![](./media/im11.png)
+    
+7.  Once the agent is created, in the Test pane, enter +++What is the
     warranty period for Washing machine?+++ and click **Send.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image62.png)
 
-6.  It gives a generalized reply as in the screenshot below.
+8.  It gives a generalized reply as in the screenshot below.
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image63.png)
