@@ -263,7 +263,7 @@ incorrect.](./media/image24.png)
 incorrect.](./media/image25.png)
 
 	![A logo of a company AI-generated content may be
-incorrect.](./media/)
+incorrect.](./media/im11.png)
 
 6.  The **agent** gets **created** as per the instructions provided.
 
