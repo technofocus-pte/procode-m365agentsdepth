@@ -421,8 +421,7 @@ incorrect.](./media/im1.png)
 
     ![](./media/im11.png)
     
-7.  Once the agent is created, in the Test pane, enter +++What is the
-    warranty period for Washing machine?+++ and click **Send.**
+7.  Once the agent is created, in the Test pane, enter +++What is the warranty period for Washing machine?+++ and click **Send.**
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image62.png)
@@ -477,8 +476,7 @@ incorrect.](./media/image69.png)
 7.  Now, let us test the agent with the same question we have tried
     before.
 
-8.  In the Test pane, enter +++ What is the warranty period for Washing
-    machine?+++ and click **Send.**
+8.  In the Test pane, enter +++ What is the warranty period for Washing machine?+++ and click **Send.**
 
     ![](./media/image70.png)
 
@@ -493,7 +491,7 @@ incorrect.](./media/image71.png)
 In this exercise, you will deploy a model in the Azure AI Foundry to use
 it in the Copilot Studio (in the next exercise).
 
-1.  Open the Azure AI Foundry Azure OpenAI resource created earlier.
+1.  Open the Microsoft Foundry Azure OpenAI resource created earlier.
 
 2.  From the left pane, select **Deployments**.
 
@@ -599,15 +597,15 @@ incorrect.](./media/image86.png)
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image88.png)
 
-11. Select the **Add to agent** option to add the prompt to the agent.
+11. Select the **Add and configure** option to add the prompt to the agent.
 
     ![A screenshot of a computer AI-generated content may be
-incorrect.](./media/image89.png)
+incorrect.](./media/im13.png)
 
     ![A screenshot of a computer AI-generated content may be
 incorrect.](./media/image90.png)
 
-With this feature, we can fine-tune the model in Azure AI Foundry and
+With this feature, we can fine-tune the model in Microsoft Foundry and
 use it in Copilot Studio with ease. We can bring in the vast ecosystem
 of the models in the Azure AI Foundry easily into the Copilot Studio.
 
