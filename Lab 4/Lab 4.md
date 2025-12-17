@@ -163,8 +163,12 @@ To import and configure a **custom MCP connector** in **Power Apps** for
 integration with the deployed MCP Server.
 
 1.  Go to +++https://make.preview.powerapps.com/customconnectors+++ and login using the **Username** and **TAP** from the **Resources** tab.
-	
+
 	![](./media/im1.png)
+
+2.  Select Get Started in the Welcome to PowerApps page.
+	
+	![](./media/im2.png)
 
 3.  Select **+ New custom connector** -\> **Import from GitHub**.
 
