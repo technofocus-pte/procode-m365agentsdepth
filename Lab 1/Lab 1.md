@@ -606,30 +606,35 @@ analyst to test.
 
     ![](./media/image37.png)
 
-4.  Go back to the open **browser** session and do a **refresh**.
+	>[!Alert] **Important:** There are couple of known issues where the Provision action in Agents Toolkit may fail with the errors shown below. If this happens, simply retry the provisioning process until it succeeds.
+ 	>
+ 	> 	![](./media/image49.png)
+ 	>	
+ 	> 	![](./media/image50.png)
+5.  Go back to the open **browser** session and do a **refresh**.
 
-5.  In the **RepairServiceAgent**, start by using the conversation
+6.  In the **RepairServiceAgent**, start by using the conversation
     starter **Create repair**. Replace parts of the prompt to add a
     title, then send it to the chat to initiate the interaction. For
     example:
 
     ![](./media/image38.png)
 
-6.  Replace the **“\[TO REPLACE\]”** with
+7.  Replace the **“\[TO REPLACE\]”** with
     +++rear camera issue+++ and assign it to me.
 
     ![](./media/image39.png)
 
-7.  The confirmation dialog if you notice has more metadata that what
+8.  The confirmation dialog if you notice has more metadata that what
     you sent, thanks to the new instructions.
 
     ![](./media/image40.png)
 
-8.  Proceed to add the item by **confirming** the dialog.
+9.  Proceed to add the item by **confirming** the dialog.
 
 	![](./media/image41.png)
 
-9.  The agent responds with the **created item**.
+10.  The agent responds with the **created item**.
 
     ![](./media/image42.png)
 
